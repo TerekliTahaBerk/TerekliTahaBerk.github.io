@@ -1,2 +1,4 @@
 name: Taha Berk Terekli's site
 title: null
+plugins:
+  - jekyll-seo-tag

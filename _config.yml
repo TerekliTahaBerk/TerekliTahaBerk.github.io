@@ -2,3 +2,8 @@ name: Taha Berk Terekli's site
 title: null
 plugins:
   - jekyll-seo-tag
+social:
+  name: Taha Berk Terekli
+  links:
+    - https://www.linkedin.com/in/tahaberkterekli1/
+    - https://github.com/TerekliTahaBerk

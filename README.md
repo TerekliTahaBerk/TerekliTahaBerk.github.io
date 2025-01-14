@@ -58,23 +58,22 @@ As a young data-driven engineer, I'm passionate about using my skills to bring v
 ## 🎯 Certifications
 
 - **IBM Professional Certificates:**
-  - Python for Data Science, AI & Development
-  - Tools for Data Science
-  - Python Project for Data Science
-  - Data Analysis with Python
-  - Databases and SQL for Data Science with Python
+  - [Python for Data Science, AI & Development](https://www.coursera.org/account/accomplishments/verify/UAW9C6KPL2G3?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=pdf_header_button&utm_product=course)
+  - [Tools for Data Science](https://drive.google.com/file/d/1m3vCV9NLV2oKxnhdpMob3PMzGVAG61Hh/view?usp=share_link)
+  - [Python Project for Data Science](https://www.coursera.org/account/accomplishments/verify/3NDCKLNS7Y6J?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=pdf_header_button&utm_product=course)
+  - [Data Analysis with Python](https://drive.google.com/file/d/1m3vCV9NLV2oKxnhdpMob3PMzGVAG61Hh/view?usp=share_link)
+  - [Databases and SQL for Data Science with Python](https://drive.google.com/file/d/1m3vCV9NLV2oKxnhdpMob3PMzGVAG61Hh/view?usp=share_link)
 
 - **Stanford University:**
-  - Code in Place, Computer Science
-  - Certificate of Completion Code in Place
-  - Supervised Machine Learning
-  - Introduction to Statistics
+  - [Certificate of Completion Code in Place](https://drive.google.com/file/d/1m3vCV9NLV2oKxnhdpMob3PMzGVAG61Hh/view?usp=share_link)
+  - [Supervised Machine Learning](https://drive.google.com/file/d/1m3vCV9NLV2oKxnhdpMob3PMzGVAG61Hh/view?usp=share_link)
+  - [Introduction to Statistics](https://drive.google.com/file/d/1m3vCV9NLV2oKxnhdpMob3PMzGVAG61Hh/view?usp=share_link)
 
 - **DataCamp:**
-  - Introduction to AWS
-  - Introduction to Python
-  - Intermediate Python
-  - Introduction to ChatGPT
+  - [Introduction to AWS](https://drive.google.com/file/d/1cNp0Qj6ICVsn2RwS_e5vORIuj0IYfQTd/view?usp=share_link)
+  - [Introduction to Python](https://drive.google.com/file/d/1m3vCV9NLV2oKxnhdpMob3PMzGVAG61Hh/view?usp=share_link)
+  - [Intermediate Python](https://drive.google.com/file/d/1m3vCV9NLV2oKxnhdpMob3PMzGVAG61Hh/view?usp=share_link)
+  - [Introduction to ChatGPT](https://drive.google.com/file/d/1dm-LVmu3S_Hgliej_CxRCd0RO_8L8qx0/view?usp=share_link)
 
 ## 🌱 Volunteering
 

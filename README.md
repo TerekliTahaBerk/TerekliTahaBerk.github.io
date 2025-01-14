@@ -45,7 +45,7 @@ As a young data-driven engineer, I'm passionate about using my skills to bring v
 - **Automation:** UiPath, Automation Anywhere, Robusta
 - **Data Science:** Data Analysis, Machine Learning, Advanced Analytics
 - **ERP Systems:** SAP
-- **Cloud:** AWS (Basic Knowledge)
+- **Cloud:** AWS
 
 ## 📚 Education
 

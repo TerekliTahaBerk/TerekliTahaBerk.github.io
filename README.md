@@ -1,4 +1,4 @@
-# 👋 Hi, I'm Taha Berk! 
+# 👋 Hi, I'm **Taha Berk**! 
 
 A data-driven engineer specializing in Data Science and Artificial Intelligence, focused on developing innovative automation systems and transforming data into actionable insights.  
 🌍 Istanbul · 📧 contact@tahaberk.com · [LinkedIn](https://www.linkedin.com/in/tahaberkterekli) · [GitHub](https://github.com/TerekliTahaBerk)
@@ -10,33 +10,33 @@ As a young data-driven engineer, I'm passionate about using my skills to bring v
 ## 💼 Professional Experience
 
 - **RPA Developer & Analyst** @[Papara](https://www.papara.com) _(Dec 2024 - Present)_
-  - Design and implement automation solutions using UiPath and Automation Anywhere
+  - Design and implement automation solutions using **UiPath** and **Automation Anywhere**
   - Analyze workflows and identify automation opportunities
-  - Develop and maintain RPA bots for streamlined operations
+  - Develop and maintain **RPA** bots for streamlined operations
   - Create comprehensive documentation and ensure seamless deployment
 
 - **Supply Chain Intern** @[LC Waikiki](https://www.lcwaikiki.com) _(Aug 2024 - Sep 2024)_
-  - Optimized supply chain processes using advanced data analytics
-  - Managed supplier relationships and implemented cost-reducing logistics improvements
+  - Optimized **supply chain** processes using advanced **data analytics**
+  - Managed supplier relationships and implemented **cost-reducing** logistics improvements
   - Enhanced transparency in demand planning and inventory management
   - Developed strategic solutions to add value across the supply chain
 
 - **RPA Developer** @[Latro](https://www.latro.com.tr) _(Jul 2023 - Aug 2023)_
-  - Led SAP automation integration initiatives
+  - Led **SAP** automation integration initiatives
   - Headed software team for automation development
-  - Developed automation processes using Java and Python
+  - Developed automation processes using **Java** and **Python**
   - Enhanced robotic systems capabilities through cutting-edge technologies
 
 - **RPA Developer Intern** @[QNB Finansbank](https://www.qnbfinansbank.com) _(Apr 2023 - Jun 2023)_
-  - Developed competencies in SQL and data manipulation
-  - Gained proficiency in R programming
+  - Developed competencies in **SQL** and **data manipulation**
+  - Gained proficiency in **R** programming
   - Managed datasets and enhanced data science skills
   - Collaborated in team environments for project success
 
 - **Short Term Intern** @[DenizBank](https://www.denizbank.com) _(Jan 2023 - Mar 2023)_
-  - Gained comprehensive banking sector experience
+  - Gained comprehensive **banking** sector experience
   - Contributed across multiple departments
-  - Developed insights into financial data science applications
+  - Developed insights into **financial data science** applications
   - Enhanced teamwork and collaboration skills
 
 ## 🛠️ Technical Skills
@@ -91,10 +91,10 @@ As a young data-driven engineer, I'm passionate about using my skills to bring v
 
 ## 🗣️ Languages
 
-- Turkish (Native)
-- English (Professional Working Proficiency)
-- German (Elementary Proficiency)
-- French (Elementary Proficiency)
+- Turkish _(Native)_
+- English _(Professional Working Proficiency)_
+- German _(Elementary Proficiency)_
+- French _(Elementary Proficiency)_
 
 ## ☕️ Support My Work
 If this project inspired you, provided ideas for your own portfolio or helped in any way, please consider [buying me a coffee](https://www.buymeacoffee.com/tahaberkterekli) ❤️. Your support motivates me to keep creating and sharing valuable content! 

@@ -1,4 +1,4 @@
-# 👋 Hi, I'm **Taha Berk**! 
+# 👋 Hi, I'm Taha Berk! 
 
 A data-driven engineer specializing in Data Science and Artificial Intelligence, focused on developing innovative automation systems and transforming data into actionable insights.  
 🌍 Istanbul · 📧 contact@tahaberk.com · [LinkedIn](https://www.linkedin.com/in/tahaberkterekli) · [GitHub](https://github.com/TerekliTahaBerk)

@@ -6,4 +6,3 @@ author: Taha Berk Terekli
 lang: en
 plugins:
   - jekyll-seo-tag
-  - open-in-new-tab

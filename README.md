@@ -93,6 +93,8 @@ As a young data-driven engineer, I'm passionate about using my skills to bring v
 
 ## 🗣️ Languages
 
+> Let’s connect on [Duolingo](https://www.duolingo.com/profile/tahaberkterekli) and be language-learning buddies!
+
 - Turkish _(Native)_
 - English _(Professional Working Proficiency)_
 - German _(Elementary Proficiency)_

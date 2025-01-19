@@ -1,9 +1,3 @@
----
-layout: default
-title: About Me
-permalink: /about/
----
-
 # 👋 Hi, I'm Taha Berk! 
 
 A data-driven engineer specializing in Data Science and Artificial Intelligence, focused on developing innovative automation systems and transforming data into actionable insights.  

@@ -1,9 +1,7 @@
-name: Taha Berk Terekli
-title: null
+title: Taha Berk Terekli - Data Scientist Portfolio
+description: A data-driven engineer specializing in Data Science and Artificial Intelligence, focused on developing innovative automation systems and transforming data into actionable insights.
+url: http://www.tahaberk.com
+author: Taha Berk Terekli
+lang: en
 plugins:
   - jekyll-seo-tag
-social:
-  name: Taha Berk Terekli
-  links:
-    - https://www.linkedin.com/in/tahaberkterekli1/
-    - https://github.com/TerekliTahaBerk

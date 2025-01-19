@@ -1,10 +1,3 @@
-<style>
-  body {
-    background-color: #121212;
-    color: #ffffff;
-  }
-</style>
-
 # 👋 Hi, I'm Taha Berk! 
 
 [Projects](/projects/)

@@ -79,13 +79,13 @@ As a young data-driven engineer, I'm passionate about using my skills to bring v
 
 ## 🌱 Volunteering
 
-- **WWF Foundation** - Volunteer Coordinator _(2023 - Present)_
+- **WWF Foundation** - Volunteer Coordinator _(2023 - 2025)_
   - Oversee project management and strategic planning
   - Focus on biodiversity loss, climate change, and sustainability initiatives
   - Drive innovative solutions for preserving natural resources
   - Develop effective communication strategies for environmental awareness
 
-- **Community Volunteers Foundation** - Coordinator _(2023 - Present)_
+- **Community Volunteers Foundation** - Coordinator _(2023 - 2025)_
   - Lead team development for impactful projects
   - Co-coordinate at Yıldız Technical University Toplum Gönüllüleri
   - Foster volunteerism culture within the university

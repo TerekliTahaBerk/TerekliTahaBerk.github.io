@@ -6,7 +6,7 @@ permalink: /projects/
 
 # Data Science Portfolio
 
-> Check out my [portfolio](http://www.tahaberk.com).
+> Check out my [portfolio](http://www.tahaberk.com) and [LeetCode solutions](/leetcode/).
 
 This repository showcases my data science portfolio, featuring projects completed for academic purposes, self-learning, and personal hobbies. It highlights a variety of topics and techniques, demonstrating my skills in data analysis, machine learning, and problem-solving, while reflecting my passion for exploring diverse challenges in the field.
 

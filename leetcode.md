@@ -6,7 +6,7 @@ permalink: /leetcode/
 
 # LeetCode Problem Solutions
 
-> Check out my [portfolio](http://www.tahaberk.com) and [latest projects](/projects/).
+> Check out [my portfolio](http://www.tahaberk.com) and [latest projects](/projects/).
 
 This repository features my solutions to various [LeetCode](https://leetcode.com/u/tterekli9/) problems, reflecting my journey in mastering algorithms and data structures. It serves as a demonstration of my problem-solving skills, dedication to continuous learning, and ability to apply computational thinking to diverse challenges in software engineering.
 

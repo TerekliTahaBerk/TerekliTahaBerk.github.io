@@ -38,6 +38,6 @@ Each solution includes:
 1. Clone the repository to your local machine:
    ```bash
    git clone https://github.com/TahaBerkTerekli/leetcode.git
-
+   ```
 ## ☕️ Support My Work
 If this project inspired you, provided ideas for your own portfolio or helped in any way, please consider [buying me a coffee](https://www.buymeacoffee.com/tahaberkterekli) ❤️. Your support motivates me to keep creating and sharing valuable content! 

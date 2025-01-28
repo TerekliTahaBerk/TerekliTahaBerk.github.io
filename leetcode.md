@@ -29,6 +29,7 @@ Each solution includes:
 | Problem Title | Difficulty | Language |                
 |-----------------------------------------------|------------|------------|
 | [0001. Two Sum](https://github.com/TerekliTahaBerk/leetcode/tree/main/001.%20Two%20Sum) | Easy | Python |
+| [0007. Reverse Integer](https://github.com/TerekliTahaBerk/leetcode/tree/main/0007.%20Reverse%20Integer) | Easy | Python |
 | [0021. Merge Two Sorted Lists](https://github.com/TerekliTahaBerk/leetcode/tree/main/0021.%20Merge%20Two%20Sorted%20Lists) | Easy | Python | 
 
 

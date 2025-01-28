@@ -28,7 +28,9 @@ Each solution includes:
 
 | Problem Title | Difficulty | Language |                
 |-----------------------------------------------|------------|------------|
-| [Two Sum](https://github.com/TerekliTahaBerk/leetcode/tree/main/001.%20Two%20Sum) | Easy | Python | 
+| [0001. Two Sum](https://github.com/TerekliTahaBerk/leetcode/tree/main/001.%20Two%20Sum) | Easy | Python |
+| [0021. Merge Two Sorted Lists](https://github.com/TerekliTahaBerk/leetcode/tree/main/0021.%20Merge%20Two%20Sorted%20Lists) | Easy | Python | 
+
 
 
 *Feel free to explore the solutions using the links provided above.*

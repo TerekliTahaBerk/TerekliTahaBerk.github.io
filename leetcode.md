@@ -31,6 +31,7 @@ Each solution includes:
 | [0001. Two Sum](https://github.com/TerekliTahaBerk/leetcode/tree/main/001.%20Two%20Sum) | Easy | Python |
 | [0006. Zigzag Conversion](https://github.com/TerekliTahaBerk/leetcode/tree/main/0006.%20Zigzag%20Conversion) | Medium | Python |
 | [0007. Reverse Integer](https://github.com/TerekliTahaBerk/leetcode/tree/main/0007.%20Reverse%20Integer) | Medium | Python |
+| [0012. Integer to Roman](https://github.com/TerekliTahaBerk/leetcode/tree/main/0012.%20Integer%20to%20Roman) | Medium | Python |
 | [0021. Merge Two Sorted Lists](https://github.com/TerekliTahaBerk/leetcode/tree/main/0021.%20Merge%20Two%20Sorted%20Lists) | Easy | Python | 
 
 

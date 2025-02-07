@@ -34,6 +34,7 @@ Each solution includes:
 | [0012. Integer to Roman](https://github.com/TerekliTahaBerk/leetcode/tree/main/0012.%20Integer%20to%20Roman) | Medium | Python |
 | [0021. Merge Two Sorted Lists](https://github.com/TerekliTahaBerk/leetcode/tree/main/0021.%20Merge%20Two%20Sorted%20Lists) | Easy | Python | 
 | [0029. Divide Two Integers](https://github.com/TerekliTahaBerk/leetcode/tree/main/0029.%20Divide%20Two%20Integer) | Medium | Python |
+| [0043. Multiply Strings](https://github.com/TerekliTahaBerk/leetcode/tree/main/0043.%20Multiply%20Strings) | Medium | Python |
 
 *Feel free to explore the solutions using the links provided above.*
 

@@ -72,6 +72,7 @@ As a young data-driven engineer, I'm passionate about using my skills to bring v
   - [Introduction to Statistics](https://drive.google.com/file/d/1m3vCV9NLV2oKxnhdpMob3PMzGVAG61Hh/view?usp=share_link)
 
 - **DataCamp:**
+  - [Understanding Prompt Engineering](https://drive.google.com/file/d/1omG5obMb-0Dpe_k06kDYfJHWxYk9jrmi/view)
   - [Introduction to AWS](https://drive.google.com/file/d/1cNp0Qj6ICVsn2RwS_e5vORIuj0IYfQTd/view?usp=share_link)
   - [Introduction to Python](https://drive.google.com/file/d/1m3vCV9NLV2oKxnhdpMob3PMzGVAG61Hh/view?usp=share_link)
   - [Intermediate Python](https://drive.google.com/file/d/1m3vCV9NLV2oKxnhdpMob3PMzGVAG61Hh/view?usp=share_link)

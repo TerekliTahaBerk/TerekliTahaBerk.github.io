@@ -36,6 +36,7 @@ Each solution includes:
 | [0029. Divide Two Integers](https://github.com/TerekliTahaBerk/leetcode/tree/main/0029.%20Divide%20Two%20Integer) | Medium | Python |
 | [0043. Multiply Strings](https://github.com/TerekliTahaBerk/leetcode/tree/main/0043.%20Multiply%20Strings) | Medium | Python |
 | [0048. Rotate Image](https://github.com/TerekliTahaBerk/leetcode/tree/main/0048.%20Rotate%20Image) | Medium | Python |
+| [0050. Pow(x, n)](https://github.com/TerekliTahaBerk/leetcode/tree/main/0050.%20Pow(x%2C%20n)) | Medium | Python |
 
 *Feel free to explore the solutions using the links provided above.*
 

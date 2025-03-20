@@ -15,10 +15,6 @@ All solutions are structured for clarity and accessibility, making this reposito
 The problems are organized within the **LeetCode Solutions** folder in a structured format:
   - Each SQL problem has its dedicated folder, named after the problem.
   - Problems are categorized by difficulty: **Easy**, **Medium**, or **Hard**.
-  - Each folder contains an SQL script with:
-    - **Query Implementation:** Optimized SQL solution for the problem.
-    - **Explanation:** Detailed comments explaining the approach.
-    - **Performance Considerations:** Notes on query efficiency and indexing.
 
 ## Problem Solutions Overview
 

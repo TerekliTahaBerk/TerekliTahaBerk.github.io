@@ -45,11 +45,14 @@ As a young data-driven engineer, I'm passionate about using my skills to bring v
 
 ## 🛠️ Technical Skills
 
-- **Programming:** Python, Java, SQL, R
-- **Automation:** UiPath, Automation Anywhere, Robusta
-- **Data Science:** Data Analysis, Machine Learning, Advanced Analytics
-- **ERP Systems:** SAP
-- **Cloud:** AWS
+- **Programming:** Python, JavaScript, VB.NET, SQL, PowerShell
+- **RPA Platforms:** UiPath, Power Automate
+- **Data Handling:** ETL, Data Analysis, SQL Server, Oracle, MySQL, PostgreSQL
+- **Integration:** REST APIs, SOAP, XML, JSON, Webhooks
+- **Business Tools:** SAP, Microsoft Dynamics 365
+- **Project Management:** Agile, Scrum, JIRA, Azure DevOps
+- **Visualization:** Power BI, Tableau
+- **Version Control:** Git, SVN, Azure Repos
 
 ## 📚 Education
 

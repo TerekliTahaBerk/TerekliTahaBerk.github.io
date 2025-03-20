@@ -27,7 +27,7 @@ _Note: Data used in the projects is for demonstration purposes only._
   - The queries demonstrate techniques for retrieving and analyzing business-related data, such as sales trends, customer segmentation, supplier relationships, and product performance.
   - Through this project, I have gained hands-on experience in handling structured business data, designing efficient queries for extracting meaningful insights, and optimizing database performance for better efficiency.
 
-- ### [Real World Projects (DataCamp)](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/Real%20World%20Projects%20(DataCamp))
+- ### [Real World Projects (DataCamp)](/sqldatacamp/)
   - This section includes hands-on SQL projects from DataCamp, focusing on real-world data analysis and business intelligence applications.
   - These projects involve working with large and complex datasets, requiring the application of SQL techniques such as data cleaning, normalization, and indexing to ensure optimal performance.
   - The goal of these projects is to derive actionable insights from data, helping businesses make data-driven decisions based on trends, patterns, and statistical analysis.

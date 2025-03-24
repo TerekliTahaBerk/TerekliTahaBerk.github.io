@@ -20,6 +20,7 @@ The problems are organized within the **LeetCode Solutions** folder in a structu
 
 | Problem Title | Difficulty | Query |  
 |--------------|------------|-------|
+| [197. Rising Temperature](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/197.%20Rising%20Temperature) | Easy | SQL |
 | [584. Find Customer Referee](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/584.%20Find%20Customer%20Referee) | Easy | SQL |
 | [595. Big Countries](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/595.%20Big%20Countries) | Easy | SQL |
 | [1068. Product Sales Analysis I](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1068.%20Product%20Sales%20Analysis%20I) | Easy | SQL |

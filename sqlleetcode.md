@@ -27,6 +27,7 @@ The problems are organized within the **LeetCode Solutions** folder in a structu
 | [1148. Article Views I](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1148.%20Article%20Views%20I) | Easy | SQL |
 | [1378. Replace Employee ID With The Unique Identifier](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1378.%20Replace%20Employee%20ID%20With%20The%20Unique%20Identifier) | Easy | SQL |
 | [1581. Customer Who Visited but Did Not Make Any Transactions](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1581.%20Customer%20Who%20Visited%20but%20Did%20Not%20Make%20Any%20Transactions) | Easy | SQL |
+| [1661. Average Time of Process per Machine](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1661.%20Average%20Time%20of%20Process%20per%20Machine) | Easy | SQL |
 | [1683. Invalid Tweets](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1683.%20Invalid%20Tweets) | Easy | SQL |
 | [1757. Recyclable and Low Fat Products](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1757.%20Recyclable%20and%20Low%20Fat%20Products) | Easy | SQL |
 | ... | ... | ... |

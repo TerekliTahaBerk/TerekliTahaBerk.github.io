@@ -15,6 +15,8 @@ This repository showcases my SQL portfolio, featuring projects completed on Data
 
 - [Analyze International Debt Statistics](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/Real%20World%20Projects%20(DataCamp)/Analyze%20International%20Debt%20Statistics): This project explores international debt data collected by The World Bank across countries worldwide. Through SQL queries, I investigate questions such as the total amount of debt, countries with the highest debts, average debt indicators, and debt distribution patterns. The analysis reveals important insights about global economic patterns and financial challenges faced by different nations.
 
+- [Analyzing Students’ Mental Health](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/Real%20World%20Projects%20(DataCamp)/Analyzing%20Students'%20Mental%20Health): This project explores patterns in students’ mental health by analyzing survey data related to stress levels, academic pressure, sleep habits, and coping mechanisms. Using SQL queries, I investigate key factors influencing students’ well-being, identify trends across different demographics, and uncover correlations between academic performance and mental health indicators. This analysis provides valuable insights for educators, policymakers, and institutions aiming to improve student support systems and promote mental wellness in academic environments.
+
 ## Tools
 - PostgreSQL
 - SQL Server

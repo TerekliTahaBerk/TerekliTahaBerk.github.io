@@ -21,10 +21,12 @@ The problems are organized within the **LeetCode Solutions** folder in a structu
 | Problem Title | Difficulty | Query |  
 |--------------|------------|-------|
 | [197. Rising Temperature](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/197.%20Rising%20Temperature) | Easy | SQL |
+| [577. Employee Bonus](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/577.%20Employee%20Bonus) | Easy | SQL |
 | [584. Find Customer Referee](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/584.%20Find%20Customer%20Referee) | Easy | SQL |
 | [595. Big Countries](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/595.%20Big%20Countries) | Easy | SQL |
 | [1068. Product Sales Analysis I](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1068.%20Product%20Sales%20Analysis%20I) | Easy | SQL |
 | [1148. Article Views I](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1148.%20Article%20Views%20I) | Easy | SQL |
+| [1280. Students and Examinations](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1280.%20Students%20and%20Examinations) | Easy | SQL |
 | [1378. Replace Employee ID With The Unique Identifier](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1378.%20Replace%20Employee%20ID%20With%20The%20Unique%20Identifier) | Easy | SQL |
 | [1581. Customer Who Visited but Did Not Make Any Transactions](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1581.%20Customer%20Who%20Visited%20but%20Did%20Not%20Make%20Any%20Transactions) | Easy | SQL |
 | [1661. Average Time of Process per Machine](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1661.%20Average%20Time%20of%20Process%20per%20Machine) | Easy | SQL |

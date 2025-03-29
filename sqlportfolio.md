@@ -22,7 +22,7 @@ _Note: Data used in the projects is for demonstration purposes only._
   - The problems cover fundamental and advanced SQL concepts, such as data filtering, sorting, grouping, and aggregation. Additionally, more complex topics like multi-table joins, subqueries, common table expressions (CTEs), and window functions are also addressed.
   - By solving these challenges, I have strengthened my problem-solving skills and deepened my understanding of query performance optimization, making my SQL code more efficient and scalable.
 
-- ### [Northwind Exercise](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/Northwind%20Exercises)
+- ### [Northwind Exercise](/sqlnorthwind/)
   - This section contains a set of SQL queries and analyses performed on the widely used Northwind database, which simulates a real-world business scenario with customers, orders, suppliers, and products.
   - The queries demonstrate techniques for retrieving and analyzing business-related data, such as sales trends, customer segmentation, supplier relationships, and product performance.
   - Through this project, I have gained hands-on experience in handling structured business data, designing efficient queries for extracting meaningful insights, and optimizing database performance for better efficiency.

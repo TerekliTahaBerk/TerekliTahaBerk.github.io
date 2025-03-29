@@ -3,7 +3,7 @@
 > Explore [my SQL portfolio](/sqlportfolio/) to see my work and expertise..
 
 A data-driven engineer specializing in Data Science and Artificial Intelligence, focused on developing innovative automation systems and transforming data into actionable insights.  
-🌍 Istanbul · 📧 contact@tahaberk.com · [LinkedIn](https://www.linkedin.com/in/tahaberkterekli) · [GitHub](https://github.com/TerekliTahaBerk)
+🌍 Istanbul · 📧 contact@tahaberk.com · [LinkedIn](https://www.linkedin.com/in/tahaberkterekli1/) · [GitHub](https://github.com/TerekliTahaBerk)
 
 > Check out [my latest python projects](/projects/) and [LeetCode solutions](/leetcode/).
 

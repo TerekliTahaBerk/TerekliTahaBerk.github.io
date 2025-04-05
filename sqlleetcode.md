@@ -37,6 +37,7 @@ The problems are organized within the **LeetCode Solutions** folder in a structu
 | [1661. Average Time of Process per Machine](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1661.%20Average%20Time%20of%20Process%20per%20Machine) | Easy | SQL |
 | [1683. Invalid Tweets](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1683.%20Invalid%20Tweets) | Easy | SQL |
 | [1757. Recyclable and Low Fat Products](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1757.%20Recyclable%20and%20Low%20Fat%20Products) | Easy | SQL |
+| [2356. Number of Unique Subjects Taught by Each Teacher](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/2356.%20Number%20of%20Unique%20Subjects%20Taught%20by%20Each%20Teacher) | Easy | SQL |
 | ... | ... | ... |
 
 More solutions will be continuously added as I progress.

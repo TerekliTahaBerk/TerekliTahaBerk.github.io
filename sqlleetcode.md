@@ -28,6 +28,7 @@ The problems are organized within the **LeetCode Solutions** folder in a structu
 | [1068. Product Sales Analysis I](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1068.%20Product%20Sales%20Analysis%20I) | Easy | SQL |
 | [1075. Project Employees I](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1075.%20Project%20Employees%20I) | Easy | SQL |
 | [1148. Article Views I](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1148.%20Article%20Views%20I) | Easy | SQL |
+| [1211. Queries Quality and Percentage](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1211.%20Queries%20Quality%20and%20Percentage) | Easy | SQL |
 | [1251. Average Selling Price](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1251.%20Average%20Selling%20Price) | Easy | SQL |
 | [1280. Students and Examinations](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1280.%20Students%20and%20Examinations) | Easy | SQL |
 | [1378. Replace Employee ID With The Unique Identifier](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1378.%20Replace%20Employee%20ID%20With%20The%20Unique%20Identifier) | Easy | SQL |

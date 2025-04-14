@@ -27,6 +27,7 @@ The problems are organized within the **LeetCode Solutions** folder in a structu
 | [620. Not Boring Movies](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/620.%20Not%20Boring%20Movies) | Easy | SQL |
 | [1068. Product Sales Analysis I](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1068.%20Product%20Sales%20Analysis%20I) | Easy | SQL |
 | [1075. Project Employees I](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1075.%20Project%20Employees%20I) | Easy | SQL |
+| [1141. User Activity for the Past 30 Days I](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1141.%20User%20Activity%20for%20the%20Past%2030%20Days%20I) | Easy | SQL |
 | [1148. Article Views I](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1148.%20Article%20Views%20I) | Easy | SQL |
 | [1211. Queries Quality and Percentage](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1211.%20Queries%20Quality%20and%20Percentage) | Easy | SQL |
 | [1251. Average Selling Price](https://github.com/TerekliTahaBerk/sql-portfolio/tree/main/LeetCode%20Solutions/1251.%20Average%20Selling%20Price) | Easy | SQL |

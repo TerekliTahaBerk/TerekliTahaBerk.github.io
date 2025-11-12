@@ -1,115 +1,138 @@
-# 👋 Hi, I'm Taha Berk! 
+# 👋 Hi, I'm Taha Berk!  
 
-> Explore [my SQL portfolio](/sqlportfolio/) to see my work and expertise..
+> Explore [my SQL portfolio](/sqlportfolio/) to see my analytical work and data engineering expertise.
 
-A data-driven engineer specializing in Data Science and Artificial Intelligence, focused on developing innovative automation systems and transforming data into actionable insights.  
-🌍 Istanbul · 📧 contact@tahaberk.com · [LinkedIn](https://www.linkedin.com/in/tahaberkterekli1/) · [GitHub](https://github.com/TerekliTahaBerk)
+A **data-driven engineer** specializing in **Data Science**, **Artificial Intelligence**, and **Automation Systems**,  
+focused on building intelligent pipelines and transforming data into actionable insights.  
+🌍 Istanbul · 📧 contact@tahaberk.com · [LinkedIn](https://www.linkedin.com/in/tahaberkterekli) · [GitHub](https://github.com/TerekliTahaBerk)
 
-> Check out [my latest python projects](/projects/) and [LeetCode solutions](/leetcode/).
+> Check out [my latest Python projects](/projects/) and [LeetCode solutions](/leetcode/).
 
-## 🚀 About Me
+---
 
-As a young data-driven engineer, I'm passionate about using my skills to bring value to organizations. With a strong focus on data analysis and a problem-solving mindset, I transform data into actionable insights to produce innovative solutions. My expertise spans across RPA development, data science applications, and supply chain optimization, allowing me to contribute meaningfully to various business domains.
+## 🚀 About Me  
 
-## 💼 Professional Experience
+As a passionate data and automation engineer, I leverage data to **optimize decision-making** and **build scalable systems**.  
+My experience spans **RPA**, **data analytics**, and **AI research**, allowing me to deliver intelligent automation and data-driven insights.  
+Currently, I’m working on real-world **data engineering** projects and a **deep learning research** project focused on **medical image segmentation**.
 
-- **RPA Developer & Analyst** @[Papara](https://www.papara.com) _(Dec 2024 - Present)_
-  - Design and implement automation solutions using **UiPath** and **Automation Anywhere**
-  - Analyze workflows and identify automation opportunities
-  - Develop and maintain **RPA** bots for streamlined operations
-  - Create comprehensive documentation and ensure seamless deployment
+---
 
-- **Supply Chain Intern** @[LC Waikiki](https://www.lcwaikiki.com) _(Aug 2024 - Sep 2024)_
-  - Optimized **supply chain** processes using advanced **data analytics**
-  - Managed supplier relationships and implemented **cost-reducing** logistics improvements
-  - Enhanced transparency in demand planning and inventory management
-  - Developed strategic solutions to add value across the supply chain
+## 💼 Professional Experience  
 
-- **RPA Developer** @[Latro](https://www.latro.com.tr) _(Jul 2023 - Aug 2023)_
-  - Led **SAP** automation integration initiatives
-  - Headed software team for automation development
-  - Developed automation processes using **Java** and **Python**
-  - Enhanced robotic systems capabilities through cutting-edge technologies
+- **Data Intern** @[Getir](https://www.getir.com) _(May 2025 – Present)_  
+  - Built automated **data pipelines** using **Airflow**, **Python (Pandas, NumPy)**, and **SQL (PostgreSQL, BigQuery)**.  
+  - Developed dashboards in **Metabase** and **Excel** for KPI monitoring.  
+  - Focused on **ETL processes**, **data consistency**, and **scalable analytics solutions**.
 
-- **RPA Developer Intern** @[QNB Finansbank](https://www.qnbfinansbank.com) _(Apr 2023 - Jun 2023)_
-  - Developed competencies in **SQL** and **data manipulation**
-  - Gained proficiency in **R** programming
-  - Managed datasets and enhanced data science skills
-  - Collaborated in team environments for project success
+- **RPA Developer & Analyst Intern** @[Papara](https://www.papara.com) _(Dec 2024 – May 2025)_  
+  - Designed automation workflows using **UiPath** and **Automation Anywhere**.  
+  - Integrated SQL data operations and .NET scripts into automation pipelines.  
+  - Developed process documentation, testing, and deployment strategies.  
 
-- **Short Term Intern** @[DenizBank](https://www.denizbank.com) _(Jan 2023 - Mar 2023)_
-  - Gained comprehensive **banking** sector experience
-  - Contributed across multiple departments
-  - Developed insights into **financial data science** applications
-  - Enhanced teamwork and collaboration skills
+- **Supply Chain Intern** @[LC Waikiki](https://www.lcwaikiki.com) _(Aug 2024 – Sep 2024)_  
+  - Optimized logistics using **data analytics** for demand and inventory planning.  
+  - Strengthened supplier management and improved transparency in operations.  
 
-## 🛠️ Technical Skills
+- **RPA Developer** @[Latro](https://www.latro.com.tr) _(Jul 2023 – Aug 2023)_  
+  - Led **SAP automation** projects with **Python**, **Java**, and **Robusta**.  
+  - Enhanced robotic systems and streamlined operational workflows.  
 
-- **Programming:** Python, JavaScript, VB.NET, SQL, PowerShell
-- **RPA Platforms:** UiPath, Power Automate
-- **Data Handling:** ETL, Data Analysis, SQL Server, Oracle, MySQL, PostgreSQL
-- **Integration:** REST APIs, SOAP, XML, JSON, Webhooks
-- **Business Tools:** SAP, Microsoft Dynamics 365
-- **Project Management:** Agile, Scrum, JIRA, Azure DevOps
-- **Visualization:** Power BI, Tableau
-- **Version Control:** Git, SVN, Azure Repos
+- **RPA Developer Intern** @[QNB Finansbank](https://www.qnbfinansbank.com) _(Apr 2023 – Jun 2023)_  
+  - Automated business processes and data management tasks.  
+  - Strengthened SQL and RPA-based problem-solving skills.  
 
-## 📚 Education
+- **Short Term Intern** @[DenizBank](https://www.denizbank.com) _(Jan 2023 – Mar 2023)_  
+  - Rotated across departments, gaining exposure to **banking analytics** and automation.  
 
-- 🎓 **Yildiz Technical University** _(2022 - 2026)_   
-Bachelor's Degree in Mathematics Focusing on mathematical foundations for data science and AI applications
+---
 
-- 🎯 **Stanford University** _(2023)_   
-Code in Place Program - Python programming and computer science fundamentals
+## 🧠 Research Experience  
 
-- 🏫 **Vefa High School** _(2017 - 2022)_
+- **TÜBİTAK 2209-A Research Project** – *Brain Tumor Segmentation with Deep Learning* _(Mar 2025 – Present)_  
+  - Developed **U-Net models** for MRI-based segmentation using **TensorFlow/Keras**.  
+  - Focused on **medical imaging**, **semantic segmentation**, and **model optimization**.  
+  - Worked on **performance evaluation** using **Dice coefficient** and **IoU metrics**.
 
-## 🎯 Certifications
+---
 
-- **IBM Professional Certificates:**
-  - [Python for Data Science, AI & Development](https://www.coursera.org/account/accomplishments/verify/UAW9C6KPL2G3?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=pdf_header_button&utm_product=course)
-  - [Tools for Data Science](https://drive.google.com/file/d/1m3vCV9NLV2oKxnhdpMob3PMzGVAG61Hh/view?usp=share_link)
-  - [Python Project for Data Science](https://www.coursera.org/account/accomplishments/verify/3NDCKLNS7Y6J?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=pdf_header_button&utm_product=course)
-  - [Data Analysis with Python](https://drive.google.com/file/d/1m3vCV9NLV2oKxnhdpMob3PMzGVAG61Hh/view?usp=share_link)
-  - [Databases and SQL for Data Science with Python](https://drive.google.com/file/d/1m3vCV9NLV2oKxnhdpMob3PMzGVAG61Hh/view?usp=share_link)
+## 🛠️ Technical Skills  
 
-- **Stanford University:**
-  - [Certificate of Completion Code in Place](https://drive.google.com/file/d/1m3vCV9NLV2oKxnhdpMob3PMzGVAG61Hh/view?usp=share_link)
-  - [Supervised Machine Learning](https://drive.google.com/file/d/1m3vCV9NLV2oKxnhdpMob3PMzGVAG61Hh/view?usp=share_link)
-  - [Introduction to Statistics](https://drive.google.com/file/d/1m3vCV9NLV2oKxnhdpMob3PMzGVAG61Hh/view?usp=share_link)
+- **Programming:** Python, JavaScript, VB.NET, SQL, PowerShell  
+- **RPA Platforms:** UiPath, Power Automate, Automation Anywhere  
+- **Data Handling:** ETL, Pandas, NumPy, SQL Server, MySQL, PostgreSQL, BigQuery  
+- **Visualization:** Power BI, Tableau, Metabase, Excel  
+- **Integrations:** REST APIs, SOAP, XML, JSON, Webhooks  
+- **Tools:** SAP, Microsoft Dynamics 365  
+- **Project Management:** Agile, Scrum, JIRA, Azure DevOps  
+- **Version Control:** Git, SVN, Azure Repos  
 
-- **DataCamp:**
-  - [Understanding Prompt Engineering](https://drive.google.com/file/d/1omG5obMb-0Dpe_k06kDYfJHWxYk9jrmi/view)
-  - [Introduction to AWS](https://drive.google.com/file/d/1cNp0Qj6ICVsn2RwS_e5vORIuj0IYfQTd/view?usp=share_link)
-  - [Introduction to Python](https://drive.google.com/file/d/1m3vCV9NLV2oKxnhdpMob3PMzGVAG61Hh/view?usp=share_link)
-  - [Intermediate Python](https://drive.google.com/file/d/1m3vCV9NLV2oKxnhdpMob3PMzGVAG61Hh/view?usp=share_link)
-  - [Introduction to ChatGPT](https://drive.google.com/file/d/1dm-LVmu3S_Hgliej_CxRCd0RO_8L8qx0/view?usp=share_link)
+---
 
-## 🌱 Volunteering
+## 📚 Education  
 
-- **WWF Foundation** - Volunteer Coordinator _(2023 - 2025)_
-  - Oversee project management and strategic planning
-  - Focus on biodiversity loss, climate change, and sustainability initiatives
-  - Drive innovative solutions for preserving natural resources
-  - Develop effective communication strategies for environmental awareness
+- 🎓 **Yildiz Technical University** _(2022 – 2026)_  
+  Bachelor’s in **Mathematics**, focused on **Data Science and AI foundations**
 
-- **Community Volunteers Foundation** - Coordinator _(2023 - 2025)_
-  - Lead team development for impactful projects
-  - Co-coordinate at Yıldız Technical University Toplum Gönüllüleri
-  - Foster volunteerism culture within the university
-  - Drive positive change through teamwork and innovation
+- 🎯 **Stanford University** _(2023)_  
+  *Code in Place Program* – Python programming and computer science fundamentals  
 
-## 🗣️ Languages
+- 🏫 **Vefa High School** _(2017 – 2022)_
+
+---
+
+## 🎯 Certifications  
+
+**IBM Professional Certificates:**  
+- [Python for Data Science, AI & Development](https://www.coursera.org/account/accomplishments/verify/UAW9C6KPL2G3)  
+- [Tools for Data Science](https://www.coursera.org/account/accomplishments/verify/YOUR_LINK_HERE)  
+- [Python Project for Data Science](https://www.coursera.org/account/accomplishments/verify/3NDCKLNS7Y6J)  
+- [Data Analysis with Python](https://www.coursera.org/account/accomplishments/verify/YOUR_LINK_HERE)  
+- [Databases and SQL for Data Science with Python](https://www.coursera.org/account/accomplishments/verify/YOUR_LINK_HERE)
+
+**Stanford University:**  
+- [Code in Place](https://codeinplace.stanford.edu/)  
+- [Supervised Machine Learning](https://www.coursera.org/account/accomplishments/verify/YOUR_LINK_HERE)  
+- [Introduction to Statistics](https://www.coursera.org/account/accomplishments/verify/YOUR_LINK_HERE)
+
+**DataCamp:**  
+- [Understanding Prompt Engineering](https://www.datacamp.com)  
+- [Introduction to AWS](https://www.datacamp.com)  
+- [Introduction to Python](https://www.datacamp.com)  
+- [Intermediate Python](https://www.datacamp.com)  
+- [Introduction to ChatGPT](https://www.datacamp.com)
+
+---
+
+## 🌱 Volunteering  
+
+- **WWF Foundation** – Volunteer Coordinator _(2023 – 2025)_  
+  - Coordinated projects on **biodiversity**, **climate change**, and **sustainability**.  
+  - Promoted environmental awareness and strategic planning efforts.  
+
+- **Community Volunteers Foundation (TOG)** – Coordinator _(2023 – 2025)_  
+  - Led university-based volunteer initiatives and student engagement programs.  
+  - Fostered teamwork and community impact projects.
+
+---
+
+## 🗣️ Languages  
 
 > Let’s connect on [Duolingo](https://www.duolingo.com/profile/tahaberkterekli) and be language-learning buddies!
 
-- Turkish _(Native)_
-- English _(Professional Working Proficiency)_
-- German _(Elementary Proficiency)_
-- French _(Elementary Proficiency)_
-
-## ☕️ Support My Work
-If this project inspired you, provided ideas for your own portfolio or helped in any way, please consider [buying me a coffee](https://www.buymeacoffee.com/tahaberkterekli) ❤️. Your support motivates me to keep creating and sharing valuable content! 
+- Turkish _(Native)_  
+- English _(Professional Working Proficiency)_  
+- German _(Elementary)_  
+- French _(Elementary)_
 
 ---
-🔗 Let's ideate, innovate, and build cool experiences with AI. Reach out for collaborations or simply to chat!
+
+## ☕️ Support My Work  
+
+If this portfolio inspired you, provided ideas for your own, or helped in any way,  
+please consider [buying me a coffee](https://www.buymeacoffee.com/tahaberkterekli) ❤️  
+Your support motivates me to keep creating and sharing meaningful tech.
+
+---
+
+🔗 *Let’s ideate, innovate, and build intelligent systems with AI. Reach out for collaborations or simply to chat!*

@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Personal — Taha Berk</title>
+  <meta name="description" content="Personal works, side projects, experiments and notes by Taha Berk Terekli." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script>(function(){try{const s=localStorage.getItem('tbt_theme');if(s==='light'){document.documentElement.classList.remove('dark');}else{document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();</script>
+
+  <style>
+    :root {
+      --bg:#f5f2eb; --fg:#15140f; --fg-soft:#4b4740; --fg-mute:#97928a; --rule:#d9d3c4; --chip:#e3decf;
+      --c-sand:    #ece4d1;
+      --c-sage:    #c8d2bd;
+      --c-pine:    #2d3a2a;
+      --c-cream:   #f0eadc;
+      --c-clay:    #c9614c;
+      --c-blush:   #e9bcae;
+      --c-ink:     #1a1a1a;
+      --c-paper:   #f6f3eb;
+      --c-mustard: #cda94a;
+      --c-sky:     #b9c8d4;
+      --c-plum:    #5e2b3f;
+      --c-moss:    #5b7050;
+    }
+    html.dark {
+      --bg:#0b0a09; --fg:#ece7d8; --fg-soft:#b5ad9c; --fg-mute:#6a655c; --rule:#2b2824; --chip:#1c1a17;
+    }
+    *,*::before,*::after { box-sizing:border-box; }
+    html,body { margin:0; padding:0; }
+    body {
+      background:var(--bg); color:var(--fg);
+      font-family:'Geist',system-ui,-apple-system,sans-serif;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    .serif { font-family:'Instrument Serif',ui-serif,Georgia,serif; letter-spacing:-0.01em; }
+    .mono  { font-family:'Geist Mono',ui-monospace,monospace; }
+    ::selection { background: var(--fg); color: var(--bg); }
+
+    .page { min-height:100vh; display:flex; flex-direction:column; padding:28px clamp(20px,4vw,56px) 40px; }
+
+    /* ---------- TOP NAV ---------- */
+    .top { display:flex; justify-content:space-between; align-items:center; gap:24px; }
+    .brand { font-family:'Instrument Serif',serif; font-size:22px; text-decoration:none; color:var(--fg);
+             display:inline-flex; align-items:baseline; gap:6px; }
+    .brand .dot { width:5px; height:5px; border-radius:50%; background:oklch(0.62 0.15 155); display:inline-block; transform:translateY(-3px); }
+    .nav { display:flex; gap:clamp(18px,2.6vw,32px); flex-wrap:wrap; justify-content:flex-end; }
+    .nav a { color:var(--fg); opacity:.65; text-decoration:none; font-size:13px; position:relative; padding:4px 2px; transition:opacity .25s ease; }
+    .nav a:hover, .nav a.active { opacity:1; }
+    .nav a::after { content:""; position:absolute; left:2px; right:2px; bottom:0; height:1px; background:currentColor; transform-origin:left; transform:scaleX(0); transition:transform .35s cubic-bezier(.2,.7,.2,1); }
+    .nav a:hover::after, .nav a.active::after { transform:scaleX(1); }
+
+    /* ---------- HEADER ---------- */
+    .head {
+      max-width: 1200px; margin: 56px auto 28px; width:100%;
+      display:flex; justify-content:space-between; align-items:end; gap:24px; flex-wrap:wrap;
+    }
+    .eyebrow {
+      font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.22em;
+      text-transform:uppercase; color:var(--fg-mute); margin-bottom:14px;
+    }
+    h1 {
+      font-family:'Instrument Serif',serif; font-weight:400;
+      font-size:clamp(56px,8.5vw,108px); line-height:0.92; letter-spacing:-0.025em; margin:0;
+      max-width: 14ch;
+    }
+    h1 em { font-style: italic; color: var(--fg-soft); }
+    .lede {
+      font-family:'Instrument Serif',serif;
+      color:var(--fg-soft);
+      font-size:clamp(18px, 1.4vw, 22px);
+      line-height:1.4;
+      max-width: 38ch;
+      margin:0;
+    }
+    .filter {
+      display:flex; gap:6px; flex-wrap:wrap; align-items:center;
+      margin-top: 8px;
+    }
+    .pill {
+      font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.16em; text-transform:uppercase;
+      padding: 6px 12px; border-radius:999px; border:1px solid var(--rule);
+      background:transparent; color:var(--fg-soft); cursor:pointer;
+      transition: background .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .pill:hover { color:var(--fg); border-color:var(--fg-soft); }
+    .pill.active { background:var(--fg); color:var(--bg); border-color:var(--fg); }
+
+    /* ---------- BENTO ---------- */
+    .bento {
+      max-width: 1200px; margin: 0 auto; width:100%;
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 80px;
+      grid-auto-flow: dense;
+      gap: 14px;
+    }
+    @media (max-width: 900px) {
+      .bento { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 70px; }
+    }
+    @media (max-width: 560px) {
+      .bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 70px; gap: 10px; }
+    }
+
+    .card {
+      position:relative; overflow:hidden;
+      border-radius: 18px;
+      padding: 22px;
+      display:flex; flex-direction:column;
+      transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease;
+      will-change: transform;
+      isolation: isolate;
+    }
+    .card:hover { transform: translateY(-2px); }
+    a.card { text-decoration: none; color: inherit; }
+
+    .card .tag {
+      font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.2em;
+      text-transform:uppercase; opacity:.65;
+    }
+    .card .meta-row {
+      display:flex; justify-content:space-between; align-items:center;
+      gap: 12px;
+    }
+    .card h3 {
+      font-family:'Instrument Serif',serif; font-weight:400;
+      font-size: clamp(20px, 1.7vw, 28px);
+      line-height: 1.08; letter-spacing:-0.01em;
+      margin: 0;
+    }
+    .card .big {
+      font-family:'Instrument Serif',serif;
+      font-size: clamp(28px, 3vw, 44px);
+      line-height: 1.04; letter-spacing:-0.015em;
+    }
+    .card .body {
+      font-size: 13px; line-height: 1.55; opacity: 0.78;
+      margin: 0;
+    }
+    .arrow-mask {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: currentColor; opacity: .9;
+      mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'><path d='M8 14 L14 8 M9 8 L14 8 L14 13' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>") center / 70% no-repeat;
+      -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'><path d='M8 14 L14 8 M9 8 L14 8 L14 13' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>") center / 70% no-repeat;
+      transition: transform .3s cubic-bezier(.2,.7,.2,1);
+    }
+    .card:hover .arrow-mask { transform: translate(2px,-2px); }
+
+    /* spans */
+    .x3 { grid-column: span 3; }
+    .x4 { grid-column: span 4; }
+    .x5 { grid-column: span 5; }
+    .x6 { grid-column: span 6; }
+    .x7 { grid-column: span 7; }
+    .x8 { grid-column: span 8; }
+    .x12 { grid-column: span 12; }
+    .y2 { grid-row: span 2; }
+    .y3 { grid-row: span 3; }
+    .y4 { grid-row: span 4; }
+    .y5 { grid-row: span 5; }
+    .y6 { grid-row: span 6; }
+
+    @media (max-width: 900px) {
+      .x3,.x4,.x5 { grid-column: span 3; }
+      .x6,.x7,.x8 { grid-column: span 6; }
+      .x12 { grid-column: span 6; }
+    }
+    @media (max-width: 560px) {
+      .x3,.x4,.x5,.x6,.x7,.x8,.x12 { grid-column: span 2; }
+    }
+
+    /* color cards */
+    .c-sand   { background: var(--c-sand);   color: #1a1a1a; }
+    .c-sage   { background: var(--c-sage);   color: #1a1a1a; }
+    .c-pine   { background: var(--c-pine);   color: #ece7d8; }
+    .c-cream  { background: var(--c-cream);  color: #15140f; }
+    .c-clay   { background: var(--c-clay);   color: #f6f3eb; }
+    .c-blush  { background: var(--c-blush);  color: #2c1812; }
+    .c-ink    { background: var(--c-ink);    color: #ece7d8; }
+    .c-paper  { background: var(--c-paper);  color: #15140f; border:1px solid var(--rule); }
+    .c-mustard{ background: var(--c-mustard);color: #1a1a1a; }
+    .c-sky    { background: var(--c-sky);    color: #15140f; }
+    .c-plum   { background: var(--c-plum);   color: #f0e5d8; }
+    .c-moss   { background: var(--c-moss);   color: #f0e5d8; }
+
+    .logo-block {
+      display:flex; align-items:center; justify-content:center;
+      flex: 1;
+      font-family:'Instrument Serif',serif;
+      font-size: clamp(38px, 4.5vw, 64px);
+      line-height: 1; letter-spacing:-0.02em;
+    }
+    .logo-block .sub {
+      font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.2em;
+      text-transform:uppercase; opacity:.7; margin-top: 6px;
+    }
+    .logo-stack { display:flex; flex-direction:column; align-items:center; gap:2px; }
+
+    .cluster { display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; }
+    .ctag { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.16em; text-transform:uppercase;
+            padding: 3px 8px; border-radius:999px; background: rgba(0,0,0,.08); }
+    .c-pine .ctag, .c-clay .ctag, .c-ink .ctag, .c-plum .ctag, .c-moss .ctag { background: rgba(255,255,255,.12); }
+
+    .mini-grid { display:grid; grid-template-columns: repeat(12, 1fr); gap: 4px 5px; margin: 12px 0; }
+    .mini-grid span { display:inline-block; width: 10px; height: 10px; color: currentColor; }
+    .mini-grid svg { display:block; width:100%; height:100%; }
+
+    .sticker {
+      position:absolute; bottom: 16px; right: 16px;
+      font-family:'Instrument Serif',serif; font-style:italic;
+      background: var(--bg); color: var(--fg);
+      padding: 6px 12px; border-radius: 999px;
+      font-size: 14px;
+      border: 1px solid var(--rule);
+      transform: rotate(-2deg);
+    }
+
+    .quote-mark {
+      font-family:'Instrument Serif',serif; font-size: 88px; line-height: 0.5;
+      opacity: 0.35;
+    }
+
+    pre.code {
+      font-family:'Geist Mono', monospace;
+      font-size: 11.5px; line-height: 1.55;
+      margin: 0; padding: 0;
+      white-space: pre; overflow: hidden;
+      opacity: 0.92;
+    }
+    .code .k { color: oklch(0.78 0.13 245); }
+    .code .s { color: oklch(0.78 0.13 55);  }
+    .code .c { opacity: 0.55; font-style: italic; }
+    .code .f { color: oklch(0.78 0.13 155); }
+
+    .photo {
+      background:
+        repeating-linear-gradient(135deg, rgba(255,255,255,0.07) 0 6px, transparent 6px 14px),
+        linear-gradient(180deg, var(--c-sky), #8da3b3);
+      position:relative;
+    }
+    .photo-label {
+      position:absolute; top: 16px; left: 16px;
+      font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.2em;
+      text-transform:uppercase; color: var(--fg-soft);
+      background: var(--bg); padding: 4px 8px; border-radius: 999px; border:1px solid var(--rule);
+    }
+
+    .stat-num {
+      font-family:'Instrument Serif',serif;
+      font-size: clamp(56px, 7vw, 110px); line-height: 0.9; letter-spacing:-0.02em;
+    }
+
+    .available {
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 6px 12px; border-radius: 999px;
+      background: rgba(0,0,0,.08); font-family:'Geist Mono',monospace;
+      font-size:10px; letter-spacing:0.16em; text-transform:uppercase;
+      width:fit-content;
+    }
+    .c-pine .available, .c-clay .available, .c-ink .available, .c-plum .available, .c-moss .available { background: rgba(255,255,255,.14); }
+    .available .pulse {
+      position: relative; display:inline-block;
+      width: 6px; height: 6px; border-radius:50%;
+      background: oklch(0.82 0.15 155);
+    }
+
+    .footer {
+      max-width: 1200px; margin: 36px auto 0; width:100%;
+      display:flex; justify-content:space-between; gap:16px;
+      color:var(--fg-mute); font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase;
+    }
+    .footer a { color:inherit; text-decoration:none; transition:color .2s ease; }
+    .footer a:hover { color:var(--fg); }
+
+    a:focus-visible, button:focus-visible { outline: 1px dashed var(--fg-soft); outline-offset: 3px; }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="top">
+      <a href="/" class="brand">Taha Berk<span class="dot" aria-hidden="true"></span></a>
+      <nav class="nav">
+        <a href="/work.html">Work</a>
+        <a href="/personal.html" class="active">Personal</a>
+        <a href="/research.html">Research</a>
+        <a href="/blog.html">Blog</a>
+      </nav>
+    </header>
+
+    <section class="head">
+      <div>
+        <div class="eyebrow">Personal · 2022 — now</div>
+        <h1>Things I built <em>after hours.</em></h1>
+      </div>
+      <p class="lede">
+        A scratchpad — side projects, scripts, notebooks, half-finished ideas.
+        Nothing here is part of a job. Most of it just had to exist.
+      </p>
+    </section>
+
+    <section class="head" style="margin-top:0; margin-bottom:18px;">
+      <div class="filter" id="filter">
+        <button class="pill active" data-tag="all">All</button>
+        <button class="pill" data-tag="code">Code</button>
+        <button class="pill" data-tag="data">Data</button>
+        <button class="pill" data-tag="ml">ML</button>
+        <button class="pill" data-tag="write">Writing</button>
+        <button class="pill" data-tag="play">Play</button>
+      </div>
+    </section>
+
+    <section class="bento" id="bento">
+
+      <article class="card c-sand x6 y4" data-tags="write play">
+        <div class="meta-row">
+          <span class="tag">01 · Manifesto</span>
+          <span class="tag">2024</span>
+        </div>
+        <div style="flex:1; display:flex; align-items:center;">
+          <p class="big" style="margin:0;">
+            I treat <em>math</em>, code &amp; a clean
+            spreadsheet as the same kind of <em>tool</em> —
+            a way to be precise about something fuzzy.
+          </p>
+        </div>
+        <div class="cluster">
+          <span class="ctag">Notes</span>
+          <span class="ctag">Personal</span>
+        </div>
+      </article>
+
+      <a class="card c-sage x3 y4" href="https://github.com/TerekliTahaBerk" target="_blank" rel="noreferrer" data-tags="code play">
+        <div class="meta-row">
+          <span class="tag">02</span>
+          <span class="arrow-mask" aria-hidden="true"></span>
+        </div>
+        <div class="logo-block">
+          <div class="logo-stack">
+            <span>tbt/</span>
+            <span class="sub">studio</span>
+          </div>
+        </div>
+        <span class="tag">a place for late-night code</span>
+      </a>
+
+      <a class="card c-pine x3 y4" href="https://github.com/TerekliTahaBerk" target="_blank" rel="noreferrer" data-tags="code data">
+        <div class="meta-row">
+          <span class="tag">03 · Repo</span>
+          <span class="arrow-mask" aria-hidden="true"></span>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; justify-content:flex-end;">
+          <h3 style="font-size: 26px;">redshift-warehouse-helpers</h3>
+          <p class="body" style="margin-top:8px;">Tiny Python utilities for inspecting, profiling and snapshotting tables in Redshift.</p>
+        </div>
+        <div class="cluster">
+          <span class="ctag">Python</span>
+          <span class="ctag">SQL</span>
+        </div>
+      </a>
+
+      <article class="card c-clay x4 y3" data-tags="write">
+        <div class="meta-row">
+          <span class="tag">04 · Essay</span>
+          <span class="tag">draft</span>
+        </div>
+        <div style="flex:1; display:flex; align-items:center;">
+          <p class="big" style="margin:0;">
+            Why I'd rather build the <em>same query twice</em> than ship a clever one.
+          </p>
+        </div>
+      </article>
+
+      <article class="card c-ink x4 y3" data-tags="code data">
+        <div class="meta-row">
+          <span class="tag">05 · Snippet</span>
+          <span class="tag">.py</span>
+        </div>
+        <pre class="code" style="margin-top:14px;"><span class="c"># 14-day retention curve</span>
+<span class="k">def</span> <span class="f">retention</span>(events):
+    cohort = events.groupby(
+        [<span class="s">"signup_d"</span>, <span class="s">"days"</span>]
+    )[<span class="s">"uid"</span>].nunique()
+    <span class="k">return</span> cohort.unstack().div(
+        cohort.xs(<span class="s">0</span>, level=<span class="s">1</span>), axis=<span class="s">0</span>
+    )</pre>
+      </article>
+
+      <article class="card c-cream x4 y3" data-tags="play">
+        <div class="meta-row">
+          <span class="tag">06 · Status</span>
+          <span class="tag">live</span>
+        </div>
+        <div style="flex:1; display:flex; align-items:center;">
+          <p class="big" style="margin:0;">
+            <em>Open</em> to a quiet collab on
+            <span style="color:oklch(0.55 0.14 155);">data</span> or
+            <span style="color:oklch(0.6 0.14 10);">ML</span>.
+          </p>
+        </div>
+        <span class="available">
+          <span class="pulse" aria-hidden="true"></span>
+          Available · Istanbul
+        </span>
+      </article>
+
+      <a class="card c-mustard x4 y4" href="https://github.com/TerekliTahaBerk" target="_blank" rel="noreferrer" data-tags="code play">
+        <div class="meta-row">
+          <span class="tag">07 · Side product</span>
+          <span class="arrow-mask" aria-hidden="true"></span>
+        </div>
+        <div class="logo-block">
+          <div class="logo-stack">
+            <span>cron/joy</span>
+            <span class="sub">tiny tools that automate themselves</span>
+          </div>
+        </div>
+        <div class="cluster">
+          <span class="ctag">Beta</span>
+          <span class="ctag">Solo build</span>
+        </div>
+      </a>
+
+      <article class="card c-paper x4 y4" data-tags="code">
+        <div class="meta-row">
+          <span class="tag">08 · GitHub</span>
+          <span class="tag">52w</span>
+        </div>
+        <h3 style="margin-top:14px;">A year of small commits.</h3>
+        <div class="mini-grid" id="mini-grid" aria-hidden="true"></div>
+        <p class="body">Most of these are evening sessions. Some are a single test passing.</p>
+      </article>
+
+      <article class="card c-blush x4 y4" data-tags="write">
+        <div class="meta-row">
+          <span class="tag">09 · Quote</span>
+          <span class="tag">notebook</span>
+        </div>
+        <span class="quote-mark">"</span>
+        <p class="big" style="margin-top:-6px;">
+          A model is a story the data agreed to tell you, on a Tuesday.
+        </p>
+        <span class="tag" style="margin-top:auto;">— scribbled in a margin, 2025</span>
+      </article>
+
+      <article class="card photo x8 y3" data-tags="play">
+        <span class="photo-label">PHOTO · drop your own</span>
+        <div style="flex:1;"></div>
+        <span class="sticker">— a desk somewhere in Istanbul</span>
+      </article>
+
+      <article class="card c-sky x4 y3" data-tags="data ml">
+        <div class="meta-row">
+          <span class="tag">10 · Stat</span>
+          <span class="tag">2025</span>
+        </div>
+        <div style="flex:1; display:flex; align-items:flex-end;">
+          <div>
+            <div class="stat-num">0.87</div>
+            <p class="body" style="margin-top:6px;">Dice coefficient on the brain-tumor U-Net side experiment (BraTS subset).</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card c-moss x4 y3" data-tags="write play">
+        <div class="meta-row">
+          <span class="tag">11 · Reading</span>
+          <span class="tag">'25</span>
+        </div>
+        <div style="flex:1; display:flex; align-items:center;">
+          <p class="big" style="margin:0;">
+            Currently re-reading <em>"How to Take Smart Notes"</em> — and ignoring most of it.
+          </p>
+        </div>
+      </article>
+
+      <a class="card c-plum x4 y3" href="https://github.com/TerekliTahaBerk" target="_blank" rel="noreferrer" data-tags="code">
+        <div class="meta-row">
+          <span class="tag">12 · Repo</span>
+          <span class="arrow-mask" aria-hidden="true"></span>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; justify-content:flex-end;">
+          <h3 style="font-size: 26px;">airflow-recipe-pack</h3>
+          <p class="body" style="margin-top:8px;">DAG templates for daily ELT, retries, Slack alerts &amp; cache warming.</p>
+        </div>
+        <div class="cluster">
+          <span class="ctag">Airflow</span>
+          <span class="ctag">Python</span>
+        </div>
+      </a>
+
+      <article class="card c-paper x4 y3" data-tags="play">
+        <div class="meta-row">
+          <span class="tag">13 · Mark</span>
+          <span class="tag">wip</span>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;">
+          <div style="font-family:'Instrument Serif',serif; font-size: clamp(46px, 5vw, 72px); line-height:1; color: oklch(0.55 0.14 245); letter-spacing:-0.02em;">
+            ∑/data
+          </div>
+          <div class="tag" style="opacity:.6;">monogram studies</div>
+        </div>
+      </article>
+
+      <a class="card c-cream x4 y3" href="https://codeinplace.stanford.edu" target="_blank" rel="noreferrer" data-tags="code write">
+        <div class="meta-row">
+          <span class="tag">14 · Course</span>
+          <span class="arrow-mask" aria-hidden="true"></span>
+        </div>
+        <h3 style="margin-top:14px;">Code in Place — Stanford</h3>
+        <p class="body" style="margin-top:8px;">Six weeks of evening Python, plus a final mini-app. Kept the notebook, deleted the slack.</p>
+        <div class="cluster" style="margin-top:auto;">
+          <span class="ctag">2023</span>
+          <span class="ctag">Self-paced</span>
+        </div>
+      </a>
+
+      <article class="card c-sage x4 y3" data-tags="ml data">
+        <div class="meta-row">
+          <span class="tag">15 · Experiment</span>
+          <span class="tag">'25</span>
+        </div>
+        <h3 style="margin-top:14px;">unet-mri-playground</h3>
+        <p class="body" style="margin-top:8px;">Notebook companion to the TÜBİTAK research — U-Net variants, augmentation grids, Dice/IoU dashboards.</p>
+        <div class="cluster" style="margin-top:auto;">
+          <span class="ctag">TensorFlow</span>
+          <span class="ctag">Notebook</span>
+        </div>
+      </article>
+
+    </section>
+
+    <footer class="footer">
+      <a href="/">← back</a>
+      <span>Istanbul · GMT+3</span>
+    </footer>
+  </main>
+
+  <script>
+    const pills = document.querySelectorAll('#filter .pill');
+    const cards = document.querySelectorAll('#bento .card');
+    pills.forEach(p => p.addEventListener('click', () => {
+      pills.forEach(o => o.classList.toggle('active', o === p));
+      const tag = p.dataset.tag;
+      cards.forEach(c => {
+        const tags = (c.dataset.tags || '').split(/\s+/);
+        const show = tag === 'all' || tags.includes(tag);
+        c.style.display = show ? '' : 'none';
+        if (show) requestAnimationFrame(() => {
+          c.animate(
+            [{opacity:0, transform:'translateY(6px)'},{opacity:1, transform:'none'}],
+            { duration: 350, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'forwards' }
+          );
+        });
+      });
+    }));
+
+    const mini = document.getElementById('mini-grid');
+    if (mini) {
+      const rows = 5, cols = 12;
+      let r = 19;
+      const rand = () => (r = (r * 9301 + 49297) % 233280) / 233280;
+      for (let i = 0; i < rows * cols; i++) {
+        const v = rand();
+        const empty = v < 0.18;
+        const op = empty ? 0.1 : 0.25 + v * 0.75;
+        const span = document.createElement('span');
+        span.style.opacity = op;
+        span.innerHTML = `<svg viewBox="0 0 12 12"><path d="M6 2L6 10 M2 6L10 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`;
+        mini.appendChild(span);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,85 +1,128 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Blog — Taha Berk</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet" />
-  <script>(function(){try{const s=localStorage.getItem('tbt_theme');if(s==='light'){document.documentElement.classList.remove('dark');}else{document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();</script>
-  <style>
-    :root { --bg:#f5f2eb; --fg:#15140f; --fg-soft:#4b4740; --fg-mute:#97928a; --rule:#d9d3c4; --chip:#e3decf; }
-    html.dark { --bg:#0b0a09; --fg:#ece7d8; --fg-soft:#b5ad9c; --fg-mute:#6a655c; --rule:#2b2824; --chip:#1c1a17; }
-    *,*::before,*::after { box-sizing: border-box; }
-    html,body { margin:0; padding:0; height:100%; }
-    body { background:var(--bg); color:var(--fg); font-family:'Geist',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
-    ::selection { background: var(--fg); color: var(--bg); }
-    .page { min-height:100vh; display:flex; flex-direction:column; padding:28px clamp(20px,4vw,56px); }
-    .top { display:flex; justify-content:space-between; align-items:center; gap:24px; }
-    .brand { font-family:'Instrument Serif',serif; font-size:22px; text-decoration:none; color:var(--fg); display:inline-flex; align-items:baseline; gap:6px; }
-    .brand .dot { width:5px; height:5px; border-radius:50%; background:oklch(0.62 0.15 155); display:inline-block; transform:translateY(-3px); }
-    .nav { display:flex; gap:clamp(20px,3vw,36px); }
-    .nav a { color:var(--fg); opacity:.65; text-decoration:none; font-size:13px; position:relative; padding:4px 2px; transition:opacity .25s ease; }
-    .nav a:hover, .nav a.active { opacity:1; }
-    .nav a::after { content:""; position:absolute; left:2px; right:2px; bottom:0; height:1px; background:currentColor; transform-origin:left; transform:scaleX(0); transition:transform .35s cubic-bezier(.2,.7,.2,1); }
-    .nav a:hover::after, .nav a.active::after { transform:scaleX(1); }
-
-    .center { flex:1; display:flex; flex-direction:column; justify-content:center; max-width:700px; width:100%; margin:0 auto; padding:48px 8px; }
-    h1 { font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(56px,9vw,104px); line-height:0.92; letter-spacing:-0.025em; margin:0 0 24px; }
-    .eyebrow { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--fg-mute); margin-bottom:14px; }
-    .lede { font-family:'Instrument Serif',serif; font-size:24px; line-height:1.35; color:var(--fg-soft); margin:0 0 36px; max-width:38ch; }
-
-    .soon { border:1px solid var(--rule); border-radius:14px; padding:24px; transition:border-color .25s ease; }
-    .soon:hover { border-color:var(--fg-soft); }
-    .soon .row { display:flex; justify-content:space-between; align-items:baseline; gap:16px; }
-    .soon h3 { font-family:'Instrument Serif',serif; font-weight:400; font-size:22px; margin:0; letter-spacing:-0.01em; }
-    .soon .when { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--fg-mute); white-space:nowrap; }
-    .soon p { color:var(--fg-soft); font-size:13.5px; line-height:1.6; margin:8px 0 0; }
-    .soon + .soon { margin-top:10px; }
-
-    .footer { display:flex; justify-content:space-between; gap:16px; padding-top:24px; color:var(--fg-mute); font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; }
-    .footer a { color:inherit; text-decoration:none; transition:color .2s ease; }
-    .footer a:hover { color:var(--fg); }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blog · Taha Berk</title>
+<link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+<link rel="apple-touch-icon" href="/favicon.jpg" />
+<meta name="description" content="Long-form notes by Taha Berk Terekli on data engineering, the RPA-to-data career transition, idempotent ELT in Redshift, and U-Net for brain tumor segmentation." />
+<meta name="keywords" content="data engineering blog, RPA to data, Redshift ELT, idempotent SQL, U-Net brain tumor, Taha Berk Terekli" />
+<meta name="author" content="Taha Berk Terekli" />
+<link rel="canonical" href="https://www.tahaberk.com/blog.html" />
+<meta property="og:title" content="Blog — Taha Berk Terekli" />
+<meta property="og:description" content="Long-form notes on data engineering, ML and the messy middle between RPA and analytics." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.tahaberk.com/blog.html" />
+<meta property="og:site_name" content="Taha Berk Terekli" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Blog — Taha Berk Terekli" />
+<meta name="twitter:description" content="Long-form notes on data engineering, ML and the messy middle between RPA and analytics." />
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Blog",
+  "name":"Taha Berk Terekli — Blog",
+  "url":"https://www.tahaberk.com/blog.html",
+  "author":{"@type":"Person","name":"Taha Berk Terekli","url":"https://www.tahaberk.com/"},
+  "description":"Long-form notes on data engineering, ML and the RPA-to-data career transition."
+}
+</script>
+<script>(function(){try{var t=localStorage.getItem('tbt_theme');if(t==='light'){document.documentElement.classList.remove('dark')}else{document.documentElement.classList.add('dark')}}catch(e){}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#faf8f3;--fg:#1a1916;--fg-soft:#4a4640;--fg-mute:#8a857b;--rule:#e6e1d4;--chip:#efe9da;--accent:oklch(0.62 0.15 155)}
+  html.dark{--bg:#0b0a09;--fg:#ece7d8;--fg-soft:#b5ad9c;--fg-mute:#6a655c;--rule:#2b2824;--chip:#1c1a17}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:'Geist',ui-sans-serif,system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--fg)}
+  .wrap{max-width:880px;margin:0 auto;padding:48px 32px 96px}
+  nav.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Instrument Serif',serif;font-size:22px}
+  .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+  nav.top ul{display:flex;gap:28px;list-style:none;padding:0;margin:0;font-family:'Geist Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-mute)}
+  nav.top a.active{color:var(--fg)}
+  .hero{padding-bottom:48px;border-bottom:1px solid var(--rule);margin-bottom:48px}
+  .hero .eyebrow{font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:18px;display:block}
+  .hero h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:64px;line-height:1.02;margin:0 0 18px;letter-spacing:-.01em}
+  .hero p{font-size:18px;color:var(--fg-soft);max-width:600px;margin:0;line-height:1.55}
+  .posts{display:flex;flex-direction:column}
+  .post{display:grid;grid-template-columns:120px 1fr;gap:32px;padding:32px 0;border-bottom:1px solid var(--rule);transition:opacity .2s}
+  .post:last-child{border-bottom:0}
+  .post:hover{opacity:.7}
+  .post .date{font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-mute);padding-top:8px}
+  .post .date small{display:block;color:var(--fg-mute);margin-top:6px;text-transform:none;letter-spacing:0;font-size:10.5px}
+  .post h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:34px;line-height:1.15;margin:0 0 10px;letter-spacing:-.005em;color:var(--fg)}
+  .post p{margin:0 0 14px;color:var(--fg-soft);font-size:15.5px;line-height:1.65}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-soft);background:var(--chip);padding:4px 10px;border-radius:3px;border:1px solid var(--rule)}
+  footer{margin-top:96px;padding-top:24px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-mute)}
+  @media (max-width:720px){
+    .wrap{padding:32px 22px 64px}
+    .hero h1{font-size:42px}
+    .post{grid-template-columns:1fr;gap:8px}
+    .post .date{padding-top:0}
+    .post h2{font-size:28px}
+    nav.top ul{gap:18px}
+  }
+</style>
 </head>
 <body>
-  <main class="page">
-    <header class="top">
-      <a href="/" class="brand">Taha Berk<span class="dot" aria-hidden="true"></span></a>
-      <nav class="nav">
-        <a href="/work.html">Work</a>
-        <a href="/personal.html">Personal</a>
-        <a href="/research.html">Research</a>
-        <a href="/blog.html" class="active">Blog</a>
-      </nav>
-    </header>
+<div class="wrap">
+  <nav class="top">
+    <a class="brand" href="/"><span class="dot"></span><span>Taha Berk</span></a>
+    <ul>
+      <li><a href="/work.html">Work</a></li>
+      <li><a href="/personal.html">Personal</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a class="active" href="/blog.html">Blog</a></li>
+    </ul>
+  </nav>
 
-    <section class="center">
-      <div class="eyebrow">Blog</div>
-      <h1>Soon.</h1>
-      <p class="lede">Short notes on data, automation, and the things I'm learning. Drafts in progress — first post lands soon.</p>
+  <section class="hero">
+    <span class="eyebrow">§ Blog · long-form</span>
+    <h1>Notes from the <em>messy middle</em>.</h1>
+    <p>Slow, opinionated essays on data engineering, machine learning and the parts of an analytics career that nobody puts on the slide. Written for people who would rather read 1,500 careful words than skim ten.</p>
+  </section>
 
-      <div class="soon">
-        <div class="row">
-          <h3>Why I'd build the same Redshift query twice</h3>
-          <span class="when">Draft</span>
-        </div>
-        <p>On caching, idempotency, and why a slow first run beats a clever flaky one.</p>
+  <div class="posts">
+
+    <a class="post" href="/posts/idempotent-elt-redshift.html">
+      <div class="date">2025 · 03<small>~ 11 min read</small></div>
+      <div>
+        <h2>Why I'd rather build the same Redshift query <em>twice</em></h2>
+        <p>A defence of boring, idempotent ELT — why running the same SQL again on Monday morning should produce the same numbers, and what that actually costs to enforce in a real warehouse. With concrete patterns for late-arriving facts, dedup windows and "soft re-runs" in Redshift.</p>
+        <div class="chips"><span class="chip">data engineering</span><span class="chip">redshift</span><span class="chip">elt</span><span class="chip">sql</span></div>
       </div>
-      <div class="soon">
-        <div class="row">
-          <h3>From RPA to data: notes from the in-between</h3>
-          <span class="when">Soon</span>
-        </div>
-        <p>A short reflection on moving from process automation into analytics.</p>
-      </div>
-    </section>
+    </a>
 
-    <footer class="footer">
-      <a href="/">← back</a>
-      <span>Istanbul · GMT+3</span>
-    </footer>
-  </main>
+    <a class="post" href="/posts/from-rpa-to-data.html">
+      <div class="date">2025 · 02<small>~ 9 min read</small></div>
+      <div>
+        <h2>From RPA to data: notes from the <em>in-between</em></h2>
+        <p>What two years of automating banks and e-commerce processes taught me before I jumped to a data role — and which of those lessons turned out to be portable, which were a trap, and what I would tell a junior RPA developer eyeing the same move today.</p>
+        <div class="chips"><span class="chip">career</span><span class="chip">rpa</span><span class="chip">data engineering</span><span class="chip">essay</span></div>
+      </div>
+    </a>
+
+    <a class="post" href="/posts/unet-brain-tumor-notes.html">
+      <div class="date">2025 · 01<small>~ 12 min read</small></div>
+      <div>
+        <h2>What U-Net taught me about <em>reading MRI slices</em></h2>
+        <p>Field notes from a TÜBİTAK-funded undergraduate project on brain tumor segmentation. Less about architectures, more about the unglamorous decisions — normalisation, patch sampling, honest evaluation — that decide whether your Dice score means anything at all.</p>
+        <div class="chips"><span class="chip">deep learning</span><span class="chip">u-net</span><span class="chip">medical imaging</span><span class="chip">tensorflow</span></div>
+      </div>
+    </a>
+
+  </div>
+
+  <footer>
+    <a href="/">← back</a>
+    <span>Istanbul · GMT+3</span>
+  </footer>
+</div>
 </body>
 </html>

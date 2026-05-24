@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>U-Net &amp; MRI slices · Taha Berk</title>
+<link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+<link rel="apple-touch-icon" href="/favicon.jpg" />
+<meta name="description" content="Field notes from a TÜBİTAK 2209-A funded undergraduate research project on brain tumor segmentation with U-Net. Less about architectures, more about the unglamorous decisions — normalisation, patch sampling, honest evaluation — that decide whether your Dice score means anything." />
+<meta name="keywords" content="U-Net brain tumor segmentation, BraTS, medical imaging, deep learning, Dice score, IoU, TensorFlow Keras, TÜBİTAK 2209-A, MRI segmentation" />
+<meta name="author" content="Taha Berk Terekli" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<link rel="canonical" href="https://www.tahaberk.com/posts/unet-brain-tumor-notes.html" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="What U-Net taught me about reading MRI slices" />
+<meta property="og:description" content="Field notes from a TÜBİTAK-funded brain tumor segmentation project — what actually moves Dice in the real world." />
+<meta property="og:url" content="https://www.tahaberk.com/posts/unet-brain-tumor-notes.html" />
+<meta property="og:site_name" content="Taha Berk Terekli" />
+<meta property="article:published_time" content="2025-01-22" />
+<meta property="article:author" content="Taha Berk Terekli" />
+<meta property="article:section" content="Machine Learning" />
+<meta property="article:tag" content="U-Net" />
+<meta property="article:tag" content="Medical Imaging" />
+<meta property="article:tag" content="Deep Learning" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="What U-Net taught me about reading MRI slices" />
+<meta name="twitter:description" content="Field notes from a brain tumor segmentation project: normalisation, patch sampling and honest evaluation." />
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"BlogPosting",
+  "headline":"What U-Net taught me about reading MRI slices",
+  "description":"Field notes from a TÜBİTAK 2209-A undergraduate research project on brain tumor segmentation with U-Net.",
+  "datePublished":"2025-01-22",
+  "dateModified":"2025-01-22",
+  "author":{"@type":"Person","name":"Taha Berk Terekli","url":"https://www.tahaberk.com/"},
+  "publisher":{"@type":"Person","name":"Taha Berk Terekli"},
+  "mainEntityOfPage":{"@type":"WebPage","@id":"https://www.tahaberk.com/posts/unet-brain-tumor-notes.html"},
+  "keywords":"U-Net, brain tumor, segmentation, BraTS, medical imaging, TensorFlow, Keras",
+  "articleSection":"Machine Learning",
+  "inLanguage":"en"
+}
+</script>
+<script>(function(){try{var t=localStorage.getItem('tbt_theme');if(t==='light'){document.documentElement.classList.remove('dark')}else{document.documentElement.classList.add('dark')}}catch(e){}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/posts/post.css" />
+</head>
+<body>
+<div class="wrap">
+  <nav class="top">
+    <a class="brand" href="/"><span class="dot"></span><span>Taha Berk</span></a>
+    <ul>
+      <li><a href="/work.html">Work</a></li>
+      <li><a href="/personal.html">Personal</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/blog.html">Blog</a></li>
+    </ul>
+  </nav>
+
+  <article>
+    <div class="meta"><span>2025 · 01 · 22</span><span>12 min read</span><span>deep learning · medical imaging</span></div>
+
+    <h1 class="title">What U-Net taught me about <em>reading MRI slices</em>.</h1>
+    <p class="lede">Field notes from a TÜBİTAK 2209-A funded undergraduate project on brain tumor segmentation. Less about architectures, more about the unglamorous decisions — normalisation, patch sampling, honest evaluation — that decide whether your Dice score means anything at all.</p>
+
+    <p>I have spent the better part of a year training U-Nets to outline glioma on brain MRIs. The work is funded by a small TÜBİTAK 2209-A undergraduate grant — see the longer write-up on <a href="/research.html">the research page</a> — and the headline result, "Dice ~0.87 on whole-tumor", is the part that fits on a poster.</p>
+
+    <p>It is also the least interesting part of the project. What I actually want to write down, before I forget, is what training a segmentation network changed about how I <em>look at a brain scan</em>. The network is a forcing function. It will not let you be sloppy about the things you used to be sloppy about. This is a list of those things.</p>
+
+    <h2>1. The dataset is not the dataset</h2>
+
+    <p>The first lie of medical-imaging ML papers is that the dataset is a fixed object. You download BraTS-style multi-modal MRIs — T1, T1ce, T2, FLAIR — and a corresponding set of segmentation labels, and you treat the whole thing as a single thing called "the dataset."</p>
+
+    <p>Then you start <em>looking</em> at it. And it turns out:</p>
+
+    <ul>
+      <li>Some volumes were skull-stripped with one tool, others with another. The leftover dura matter on a few patients confuses every model you train.</li>
+      <li>The intensity histograms of T1ce vary by an order of magnitude between scanners. Some patients were imaged on a 1.5T machine, some on a 3T.</li>
+      <li>The "ground truth" labels were drawn by different annotators with different thresholds for what counts as edema. You can sometimes <em>guess the annotator</em> from the label style.</li>
+    </ul>
+
+    <p>None of these are bugs. They are the actual texture of medical data. But if you treat them as bugs and try to "clean" them away, you will train a model that works beautifully on your sanitised slice of the world and falls apart the moment a real hospital sends you a scan from a different scanner. The dataset is a population, not a thing.</p>
+
+    <h2>2. Normalisation is half the model</h2>
+
+    <p>The single biggest jump in my early Dice scores did not come from changing the architecture. It came from changing how I normalised intensities. I had been doing the textbook thing — divide by max, or min-max scale per volume — and it was leaving the network to learn intensity invariance from data, which is a slow and expensive thing to ask it to learn.</p>
+
+    <p>Switching to per-volume <em>z-score normalisation on non-zero voxels</em> (i.e. ignore the air around the brain, then standardise) added something like five Dice points overnight. That is more than I ever got from a bigger encoder, a fancier loss, or any of the architectural ablations I ran for two months after.</p>
+
+    <div class="callout"><strong>Lesson:</strong> in medical imaging, "preprocessing" is not a chore you do before the real work. It <em>is</em> the work. The model is the cheap part.</div>
+
+    <h2>3. The class imbalance is worse than it looks</h2>
+
+    <p>If you measure "tumor vs. background" you get a class ratio that is bad but tractable — maybe 1% positive voxels on average. If you measure "enhancing tumor vs. background", it is closer to <strong>0.1%</strong>. A naïve cross-entropy loss will learn, very quickly, that the safe bet is to predict zero everywhere, and your loss will be wonderful, and your model will be useless.</p>
+
+    <p>Three things, layered, fixed this for me:</p>
+
+    <ol>
+      <li><strong>Patch-based sampling.</strong> Instead of feeding the whole volume, sample 3D patches that are biased toward containing tumor voxels. ~50/50 tumor-vs-background patches at training time gets the network to actually look at the rare class.</li>
+      <li><strong>Soft Dice loss combined with categorical cross-entropy.</strong> Dice is naturally robust to imbalance because it normalises by the size of the positive region.</li>
+      <li><strong>Focal Tversky for the small enhancing class.</strong> An ablation, but a useful one — it gave the smallest sub-region a fighting chance without destabilising the rest.</li>
+    </ol>
+
+    <p>None of this is a paper-worthy contribution. All of it is the difference between a model that segments and a model that pretends to.</p>
+
+    <h2>4. The validation split lies more than your loss</h2>
+
+    <p>The single most embarrassing bug I shipped, briefly, in version one of this pipeline: I split the data into train and val by <em>slice</em>, not by <em>patient</em>. Each MRI volume has ~150 slices. If you randomly shuffle slices and then split 80/20, then for every patient in val, ~80% of their adjacent slices are in train.</p>
+
+    <p>The model was not segmenting. It was <em>memorising patients</em>. My val Dice was nearly a full point higher than the test Dice, and I spent two weeks chasing imaginary improvements before I noticed.</p>
+
+    <div class="callout"><strong>Rule I now write on every notebook:</strong> the unit of the split is the <em>patient</em>, not the slice, not the patch, and not the augmented sample. Anything else is a leak waiting to happen.</div>
+
+    <h2>5. Dice is a mean. Stop reporting only the mean.</h2>
+
+    <p>Reporting "we achieved a Dice of 0.87 on whole-tumor" is, technically, fine. It is also the kind of sentence that has caused a lot of medical-imaging work to over-promise and under-deliver. Because that 0.87 is a <em>mean across patients</em>, and the underlying distribution is almost always heavy-tailed: most patients are at 0.92, and a long tail of difficult cases is at 0.4-0.6.</p>
+
+    <p>Those tail cases are the ones a clinician would notice. A model that performs at 0.92 on easy gliomas and 0.45 on the unusual ones is, in practice, a model that fails exactly where you would most want it to help.</p>
+
+    <p>I have switched to always reporting Dice, IoU and HD95 as <strong>median and IQR across patients</strong>, plus an explicit count of how many patients fall below some threshold (say, Dice &lt; 0.7). It is less impressive on a slide. It is much harder to be wrong about.</p>
+
+    <h2>6. The model's mistakes are diagnostic of its training data</h2>
+
+    <p>This is the part that genuinely changed how I look at scans. After enough training runs, you start to notice patterns in <em>where</em> your network is wrong.</p>
+
+    <ul>
+      <li>If it confuses ventricles for necrotic core, your FLAIR normalisation is probably off.</li>
+      <li>If it under-segments small enhancing tumor, you almost certainly didn't sample enough of those patches at training time.</li>
+      <li>If it produces ragged, speckled predictions near the cortex, you are probably training on too few slices and overfitting to mid-brain anatomy.</li>
+    </ul>
+
+    <p>Once you see this, you cannot un-see it. The error map becomes a kind of mirror of your own data choices. The network is not failing; it is reporting, very precisely, what you taught it to think a tumor looks like.</p>
+
+    <h2>7. A baseline is more useful than a contribution</h2>
+
+    <p>One of the under-stated goals of this project — and probably the one I am proudest of — is not the model itself. It is the goal of leaving behind a <em>reproducible</em> U-Net baseline that another undergraduate at my university can fork in a week and run end-to-end on a single GPU.</p>
+
+    <p>Most academic ML code I have inherited as a student is, charitably, hostile. A model checkpoint sits in a forgotten Google Drive folder. Preprocessing is half in a Jupyter notebook, half in someone's bash history. The "results" require running three scripts in the right order with the right CUDA version, and the right CUDA version is not in the README.</p>
+
+    <p>I want the artifact I leave behind to be the opposite of that. One repo. One training script. One config file. One synthetic-data smoke test that runs in 90 seconds on CPU. A README that assumes nothing and apologises for nothing.</p>
+
+    <blockquote>
+      A research project ends when somebody else can reproduce it. Until then, it is a personal achievement, not a public one.
+      <footer>— something my advisor said, which I keep stealing</footer>
+    </blockquote>
+
+    <h2>What I'd do differently next</h2>
+
+    <p>For the next iteration — and there will be one — the changes I want to try are not architectural. They are all upstream:</p>
+
+    <ul>
+      <li>Better skull-strip QA before training; potentially a learned skull-strip step.</li>
+      <li>Histogram matching across scanners, not just per-volume z-scoring.</li>
+      <li>Per-patient temperature scaling on the output, so uncertainty estimates are actually calibrated.</li>
+      <li>An honest "out-of-distribution" test set from a different scanner / institution, used only at the very end.</li>
+    </ul>
+
+    <p>None of these will make for an exciting paper title. All of them, I think, would move the work closer to something a clinician could actually look at without rolling their eyes.</p>
+
+    <p class="muted">If you are working on something similar — or if any of this contradicts your experience — I'd love to hear about it. Brain tumor segmentation has many crowded leaderboards and very few honest field notes, and I would rather this post be the start of a conversation than the end of one.</p>
+
+    <div class="tags">
+      <span class="tag">u-net</span><span class="tag">medical imaging</span><span class="tag">deep learning</span><span class="tag">tensorflow</span><span class="tag">brats</span><span class="tag">segmentation</span>
+    </div>
+
+    <hr class="rule" />
+    <div class="next">
+      <a href="/research.html"><span class="lab">More →</span><span class="tit">The full <em>research</em> page</span></a>
+      <a href="/posts/from-rpa-to-data.html"><span class="lab">← Previous</span><span class="tit">From RPA to data: notes from the <em>in-between</em></span></a>
+    </div>
+  </article>
+
+  <footer class="page">
+    <a href="/blog.html">← blog</a>
+    <span>Istanbul · GMT+3</span>
+  </footer>
+</div>
+</body>
+</html>

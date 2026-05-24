@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>From RPA to data · Taha Berk</title>
+<link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+<link rel="apple-touch-icon" href="/favicon.jpg" />
+<meta name="description" content="What two years of RPA at Papara, Latro and QNB Finansbank taught me before moving into a data engineering role at Getir — which lessons turned out to be portable, which were a trap, and what to tell a junior RPA developer eyeing the same move." />
+<meta name="keywords" content="RPA to data engineering, UiPath, Blue Prism, career change, junior data engineer, automation to analytics, Taha Berk Terekli" />
+<meta name="author" content="Taha Berk Terekli" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<link rel="canonical" href="https://www.tahaberk.com/posts/from-rpa-to-data.html" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="From RPA to data: notes from the in-between" />
+<meta property="og:description" content="What two years of RPA at banks and e-commerce taught me before moving into a data engineering role — and what I'd tell a junior considering the same move." />
+<meta property="og:url" content="https://www.tahaberk.com/posts/from-rpa-to-data.html" />
+<meta property="og:site_name" content="Taha Berk Terekli" />
+<meta property="article:published_time" content="2025-02-14" />
+<meta property="article:author" content="Taha Berk Terekli" />
+<meta property="article:section" content="Career" />
+<meta property="article:tag" content="RPA" />
+<meta property="article:tag" content="Data Engineering" />
+<meta property="article:tag" content="Career" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="From RPA to data: notes from the in-between" />
+<meta name="twitter:description" content="What two years of RPA taught me before moving to data engineering — what was portable, what was a trap." />
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"BlogPosting",
+  "headline":"From RPA to data: notes from the in-between",
+  "description":"What two years of RPA at Papara, Latro and QNB Finansbank taught me before moving into a data engineering role at Getir.",
+  "datePublished":"2025-02-14",
+  "dateModified":"2025-02-14",
+  "author":{"@type":"Person","name":"Taha Berk Terekli","url":"https://www.tahaberk.com/"},
+  "publisher":{"@type":"Person","name":"Taha Berk Terekli"},
+  "mainEntityOfPage":{"@type":"WebPage","@id":"https://www.tahaberk.com/posts/from-rpa-to-data.html"},
+  "keywords":"RPA, data engineering, career, UiPath, Blue Prism",
+  "articleSection":"Career",
+  "inLanguage":"en"
+}
+</script>
+<script>(function(){try{var t=localStorage.getItem('tbt_theme');if(t==='light'){document.documentElement.classList.remove('dark')}else{document.documentElement.classList.add('dark')}}catch(e){}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/posts/post.css" />
+</head>
+<body>
+<div class="wrap">
+  <nav class="top">
+    <a class="brand" href="/"><span class="dot"></span><span>Taha Berk</span></a>
+    <ul>
+      <li><a href="/work.html">Work</a></li>
+      <li><a href="/personal.html">Personal</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/blog.html">Blog</a></li>
+    </ul>
+  </nav>
+
+  <article>
+    <div class="meta"><span>2025 · 02 · 14</span><span>9 min read</span><span>career · essay</span></div>
+
+    <h1 class="title">From RPA to data: notes from the <em>in-between</em>.</h1>
+    <p class="lede">What two years of automating banks and e-commerce processes taught me before I jumped to a data role — and which of those lessons turned out to be portable, which were a trap, and what I'd tell a junior developer eyeing the same move today.</p>
+
+    <p>The first time I told someone in a data interview that I had spent two years writing RPA bots, they did the thing — the small, polite pause where you can see them re-classifying you in their head. <em>Oh. So you're not really an engineer.</em> They never said it. They didn't have to.</p>
+
+    <p>That moment, repeated across a dozen interviews in 2024, is the reason for this post. Because the honest answer is more interesting than either party usually has time for. RPA gave me half of what a junior data engineer needs and almost none of the prestige. Some of what it taught me has aged beautifully. Some of it I have had to actively un-learn. This is a long, opinionated map of which is which.</p>
+
+    <h2>What RPA actually was, for me</h2>
+
+    <p>I want to say what I mean by "RPA" first, because the term has been so abused by vendor marketing that it has lost a lot of its shape. In practice my RPA years (across <a href="/work.html">Papara, Latro, QNB Finansbank, DenizBank</a>) looked like this:</p>
+
+    <ul>
+      <li>Reading internal SOPs written by ops people, sometimes in Word, sometimes only in someone's head.</li>
+      <li>Translating those SOPs into UiPath / Blue Prism flows that opened SAP, Excel, web portals, mainframe green screens and PDFs in some specific order.</li>
+      <li>Negotiating with three different teams about who owned the credentials, the VM, the queue, and the on-call when it broke at 03:00.</li>
+      <li>Writing a <em>lot</em> of defensive try / catch / retry / log code around UI calls that were one Chrome update away from snapping.</li>
+    </ul>
+
+    <p>That last bullet is the secret. Once you strip the demos, RPA is mostly <strong>integration without an API</strong>. Everything else — the orchestration, the monitoring, the SLAs, the "this thing has to run at 06:00 or finance can't close" — is just normal production engineering done in a slightly cursed runtime.</p>
+
+    <h2>What was portable</h2>
+
+    <h3>1. Production empathy</h3>
+
+    <p>When your bot calls a SAP transaction that times out at 03:14, and finance is escalating at 09:00 because cash positions haven't loaded, you learn very quickly that <em>"it works on my machine"</em> is not an engineering position. It is an apology.</p>
+
+    <p>I came into data engineering already believing the things that everyone tells junior data engineers and that junior data engineers mostly nod at without internalising: that <strong>idempotency is non-negotiable</strong>, that logs without context are decorations, that "I'll just re-run it" should be a feature of the system, not a heroic act by a human. Those were not abstractions to me. They were scar tissue. I have <a href="/posts/idempotent-elt-redshift.html">written a whole post about one slice of that</a>.</p>
+
+    <h3>2. Reading other people's processes for a living</h3>
+
+    <p>The single most under-rated RPA skill is sitting with a domain expert — usually someone in finance, ops, or supply chain — and patiently extracting what they <em>actually</em> do, as opposed to what the SOP says they do. The SOP says "verify the invoice against the PO". The actual job is "if the supplier is X, ignore the third line because they always overcharge by 2 TL and we settle quarterly".</p>
+
+    <p>That skill — translating tacit, messy, exception-riddled business logic into something a machine can execute — turns out to be exactly what a data engineer does when they sit down with a finance lead and try to figure out what <em>"active customer"</em> means in this particular company. It is the same job. The output format just changed from a UiPath flowchart to a CTE.</p>
+
+    <h3>3. Versioning the un-versionable</h3>
+
+    <p>RPA platforms are not, charitably, kind to source control. Half your "code" lives in proprietary XML, half in some studio's binary blob, and the diff view is "good luck". You very quickly invent your own rituals: naming conventions for processes, a parallel Git repo for the human-readable parts, a release checklist, an environments matrix.</p>
+
+    <p>It was annoying. It also turned out to be a great pre-school for the more grown-up versions of the same problem in data: managing SQL across environments, keeping dbt models tidy, separating dev / prod credentials, making changes reviewable. The tooling got better. The discipline was already there.</p>
+
+    <h2>What was a trap</h2>
+
+    <h3>1. Pattern matching on UI, not data</h3>
+
+    <p>RPA trains a very specific reflex: when something breaks, look at <em>the screen</em>. Is the button in a different place? Did the popup change? Did the page load in time?</p>
+
+    <p>When something breaks in a data pipeline, the screen is almost never the right place to look. The right place is several layers up: the source contract, the freshness SLA, the schema drift in the upstream Kafka topic, the silent column reorder in a CSV from a partner. I had to consciously rewire myself away from "stare at the failure" and toward "ask what changed in the inputs". It took longer than I'd like to admit.</p>
+
+    <h3>2. Optimising for "it runs once a day, that's enough"</h3>
+
+    <p>Many RPA jobs run nightly. Many of them treat performance as decoration — if it finishes by morning, ship it. Data engineering, even at modest scale, punishes this hard. A query that scans 800 GB and runs in 11 minutes is not "fine because it ran" — it is a <em>cost</em> someone is paying, every day, that you are responsible for.</p>
+
+    <p>I had to learn — not just intellectually, but in my hands — to read <code>EXPLAIN</code> plans, to think about distribution keys and sort keys in Redshift, to ask <em>"how much data does this actually need to touch?"</em> before writing the query, not after the bill came in. RPA never made me ask that. It rewarded me for finishing.</p>
+
+    <h3>3. Believing the demo</h3>
+
+    <p>RPA vendors run on demos. Beautiful, frictionless demos where the bot reads the PDF, opens the portal, fills the form, and a Slack message says <em>"Done in 14 seconds!"</em></p>
+
+    <p>The reality of any one of those steps is a 200-line state machine with retries, credential refreshes, fallback selectors, dead-letter queues and a human on standby. I think every RPA developer leaves with a healthy allergy to demoware — which is wonderful when a vendor walks into your data team in 2025 with a slide that says <em>"AI agent automates your entire ELT in 14 seconds!"</em></p>
+
+    <div class="callout"><strong>The pattern:</strong> the parts of RPA that traveled well were about <em>operating</em> software in production — humility, monitoring, exception handling, talking to humans. The parts that didn't travel were about <em>building</em> software at the scale and economics that analytics actually demands.</div>
+
+    <h2>What I'd tell a junior RPA developer today</h2>
+
+    <p>If you're two years into UiPath or Blue Prism or Power Automate and looking longingly at data engineering job descriptions, here is the short version of what I would have liked someone to tell me in 2023.</p>
+
+    <ol>
+      <li><strong>Stop calling yourself an "RPA developer" in your CV.</strong> Call yourself an automation engineer who happens to work in UiPath. The job descriptions are the same in 80% of cases. Recruiters parse the title, not the platform.</li>
+      <li><strong>Learn SQL deeply, not broadly.</strong> Window functions, CTEs, query plans, set theory. Skip the part of every tutorial that teaches you <code>SELECT * FROM users</code> for the tenth time. Go straight to <em>"why is this query slow and what would I change in the schema?"</em>.</li>
+      <li><strong>Pick one cloud warehouse and one orchestrator</strong> and build something end-to-end on your laptop. BigQuery + dbt + a free GitHub Actions schedule is plenty. Snowflake + Airflow on a free trial is fine. The specific tools matter less than the fact that you've shipped one pipeline from raw to dashboard that survives a re-run.</li>
+      <li><strong>Translate every RPA story on your CV into a data story.</strong> "Automated invoice reconciliation in UiPath" becomes "designed a daily reconciliation job that processed ~14k invoices, with idempotent retries, structured logging and a per-supplier exception queue." Same project. Different audience.</li>
+      <li><strong>Be patient with the prestige gap.</strong> It is real. It is also smaller every year, because every data team eventually discovers that the boring, ops-shaped half of the job is the half that breaks at 03:00 — and that is exactly the half you already know.</li>
+    </ol>
+
+    <h2>The thing nobody tells you</h2>
+
+    <p>The thing nobody tells you about moving from RPA to data is that the hardest part is not technical. It is <em>identity</em>. For two years you were the person who made the broken thing work, the last line of defence against an Excel that wouldn't behave. You were <em>useful</em> in a very immediate, very visible way. Finance loved you, because you saved them four hours a day.</p>
+
+    <p>Data engineering is, frankly, less immediate. You build a pipeline. Six months later, a number on a dashboard is correct. Nobody throws a party for the number being correct. The work is more leveraged and quieter. That trade — visibility for leverage — is the actual career move. Everything else is just learning some new SQL.</p>
+
+    <blockquote>
+      RPA taught me to make things work in production before they were elegant. Data taught me that elegance, in the small, is what keeps them working in production.
+      <footer>— a thing I keep telling junior friends</footer>
+    </blockquote>
+
+    <p class="muted">If you are mid-jump and any of this resonates — or doesn't — I'm always happy to read messages from people in the same spot. The in-between is shorter than it feels.</p>
+
+    <div class="tags">
+      <span class="tag">career</span><span class="tag">rpa</span><span class="tag">uipath</span><span class="tag">data engineering</span><span class="tag">essay</span>
+    </div>
+
+    <hr class="rule" />
+    <div class="next">
+      <a href="/posts/unet-brain-tumor-notes.html"><span class="lab">Next post →</span><span class="tit">What U-Net taught me about <em>reading MRI slices</em></span></a>
+      <a href="/posts/idempotent-elt-redshift.html"><span class="lab">← Previous</span><span class="tit">Why I'd rather build the same Redshift query <em>twice</em></span></a>
+    </div>
+  </article>
+
+  <footer class="page">
+    <a href="/blog.html">← blog</a>
+    <span>Istanbul · GMT+3</span>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Idempotent Redshift ELT · Taha Berk</title>
+<link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+<link rel="apple-touch-icon" href="/favicon.jpg" />
+<meta name="description" content="A pragmatic defence of idempotent ELT in Amazon Redshift: why running the same SQL twice should produce the same numbers, with concrete patterns for late-arriving facts, dedup windows, MERGE-style upserts and safe re-runs." />
+<meta name="keywords" content="idempotent ELT, Amazon Redshift, data engineering, SQL, late-arriving facts, dedup, MERGE, upsert, dbt, e-commerce analytics" />
+<meta name="author" content="Taha Berk Terekli" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<link rel="canonical" href="https://www.tahaberk.com/posts/idempotent-elt-redshift.html" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Why I'd rather build the same Redshift query twice" />
+<meta property="og:description" content="A defence of idempotent ELT in Redshift — with concrete patterns for late-arriving facts, dedup and safe re-runs." />
+<meta property="og:url" content="https://www.tahaberk.com/posts/idempotent-elt-redshift.html" />
+<meta property="og:site_name" content="Taha Berk Terekli" />
+<meta property="article:published_time" content="2025-03-04" />
+<meta property="article:author" content="Taha Berk Terekli" />
+<meta property="article:section" content="Data Engineering" />
+<meta property="article:tag" content="Redshift" />
+<meta property="article:tag" content="ELT" />
+<meta property="article:tag" content="SQL" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Why I'd rather build the same Redshift query twice" />
+<meta name="twitter:description" content="A defence of idempotent ELT in Redshift — with concrete patterns for late-arriving facts, dedup and safe re-runs." />
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"BlogPosting",
+  "headline":"Why I'd rather build the same Redshift query twice",
+  "description":"A pragmatic defence of idempotent ELT in Amazon Redshift: why running the same SQL twice should produce the same numbers.",
+  "datePublished":"2025-03-04",
+  "dateModified":"2025-03-04",
+  "author":{"@type":"Person","name":"Taha Berk Terekli","url":"https://www.tahaberk.com/"},
+  "publisher":{"@type":"Person","name":"Taha Berk Terekli"},
+  "mainEntityOfPage":{"@type":"WebPage","@id":"https://www.tahaberk.com/posts/idempotent-elt-redshift.html"},
+  "keywords":"idempotent ELT, Redshift, data engineering, SQL, dedup, MERGE, late-arriving facts",
+  "articleSection":"Data Engineering",
+  "inLanguage":"en"
+}
+</script>
+<script>(function(){try{var t=localStorage.getItem('tbt_theme');if(t==='light'){document.documentElement.classList.remove('dark')}else{document.documentElement.classList.add('dark')}}catch(e){}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/posts/post.css" />
+</head>
+<body>
+<div class="wrap">
+  <nav class="top">
+    <a class="brand" href="/"><span class="dot"></span><span>Taha Berk</span></a>
+    <ul>
+      <li><a href="/work.html">Work</a></li>
+      <li><a href="/personal.html">Personal</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/blog.html">Blog</a></li>
+    </ul>
+  </nav>
+
+  <article>
+    <div class="meta">
+      <span>2025 · 03 · 04</span><span>11 min read</span><span>data engineering</span>
+    </div>
+
+    <h1 class="title">Why I'd rather build the same Redshift query <em>twice</em>.</h1>
+    <p class="lede">A defence of boring, idempotent ELT — why running the same SQL again on Monday morning should produce the same numbers, and what that actually costs to enforce in a real warehouse.</p>
+
+    <p>Every data team I've worked on eventually has the same argument. It starts on a Slack thread at 09:47 on a Tuesday, sounds like <em>"the dashboard moved overnight again,"</em> and ends with someone — usually the most senior person — saying, almost as a confession: <em>"yeah, just re-run the DAG and see."</em></p>
+
+    <p>That sentence has always bothered me. Not because re-running is bad, but because the only reason it's the answer is that we secretly don't trust our own pipelines to be <em>repeatable</em>. We don't trust that running the same SQL over the same source data will produce the same output. So we hit retry and hope the universe is in a better mood the second time.</p>
+
+    <p>This post is a long argument with that little voice. It is about <strong>idempotency</strong> as a first-class design goal in ELT — specifically in Amazon Redshift, because that's the warehouse I work in most days at <a href="/work.html">Getir</a> — and about the unglamorous patterns that make "just run it again" a feature rather than a prayer.</p>
+
+    <h2>What "idempotent" actually means here</h2>
+
+    <p>The word gets thrown around a lot, so let me pin it down. A pipeline step is <em>idempotent</em> when running it <strong>N times</strong> over the same input window produces the same output state as running it <strong>once</strong>. That is it. No more, no less.</p>
+
+    <p>It does not mean "fast". It does not mean "incremental". It does not mean "exactly once" in the distributed-systems sense — those are different properties and people conflate them constantly. A full <code>TRUNCATE</code>-and-rebuild can be perfectly idempotent and also incredibly slow. A clever incremental merge can be lightning fast and silently <em>non</em>-idempotent, drifting by a few rows each run until your finance team notices in a quarterly report.</p>
+
+    <div class="callout"><strong>The test I use:</strong> if I take a downstream table, drop it, then re-run the last 30 days of pipeline runs in their original order, do I get bit-for-bit the same table back? If not, the pipeline is not idempotent — it is just <em>usually correct</em>.</div>
+
+    <h2>Why this matters more in Redshift than in your laptop</h2>
+
+    <p>Redshift, like most analytical warehouses, gives you very few transactional guarantees across multiple statements in a long-running ELT job. You can wrap things in <code>BEGIN ... COMMIT</code>, but you are still composing dozens of separate SELECTs, INSERTs, and DELETEs against tables that are simultaneously being written to by ingestion jobs and read by hundreds of dashboards.</p>
+
+    <p>That means three boring failure modes show up constantly:</p>
+
+    <ol>
+      <li><strong>Partial runs.</strong> A job dies at step 7 of 12. Steps 1–6 already mutated state. Re-running from the start now double-inserts.</li>
+      <li><strong>Late-arriving facts.</strong> The order table for <code>2025-03-01</code> gets a refund row on <code>2025-03-04</code>. Your daily aggregate for the 1st is now <em>stale</em>, but your incremental job only looked at "yesterday".</li>
+      <li><strong>Retries on the orchestrator.</strong> Airflow / Step Functions / cron retries a task that already half-succeeded. The second attempt sees a different world.</li>
+    </ol>
+
+    <p>Idempotency is not a purity exercise. It is the cheapest, most boring insurance policy against all three.</p>
+
+    <h2>Pattern 1 — Window deletes, then insert</h2>
+
+    <p>The single most useful pattern I keep reaching for is <em>delete-then-insert over a window</em>. It looks like this, simplified:</p>
+
+<pre><code><span class="pre-k">BEGIN</span>;
+
+<span class="pre-k">DELETE FROM</span> mart.fct_orders_daily
+<span class="pre-k">WHERE</span> order_date <span class="pre-k">BETWEEN</span> :start_date <span class="pre-k">AND</span> :end_date;
+
+<span class="pre-k">INSERT INTO</span> mart.fct_orders_daily
+<span class="pre-k">SELECT</span> order_date,
+       country,
+       <span class="pre-k">COUNT</span>(*)                  <span class="pre-k">AS</span> orders,
+       <span class="pre-k">SUM</span>(gross_amount_try)      <span class="pre-k">AS</span> gmv_try
+<span class="pre-k">FROM</span>   raw.orders
+<span class="pre-k">WHERE</span>  order_date <span class="pre-k">BETWEEN</span> :start_date <span class="pre-k">AND</span> :end_date
+<span class="pre-k">GROUP BY</span> 1, 2;
+
+<span class="pre-k">COMMIT</span>;</code></pre>
+
+    <p>Three things matter here. <strong>One:</strong> the delete and the insert are over the <em>exact same window</em>. If you parameterize one and forget the other, you have just invented a new way to corrupt history. <strong>Two:</strong> the window is a closed interval on a deterministic column (<code>order_date</code>), not on <code>ingestion_ts</code> or <code>_loaded_at</code> — those move when you re-load. <strong>Three:</strong> it's all in one transaction, so partial failure rolls back cleanly.</p>
+
+    <p>This pattern is dumb. It is also, in my experience, the right default for ~70% of fact tables under, say, a hundred million rows per partition. The temptation to be clever about merge logic is almost always more expensive than the cost of re-aggregating a 7-day window.</p>
+
+    <h2>Pattern 2 — Dedup with <code>ROW_NUMBER()</code>, deterministically</h2>
+
+    <p>Source systems lie. CDC streams duplicate. Webhooks fire twice. The job of a staging layer is not to pretend they don't — it is to <em>collapse</em> them to a canonical row in a way that survives a re-run.</p>
+
+<pre><code><span class="pre-k">WITH</span> ranked <span class="pre-k">AS</span> (
+  <span class="pre-k">SELECT</span> *,
+         <span class="pre-k">ROW_NUMBER</span>() <span class="pre-k">OVER</span> (
+           <span class="pre-k">PARTITION BY</span> order_id
+           <span class="pre-k">ORDER BY</span> updated_at <span class="pre-k">DESC</span>,
+                    _ingested_at <span class="pre-k">DESC</span>,
+                    source_file_name <span class="pre-k">DESC</span>
+         ) <span class="pre-k">AS</span> rn
+  <span class="pre-k">FROM</span> raw.orders_cdc
+  <span class="pre-k">WHERE</span> order_date <span class="pre-k">BETWEEN</span> :start <span class="pre-k">AND</span> :end
+)
+<span class="pre-k">SELECT</span> * <span class="pre-k">FROM</span> ranked <span class="pre-k">WHERE</span> rn = 1;</code></pre>
+
+    <p>The whole game is in the <code>ORDER BY</code>. Notice that it has <em>three</em> tiebreakers, all of which are stable across re-runs. If you sort only by <code>updated_at</code> and two rows share a millisecond, Redshift will pick one arbitrarily — and the choice can flip on the next run, silently changing your downstream numbers.</p>
+
+    <div class="callout"><strong>Rule of thumb:</strong> every <code>ROW_NUMBER()</code> in a production ELT job should sort by enough columns that any sane re-run produces an identical ranking. Random tie-breaking is the slow leak you'll never debug at 2 a.m.</div>
+
+    <h2>Pattern 3 — "Soft re-run" windows for late-arriving facts</h2>
+
+    <p>Refunds, returns, support credits, B2B reconciliations. Anything that touches money and humans will, eventually, arrive late. If your daily job only ever re-processes "yesterday", you will quietly understate refunds forever.</p>
+
+    <p>The cheapest fix I've found is to make every fact-table job re-process a <em>trailing window</em>, not a single day:</p>
+
+    <ul>
+      <li>Cheap, high-volume facts (page views, clicks): re-process last <strong>3 days</strong>.</li>
+      <li>Order-level facts: re-process last <strong>14 days</strong>.</li>
+      <li>Anything touching refunds or accounting: re-process last <strong>35 days</strong>.</li>
+    </ul>
+
+    <p>Combine this with Pattern 1 and you get the property I actually care about: <em>the last 35 days of any fact table are always a deterministic function of the latest snapshot of the source system, regardless of when the job ran or how many times</em>. Older partitions are frozen, both for cost and for auditability.</p>
+
+    <h2>Pattern 4 — Don't trust <code>CURRENT_DATE</code></h2>
+
+    <p>This one looks small and it is not. If your job has a line like:</p>
+
+<pre><code><span class="pre-k">WHERE</span> order_date = <span class="pre-k">CURRENT_DATE</span> - <span class="pre-s">1</span></code></pre>
+
+    <p>…then it is <em>not</em> idempotent. It is "idempotent within a single calendar day", which is different. Run it Sunday at 23:59 and Monday at 00:01 and you process two different windows. Backfill it three weeks later and you get nothing at all.</p>
+
+    <p>Every job I write now takes <code>:run_date</code> as a parameter, passed in by the orchestrator, and uses <em>only</em> that. The job becomes a pure function of <code>(run_date, source_data)</code>. That is the actual unit you want to be able to replay.</p>
+
+    <h2>What this costs</h2>
+
+    <p>I want to be honest about the trade-off, because "idempotent everything" is also how you set fire to your Redshift bill.</p>
+
+    <ul>
+      <li>You re-process more data than you strictly need to. A 14-day trailing window is, on average, 14× the work of "yesterday only".</li>
+      <li>You will write more <code>DELETE</code> statements, which in Redshift means more <code>VACUUM</code> debt if you don't manage it (auto-vacuum has gotten much better, but it is not magic).</li>
+      <li>Your developers will, briefly, hate you when their "quick incremental fix" gets rejected in review.</li>
+    </ul>
+
+    <p>The trade I keep making is: I would rather pay <strong>1.5× the compute</strong> for a pipeline that I can <strong>drop, re-run, and trust</strong>, than save money on a clever incremental job that I cannot reason about at 3 a.m. when a stakeholder is asking why GMV moved by 2%.</p>
+
+    <blockquote>
+      The cheapest data pipeline is the one you can throw away and rebuild from a single deterministic function of the source. Everything else is a story you tell yourself about how the data <em>probably</em> got that way.
+      <footer>— a note to my future self</footer>
+    </blockquote>
+
+    <h2>The dashboard test</h2>
+
+    <p>Here is the test I would love every data team to run, once a quarter. Pick three of your most-viewed dashboards. For each: drop the underlying mart tables, re-run the last 60 days of pipelines from scratch, and compare every number on the dashboard before and after, to four decimal places.</p>
+
+    <p>If they match — you have an idempotent ELT layer, congratulations, you can sleep. If they don't — and the first time I ran this, they did not — the gap between the two is a precise, dollar-denominated measure of how much your stakeholders <em>think</em> they trust the numbers vs. how much they actually <em>should</em>.</p>
+
+    <p class="muted">That gap is what I am trying to close, one boring SQL pattern at a time.</p>
+
+    <div class="tags">
+      <span class="tag">redshift</span><span class="tag">elt</span><span class="tag">sql</span><span class="tag">data engineering</span><span class="tag">idempotency</span>
+    </div>
+
+    <hr class="rule" />
+    <div class="next">
+      <a href="/posts/from-rpa-to-data.html"><span class="lab">Next post →</span><span class="tit">From RPA to data: notes from the <em>in-between</em></span></a>
+      <a href="/blog.html"><span class="lab">Index</span><span class="tit">All posts</span></a>
+    </div>
+  </article>
+
+  <footer class="page">
+    <a href="/blog.html">← blog</a>
+    <span>Istanbul · GMT+3</span>
+  </footer>
+</div>
+</body>
+</html>

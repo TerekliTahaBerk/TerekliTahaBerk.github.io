@@ -1,100 +1,222 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Research — Taha Berk</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet" />
-  <script>(function(){try{const s=localStorage.getItem('tbt_theme');if(s==='light'){document.documentElement.classList.remove('dark');}else{document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();</script>
-  <style>
-    :root { --bg:#f5f2eb; --fg:#15140f; --fg-soft:#4b4740; --fg-mute:#97928a; --rule:#d9d3c4; --chip:#e3decf; }
-    html.dark { --bg:#0b0a09; --fg:#ece7d8; --fg-soft:#b5ad9c; --fg-mute:#6a655c; --rule:#2b2824; --chip:#1c1a17; }
-    *,*::before,*::after { box-sizing: border-box; }
-    html,body { margin:0; padding:0; height:100%; }
-    body { background:var(--bg); color:var(--fg); font-family:'Geist',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
-    ::selection { background: var(--fg); color: var(--bg); }
-    .page { min-height:100vh; display:flex; flex-direction:column; padding:28px clamp(20px,4vw,56px); }
-    .top { display:flex; justify-content:space-between; align-items:center; gap:24px; }
-    .brand { font-family:'Instrument Serif',serif; font-size:22px; text-decoration:none; color:var(--fg); display:inline-flex; align-items:baseline; gap:6px; }
-    .brand .dot { width:5px; height:5px; border-radius:50%; background:oklch(0.62 0.15 155); display:inline-block; transform:translateY(-3px); }
-    .nav { display:flex; gap:clamp(20px,3vw,36px); }
-    .nav a { color:var(--fg); opacity:.65; text-decoration:none; font-size:13px; position:relative; padding:4px 2px; transition:opacity .25s ease; }
-    .nav a:hover, .nav a.active { opacity:1; }
-    .nav a::after { content:""; position:absolute; left:2px; right:2px; bottom:0; height:1px; background:currentColor; transform-origin:left; transform:scaleX(0); transition:transform .35s cubic-bezier(.2,.7,.2,1); }
-    .nav a:hover::after, .nav a.active::after { transform:scaleX(1); }
-
-    .center { flex:1; display:flex; flex-direction:column; justify-content:center; max-width:780px; width:100%; margin:0 auto; padding:48px 8px; }
-    h1 { font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(56px,9vw,104px); line-height:0.92; letter-spacing:-0.025em; margin:0 0 36px; }
-    .eyebrow { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--fg-mute); margin-bottom:14px; }
-
-    .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; }
-    .card { border:1px solid var(--rule); border-radius:14px; padding:22px 22px 20px; background:var(--bg); transition:border-color .25s ease, transform .25s ease; }
-    .card:hover { border-color:var(--fg-soft); transform:translateY(-1px); }
-    .card .h { display:flex; justify-content:space-between; align-items:center; }
-    .card .id { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--fg-mute); }
-    .card .stat { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; padding:3px 9px; border-radius:999px; background:var(--chip); color:var(--fg-soft); }
-    .card .stat.live { background:oklch(0.30 0.08 155); color:oklch(0.85 0.10 155); }
-    html:not(.dark) .card .stat.live { background:oklch(0.92 0.06 155); color:oklch(0.32 0.10 155); }
-    .card h3 { font-family:'Instrument Serif',serif; font-weight:400; font-size:26px; line-height:1.1; letter-spacing:-0.01em; margin:18px 0 4px; }
-    .card .org { color:var(--fg-mute); font-size:12px; margin-bottom:14px; font-family:'Geist Mono',monospace; letter-spacing:0.04em; }
-    .card p { color:var(--fg-soft); font-size:13.5px; line-height:1.6; margin:0 0 16px; }
-    .chips { display:flex; flex-wrap:wrap; gap:6px; }
-    .chip { font-family:'Geist Mono',monospace; font-size:10px; padding:2px 8px; border-radius:999px; background:var(--chip); color:var(--fg-soft); letter-spacing:0.04em; }
-
-    .footer { display:flex; justify-content:space-between; gap:16px; padding-top:24px; color:var(--fg-mute); font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; }
-    .footer a { color:inherit; text-decoration:none; transition:color .2s ease; }
-    .footer a:hover { color:var(--fg); }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Research · Taha Berk</title>
+<link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+<link rel="apple-touch-icon" href="/favicon.jpg" />
+<meta name="description" content="Research notebook of Taha Berk Terekli — deep learning for medical imaging (brain tumor segmentation with U-Net), TÜBİTAK 2209-A grant project, and ongoing notes on data, ML and causal inference." />
+<link rel="canonical" href="https://www.tahaberk.com/research.html" />
+<meta property="og:title" content="Research — Taha Berk Terekli" />
+<meta property="og:description" content="Brain tumor segmentation with U-Net (TÜBİTAK 2209-A) and other ongoing research notes." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.tahaberk.com/research.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<script>(function(){try{var t=localStorage.getItem('tbt_theme');if(t==='light'){document.documentElement.classList.remove('dark')}else{document.documentElement.classList.add('dark')}}catch(e){}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf8f3; --fg:#1a1916; --fg-soft:#4a4640; --fg-mute:#8a857b;
+    --rule:#e6e1d4; --chip:#efe9da; --accent:oklch(0.62 0.15 155);
+    --warn:oklch(0.7 0.16 60); --blue:oklch(0.62 0.13 235);
+  }
+  html.dark{
+    --bg:#0b0a09; --fg:#ece7d8; --fg-soft:#b5ad9c; --fg-mute:#6a655c;
+    --rule:#2b2824; --chip:#1c1a17;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:'Geist',ui-sans-serif,system-ui,sans-serif;font-weight:400;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  a{color:inherit;text-decoration:none}
+  a:hover{color:var(--fg-soft)}
+  .mono{font-family:'Geist Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-mute)}
+  .serif{font-family:'Instrument Serif',serif;font-weight:400}
+  em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--fg)}
+  .wrap{max-width:1100px;margin:0 auto;padding:48px 32px 96px}
+  nav.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Instrument Serif',serif;font-size:22px}
+  .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+  nav.top ul{display:flex;gap:28px;list-style:none;padding:0;margin:0;font-family:'Geist Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-mute)}
+  nav.top a.active{color:var(--fg)}
+  /* hero */
+  .hero{display:grid;grid-template-columns:180px 1fr;gap:32px;padding-bottom:48px;border-bottom:1px solid var(--rule);margin-bottom:64px}
+  .hero .label{padding-top:14px}
+  .hero h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:64px;line-height:1.02;margin:0 0 20px;letter-spacing:-.01em}
+  .hero p.lede{font-size:18px;color:var(--fg-soft);max-width:640px;margin:0;line-height:1.55}
+  /* featured */
+  .featured{border:1px solid var(--rule);border-radius:6px;padding:40px;margin-bottom:48px;background:linear-gradient(180deg, color-mix(in oklab, var(--chip) 50%, transparent), transparent 40%);position:relative;overflow:hidden}
+  .featured::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent);opacity:.7}
+  .featured .head{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;margin-bottom:24px;flex-wrap:wrap}
+  .featured .head .meta{display:flex;flex-direction:column;gap:6px}
+  .featured h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:44px;line-height:1.1;margin:0;letter-spacing:-.01em}
+  .featured h2 .sub{display:block;font-size:18px;color:var(--fg-mute);margin-top:6px;font-style:italic}
+  .status{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border:1px solid var(--rule);border-radius:999px;font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-soft);background:var(--bg)}
+  .status .ping{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);animation:ping 2s ease-in-out infinite}
+  @keyframes ping{0%,100%{opacity:1}50%{opacity:.35}}
+  .featured .grid{display:grid;grid-template-columns:1fr 280px;gap:48px;margin-top:8px}
+  .featured p{color:var(--fg-soft);font-size:15.5px;line-height:1.7;margin:0 0 18px}
+  .featured p:last-of-type{margin-bottom:0}
+  .sidecard{border-left:1px solid var(--rule);padding-left:28px}
+  .sidecard h4{font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-mute);margin:0 0 12px;font-weight:400}
+  .sidecard ul{list-style:none;padding:0;margin:0 0 24px}
+  .sidecard li{font-size:13.5px;color:var(--fg-soft);padding:6px 0;border-bottom:1px dashed var(--rule);display:flex;justify-content:space-between;gap:12px}
+  .sidecard li:last-child{border-bottom:0}
+  .sidecard li b{color:var(--fg);font-weight:500;font-family:'Geist Mono',monospace;font-size:12px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
+  .chip{font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-soft);background:var(--chip);padding:5px 10px;border-radius:3px;border:1px solid var(--rule)}
+  .section-h{font-family:'Instrument Serif',serif;font-size:14px;color:var(--fg-mute);letter-spacing:.06em;text-transform:uppercase;margin:48px 0 24px;font-weight:400;display:flex;align-items:center;gap:16px}
+  .section-h::after{content:"";flex:1;height:1px;background:var(--rule)}
+  /* methodology */
+  .method{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:6px;overflow:hidden;margin-bottom:48px}
+  .method .step{background:var(--bg);padding:24px 22px;position:relative;min-height:140px}
+  .method .step .num{font-family:'Geist Mono',monospace;font-size:10px;color:var(--fg-mute);letter-spacing:.1em}
+  .method .step h5{font-family:'Instrument Serif',serif;font-weight:400;font-size:22px;margin:8px 0 10px;color:var(--fg)}
+  .method .step p{font-size:13px;color:var(--fg-soft);margin:0;line-height:1.55}
+  /* notes grid */
+  .notes{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+  .note{border:1px solid var(--rule);border-radius:6px;padding:24px 26px;transition:transform .25s ease, background .25s ease}
+  .note:hover{background:color-mix(in oklab, var(--chip) 60%, transparent);transform:translateY(-2px)}
+  .note .top{display:flex;justify-content:space-between;font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:12px}
+  .note h3{font-family:'Instrument Serif',serif;font-weight:400;font-size:26px;line-height:1.2;margin:0 0 12px;color:var(--fg)}
+  .note p{font-size:14px;color:var(--fg-soft);margin:0;line-height:1.6}
+  .note .chips{margin-top:16px}
+  /* footer */
+  footer{margin-top:96px;padding-top:24px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-mute)}
+  footer a:hover{color:var(--fg)}
+  @media (max-width:820px){
+    .wrap{padding:32px 22px 64px}
+    .hero{grid-template-columns:1fr;gap:12px}
+    .hero h1{font-size:44px}
+    .featured{padding:28px 24px}
+    .featured h2{font-size:32px}
+    .featured .grid{grid-template-columns:1fr;gap:28px}
+    .sidecard{border-left:0;border-top:1px solid var(--rule);padding:24px 0 0}
+    .method{grid-template-columns:1fr 1fr}
+    .notes{grid-template-columns:1fr}
+    nav.top ul{gap:18px}
+  }
+</style>
 </head>
 <body>
-  <main class="page">
-    <header class="top">
-      <a href="/" class="brand">Taha Berk<span class="dot" aria-hidden="true"></span></a>
-      <nav class="nav">
-        <a href="/work.html">Work</a>
-        <a href="/personal.html">Personal</a>
-        <a href="/research.html" class="active">Research</a>
-        <a href="/blog.html">Blog</a>
-      </nav>
-    </header>
+<div class="wrap">
+  <nav class="top">
+    <a class="brand" href="/"><span class="dot"></span><span>Taha Berk</span></a>
+    <ul>
+      <li><a href="/work.html">Work</a></li>
+      <li><a href="/personal.html">Personal</a></li>
+      <li><a class="active" href="/research.html">Research</a></li>
+      <li><a href="/blog.html">Blog</a></li>
+    </ul>
+  </nav>
 
-    <section class="center">
-      <div class="eyebrow">Research</div>
-      <h1>Notes &amp; experiments.</h1>
+  <section class="hero">
+    <div class="label"><span class="mono">§ Research · 2025</span></div>
+    <div>
+      <h1>Reading <em>brains</em>, one<br>tensor at a time.</h1>
+      <p class="lede">A small corner of my work that lives between curiosity and a research grant — mostly applied deep learning on medical images, with the occasional detour into causal inference and time-series anomaly detection.</p>
+    </div>
+  </section>
 
-      <div class="cards">
-        <article class="card">
-          <div class="h">
-            <span class="id">R/01</span>
-            <span class="stat live">In progress</span>
-          </div>
-          <h3>Brain Tumor Segmentation with U-Net</h3>
-          <div class="org">TÜBİTAK 2209-A · 2025</div>
-          <p>Semantic segmentation on MRI volumes — preprocessing, training U-Net variants in TF/Keras, evaluating with Dice + IoU.</p>
-          <div class="chips">
-            <span class="chip">TensorFlow</span><span class="chip">Keras</span><span class="chip">U-Net</span><span class="chip">MRI</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="h">
-            <span class="id">R/02</span>
-            <span class="stat">Planned</span>
-          </div>
-          <h3>Next direction</h3>
-          <div class="org">TBD</div>
-          <p>Reserved — second research direction will be documented here once the topic is locked in.</p>
-          <div class="chips"><span class="chip">TBD</span></div>
-        </article>
+  <!-- Featured project -->
+  <article class="featured">
+    <div class="head">
+      <div class="meta">
+        <span class="mono">R / 01 · principal investigator</span>
+        <h2>Brain Tumor Segmentation with U-Net<span class="sub">— a TÜBİTAK 2209-A funded undergraduate research project</span></h2>
       </div>
-    </section>
+      <span class="status"><span class="ping"></span> In progress · 2025</span>
+    </div>
 
-    <footer class="footer">
-      <a href="/">← back</a>
-      <span>Istanbul · GMT+3</span>
-    </footer>
-  </main>
+    <div class="grid">
+      <div>
+        <p>Glioma sub-region segmentation on multi-modal MRI is one of those problems where the <em>last 5% of Dice</em> is where all the engineering lives. The clinically useful part — separating enhancing tumor from necrotic core and surrounding edema — is rarely about a fancier backbone. It is about boring things: skull-stripping consistency, intensity normalisation, patch sampling, and not lying to yourself with the validation split.</p>
+        <p>This project takes the original <em>U-Net</em> as a baseline and rebuilds it carefully in TensorFlow / Keras, then iterates on three axes: <strong>data</strong> (BraTS-style 4-channel volumes, on-the-fly augmentation, class-balanced patch sampling), <strong>loss</strong> (Dice + categorical cross-entropy, then a focal Tversky variant for the small enhancing class), and <strong>evaluation</strong> (per-class Dice, IoU, HD95, and an honest per-patient breakdown rather than dataset-averaged numbers).</p>
+        <p>The deeper question I keep coming back to is not <em>"can it segment?"</em> — modern U-Nets can — but <em>"can a junior researcher reproduce this pipeline end-to-end on a single GPU in a week?"</em> The artifact I want to leave behind is a clean, documented, single-author baseline that other students at my university can fork without inheriting a thousand-line undocumented codebase.</p>
+      </div>
+      <aside class="sidecard">
+        <h4>At a glance</h4>
+        <ul>
+          <li><span>Funding</span><b>TÜBİTAK 2209-A</b></li>
+          <li><span>Role</span><b>PI · solo</b></li>
+          <li><span>Modality</span><b>multi-MRI</b></li>
+          <li><span>Best Dice (WT)</span><b>0.87*</b></li>
+          <li><span>Framework</span><b>TF / Keras</b></li>
+          <li><span>Compute</span><b>1× GPU</b></li>
+        </ul>
+        <h4>Stack</h4>
+        <div class="chips">
+          <span class="chip">TensorFlow</span><span class="chip">Keras</span>
+          <span class="chip">U-Net</span><span class="chip">NumPy</span>
+          <span class="chip">SimpleITK</span><span class="chip">Albumentations</span>
+          <span class="chip">Matplotlib</span><span class="chip">W&amp;B</span>
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <h3 class="section-h">Method, in four panels</h3>
+  <div class="method">
+    <div class="step">
+      <div class="num">01 · DATA</div>
+      <h5>Curate &amp; normalise</h5>
+      <p>4-channel MRI volumes (T1, T1ce, T2, FLAIR), per-volume z-score normalisation, skull-strip sanity checks, and a patient-disjoint train/val/test split.</p>
+    </div>
+    <div class="step">
+      <div class="num">02 · MODEL</div>
+      <h5>U-Net, opinionated</h5>
+      <p>Classical contracting / expanding path with instance norm + GELU, group convolutions in the bottleneck, deep supervision at two scales.</p>
+    </div>
+    <div class="step">
+      <div class="num">03 · LOSS</div>
+      <h5>Dice + CE, then Tversky</h5>
+      <p>Soft Dice combined with categorical cross-entropy as the workhorse; focal Tversky as an ablation for the under-represented enhancing-tumor class.</p>
+    </div>
+    <div class="step">
+      <div class="num">04 · EVAL</div>
+      <h5>Honest metrics</h5>
+      <p>Per-class Dice / IoU / HD95 reported as median + IQR across patients — not a single inflated mean — and qualitative slice galleries for every failure case.</p>
+    </div>
+  </div>
+
+  <h3 class="section-h">Other notes &amp; small experiments</h3>
+  <div class="notes">
+
+    <article class="note">
+      <div class="top"><span>R / 02 · NOTE</span><span>Draft</span></div>
+      <h3>What U-Net taught me about <em>reading MRI slices</em></h3>
+      <p>An informal write-up on how training a segmentation network changes the way you look at a brain scan — what the network sees first, what it ignores, and where its mistakes are weirdly diagnostic of its training data.</p>
+      <div class="chips"><span class="chip">deep learning</span><span class="chip">medical imaging</span><span class="chip">essay</span></div>
+    </article>
+
+    <article class="note">
+      <div class="top"><span>R / 03 · EXPLORATION</span><span>Planned</span></div>
+      <h3>Causal inference for <em>retention experiments</em></h3>
+      <p>A small side-quest growing out of day-job questions: when an A/B test is contaminated, what is the cheapest defensible estimator? Notes on DiD, synthetic controls, and CUPED applied to e-commerce cohorts.</p>
+      <div class="chips"><span class="chip">causal inference</span><span class="chip">A/B testing</span><span class="chip">CUPED</span></div>
+    </article>
+
+    <article class="note">
+      <div class="top"><span>R / 04 · EXPLORATION</span><span>Planned</span></div>
+      <h3>Anomaly detection on <em>warehouse signals</em></h3>
+      <p>Carry-over interest from supply-chain work: unsupervised detection of broken pickers, ghost SKUs and unit-of-measure drift in event streams — STL + isolation forest + a simple control chart, benchmarked honestly.</p>
+      <div class="chips"><span class="chip">time series</span><span class="chip">anomaly detection</span><span class="chip">supply chain</span></div>
+    </article>
+
+    <article class="note">
+      <div class="top"><span>R / 05 · TEACHING</span><span>Open</span></div>
+      <h3>A <em>reproducible</em> U-Net starter for undergrads</h3>
+      <p>A spin-off goal of R/01: package the segmentation pipeline as a single repo with a one-command training script, a tiny synthetic dataset, and a 30-minute tutorial — so the next student doesn't have to start from zero.</p>
+      <div class="chips"><span class="chip">open source</span><span class="chip">teaching</span><span class="chip">repro</span></div>
+    </article>
+
+  </div>
+
+  <footer>
+    <a href="/">← back</a>
+    <span>Istanbul · GMT+3</span>
+  </footer>
+</div>
 </body>
 </html>

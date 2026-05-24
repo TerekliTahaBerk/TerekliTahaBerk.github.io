@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Work — Taha Berk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet" />
+  <script>(function(){try{const s=localStorage.getItem('tbt_theme');if(s==='light'){document.documentElement.classList.remove('dark');}else{document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();</script>
+  <style>
+    :root { --bg:#f5f2eb; --fg:#15140f; --fg-soft:#4b4740; --fg-mute:#97928a; --rule:#d9d3c4; --chip:#e3decf; }
+    html.dark { --bg:#0b0a09; --fg:#ece7d8; --fg-soft:#b5ad9c; --fg-mute:#6a655c; --rule:#2b2824; --chip:#1c1a17; }
+    *,*::before,*::after { box-sizing: border-box; }
+    html,body { margin:0; padding:0; height:100%; }
+    body { background:var(--bg); color:var(--fg); font-family:'Geist',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+    ::selection { background: var(--fg); color: var(--bg); }
+    .page { min-height:100vh; display:flex; flex-direction:column; padding:28px clamp(20px,4vw,56px); }
+    .top { display:flex; justify-content:space-between; align-items:center; gap:24px; }
+    .brand { font-family:'Instrument Serif',serif; font-size:22px; text-decoration:none; color:var(--fg); display:inline-flex; align-items:baseline; gap:6px; }
+    .brand .dot { width:5px; height:5px; border-radius:50%; background:oklch(0.62 0.15 155); display:inline-block; transform:translateY(-3px); }
+    .nav { display:flex; gap:clamp(20px,3vw,36px); }
+    .nav a { color:var(--fg); opacity:.65; text-decoration:none; font-size:13px; position:relative; padding:4px 2px; transition:opacity .25s ease; }
+    .nav a:hover, .nav a.active { opacity:1; }
+    .nav a::after { content:""; position:absolute; left:2px; right:2px; bottom:0; height:1px; background:currentColor; transform-origin:left; transform:scaleX(0); transition:transform .35s cubic-bezier(.2,.7,.2,1); }
+    .nav a:hover::after, .nav a.active::after { transform:scaleX(1); }
+
+    .center { flex:1; display:flex; flex-direction:column; justify-content:center; max-width:780px; width:100%; margin:0 auto; padding:48px 8px; }
+    h1 { font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(56px, 9vw, 104px); line-height:0.92; letter-spacing:-0.025em; margin:0 0 40px; }
+    .eyebrow { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--fg-mute); margin-bottom:14px; }
+
+    .list { display:flex; flex-direction:column; }
+    .row { display:grid; grid-template-columns: minmax(150px, 1.2fr) 2fr minmax(120px, auto); gap:24px; padding:22px 0; border-top:1px solid var(--rule); align-items:baseline; }
+    .row:last-child { border-bottom:1px solid var(--rule); }
+    .row .co { font-family:'Instrument Serif',serif; font-size:26px; letter-spacing:-0.01em; }
+    .row .role { color:var(--fg-soft); font-size:13.5px; line-height:1.55; }
+    .row .when { color:var(--fg-mute); font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; text-align:right; white-space:nowrap; }
+
+    .footer { display:flex; justify-content:space-between; gap:16px; padding-top:24px; color:var(--fg-mute); font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; }
+    .footer a { color:inherit; text-decoration:none; transition:color .2s ease; }
+    .footer a:hover { color:var(--fg); }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="top">
+      <a href="/" class="brand">Taha Berk<span class="dot" aria-hidden="true"></span></a>
+      <nav class="nav">
+        <a href="/work.html" class="active">Work</a>
+        <a href="/research.html">Research</a>
+        <a href="/blog.html">Blog</a>
+      </nav>
+    </header>
+
+    <section class="center">
+      <div class="eyebrow">Work · 2023 — present</div>
+      <h1>Where I've been.</h1>
+
+      <div class="list">
+        <div class="row">
+          <div>
+            <div class="co">Getir</div>
+            <div class="role">Data Intern</div>
+          </div>
+          <div class="role">Airflow · Python · PostgreSQL · BigQuery · Metabase. Pipelines &amp; dashboards.</div>
+          <div class="when">May 2025 — Now</div>
+        </div>
+        <div class="row">
+          <div>
+            <div class="co">Papara</div>
+            <div class="role">RPA Developer / Analyst Intern</div>
+          </div>
+          <div class="role">UiPath · Automation Anywhere · SQL · .NET. Workflow automation.</div>
+          <div class="when">Dec 2024 — May 2025</div>
+        </div>
+        <div class="row">
+          <div>
+            <div class="co">LC Waikiki</div>
+            <div class="role">Supply Chain Intern</div>
+          </div>
+          <div class="role">Analytics for demand planning &amp; inventory.</div>
+          <div class="when">Aug — Sep 2024</div>
+        </div>
+        <div class="row">
+          <div>
+            <div class="co">Latro</div>
+            <div class="role">RPA Developer</div>
+          </div>
+          <div class="role">Robusta · Python · Java. SAP automation.</div>
+          <div class="when">Jul — Aug 2023</div>
+        </div>
+        <div class="row">
+          <div>
+            <div class="co">QNB Finansbank</div>
+            <div class="role">RPA Developer Intern</div>
+          </div>
+          <div class="role">SQL · RPA. Business process automation.</div>
+          <div class="when">Apr — Jun 2023</div>
+        </div>
+        <div class="row">
+          <div>
+            <div class="co">DenizBank</div>
+            <div class="role">Short Term Intern</div>
+          </div>
+          <div class="role">Banking analytics &amp; automation rotation.</div>
+          <div class="when">Jan — Mar 2023</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <a href="/">← back</a>
+      <span>Istanbul · GMT+3</span>
+    </footer>
+  </main>
+</body>
+</html>

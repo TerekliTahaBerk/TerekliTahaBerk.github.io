@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Research — Taha Berk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet" />
+  <script>(function(){try{const s=localStorage.getItem('tbt_theme');if(s==='light'){document.documentElement.classList.remove('dark');}else{document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();</script>
+  <style>
+    :root { --bg:#f5f2eb; --fg:#15140f; --fg-soft:#4b4740; --fg-mute:#97928a; --rule:#d9d3c4; --chip:#e3decf; }
+    html.dark { --bg:#0b0a09; --fg:#ece7d8; --fg-soft:#b5ad9c; --fg-mute:#6a655c; --rule:#2b2824; --chip:#1c1a17; }
+    *,*::before,*::after { box-sizing: border-box; }
+    html,body { margin:0; padding:0; height:100%; }
+    body { background:var(--bg); color:var(--fg); font-family:'Geist',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+    ::selection { background: var(--fg); color: var(--bg); }
+    .page { min-height:100vh; display:flex; flex-direction:column; padding:28px clamp(20px,4vw,56px); }
+    .top { display:flex; justify-content:space-between; align-items:center; gap:24px; }
+    .brand { font-family:'Instrument Serif',serif; font-size:22px; text-decoration:none; color:var(--fg); display:inline-flex; align-items:baseline; gap:6px; }
+    .brand .dot { width:5px; height:5px; border-radius:50%; background:oklch(0.62 0.15 155); display:inline-block; transform:translateY(-3px); }
+    .nav { display:flex; gap:clamp(20px,3vw,36px); }
+    .nav a { color:var(--fg); opacity:.65; text-decoration:none; font-size:13px; position:relative; padding:4px 2px; transition:opacity .25s ease; }
+    .nav a:hover, .nav a.active { opacity:1; }
+    .nav a::after { content:""; position:absolute; left:2px; right:2px; bottom:0; height:1px; background:currentColor; transform-origin:left; transform:scaleX(0); transition:transform .35s cubic-bezier(.2,.7,.2,1); }
+    .nav a:hover::after, .nav a.active::after { transform:scaleX(1); }
+
+    .center { flex:1; display:flex; flex-direction:column; justify-content:center; max-width:780px; width:100%; margin:0 auto; padding:48px 8px; }
+    h1 { font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(56px,9vw,104px); line-height:0.92; letter-spacing:-0.025em; margin:0 0 36px; }
+    .eyebrow { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--fg-mute); margin-bottom:14px; }
+
+    .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; }
+    .card { border:1px solid var(--rule); border-radius:14px; padding:22px 22px 20px; background:var(--bg); transition:border-color .25s ease, transform .25s ease; }
+    .card:hover { border-color:var(--fg-soft); transform:translateY(-1px); }
+    .card .h { display:flex; justify-content:space-between; align-items:center; }
+    .card .id { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--fg-mute); }
+    .card .stat { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; padding:3px 9px; border-radius:999px; background:var(--chip); color:var(--fg-soft); }
+    .card .stat.live { background:oklch(0.30 0.08 155); color:oklch(0.85 0.10 155); }
+    html:not(.dark) .card .stat.live { background:oklch(0.92 0.06 155); color:oklch(0.32 0.10 155); }
+    .card h3 { font-family:'Instrument Serif',serif; font-weight:400; font-size:26px; line-height:1.1; letter-spacing:-0.01em; margin:18px 0 4px; }
+    .card .org { color:var(--fg-mute); font-size:12px; margin-bottom:14px; font-family:'Geist Mono',monospace; letter-spacing:0.04em; }
+    .card p { color:var(--fg-soft); font-size:13.5px; line-height:1.6; margin:0 0 16px; }
+    .chips { display:flex; flex-wrap:wrap; gap:6px; }
+    .chip { font-family:'Geist Mono',monospace; font-size:10px; padding:2px 8px; border-radius:999px; background:var(--chip); color:var(--fg-soft); letter-spacing:0.04em; }
+
+    .footer { display:flex; justify-content:space-between; gap:16px; padding-top:24px; color:var(--fg-mute); font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; }
+    .footer a { color:inherit; text-decoration:none; transition:color .2s ease; }
+    .footer a:hover { color:var(--fg); }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="top">
+      <a href="/" class="brand">Taha Berk<span class="dot" aria-hidden="true"></span></a>
+      <nav class="nav">
+        <a href="/work.html">Work</a>
+        <a href="/research.html" class="active">Research</a>
+        <a href="/blog.html">Blog</a>
+      </nav>
+    </header>
+
+    <section class="center">
+      <div class="eyebrow">Research</div>
+      <h1>Notes &amp; experiments.</h1>
+
+      <div class="cards">
+        <article class="card">
+          <div class="h">
+            <span class="id">R/01</span>
+            <span class="stat live">In progress</span>
+          </div>
+          <h3>Brain Tumor Segmentation with U-Net</h3>
+          <div class="org">TÜBİTAK 2209-A · 2025</div>
+          <p>Semantic segmentation on MRI volumes — preprocessing, training U-Net variants in TF/Keras, evaluating with Dice + IoU.</p>
+          <div class="chips">
+            <span class="chip">TensorFlow</span><span class="chip">Keras</span><span class="chip">U-Net</span><span class="chip">MRI</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="h">
+            <span class="id">R/02</span>
+            <span class="stat">Planned</span>
+          </div>
+          <h3>Next direction</h3>
+          <div class="org">TBD</div>
+          <p>Reserved — second research direction will be documented here once the topic is locked in.</p>
+          <div class="chips"><span class="chip">TBD</span></div>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <a href="/">← back</a>
+      <span>Istanbul · GMT+3</span>
+    </footer>
+  </main>
+</body>
+</html>

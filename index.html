@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Taha Berk — building with data, automation, research and ML</title>
+  <meta name="description" content="Taha Berk Terekli — mathematics student & data-driven engineer in Istanbul." />
+  <meta name="theme-color" content="#0f0e0c" />
+  <link rel="canonical" href="https://www.tahaberk.com/" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet" />
+
+  <script>
+    // Default to dark; respect user choice if previously set.
+    (function () {
+      try {
+        const saved = localStorage.getItem('tbt_theme');
+        if (saved === 'light') {
+          document.documentElement.classList.remove('dark');
+        } else {
+          document.documentElement.classList.add('dark');
+        }
+      } catch (e) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+
+  <style>
+    :root {
+      --bg:        #f5f2eb;
+      --fg:        #15140f;
+      --fg-soft:   #4b4740;
+      --fg-mute:   #97928a;
+      --rule:      #d9d3c4;
+      --chip:      #e3decf;
+      --hover:     rgba(21, 20, 15, 0.04);
+    }
+    html.dark {
+      --bg:        #0b0a09;
+      --fg:        #ece7d8;
+      --fg-soft:   #b5ad9c;
+      --fg-mute:   #6a655c;
+      --rule:      #2b2824;
+      --chip:      #1c1a17;
+      --hover:     rgba(236, 231, 216, 0.05);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; height: 100%; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Geist', system-ui, -apple-system, sans-serif;
+      font-feature-settings: "ss01", "cv11";
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow: hidden;
+    }
+    @media (max-height: 660px), (max-width: 520px) {
+      body { overflow: auto; }
+    }
+
+    ::selection { background: var(--fg); color: var(--bg); }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 28px clamp(20px, 4vw, 56px);
+      position: relative;
+    }
+
+    /* ---------- TOP BAR ---------- */
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+    .brand {
+      font-family: 'Instrument Serif', serif;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      color: var(--fg);
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .brand .dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: oklch(0.62 0.15 155);
+      display: inline-block;
+      transform: translateY(-3px);
+    }
+    .nav-wrap { display: flex; align-items: center; gap: clamp(16px, 2vw, 28px); }
+    .nav {
+      display: flex;
+      gap: clamp(20px, 3vw, 36px);
+    }
+    .nav a {
+      color: var(--fg);
+      opacity: 0.65;
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.01em;
+      position: relative;
+      padding: 4px 2px;
+      transition: opacity .25s ease;
+    }
+    .nav a:hover { opacity: 1; }
+    .nav a::after {
+      content: "";
+      position: absolute;
+      left: 2px; right: 2px;
+      bottom: 0;
+      height: 1px;
+      background: currentColor;
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform .35s cubic-bezier(.2,.7,.2,1);
+    }
+    .nav a:hover::after { transform: scaleX(1); }
+
+    .theme-toggle {
+      background: transparent;
+      border: 1px solid var(--rule);
+      color: var(--fg);
+      opacity: 0.65;
+      border-radius: 999px;
+      width: 28px; height: 28px;
+      display: inline-flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: opacity .25s ease, border-color .25s ease;
+    }
+    .theme-toggle:hover { opacity: 1; border-color: var(--fg-soft); }
+    .theme-toggle svg { width: 13px; height: 13px; }
+
+    /* ---------- CENTER ---------- */
+    .center {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      max-width: 720px;
+      margin: 0 auto 0 clamp(8px, 6vw, 80px);
+      width: 100%;
+      padding: 0 8px;
+    }
+
+    .hey {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+      font-size: clamp(72px, 13vw, 160px);
+      line-height: 0.88;
+      letter-spacing: -0.025em;
+      margin: 0;
+    }
+
+    .live {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fg-mute);
+      margin-top: 18px;
+      text-decoration: none;
+    }
+    .live:hover .live-link { color: var(--fg); }
+    .live .live-link { color: var(--fg-mute); transition: color .25s ease; }
+    .live .pulse {
+      position: relative;
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: oklch(0.62 0.15 155);
+    }
+    .live .pulse::after {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: oklch(0.62 0.15 155);
+      opacity: 0.35;
+      animation: pulse 1.8s ease-out infinite;
+    }
+    @keyframes pulse {
+      0%   { transform: scale(0.6); opacity: 0.5; }
+      100% { transform: scale(1.7); opacity: 0; }
+    }
+
+    /* ---------- PLUS GRID ---------- */
+    .grid {
+      margin-top: clamp(20px, 3.5vh, 36px);
+      display: grid;
+      grid-template-columns: repeat(var(--cols, 22), 1fr);
+      gap: 7px 8px;
+      width: 100%;
+      max-width: 560px;
+    }
+    .grid svg {
+      display: block;
+      color: var(--fg);
+      opacity: 0;
+      transform: translateY(3px) scale(.55);
+      transition:
+        opacity .65s cubic-bezier(.2,.7,.2,1),
+        transform .35s cubic-bezier(.2,.7,.2,1),
+        color .25s ease;
+      cursor: default;
+    }
+    .grid svg.in {
+      opacity: var(--op, 1);
+      transform: none;
+    }
+    .grid svg:hover {
+      opacity: 1 !important;
+      transform: scale(1.25);
+    }
+
+    /* ---------- INTRO ---------- */
+    .intro {
+      margin-top: clamp(20px, 4vh, 36px);
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(22px, 2.6vw, 30px);
+      line-height: 1.25;
+      letter-spacing: -0.005em;
+      max-width: 34ch;
+      color: var(--fg);
+    }
+    .w-data       { color: oklch(0.62 0.14 245); }
+    .w-automation { color: oklch(0.66 0.14 55);  }
+    .w-research   { color: oklch(0.60 0.14 155); }
+    .w-ml         { color: oklch(0.62 0.14 10);  }
+    html.dark .w-data       { color: oklch(0.78 0.14 245); }
+    html.dark .w-automation { color: oklch(0.82 0.14 55);  }
+    html.dark .w-research   { color: oklch(0.78 0.14 155); }
+    html.dark .w-ml         { color: oklch(0.78 0.14 10);  }
+
+    /* ---------- BOTTOM ---------- */
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .meta {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fg-mute);
+    }
+    .icons {
+      display: flex;
+      gap: 10px;
+    }
+    .icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px; height: 30px;
+      border-radius: 999px;
+      color: var(--fg);
+      opacity: 0.45;
+      text-decoration: none;
+      transition: opacity .25s ease, background .25s ease, transform .25s ease;
+    }
+    .icons a:hover {
+      opacity: 1;
+      background: var(--hover);
+      transform: translateY(-1px);
+    }
+    .icons a svg { width: 15px; height: 15px; }
+
+    a:focus-visible, button:focus-visible {
+      outline: 1px dashed var(--fg-soft);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <!-- TOP -->
+    <header class="top">
+      <a href="/" class="brand">Taha Berk<span class="dot" aria-hidden="true"></span></a>
+      <div class="nav-wrap">
+        <nav class="nav" aria-label="Primary">
+          <a href="/work.html">Work</a>
+          <a href="/research.html">Research</a>
+          <a href="/blog.html">Blog</a>
+        </nav>
+        <button class="theme-toggle" id="theme" aria-label="Toggle theme" title="Toggle theme">
+          <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- CENTER -->
+    <section class="center">
+      <h1 class="hey">Hey,</h1>
+
+      <a class="live" id="live" href="https://github.com/TerekliTahaBerk" target="_blank" rel="noreferrer">
+        <span class="pulse" aria-hidden="true"></span>
+        <span class="live-link" id="live-label">live · loading github…</span>
+        <span class="live-link" aria-hidden="true">↗</span>
+      </a>
+
+      <div class="grid" id="grid" aria-hidden="true"></div>
+
+      <p class="intro">
+        I'm Taha, building with
+        <span class="w-data">data</span>,
+        <span class="w-automation">automation</span>,
+        <span class="w-research">research</span>
+        and <span class="w-ml">ML</span>.
+      </p>
+    </section>
+
+    <!-- BOTTOM -->
+    <footer class="bottom">
+      <div class="meta">Istanbul · GMT+3</div>
+      <div class="icons" aria-label="Contact">
+        <a href="https://github.com/TerekliTahaBerk" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5C5.73.5.75 5.48.75 11.75c0 4.98 3.23 9.2 7.71 10.7.56.1.77-.24.77-.54v-1.9c-3.14.68-3.8-1.51-3.8-1.51-.51-1.3-1.25-1.64-1.25-1.64-1.02-.7.08-.68.08-.68 1.13.08 1.73 1.16 1.73 1.16 1 1.72 2.63 1.23 3.27.94.1-.73.39-1.23.71-1.51-2.5-.28-5.13-1.25-5.13-5.58 0-1.23.44-2.24 1.16-3.03-.12-.29-.5-1.43.11-2.98 0 0 .95-.3 3.1 1.16a10.7 10.7 0 0 1 5.65 0c2.15-1.46 3.1-1.16 3.1-1.16.61 1.55.23 2.69.11 2.98.72.79 1.16 1.8 1.16 3.03 0 4.34-2.63 5.3-5.14 5.58.4.35.76 1.03.76 2.08v3.08c0 .3.21.65.78.54 4.47-1.5 7.7-5.72 7.7-10.7C23.25 5.48 18.27.5 12 .5z"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/tahaberkterekli" target="_blank" rel="noreferrer" aria-label="LinkedIn" title="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.84v1.64h.06c.54-1 1.85-2.06 3.8-2.06 4.06 0 4.8 2.67 4.8 6.15V21h-4v-5.34c0-1.27-.02-2.91-1.78-2.91-1.78 0-2.05 1.39-2.05 2.82V21h-4V9z"/>
+          </svg>
+        </a>
+        <a href="mailto:contact@tahaberk.com" aria-label="Email" title="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <path d="m3 7 9 6 9-6"/>
+          </svg>
+        </a>
+        <a href="https://www.tahaberk.com" aria-label="Website" title="Website">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>
+          </svg>
+        </a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    /* ---------- Theme toggle ---------- */
+    const themeBtn  = document.getElementById('theme');
+    const themeIcon = document.getElementById('theme-icon');
+    const SUN = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>';
+    const MOON = '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>';
+    const syncIcon = () => {
+      themeIcon.innerHTML = document.documentElement.classList.contains('dark') ? SUN : MOON;
+    };
+    syncIcon();
+    themeBtn.addEventListener('click', () => {
+      const root = document.documentElement;
+      root.classList.toggle('dark');
+      try { localStorage.setItem('tbt_theme', root.classList.contains('dark') ? 'dark' : 'light'); } catch {}
+      syncIcon();
+    });
+
+    /* ---------- Plus grid ---------- */
+    const COLS = 22, ROWS = 7;
+    const SVG_NS = 'http://www.w3.org/2000/svg';
+    const grid = document.getElementById('grid');
+    grid.style.setProperty('--cols', COLS);
+
+    function buildMock(seed) {
+      let r = seed;
+      const rand = () => (r = (r * 9301 + 49297) % 233280) / 233280;
+      const cells = [];
+      for (let col = 0; col < COLS; col++) {
+        for (let row = 0; row < ROWS; row++) {
+          const recency = col / (COLS - 1);
+          const weekendDrop = (row === 5 || row === 6) ? -0.18 : 0;
+          const v = Math.max(0, Math.min(1,
+            0.18 + rand() * 0.55 + recency * 0.32 + weekendDrop +
+            (Math.sin(col * 0.6 + row * 0.9) * 0.1)
+          ));
+          const empty = rand() < 0.18;
+          cells.push(empty ? 0 : v);
+        }
+      }
+      return cells;
+    }
+
+    const cells = buildMock(7);
+    const plusElems = [];
+    for (let i = 0; i < cells.length; i++) {
+      const v = cells[i];
+      const op = v === 0 ? 0.06 : 0.16 + v * 0.78;
+      const svg = document.createElementNS(SVG_NS, 'svg');
+      svg.setAttribute('viewBox', '0 0 14 14');
+      svg.setAttribute('width', '13');
+      svg.setAttribute('height', '13');
+      svg.style.setProperty('--op', op);
+      const path = document.createElementNS(SVG_NS, 'path');
+      path.setAttribute('d', 'M7 2.5 L7 11.5 M2.5 7 L11.5 7');
+      path.setAttribute('stroke', 'currentColor');
+      path.setAttribute('stroke-width', '1.4');
+      path.setAttribute('stroke-linecap', 'round');
+      svg.appendChild(path);
+      grid.appendChild(svg);
+      plusElems.push({ svg, v, op });
+    }
+    // Column-by-column stagger reveal
+    plusElems.forEach((p, i) => {
+      const col = Math.floor(i / ROWS);
+      const row = i % ROWS;
+      const delay = col * 26 + row * 14;
+      setTimeout(() => p.svg.classList.add('in'), 140 + delay);
+    });
+
+    /* ---------- Live GitHub overlay ---------- */
+    const liveLabel = document.getElementById('live-label');
+    (async () => {
+      try {
+        const r = await fetch('https://api.github.com/users/TerekliTahaBerk/events/public?per_page=60', {
+          headers: { Accept: 'application/vnd.github+json' },
+        });
+        if (!r.ok) throw new Error('http ' + r.status);
+        const events = await r.json();
+        if (!Array.isArray(events) || events.length === 0) throw new Error('no events');
+
+        const byDay = {};
+        for (const e of events) {
+          const d = e.created_at.slice(0, 10);
+          byDay[d] = (byDay[d] || 0) + 1;
+        }
+        const today = new Date();
+        const todayUTC = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate());
+        Object.entries(byDay).forEach(([day, count]) => {
+          const dt = new Date(day + 'T00:00:00Z');
+          const diffDays = Math.floor((todayUTC - dt.getTime()) / 86400000);
+          if (diffDays < 0 || diffDays >= COLS * 7) return;
+          const col = (COLS - 1) - Math.floor(diffDays / 7);
+          const dow = (dt.getUTCDay() + 6) % 7; // Mon=0..Sun=6
+          const row = Math.min(ROWS - 1, dow);
+          const idx = col * ROWS + row;
+          const item = plusElems[idx];
+          if (!item) return;
+          const boost = Math.min(1, 0.55 + count * 0.12);
+          item.svg.style.setProperty('--op', boost);
+          if (item.svg.classList.contains('in')) item.svg.style.opacity = boost;
+        });
+
+        // Most recent event for the status line
+        const last = events[0];
+        const when = new Date(last.created_at);
+        const diffMin = Math.max(1, Math.round((Date.now() - when.getTime()) / 60000));
+        const rel =
+          diffMin < 60   ? `${diffMin}m ago` :
+          diffMin < 1440 ? `${Math.round(diffMin/60)}h ago` :
+                           `${Math.round(diffMin/1440)}d ago`;
+        liveLabel.textContent = `live · updated ${rel} · github`;
+      } catch (err) {
+        liveLabel.textContent = 'offline · mock activity · github';
+      }
+    })();
+  </script>
+</body>
+</html>

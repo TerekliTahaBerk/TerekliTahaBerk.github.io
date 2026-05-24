@@ -166,71 +166,86 @@
     }
 
     .live {
-      display: inline-flex; align-items: center; gap: 8px;
+      display: inline-flex; align-items: center; gap: 9px;
       font-family: 'Geist Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.02em;
+      font-size: 10px;
+      letter-spacing: 0.06em;
       color: var(--fg-mute);
-      margin-top: 18px;
+      margin-top: 20px;
       text-decoration: none;
     }
-    .live:hover .live-link { color: var(--fg); }
-    .live .live-link { color: var(--fg-mute); transition: color .25s ease; }
-    .live .arrow { opacity: .55; }
+    .live:hover .live-link { color: var(--fg-soft); }
+    .live .live-link { color: var(--fg-mute); transition: color .3s ease; }
+    .live .arrow { opacity: .45; }
     .live .pulse {
       position: relative;
       display: inline-block;
-      width: 6px; height: 6px;
+      width: 5px; height: 5px;
       border-radius: 50%;
-      background: oklch(0.62 0.15 155);
+      background: oklch(0.66 0.16 152);
+      box-shadow: 0 0 6px oklch(0.66 0.16 152 / 0.6);
     }
     .live .pulse::after {
       content: "";
       position: absolute;
       inset: -3px;
       border-radius: 50%;
-      background: oklch(0.62 0.15 155);
-      opacity: 0.35;
-      animation: pulse 1.8s ease-out infinite;
+      background: oklch(0.66 0.16 152);
+      opacity: 0.3;
+      animation: pulse 2.4s ease-out infinite;
     }
     @keyframes pulse {
-      0%   { transform: scale(0.6); opacity: 0.5; }
-      100% { transform: scale(1.7); opacity: 0; }
+      0%   { transform: scale(0.55); opacity: 0.45; }
+      100% { transform: scale(2.0);  opacity: 0;    }
     }
 
     /* ---------- PLUS GRID ---------- */
     .grid {
-      margin-top: clamp(18px, 3vh, 32px);
+      --cell: 11px;
+      --gap-x: 6px;
+      --gap-y: 7px;
+      --tone-low:  var(--fg-mute);
+      --tone-high: var(--fg);
+
+      margin-top: clamp(22px, 3.4vh, 36px);
       display: grid;
-      grid-template-columns: repeat(var(--cols, 22), 14px);
-      grid-template-rows: repeat(var(--rows, 8), 14px);
+      grid-template-columns: repeat(var(--cols, 22), var(--cell));
+      grid-template-rows:    repeat(var(--rows, 8),  var(--cell));
       grid-auto-flow: column;
-      gap: 8px 9px;
+      gap: var(--gap-y) var(--gap-x);
       width: max-content;
       max-width: 100%;
+      /* a faint inner halo to anchor the field as a single object */
+      filter: drop-shadow(0 0 0 transparent);
+    }
+    html.dark .grid {
+      --tone-low:  #2f2c27;
+      --tone-high: #ece4d2; /* soft warm white */
     }
     .grid svg {
       display: block;
-      width: 14px;
-      height: 14px;
-      color: var(--fg);
+      width: var(--cell);
+      height: var(--cell);
+      /* per-cell tone interpolated low→high by --tone (0..1) */
+      color: color-mix(in oklab, var(--tone-low), var(--tone-high) calc(var(--tone, 0) * 100%));
       opacity: 0;
-      transform: translateY(3px) scale(.55);
+      transform: translateY(4px) scale(.5);
       transition:
-        opacity .6s cubic-bezier(.2,.7,.2,1),
-        transform .3s cubic-bezier(.2,.7,.2,1),
-        filter .25s ease,
-        color .25s ease;
-      cursor: default;
+        opacity .9s cubic-bezier(.2,.7,.2,1),
+        transform .55s cubic-bezier(.2,.7,.2,1),
+        filter .35s ease,
+        color .35s ease;
+      will-change: opacity, transform;
     }
     .grid svg.in {
       opacity: var(--op, 1);
-      transform: none;
+      transform: scale(var(--scl, 1));
     }
     .grid svg:hover {
-      opacity: 1 !important;
-      transform: scale(1.25);
-      filter: drop-shadow(0 0 6px currentColor);
+      opacity: 1;
+      transform: scale(1.45);
+      color: var(--tone-high);
+      filter: drop-shadow(0 0 5px color-mix(in oklab, var(--tone-high), transparent 35%));
     }
 
     /* ---------- INTRO ---------- */
@@ -385,14 +400,14 @@
     });
 
     /* ---------- GitHubActivityGrid ----------
-       Decorative plus-grid that softly reflects recent GitHub activity.
-       Renders deterministic mock data first, then tries to overlay public
-       events. Any network failure is swallowed silently — the grid stays
-       as decorative mock data and the status line flips to "offline".
+       A decorative plus-sign field that softly reacts to recent GitHub
+       activity. Deterministic mock data is rendered immediately; the
+       public events feed is then quietly overlaid. Any failure is
+       swallowed — the field keeps its mock data and the status line
+       stays as "live · github activity" (never shows errors / loading).
     ----------------------------------------------------------------- */
     function GitHubActivityGrid({
       mount,
-      statusEl,
       username,
       cols = 22,
       rows = 8,
@@ -401,141 +416,146 @@
       mount.style.setProperty('--cols', cols);
       mount.style.setProperty('--rows', rows);
 
-      // --- helpers ---------------------------------------------------
-      function makePlus(op) {
+      // ---- intensity → visual mapping ------------------------------
+      // Plus signs vary by opacity, tone (color mix) and a *very* subtle
+      // scale. Low activity ≈ almost invisible gray. High ≈ soft warm white.
+      function styleFromIntensity(v) {
+        const x = Math.max(0, Math.min(1, v));
+        // Strong floor so low cells barely register, gentle ceiling so the
+        // field never feels punchy or developer-dashboard-like.
+        const op   = 0.06 + Math.pow(x, 1.25) * 0.86;
+        const tone = Math.pow(x, 1.4);              // 0..1, biased dark
+        const scl  = 0.86 + x * 0.18;               // 0.86..1.04
+        return { op, tone, scl };
+      }
+
+      function makePlus(v) {
+        const { op, tone, scl } = styleFromIntensity(v);
         const svg = document.createElementNS(SVG_NS, 'svg');
         svg.setAttribute('viewBox', '0 0 14 14');
         svg.setAttribute('aria-hidden', 'true');
-        svg.style.setProperty('--op', op);
+        svg.style.setProperty('--op',   op);
+        svg.style.setProperty('--tone', tone);
+        svg.style.setProperty('--scl',  scl);
         const path = document.createElementNS(SVG_NS, 'path');
         path.setAttribute('d', 'M7 2.5 L7 11.5 M2.5 7 L11.5 7');
         path.setAttribute('stroke', 'currentColor');
-        path.setAttribute('stroke-width', '1.3');
+        path.setAttribute('stroke-width', '1.4');
         path.setAttribute('stroke-linecap', 'round');
+        path.setAttribute('fill', 'none');
         svg.appendChild(path);
         return svg;
       }
 
+      function applyStyle(svg, v) {
+        const { op, tone, scl } = styleFromIntensity(v);
+        svg.style.setProperty('--op',   op);
+        svg.style.setProperty('--tone', tone);
+        svg.style.setProperty('--scl',  scl);
+        if (svg.classList.contains('in')) {
+          svg.style.opacity = op;
+        }
+      }
+
+      // ---- deterministic mock field --------------------------------
+      // Smooth low-frequency noise so the field reads as texture rather
+      // than random dots. Recency lifts the right side just slightly.
       function buildMock(seed) {
-        let r = seed;
-        const rand = () => (r = (r * 9301 + 49297) % 233280) / 233280;
+        let r = seed >>> 0;
+        const rand = () => {
+          r = (r * 1664525 + 1013904223) >>> 0;
+          return (r & 0xffffffff) / 0x100000000;
+        };
         const cells = new Array(cols * rows);
-        for (let i = 0; i < cells.length; i++) {
-          const col = Math.floor(i / rows);
-          const row = i % rows;
-          const recency = col / Math.max(1, cols - 1);
-          const v = Math.max(0, Math.min(1,
-            0.18 + rand() * 0.55 + recency * 0.32 +
-            (Math.sin(col * 0.6 + row * 0.9) * 0.1)
-          ));
-          cells[i] = rand() < 0.2 ? 0 : v;
+        for (let c = 0; c < cols; c++) {
+          for (let row = 0; row < rows; row++) {
+            const recency = c / Math.max(1, cols - 1);          // 0..1
+            const wave =
+              0.18 * Math.sin(c * 0.55 + row * 0.85) +
+              0.12 * Math.sin(c * 0.21 - row * 0.33 + 1.1);
+            const noise = rand() * 0.45;
+            let v = 0.22 + noise + wave + recency * 0.22;
+            // sprinkle voids so the field has breathing room
+            if (rand() < 0.18) v *= 0.15;
+            cells[c * rows + row] = Math.max(0, Math.min(1, v));
+          }
         }
         return cells;
       }
 
-      function intensityToOpacity(v) {
-        return v <= 0 ? 0.05 : 0.14 + v * 0.82;
-      }
-
+      // ---- render + diagonal stagger reveal ------------------------
       function render(values) {
         mount.innerHTML = '';
         const nodes = new Array(values.length);
         for (let i = 0; i < values.length; i++) {
-          const svg = makePlus(intensityToOpacity(values[i]));
+          const svg = makePlus(values[i]);
           mount.appendChild(svg);
           nodes[i] = svg;
         }
-        // Column-by-column stagger reveal
-        nodes.forEach((svg, i) => {
+        // Diagonal wave reveal — calm, premium, not dramatic.
+        for (let i = 0; i < nodes.length; i++) {
           const col = Math.floor(i / rows);
           const row = i % rows;
-          const delay = col * 24 + row * 12;
-          setTimeout(() => svg.classList.add('in'), 140 + delay);
-        });
+          const delay = 180 + col * 22 + row * 14;
+          setTimeout(() => nodes[i].classList.add('in'), delay);
+        }
         return nodes;
       }
 
-      function updateOpacities(nodes, values) {
-        for (let i = 0; i < nodes.length; i++) {
-          const op = intensityToOpacity(values[i]);
-          nodes[i].style.setProperty('--op', op);
-          if (nodes[i].classList.contains('in')) nodes[i].style.opacity = op;
-        }
-      }
-
-      function setStatus(state) {
-        if (!statusEl) return;
-        statusEl.textContent = state === 'live'
-          ? 'live · github activity'
-          : 'offline · sample activity';
-      }
-
-      // --- 1) instant mock render ------------------------------------
-      const values = buildMock(7);
+      // ---- 1) instant mock paint -----------------------------------
+      const values = buildMock(0x9e3779b1);
       const nodes  = render(values);
-      // Optimistic — switch to offline only if fetch actually fails
-      setStatus('live');
 
-      // --- 2) try to overlay real GitHub events ----------------------
+      // ---- 2) silent overlay from real GitHub events ---------------
       (async () => {
         try {
-          const r = await fetch(
+          const res = await fetch(
             `https://api.github.com/users/${encodeURIComponent(username)}/events/public?per_page=50`,
             { headers: { Accept: 'application/vnd.github+json' } }
           );
-          if (!r.ok) throw new Error('http ' + r.status);
-          const events = await r.json();
-          if (!Array.isArray(events) || events.length === 0) throw new Error('empty');
+          if (!res.ok) return;
+          const events = await res.json();
+          if (!Array.isArray(events) || events.length === 0) return;
 
-          // Bucket events by day
+          // Bucket events by UTC day
           const byDay = Object.create(null);
           let maxCount = 0;
           for (const e of events) {
-            const day = (e.created_at || '').slice(0, 10);
+            const day = (e && e.created_at || '').slice(0, 10);
             if (!day) continue;
             byDay[day] = (byDay[day] || 0) + 1;
             if (byDay[day] > maxCount) maxCount = byDay[day];
           }
 
-          // Map onto the last `cols` weeks ending in the current week (Sat).
+          // Last (cols * rows) days, oldest at top-left, newest at bottom-right.
           const today = new Date();
-          const todayUTC = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
-          const dowToday = todayUTC.getUTCDay();          // 0=Sun..6=Sat
-          const daysToSat = (6 - dowToday + 7) % 7;
-          const lastSat = new Date(todayUTC.getTime() + daysToSat * 86400000);
-          const totalDays = cols * 7;
-          const firstSun = new Date(lastSat.getTime() - (totalDays - 1) * 86400000);
+          const todayUTC = new Date(Date.UTC(
+            today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()
+          ));
+          const totalDays = cols * rows;
+          const first = new Date(todayUTC.getTime() - (totalDays - 1) * 86400000);
+          const denom = Math.log2(1 + Math.max(maxCount, 2));
 
-          // Intensity from real activity, blended onto the existing mock so the
-          // grid never collapses to empty when there are only a few events.
-          const denom = Math.log2(1 + Math.max(maxCount, 3));
           for (let d = 0; d < totalDays; d++) {
-            const date = new Date(firstSun.getTime() + d * 86400000);
+            const date = new Date(first.getTime() + d * 86400000);
             const iso = date.toISOString().slice(0, 10);
             const count = byDay[iso] || 0;
-            const col = Math.floor(d / 7);
-            const row = date.getUTCDay();               // Sun=0..Sat=6
-            if (row >= rows) continue;
-            if (date.getTime() > todayUTC.getTime()) continue; // future stays empty
-            const idx = col * rows + row;
             if (count > 0) {
-              const boost = Math.min(1, 0.35 + (Math.log2(1 + count) / denom) * 0.85);
-              // Take the brighter of mock vs real so the field stays cohesive.
-              values[idx] = Math.max(values[idx], boost);
+              // log-scaled boost; brighten the existing mock so the field
+              // remains cohesive even with only a handful of events.
+              const boost = Math.min(1, 0.45 + (Math.log2(1 + count) / denom) * 0.55);
+              values[d] = Math.max(values[d], boost);
+              applyStyle(nodes[d], values[d]);
             }
           }
-          updateOpacities(nodes, values);
-          setStatus('live');
-        } catch (_err) {
-          // Silent fallback — keep mock data, just flip the label.
-          setStatus('offline');
+        } catch (_) {
+          // Silent — keep mock data, keep the status line as-is.
         }
       })();
     }
 
     GitHubActivityGrid({
       mount: document.getElementById('grid'),
-      statusEl: document.getElementById('live-label'),
       username: 'TerekliTahaBerk',
       cols: 22,
       rows: 8,

@@ -1,322 +1,221 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>CV · Taha Berk</title>
-<link rel="icon" type="image/jpeg" href="/favicon.jpg" />
-<link rel="apple-touch-icon" href="/favicon.jpg" />
-<meta name="description" content="CV of Taha Berk Terekli — Mathematics BSc at YTU, data &amp; automation experience at Getir, Papara, LC Waikiki and Latro, TÜBİTAK 2209-A researcher." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet" />
-<script>(function(){try{const s=localStorage.getItem('tbt_theme');if(s==='light'){document.documentElement.classList.remove('dark');}else{document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();</script>
-<style>
-:root { --bg:#f5f2eb; --fg:#15140f; --fg-soft:#4b4740; --fg-mute:#97928a; --rule:#d9d3c4; --chip:#e3decf; }
-html.dark { --bg:#0b0a09; --fg:#ece7d8; --fg-soft:#b5ad9c; --fg-mute:#6a655c; --rule:#2b2824; --chip:#1c1a17; }
-*,*::before,*::after { box-sizing: border-box; }
-html,body { margin:0; padding:0; }
-body { background:var(--bg); color:var(--fg); font-family:'Geist',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
-::selection { background: var(--fg); color: var(--bg); }
-.page { min-height:100vh; display:flex; flex-direction:column; padding:28px clamp(20px,4vw,56px) 48px; }
-.top { display:flex; justify-content:space-between; align-items:center; gap:24px; }
-.brand { font-family:'Instrument Serif',serif; font-size:22px; text-decoration:none; color:var(--fg); display:inline-flex; align-items:baseline; gap:6px; }
-.brand .dot { width:5px; height:5px; border-radius:50%; background:oklch(0.62 0.15 155); display:inline-block; transform:translateY(-3px); }
-.nav { display:flex; gap:clamp(18px,2.6vw,32px); flex-wrap:wrap; justify-content:flex-end; }
-.nav a { color:var(--fg); opacity:.65; text-decoration:none; font-size:13px; position:relative; padding:4px 2px; transition:opacity .25s ease; }
-.nav a:hover, .nav a.active { opacity:1; }
-.nav a::after { content:""; position:absolute; left:2px; right:2px; bottom:0; height:1px; background:currentColor; transform-origin:left; transform:scaleX(0); transition:transform .35s cubic-bezier(.2,.7,.2,1); }
-.nav a:hover::after, .nav a.active::after { transform:scaleX(1); }
-.head { max-width:1080px; margin:64px auto 36px; width:100%; display:grid; grid-template-columns:1.6fr 1fr; gap:36px 48px; align-items:end; }
-@media (max-width:760px) { .head { grid-template-columns:1fr; gap:24px; } }
-.eyebrow { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--fg-mute); margin-bottom:14px; }
-h1 { font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(56px,9vw,108px); line-height:0.9; letter-spacing:-0.025em; margin:0; }
-h1 em { font-style:italic; color:var(--fg-soft); }
-.lede { font-family:'Instrument Serif',serif; color:var(--fg-soft); font-size:clamp(17px,1.4vw,21px); line-height:1.45; max-width:38ch; margin:0; }
-.timeline { max-width:1080px; width:100%; margin:0 auto; display:flex; flex-direction:column; }
-.role { display:grid; grid-template-columns:180px 1fr; gap:28px clamp(24px,4vw,56px); padding:32px 0; border-top:1px solid var(--rule); position:relative; }
-.timeline .role:last-child { border-bottom:1px solid var(--rule); }
-.role .left { display:flex; flex-direction:column; gap:10px; }
-.role .when { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--fg-mute); }
-.role .co { font-family:'Instrument Serif',serif; font-size:clamp(30px,3vw,40px); line-height:1; letter-spacing:-0.015em; color:var(--fg); text-decoration:none; display:inline-flex; align-items:baseline; gap:6px; }
-.role .co .ext { font-size:14px; opacity:.4; transition:transform .3s ease, opacity .3s ease; }
-.role .co:hover .ext { opacity:1; transform:translate(2px,-2px); }
-.role .place { color:var(--fg-mute); font-size:12px; font-family:'Geist Mono',monospace; letter-spacing:0.04em; }
-.role .right { display:flex; flex-direction:column; gap:14px; }
-.role .role-title { font-size:14px; color:var(--fg-soft); letter-spacing:0.01em; }
-.role .role-title strong { color:var(--fg); font-weight:500; }
-.role p { margin:0; font-size:14.5px; line-height:1.7; color:var(--fg-soft); max-width:62ch; }
-.role p em { color:var(--fg); font-style:italic; }
-.bullets { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px 22px; margin-top:4px; }
-.bullets .bul { display:flex; align-items:flex-start; gap:10px; font-size:13px; line-height:1.55; color:var(--fg-soft); }
-.bullets .bul::before { content:""; margin-top:7px; flex:0 0 4px; width:4px; height:4px; border-radius:50%; background:var(--fg-mute); opacity:.85; }
-.bullets .bul em { color:var(--fg); font-style:italic; }
-.stack { display:flex; flex-wrap:wrap; gap:5px; margin-top:4px; }
-.chip { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.08em; padding:3px 9px; border-radius:999px; background:var(--chip); color:var(--fg-soft); transition:color .2s ease; }
-.role:hover .chip { color:var(--fg); }
-@media (max-width:760px) {
-  .role { grid-template-columns:1fr; gap:18px; padding:26px 0; }
-  .role .left { flex-direction:row; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:8px; }
-}
-.footer { max-width:1080px; margin:56px auto 0; width:100%; display:flex; justify-content:space-between; gap:16px; padding-top:24px; color:var(--fg-mute); font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; }
-.footer a { color:inherit; text-decoration:none; transition:color .2s ease; }
-.footer a:hover { color:var(--fg); }
-/* CV-specific blocks */
-.section-label { max-width:1080px; width:100%; margin:64px auto 18px; font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--fg-mute); display:flex; align-items:center; gap:14px; }
-.section-label::after { content:""; flex:1; height:1px; background:var(--rule); }
-.list { max-width:1080px; width:100%; margin:0 auto; display:flex; flex-direction:column; }
-.entry { display:grid; grid-template-columns:180px 1fr; gap:14px clamp(24px,4vw,56px); padding:24px 0; border-top:1px solid var(--rule); }
-.list .entry:last-child { border-bottom:1px solid var(--rule); }
-.entry .when { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--fg-mute); padding-top:4px; }
-.entry .body h3 { font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(22px,2.2vw,28px); line-height:1.15; margin:0 0 4px; letter-spacing:-0.01em; color:var(--fg); }
-.entry .body .where { font-size:13px; color:var(--fg-soft); font-family:'Geist Mono',monospace; letter-spacing:0.04em; margin-bottom:8px; display:block; }
-.entry .body p { margin:6px 0 0; font-size:14px; line-height:1.65; color:var(--fg-soft); max-width:62ch; }
-.entry .body p em { color:var(--fg); font-style:italic; }
-.cert-grid { max-width:1080px; width:100%; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:0; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); }
-.cert-grid .cert { padding:22px 22px 22px 0; border-right:1px solid var(--rule); }
-.cert-grid .cert:last-child { border-right:0; }
-.cert-grid .cert .issuer { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--fg-mute); margin-bottom:10px; }
-.cert-grid .cert ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:6px; }
-.cert-grid .cert li { font-size:13.5px; color:var(--fg-soft); line-height:1.5; padding-left:14px; position:relative; }
-.cert-grid .cert li::before { content:""; position:absolute; left:0; top:9px; width:5px; height:5px; border-radius:50%; background:var(--fg-mute); opacity:.7; }
-@media (max-width:760px) {
-  .entry { grid-template-columns:1fr; gap:6px; }
-  .entry .when { padding-top:0; }
-  .cert-grid { grid-template-columns:1fr; }
-  .cert-grid .cert { border-right:0; border-bottom:1px solid var(--rule); padding:18px 0; }
-  .cert-grid .cert:last-child { border-bottom:0; }
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CV · Taha Berk</title>
+  <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+  <link rel="apple-touch-icon" href="/favicon.jpg" />
+  <meta name="description" content="CV of Taha Berk Terekli — Mathematics BSc at YTU, data &amp; automation at Getir, Papara, LC Waikiki, Latro; TÜBİTAK 2209-A researcher." />
+  <link rel="canonical" href="https://www.tahaberk.com/work.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet" />
+  <script>(function(){try{const s=localStorage.getItem('tbt_theme');if(s==='light'){document.documentElement.classList.remove('dark');}else{document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();</script>
+  <style>
+    :root { --bg:#f5f2eb; --fg:#15140f; --fg-soft:#4b4740; --fg-mute:#97928a; --rule:#d9d3c4; --chip:#e3decf; }
+    html.dark { --bg:#0f0e0c; --fg:#ece7d8; --fg-soft:#b5ad9c; --fg-mute:#6a655c; --rule:#2b2824; --chip:#1c1a17; }
+    *,*::before,*::after { box-sizing: border-box; }
+    html,body { margin:0; padding:0; }
+    body { background:var(--bg); color:var(--fg); font-family:'Geist',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+    ::selection { background: var(--fg); color: var(--bg); }
+    .page { min-height:100vh; display:flex; flex-direction:column; padding:28px clamp(20px,4vw,56px); }
+    .top { display:flex; justify-content:space-between; align-items:baseline; gap:24px; }
+    .brand { font-family:'Instrument Serif',serif; font-size:24px; text-decoration:none; color:var(--fg); display:inline-flex; align-items:baseline; gap:6px; }
+    .brand .dot { width:5px; height:5px; border-radius:50%; background:oklch(0.62 0.15 155); display:inline-block; transform:translateY(-3px); }
+    .nav { display:flex; gap:clamp(20px,3vw,40px); }
+    .nav a { color:var(--fg); opacity:.7; text-decoration:none; font-size:14px; position:relative; padding:4px 2px; transition:opacity .25s ease; }
+    .nav a:hover, .nav a.active { opacity:1; }
+    .nav a::after { content:""; position:absolute; left:2px; right:2px; bottom:0; height:1px; background:currentColor; transform-origin:left; transform:scaleX(0); transition:transform .35s cubic-bezier(.2,.7,.2,1); }
+    .nav a:hover::after, .nav a.active::after { transform:scaleX(1); }
+
+    .main { flex:1; max-width:760px; width:100%; margin:0 auto; padding:72px 8px 24px; }
+    h1 { font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(56px,9vw,96px); line-height:0.95; letter-spacing:-0.02em; margin:0 0 36px; }
+    .eyebrow { font-family:'Geist Mono',monospace; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--fg-mute); margin-bottom:12px; }
+
+    .section-label { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--fg-mute); margin:56px 0 6px; }
+
+    .list { display:flex; flex-direction:column; }
+    .row { display:grid; grid-template-columns: minmax(140px, 1fr) 2fr minmax(120px, auto); gap:24px; padding:22px 0; border-top:1px solid var(--rule); align-items:baseline; }
+    .row:last-child { border-bottom:1px solid var(--rule); }
+    .row .co { font-family:'Instrument Serif',serif; font-size:28px; letter-spacing:-0.01em; }
+    .row .role { color:var(--fg-soft); font-size:14px; line-height:1.55; }
+    .row .when { color:var(--fg-mute); font-family:'Geist Mono',monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; text-align:right; white-space:nowrap; }
+
+    .certs { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; border-top:1px solid var(--rule); padding-top:18px; }
+    .cert { padding:4px 0; }
+    .cert .issuer { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--fg-mute); margin-bottom:10px; }
+    .cert ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:6px; }
+    .cert li { font-size:13.5px; color:var(--fg-soft); line-height:1.5; }
+
+    @media (max-width:640px) {
+      .row { grid-template-columns:1fr; gap:6px; }
+      .row .when { text-align:left; }
+    }
+
+    .footer { display:flex; justify-content:space-between; gap:16px; padding-top:24px; color:var(--fg-mute); font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.16em; text-transform:uppercase; }
+    .footer a { color:inherit; text-decoration:none; }
+    .footer a:hover { color:var(--fg); }
+  </style>
 </head>
 <body>
-<main class="page">
-  <header class="top">
-    <a href="/" class="brand">Taha Berk<span class="dot" aria-hidden="true"></span></a>
-    <nav class="nav">
-      <a href="/work.html" class="active">CV</a>
-      <a href="/personal.html">Personal</a>
-      <a href="/research.html">Research</a>
-      <a href="/blog.html">Blog</a>
-    </nav>
-  </header>
+  <main class="page">
+    <header class="top">
+      <a href="/" class="brand">Taha Berk<span class="dot" aria-hidden="true"></span></a>
+      <nav class="nav">
+        <a href="/work.html" class="active">CV</a>
+        <a href="/personal.html">Personal</a>
+        <a href="/research.html">Research</a>
+        <a href="/blog.html">Blog</a>
+      </nav>
+    </header>
 
-  <section class="head">
-    <div>
+    <section class="main">
       <div class="eyebrow">Curriculum Vitæ · 2026</div>
-      <h1>Where I've <em>been.</em></h1>
-    </div>
-    <p class="lede">
-      Mathematics at <em>Yıldız Technical University</em>, four rooms of work in data and automation,
-      a TÜBİTAK research project on the side. One page, in chronological order.
-    </p>
-  </section>
+      <h1>Where I've been.</h1>
 
-  <div class="section-label">Experience</div>
-  <section class="timeline">
-
-    <article class="role">
-      <div class="left">
-        <span class="when">May 2025 — Now</span>
-        <a class="co" href="https://www.getir.com" target="_blank" rel="noreferrer">Getir<span class="ext">↗</span></a>
-        <span class="place">Istanbul · Data Intern</span>
-      </div>
-      <div class="right">
-        <div class="role-title"><strong>Data Intern</strong> · Business Intelligence &amp; Data Engineering</div>
-        <p>
-          Working inside Getir's analytics stack — the part of the company where every "how many?" question eventually lands.
-          Most of my time goes into <em>moving data carefully</em>: building Airflow DAGs that survive retries, writing SQL
-          against Redshift and BigQuery that doesn't quietly drift, and stitching dashboards in Metabase that operations
-          teams actually trust enough to act on.
-        </p>
-        <div class="bullets">
-          <div class="bul">Built <em>ELT pipelines</em> in Airflow + Python (pandas, NumPy) for daily KPI rollups, with idempotent reruns and Slack-side alerts.</div>
-          <div class="bul">Modeled fact/dim tables in Redshift &amp; BigQuery; tuned long-running joins by re-keying and partition pruning.</div>
-          <div class="bul">Owned a small portfolio of Metabase dashboards — pruned the dead ones, instrumented the live ones with freshness checks.</div>
-          <div class="bul">Wrote internal docs &amp; runbooks so the next intern doesn't have to read my Slack history to debug a DAG.</div>
+      <div class="section-label">Experience</div>
+      <div class="list">
+        <div class="row">
+          <div>
+            <div class="co">Getir</div>
+            <div class="role">Data Intern</div>
+          </div>
+          <div class="role">SQL · Python · Redshift · Airflow · Tableau. Pipelines &amp; dashboards.</div>
+          <div class="when">May 2025 — Now</div>
         </div>
-        <div class="stack">
-          <span class="chip">Airflow</span><span class="chip">Python</span><span class="chip">PostgreSQL</span><span class="chip">Redshift</span><span class="chip">BigQuery</span><span class="chip">Metabase</span><span class="chip">ELT</span>
+        <div class="row">
+          <div>
+            <div class="co">Papara</div>
+            <div class="role">RPA Developer / Analyst Intern</div>
+          </div>
+          <div class="role">Automation Anywhere · .NET · VB · SQL. Workflow automation.</div>
+          <div class="when">Dec 2024 — May 2025</div>
         </div>
-      </div>
-    </article>
-
-    <article class="role">
-      <div class="left">
-        <span class="when">Dec 2024 — May 2025</span>
-        <a class="co" href="https://www.papara.com" target="_blank" rel="noreferrer">Papara<span class="ext">↗</span></a>
-        <span class="place">Istanbul · RPA Developer &amp; Analyst Intern</span>
-      </div>
-      <div class="right">
-        <div class="role-title"><strong>RPA Developer / Analyst Intern</strong> · Process automation in fintech</div>
-        <p>
-          Sat on the seam between operations and engineering — the part of fintech where someone is still copy-pasting
-          from one tab to another at 2 a.m. My job was to turn those small, dignity-eroding tasks into bots: stable,
-          auditable, and explainable to a compliance team that needs to know exactly <em>what the robot did and why</em>.
-        </p>
-        <div class="bullets">
-          <div class="bul">Built UiPath &amp; Automation Anywhere flows for reconciliations, periodic reports, and customer-ops triage.</div>
-          <div class="bul">Hooked bots into SQL Server &amp; .NET services so the automation didn't end at the UI but pushed into proper data stores.</div>
-          <div class="bul">Wrote PDDs &amp; SDDs that read like <em>documentation</em>, not a CYA — version-controlled and kept in sync with production.</div>
-          <div class="bul">Helped redesign manual processes into "humans only on the exceptions" flows, which is the only RPA win that matters.</div>
+        <div class="row">
+          <div>
+            <div class="co">LC Waikiki</div>
+            <div class="role">Supply Chain Intern</div>
+          </div>
+          <div class="role">Analytics for demand planning &amp; inventory.</div>
+          <div class="when">Aug — Sep 2024</div>
         </div>
-        <div class="stack">
-          <span class="chip">UiPath</span><span class="chip">Automation Anywhere</span><span class="chip">SQL</span><span class="chip">.NET</span><span class="chip">VBA</span><span class="chip">Process Design</span>
+        <div class="row">
+          <div>
+            <div class="co">Latro</div>
+            <div class="role">RPA Developer</div>
+          </div>
+          <div class="role">Robusta · Python · Java. SAP automation.</div>
+          <div class="when">Jul 2023 — Apr 2024</div>
         </div>
       </div>
-    </article>
 
-    <article class="role">
-      <div class="left">
-        <span class="when">Aug — Sep 2024</span>
-        <a class="co" href="https://www.lcwaikiki.com" target="_blank" rel="noreferrer">LC Waikiki<span class="ext">↗</span></a>
-        <span class="place">Istanbul · Supply Chain Intern</span>
-      </div>
-      <div class="right">
-        <div class="role-title"><strong>Supply Chain Intern</strong> · Demand planning &amp; inventory analytics</div>
-        <p>
-          A short, dense rotation through a global retailer's supply chain — the kind of place where a 1% error in
-          forecast shows up as containers on a dock. I worked with planners on <em>demand signals</em> across SKUs and
-          stores, and built small analytical views to answer questions that Excel was starting to lose patience with.
-        </p>
-        <div class="bullets">
-          <div class="bul">Cleaned and aligned multi-source sales &amp; inventory data across markets and time zones.</div>
-          <div class="bul">Built ad-hoc analyses for SKU-level demand variance and over/under-stock pockets.</div>
-          <div class="bul">Sat in on supplier reviews — learned more about <em>lead-time risk</em> in a week than in two semesters.</div>
+      <div class="section-label">Education</div>
+      <div class="list">
+        <div class="row">
+          <div>
+            <div class="co">Yıldız Technical University</div>
+            <div class="role">B.Sc. in Mathematics</div>
+          </div>
+          <div class="role">Istanbul · undergraduate degree.</div>
+          <div class="when">2022 — 2026</div>
         </div>
-        <div class="stack">
-          <span class="chip">Excel</span><span class="chip">SQL</span><span class="chip">Power BI</span><span class="chip">Supply Chain</span>
+        <div class="row">
+          <div>
+            <div class="co">Stanford University</div>
+            <div class="role">Code in Place · Computer Science</div>
+          </div>
+          <div class="role">Certificate program · live, five-week CS course in Python.</div>
+          <div class="when">Apr — Jun 2023</div>
         </div>
-      </div>
-    </article>
-
-    <article class="role">
-      <div class="left">
-        <span class="when">Jul 2023 — Apr 2024</span>
-        <a class="co" href="https://www.latro.com.tr" target="_blank" rel="noreferrer">Latro<span class="ext">↗</span></a>
-        <span class="place">Istanbul · RPA Developer</span>
-      </div>
-      <div class="right">
-        <div class="role-title"><strong>RPA Developer</strong> · SAP automation on the Robusta platform</div>
-        <p>
-          My first real production engineering role. I built bots on Robusta that operated against SAP — the kind of
-          automation where a misclick costs a finance team a closing day. Tight feedback loops with users, a lot of
-          care around <em>idempotency</em>, and the discovery that "stable RPA" is mostly stable design, not stable code.
-        </p>
-        <div class="bullets">
-          <div class="bul">Designed &amp; shipped Robusta workflows for SAP transactions in finance and procurement, including <em>automatic account initiation</em> and customs entry processes.</div>
-          <div class="bul">Wrote Python and Java helpers for parsing inputs, logging, and retry policies the platform didn't ship with.</div>
-          <div class="bul">Collaborated end-to-end with the software team on design, development, testing and deployment of robotic workflows.</div>
-        </div>
-        <div class="stack">
-          <span class="chip">Robusta</span><span class="chip">Python</span><span class="chip">Java</span><span class="chip">SAP</span>
+        <div class="row">
+          <div>
+            <div class="co">Vefa High School</div>
+            <div class="role">High School Diploma</div>
+          </div>
+          <div class="role">Istanbul.</div>
+          <div class="when">2017 — 2022</div>
         </div>
       </div>
-    </article>
 
-  </section>
+      <div class="section-label">Volunteering &amp; Research</div>
+      <div class="list">
+        <div class="row">
+          <div>
+            <div class="co">TÜBİTAK</div>
+            <div class="role">Research Student · 2209-A grant</div>
+          </div>
+          <div class="role">Brain tumor segmentation with U-Net on MRI · TF/Keras · Dice + IoU.</div>
+          <div class="when">Mar 2025 — Now</div>
+        </div>
+        <div class="row">
+          <div>
+            <div class="co">Toplum Gönüllüleri</div>
+            <div class="role">Coordinator of Volunteers</div>
+          </div>
+          <div class="role">Coordinating volunteer projects at YTU.</div>
+          <div class="when">Sep 2023 — Now</div>
+        </div>
+        <div class="row">
+          <div>
+            <div class="co">WWF</div>
+            <div class="role">Coordinator of Volunteers</div>
+          </div>
+          <div class="role">Sustainability &amp; biodiversity awareness campaigns.</div>
+          <div class="when">Jun 2023 — Feb 2025</div>
+        </div>
+      </div>
 
-  <div class="section-label">Education</div>
-  <section class="list">
-    <article class="entry">
-      <span class="when">2022 — 2026</span>
-      <div class="body">
-        <h3>B.Sc. in <em>Mathematics</em></h3>
-        <span class="where">Yıldız Technical University · Istanbul</span>
-        <p>Four years of proofs, probability and the slow habit of writing things down carefully. Most of what I now do with data quietly traces back to a linear-algebra class.</p>
+      <div class="section-label">Certificates</div>
+      <div class="certs">
+        <div class="cert">
+          <div class="issuer">Stanford</div>
+          <ul>
+            <li>Code in Place (CS)</li>
+            <li>Supervised Machine Learning</li>
+            <li>Introduction to Statistics</li>
+          </ul>
+        </div>
+        <div class="cert">
+          <div class="issuer">IBM</div>
+          <ul>
+            <li>Python for Data Science, AI &amp; Development</li>
+            <li>Data Analysis with Python</li>
+            <li>Databases &amp; SQL for Data Science</li>
+            <li>Python Project for Data Science</li>
+            <li>Tools for Data Science</li>
+          </ul>
+        </div>
+        <div class="cert">
+          <div class="issuer">DataCamp</div>
+          <ul>
+            <li>Introduction to AWS</li>
+            <li>Introduction to Python</li>
+            <li>Intermediate Python</li>
+            <li>Introduction to ChatGPT</li>
+          </ul>
+        </div>
       </div>
-    </article>
-    <article class="entry">
-      <span class="when">Apr — Jun 2023</span>
-      <div class="body">
-        <h3><em>Code in Place</em> · Stanford University</h3>
-        <span class="where">Certificate Program · Computer Science</span>
-        <p>A live, five-week Stanford CS course taught in Python — my first formal exposure to programming as a craft, with weekly assignments and section leaders. The course that turned a hobby into a direction.</p>
-      </div>
-    </article>
-    <article class="entry">
-      <span class="when">2017 — 2022</span>
-      <div class="body">
-        <h3>High School Diploma</h3>
-        <span class="where">Vefa High School · Istanbul</span>
-      </div>
-    </article>
-  </section>
 
-  <div class="section-label">Volunteering &amp; Research</div>
-  <section class="list">
-    <article class="entry">
-      <span class="when">Mar 2025 — Now</span>
-      <div class="body">
-        <h3>TÜBİTAK 2209-A · <em>Research Student</em></h3>
-        <span class="where">Scientific and Technological Research Council of Turkey · Worldwide</span>
-        <p>Principal investigator on a funded undergraduate research project on <em>brain tumor segmentation</em> using U-Net on multi-modal MRI — preprocessing, training in TensorFlow/Keras, and evaluation with Dice and IoU. More on the <a href="/research.html" style="color:inherit;text-decoration:underline;text-decoration-color:var(--fg-mute);">research page</a>.</p>
+      <div class="section-label">Languages</div>
+      <div class="list">
+        <div class="row">
+          <div><div class="co">Turkish</div></div>
+          <div class="role">Native.</div>
+          <div class="when">Native</div>
+        </div>
+        <div class="row">
+          <div><div class="co">English</div></div>
+          <div class="role">Professional working proficiency.</div>
+          <div class="when">Professional</div>
+        </div>
       </div>
-    </article>
-    <article class="entry">
-      <span class="when">Sep 2023 — Now</span>
-      <div class="body">
-        <h3>Toplum Gönüllüleri Vakfı · <em>Coordinator</em></h3>
-        <span class="where">Community Volunteers Foundation · Istanbul, Turkey</span>
-        <p>Co-coordinated volunteer initiatives at Yıldız Technical University, leading small teams to deliver social-responsibility projects and keep a culture of volunteerism alive between cohorts.</p>
-      </div>
-    </article>
-    <article class="entry">
-      <span class="when">Jun 2023 — Feb 2025</span>
-      <div class="body">
-        <h3>WWF · <em>Coordinator of Volunteers</em></h3>
-        <span class="where">World Wide Fund for Nature · Worldwide</span>
-        <p>Coordinated volunteer project management, strategic planning and stakeholder collaboration on biodiversity and climate awareness campaigns.</p>
-      </div>
-    </article>
-  </section>
+    </section>
 
-  <div class="section-label">Certificates</div>
-  <div class="cert-grid">
-    <div class="cert">
-      <div class="issuer">Stanford University</div>
-      <ul>
-        <li>Code in Place (Computer Science)</li>
-        <li>Supervised Machine Learning</li>
-        <li>Introduction to Statistics</li>
-      </ul>
-    </div>
-    <div class="cert">
-      <div class="issuer">IBM</div>
-      <ul>
-        <li>Python for Data Science, AI &amp; Development</li>
-        <li>Data Analysis with Python</li>
-        <li>Databases and SQL for Data Science</li>
-        <li>Python Project for Data Science</li>
-        <li>Tools for Data Science</li>
-      </ul>
-    </div>
-    <div class="cert">
-      <div class="issuer">DataCamp</div>
-      <ul>
-        <li>Introduction to AWS</li>
-        <li>Introduction to Python</li>
-        <li>Intermediate Python</li>
-        <li>Introduction to ChatGPT</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="section-label">Languages</div>
-  <section class="list">
-    <article class="entry">
-      <span class="when">Native</span>
-      <div class="body"><h3>Turkish</h3></div>
-    </article>
-    <article class="entry">
-      <span class="when">Professional</span>
-      <div class="body"><h3>English</h3><span class="where">Professional Working Proficiency</span></div>
-    </article>
-  </section>
-
-  <footer class="footer">
-    <a href="/">← back</a>
-    <span>Istanbul · GMT+3</span>
-  </footer>
-</main>
+    <footer class="footer">
+      <a href="/">← back</a>
+      <span>Istanbul · GMT+3</span>
+    </footer>
+  </main>
 </body>
 </html>

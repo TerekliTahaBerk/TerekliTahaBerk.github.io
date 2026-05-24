@@ -1,129 +1,104 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Research · Taha Berk</title>
-<link rel="icon" type="image/jpeg" href="/favicon.jpg" />
-<link rel="apple-touch-icon" href="/favicon.jpg" />
-<meta name="description" content="Research notes — brain tumor segmentation with U-Net, TÜBİTAK 2209-A grant project." />
-<link rel="canonical" href="https://www.tahaberk.com/research.html" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet" />
-<script>(function(){try{const s=localStorage.getItem('tbt_theme');if(s==='light'){document.documentElement.classList.remove('dark');}else{document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();</script>
-<style>
-:root { --bg:#f5f2eb; --fg:#15140f; --fg-soft:#4b4740; --fg-mute:#97928a; --rule:#d9d3c4; --chip:#e3decf; }
-html.dark { --bg:#0b0a09; --fg:#ece7d8; --fg-soft:#b5ad9c; --fg-mute:#6a655c; --rule:#2b2824; --chip:#1c1a17; }
-*,*::before,*::after { box-sizing: border-box; }
-html,body { margin:0; padding:0; }
-body { background:var(--bg); color:var(--fg); font-family:'Geist',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
-::selection { background:var(--fg); color:var(--bg); }
-.page { min-height:100vh; display:flex; flex-direction:column; padding:28px clamp(20px,4vw,56px) 48px; }
-.top { display:flex; justify-content:space-between; align-items:center; gap:24px; }
-.brand { font-family:'Instrument Serif',serif; font-size:22px; text-decoration:none; color:var(--fg); display:inline-flex; align-items:baseline; gap:6px; }
-.brand .dot { width:5px; height:5px; border-radius:50%; background:oklch(0.62 0.15 155); display:inline-block; transform:translateY(-3px); }
-.nav { display:flex; gap:clamp(18px,2.6vw,32px); flex-wrap:wrap; justify-content:flex-end; }
-.nav a { color:var(--fg); opacity:.65; text-decoration:none; font-size:13px; position:relative; padding:4px 2px; transition:opacity .25s ease; }
-.nav a:hover, .nav a.active { opacity:1; }
-.nav a::after { content:""; position:absolute; left:2px; right:2px; bottom:0; height:1px; background:currentColor; transform-origin:left; transform:scaleX(0); transition:transform .35s cubic-bezier(.2,.7,.2,1); }
-.nav a:hover::after, .nav a.active::after { transform:scaleX(1); }
-.head { max-width:1080px; margin:64px auto 36px; width:100%; display:grid; grid-template-columns:1.6fr 1fr; gap:36px 48px; align-items:end; }
-@media (max-width:760px) { .head { grid-template-columns:1fr; gap:24px; } }
-.eyebrow { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--fg-mute); margin-bottom:14px; }
-h1 { font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(56px,9vw,108px); line-height:0.9; letter-spacing:-0.025em; margin:0; }
-h1 em { font-style:italic; color:var(--fg-soft); }
-.lede { font-family:'Instrument Serif',serif; color:var(--fg-soft); font-size:clamp(17px,1.4vw,21px); line-height:1.45; max-width:42ch; margin:0; }
-.list { max-width:1080px; width:100%; margin:0 auto; display:flex; flex-direction:column; }
-.card { display:grid; grid-template-columns:180px 1fr; gap:28px clamp(24px,4vw,56px); padding:36px 0; border-top:1px solid var(--rule); }
-.list .card:last-child { border-bottom:1px solid var(--rule); }
-.card .left { display:flex; flex-direction:column; gap:10px; }
-.card .id { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--fg-mute); }
-.card .when { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--fg-mute); }
-.card h2 { font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(30px,3.4vw,44px); line-height:1; letter-spacing:-0.015em; margin:0; color:var(--fg); }
-.card h2 em { font-style:italic; color:var(--fg-soft); }
-.card p { margin:6px 0 0; font-size:14.5px; line-height:1.7; color:var(--fg-soft); max-width:62ch; }
-.card p em { color:var(--fg); font-style:italic; }
-.card .stack { display:flex; flex-wrap:wrap; gap:5px; margin-top:14px; }
-.chip { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.08em; padding:3px 9px; border-radius:999px; background:var(--chip); color:var(--fg-soft); }
-.card:hover .chip { color:var(--fg); }
-.status { display:inline-flex; align-items:center; gap:6px; font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--fg-soft); }
-.status .ping { width:6px; height:6px; border-radius:50%; background:oklch(0.62 0.15 155); box-shadow:0 0 8px oklch(0.62 0.15 155); animation:ping 2s ease-in-out infinite; }
-@keyframes ping { 0%,100%{opacity:1} 50%{opacity:.35} }
-@media (max-width:760px) {
-  .card { grid-template-columns:1fr; gap:14px; padding:28px 0; }
-  .card .left { flex-direction:row; flex-wrap:wrap; gap:14px; align-items:baseline; }
-}
-.footer { max-width:1080px; margin:56px auto 0; width:100%; display:flex; justify-content:space-between; gap:16px; padding-top:24px; color:var(--fg-mute); font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; }
-.footer a { color:inherit; text-decoration:none; transition:color .2s ease; }
-.footer a:hover { color:var(--fg); }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Research · Taha Berk</title>
+  <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+  <link rel="apple-touch-icon" href="/favicon.jpg" />
+  <meta name="description" content="Research notes — brain tumor segmentation with U-Net, TÜBİTAK 2209-A grant project." />
+  <link rel="canonical" href="https://www.tahaberk.com/research.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet" />
+  <script>(function(){try{const s=localStorage.getItem('tbt_theme');if(s==='light'){document.documentElement.classList.remove('dark');}else{document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();</script>
+  <style>
+    :root { --bg:#f5f2eb; --fg:#15140f; --fg-soft:#4b4740; --fg-mute:#97928a; --rule:#d9d3c4; --chip:#e3decf; }
+    html.dark { --bg:#0f0e0c; --fg:#ece7d8; --fg-soft:#b5ad9c; --fg-mute:#6a655c; --rule:#2b2824; --chip:#1c1a17; }
+    *,*::before,*::after { box-sizing: border-box; }
+    html,body { margin:0; padding:0; height:100%; }
+    body { background:var(--bg); color:var(--fg); font-family:'Geist',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+    ::selection { background: var(--fg); color: var(--bg); }
+    .page { min-height:100vh; display:flex; flex-direction:column; padding:28px clamp(20px,4vw,56px); }
+    .top { display:flex; justify-content:space-between; align-items:baseline; gap:24px; }
+    .brand { font-family:'Instrument Serif',serif; font-size:24px; text-decoration:none; color:var(--fg); display:inline-flex; align-items:baseline; gap:6px; }
+    .brand .dot { width:5px; height:5px; border-radius:50%; background:oklch(0.62 0.15 155); display:inline-block; transform:translateY(-3px); }
+    .nav { display:flex; gap:clamp(20px,3vw,40px); }
+    .nav a { color:var(--fg); opacity:.7; text-decoration:none; font-size:14px; position:relative; padding:4px 2px; transition:opacity .25s ease; }
+    .nav a:hover, .nav a.active { opacity:1; }
+    .nav a::after { content:""; position:absolute; left:2px; right:2px; bottom:0; height:1px; background:currentColor; transform-origin:left; transform:scaleX(0); transition:transform .35s cubic-bezier(.2,.7,.2,1); }
+    .nav a:hover::after, .nav a.active::after { transform:scaleX(1); }
+
+    .center { flex:1; display:flex; flex-direction:column; justify-content:center; max-width:760px; width:100%; margin:0 auto; padding:48px 8px; }
+    h1 { font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(56px,9vw,96px); line-height:0.95; letter-spacing:-0.02em; margin:0 0 36px; }
+    .eyebrow { font-family:'Geist Mono',monospace; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--fg-mute); margin-bottom:12px; }
+
+    .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px; }
+    .card { border:1px solid var(--rule); border-radius:14px; padding:22px 22px 20px; background:var(--bg); transition:border-color .25s ease, transform .25s ease; }
+    .card:hover { border-color:var(--fg-soft); transform:translateY(-1px); }
+    .card .h { display:flex; justify-content:space-between; align-items:center; }
+    .card .id { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--fg-mute); }
+    .card .stat { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; padding:3px 9px; border-radius:999px; background:var(--chip); color:var(--fg-soft); }
+    .card .stat.live { background:oklch(0.92 0.06 155); color:oklch(0.32 0.1 155); }
+    html.dark .card .stat.live { background:oklch(0.3 0.08 155); color:oklch(0.85 0.1 155); }
+    .card h3 { font-family:'Instrument Serif',serif; font-weight:400; font-size:26px; line-height:1.1; letter-spacing:-0.01em; margin:18px 0 4px; }
+    .card .org { color:var(--fg-mute); font-size:12px; margin-bottom:14px; }
+    .card p { color:var(--fg-soft); font-size:14px; line-height:1.6; margin:0 0 16px; }
+    .chips { display:flex; flex-wrap:wrap; gap:6px; }
+    .chip { font-family:'Geist Mono',monospace; font-size:11px; padding:2px 8px; border-radius:999px; background:var(--chip); color:var(--fg-soft); }
+
+    .footer { display:flex; justify-content:space-between; gap:16px; padding-top:24px; color:var(--fg-mute); font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.16em; text-transform:uppercase; }
+    .footer a { color:inherit; text-decoration:none; }
+    .footer a:hover { color:var(--fg); }
+  </style>
 </head>
 <body>
-<main class="page">
-  <header class="top">
-    <a href="/" class="brand">Taha Berk<span class="dot" aria-hidden="true"></span></a>
-    <nav class="nav">
-      <a href="/work.html">CV</a>
-      <a href="/personal.html">Personal</a>
-      <a href="/research.html" class="active">Research</a>
-      <a href="/blog.html">Blog</a>
-    </nav>
-  </header>
+  <main class="page">
+    <header class="top">
+      <a href="/" class="brand">Taha Berk<span class="dot" aria-hidden="true"></span></a>
+      <nav class="nav">
+        <a href="/work.html">CV</a>
+        <a href="/personal.html">Personal</a>
+        <a href="/research.html" class="active">Research</a>
+        <a href="/blog.html">Blog</a>
+      </nav>
+    </header>
 
-  <section class="head">
-    <div>
-      <div class="eyebrow">Research · 2025</div>
-      <h1>A small <em>notebook.</em></h1>
-    </div>
-    <p class="lede">
-      One funded project and a few quiet experiments on the side. Updated when there is something honest to add.
-    </p>
-  </section>
+    <section class="center">
+      <div class="eyebrow">Research</div>
+      <h1>Notes &amp; experiments.</h1>
 
-  <section class="list">
+      <div class="cards">
+        <article class="card">
+          <div class="h">
+            <span class="id">R/01</span>
+            <span class="stat live">In progress</span>
+          </div>
+          <h3>Brain Tumor Segmentation with U-Net</h3>
+          <div class="org">TÜBİTAK 2209-A · 2025</div>
+          <p>Semantic segmentation on MRI volumes — preprocessing, training U-Net variants in TF/Keras, evaluating with Dice + IoU.</p>
+          <div class="chips">
+            <span class="chip">TensorFlow</span><span class="chip">Keras</span><span class="chip">U-Net</span><span class="chip">MRI</span>
+          </div>
+        </article>
 
-    <article class="card">
-      <div class="left">
-        <span class="id">R / 01</span>
-        <span class="when">Mar 2025 — Now</span>
-        <span class="status"><span class="ping"></span> In progress</span>
+        <article class="card">
+          <div class="h">
+            <span class="id">R/02</span>
+            <span class="stat">Planned</span>
+          </div>
+          <h3>Research Project 02</h3>
+          <div class="org">Placeholder · TBD</div>
+          <p>Reserved card — will document the second research direction here once the topic is locked in.</p>
+          <div class="chips"><span class="chip">TBD</span></div>
+        </article>
       </div>
-      <div>
-        <h2>Brain Tumor Segmentation with <em>U-Net</em></h2>
-        <p>
-          A TÜBİTAK 2209-A funded undergraduate research project: applying U-Net architectures to <em>multi-modal MRI</em>
-          for glioma sub-region segmentation. Most of the time goes into preprocessing — normalisation, patch sampling,
-          patient-disjoint splits — and into reporting Dice / IoU honestly across patients rather than as a single mean.
-        </p>
-        <div class="stack">
-          <span class="chip">TensorFlow</span><span class="chip">Keras</span><span class="chip">U-Net</span><span class="chip">MRI</span><span class="chip">Dice</span><span class="chip">IoU</span>
-        </div>
-      </div>
-    </article>
+    </section>
 
-    <article class="card">
-      <div class="left">
-        <span class="id">R / 02</span>
-        <span class="when">Next</span>
-        <span class="status" style="color:var(--fg-mute)">Planned</span>
-      </div>
-      <div>
-        <h2>Next <em>direction.</em></h2>
-        <p>
-          Probably a small piece on <em>causal inference</em> for retention experiments, or anomaly detection on
-          warehouse signals — both side-quests that grew out of day-job questions. Will land here when there is
-          something more than an idea.
-        </p>
-      </div>
-    </article>
-
-  </section>
-
-  <footer class="footer">
-    <a href="/">← back</a>
-    <span>Istanbul · GMT+3</span>
-  </footer>
-</main>
+    <footer class="footer">
+      <a href="/">← back</a>
+      <span>Istanbul · GMT+3</span>
+    </footer>
+  </main>
 </body>
 </html>

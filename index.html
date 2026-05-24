@@ -145,12 +145,14 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: flex-start;
+      align-items: center;
+      text-align: center;
       max-width: 720px;
-      margin: 0 auto 0 clamp(8px, 6vw, 80px);
+      margin: 0 auto;
       width: 100%;
       padding: 0 8px;
     }
+    .center .intro { text-align: center; }
 
     .hey {
       font-family: 'Instrument Serif', serif;
@@ -383,26 +385,19 @@
       let r = seed;
       const rand = () => (r = (r * 9301 + 49297) % 233280) / 233280;
       const cells = [];
-      for (let col = 0; col < COLS; col++) {
-        for (let row = 0; row < ROWS; row++) {
-          const recency = col / (COLS - 1);
-          const weekendDrop = (row === 5 || row === 6) ? -0.18 : 0;
-          const v = Math.max(0, Math.min(1,
-            0.18 + rand() * 0.55 + recency * 0.32 + weekendDrop +
-            (Math.sin(col * 0.6 + row * 0.9) * 0.1)
-          ));
-          const empty = rand() < 0.18;
-          cells.push(empty ? 0 : v);
-        }
+      for (let i = 0; i < COLS * ROWS; i++) {
+        const col = Math.floor(i / ROWS);
+        const recency = col / (COLS - 1);
+        const v = Math.max(0, Math.min(1,
+          0.18 + rand() * 0.55 + recency * 0.32 +
+          (Math.sin(col * 0.6 + (i % ROWS) * 0.9) * 0.1)
+        ));
+        cells.push(rand() < 0.2 ? 0 : v);
       }
       return cells;
     }
 
-    const cells = buildMock(7);
-    const plusElems = [];
-    for (let i = 0; i < cells.length; i++) {
-      const v = cells[i];
-      const op = v === 0 ? 0.06 : 0.16 + v * 0.78;
+    function makePlus(op) {
       const svg = document.createElementNS(SVG_NS, 'svg');
       svg.setAttribute('viewBox', '0 0 14 14');
       svg.setAttribute('width', '13');
@@ -414,61 +409,110 @@
       path.setAttribute('stroke-width', '1.4');
       path.setAttribute('stroke-linecap', 'round');
       svg.appendChild(path);
-      grid.appendChild(svg);
-      plusElems.push({ svg, v, op });
+      return svg;
     }
-    // Column-by-column stagger reveal
-    plusElems.forEach((p, i) => {
-      const col = Math.floor(i / ROWS);
-      const row = i % ROWS;
-      const delay = col * 26 + row * 14;
-      setTimeout(() => p.svg.classList.add('in'), 140 + delay);
-    });
 
-    /* ---------- Live GitHub overlay ---------- */
+    function renderGrid(values) {
+      grid.innerHTML = '';
+      const plusElems = [];
+      for (let i = 0; i < values.length; i++) {
+        const v = values[i];
+        const op = v === 0 ? 0.05 : 0.14 + v * 0.82;
+        const svg = makePlus(op);
+        grid.appendChild(svg);
+        plusElems.push(svg);
+      }
+      plusElems.forEach((svg, i) => {
+        const col = Math.floor(i / ROWS);
+        const row = i % ROWS;
+        const delay = col * 26 + row * 14;
+        setTimeout(() => svg.classList.add('in'), 140 + delay);
+      });
+      return plusElems;
+    }
+
+    // Initial render with mock so the grid never looks empty
+    let values = buildMock(7);
+    renderGrid(values);
+
+    /* ---------- Real GitHub contributions ---------- */
     const liveLabel = document.getElementById('live-label');
-    (async () => {
-      try {
-        const r = await fetch('https://api.github.com/users/TerekliTahaBerk/events/public?per_page=60', {
-          headers: { Accept: 'application/vnd.github+json' },
-        });
-        if (!r.ok) throw new Error('http ' + r.status);
-        const events = await r.json();
-        if (!Array.isArray(events) || events.length === 0) throw new Error('no events');
 
-        const byDay = {};
-        for (const e of events) {
-          const d = e.created_at.slice(0, 10);
-          byDay[d] = (byDay[d] || 0) + 1;
+    async function loadContributions() {
+      // Public proxy returning the real GitHub contribution calendar (no auth).
+      const r = await fetch('https://github-contributions-api.jogruber.de/v4/TerekliTahaBerk?y=last');
+      if (!r.ok) throw new Error('contrib http ' + r.status);
+      const data = await r.json();
+      if (!data || !Array.isArray(data.contributions)) throw new Error('no contrib');
+
+      // Build the last COLS weeks ending today (Mon..Sun rows).
+      const map = Object.create(null);
+      for (const d of data.contributions) map[d.date] = d.count;
+
+      const today = new Date();
+      const todayUTC = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
+      // Anchor to the most recent Sunday so a full week fits the rightmost column.
+      const dowToday = todayUTC.getUTCDay(); // 0=Sun..6=Sat
+      const daysToSun = (7 - dowToday) % 7;
+      const anchor = new Date(todayUTC.getTime() + daysToSun * 86400000);
+
+      const totalDays = COLS * 7;
+      const out = new Array(COLS * ROWS).fill(0);
+      let maxCount = 0;
+
+      for (let d = 0; d < totalDays; d++) {
+        const date = new Date(anchor.getTime() - (totalDays - 1 - d) * 86400000);
+        const iso = date.toISOString().slice(0, 10);
+        const count = map[iso] || 0;
+        if (count > maxCount) maxCount = count;
+        // Column 0 = oldest week, ROWS rows Mon..Sun (0..6)
+        const dow = (date.getUTCDay() + 6) % 7; // Mon=0..Sun=6
+        const col = Math.floor(d / 7);
+        if (dow < ROWS) {
+          out[col * ROWS + dow] = count;
         }
-        const today = new Date();
-        const todayUTC = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate());
-        Object.entries(byDay).forEach(([day, count]) => {
-          const dt = new Date(day + 'T00:00:00Z');
-          const diffDays = Math.floor((todayUTC - dt.getTime()) / 86400000);
-          if (diffDays < 0 || diffDays >= COLS * 7) return;
-          const col = (COLS - 1) - Math.floor(diffDays / 7);
-          const dow = (dt.getUTCDay() + 6) % 7; // Mon=0..Sun=6
-          const row = Math.min(ROWS - 1, dow);
-          const idx = col * ROWS + row;
-          const item = plusElems[idx];
-          if (!item) return;
-          const boost = Math.min(1, 0.55 + count * 0.12);
-          item.svg.style.setProperty('--op', boost);
-          if (item.svg.classList.contains('in')) item.svg.style.opacity = boost;
-        });
+      }
 
-        // Most recent event for the status line
-        const last = events[0];
-        const when = new Date(last.created_at);
-        const diffMin = Math.max(1, Math.round((Date.now() - when.getTime()) / 60000));
-        const rel =
-          diffMin < 60   ? `${diffMin}m ago` :
-          diffMin < 1440 ? `${Math.round(diffMin/60)}h ago` :
-                           `${Math.round(diffMin/1440)}d ago`;
-        liveLabel.textContent = `live · updated ${rel} · github`;
-      } catch (err) {
-        liveLabel.textContent = 'offline · mock activity · github';
+      // Normalize counts to 0..1 with a soft log curve so a 1-commit day is still visible.
+      const norm = out.map(c => {
+        if (c <= 0) return 0;
+        return Math.min(1, 0.25 + Math.log2(1 + c) / Math.log2(1 + Math.max(maxCount, 4)) * 0.85);
+      });
+      return { values: norm, total: data.total && data.total.lastYear };
+    }
+
+    async function loadLastEvent() {
+      const r = await fetch('https://api.github.com/users/TerekliTahaBerk/events/public?per_page=10', {
+        headers: { Accept: 'application/vnd.github+json' },
+      });
+      if (!r.ok) throw new Error('events http ' + r.status);
+      const events = await r.json();
+      if (!Array.isArray(events) || events.length === 0) throw new Error('no events');
+      const last = events[0];
+      const when = new Date(last.created_at);
+      const diffMin = Math.max(1, Math.round((Date.now() - when.getTime()) / 60000));
+      return diffMin < 60   ? `${diffMin}m ago` :
+             diffMin < 1440 ? `${Math.round(diffMin/60)}h ago` :
+                              `${Math.round(diffMin/1440)}d ago`;
+    }
+
+    (async () => {
+      let liveOk = false;
+      try {
+        const { values: real } = await loadContributions();
+        renderGrid(real);
+        liveOk = true;
+      } catch (e) { /* keep mock */ }
+
+      try {
+        const rel = await loadLastEvent();
+        liveLabel.textContent = liveOk
+          ? `live · updated ${rel} · github`
+          : `offline · last seen ${rel} · github`;
+      } catch (e) {
+        liveLabel.textContent = liveOk
+          ? `live · github`
+          : `offline · mock activity · github`;
       }
     })();
   </script>

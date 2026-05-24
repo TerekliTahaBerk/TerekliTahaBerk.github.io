@@ -491,7 +491,7 @@
 
       <a class="live" id="live" href="https://github.com/TerekliTahaBerk" target="_blank" rel="noreferrer">
         <span class="pulse" aria-hidden="true"></span>
-        <span class="live-link" id="live-label">live · github activity</span>
+        <span class="live-link" id="live-label">offline · sample activity</span>
         <span class="live-link arrow" aria-hidden="true">↗</span>
       </a>
 
@@ -555,10 +555,10 @@
 
     /* ---------- GitHubActivityGrid ----------
        A decorative plus-sign field that softly reacts to recent GitHub
-       activity. Deterministic mock data is rendered immediately; the
-       public events feed is then quietly overlaid. Any failure is
-       swallowed — the field keeps its mock data and the status line
-       stays as "live · github activity" (never shows errors / loading).
+       activity. Deterministic mock data is rendered immediately; a
+       statically-generated JSON file (built daily by a GitHub Action)
+       is then quietly overlaid. If the JSON is unavailable the field
+       keeps its mock data and the status line flips to "offline".
     ----------------------------------------------------------------- */
     function GitHubActivityGrid({
       mount,
@@ -727,46 +727,63 @@
       const data  = buildMock(0x9e3779b1);
       const nodes = render(data);
 
-      // ---- 2) silent overlay from real GitHub events ---------------
+      // ---- 2) silent overlay from statically-built JSON -----------
+      // The JSON is produced daily by .github/workflows/github-activity.yml
+      // and committed to the repo. We try a couple of likely paths so the
+      // site works both at the repo root and when served from /public.
       (async () => {
-        try {
-          const res = await fetch(
-            `https://api.github.com/users/${encodeURIComponent(username)}/events/public?per_page=50`,
-            { headers: { Accept: 'application/vnd.github+json' } }
-          );
-          if (!res.ok) return;
-          const events = await res.json();
-          if (!Array.isArray(events) || events.length === 0) return;
-
-          // Bucket events by UTC day
-          const byDay = Object.create(null);
-          let maxCount = 0;
-          for (const e of events) {
-            const day = (e && e.created_at || '').slice(0, 10);
-            if (!day) continue;
-            byDay[day] = (byDay[day] || 0) + 1;
-            if (byDay[day] > maxCount) maxCount = byDay[day];
-          }
-
-          const denom = Math.log2(1 + Math.max(maxCount, 2));
-
-          for (let d = 0; d < totalDays; d++) {
-            const iso = dateForIndex(d).toISOString().slice(0, 10);
-            const count = byDay[iso] || 0;
-            // Always record the real count on the cell, even when 0,
-            // so tooltips reflect reality once data has loaded.
-            data[d].count = count;
-            if (count > 0) {
-              // log-scaled boost; brighten the existing mock so the field
-              // remains cohesive even with only a handful of events.
-              const boost = Math.min(1, 0.45 + (Math.log2(1 + count) / denom) * 0.55);
-              data[d].intensity = Math.max(data[d].intensity, boost);
-              applyStyle(nodes[d], data[d].intensity);
+        const candidates = [
+          '/github-activity.json',
+          'github-activity.json',
+          'public/github-activity.json',
+        ];
+        let days = null;
+        for (const url of candidates) {
+          try {
+            const res = await fetch(url, { cache: 'no-cache' });
+            if (!res.ok) continue;
+            const json = await res.json();
+            if (Array.isArray(json) && json.length > 0) {
+              days = json;
+              break;
             }
-          }
-        } catch (_) {
-          // Silent — keep mock data, keep the status line as-is.
+          } catch (_) { /* try next */ }
         }
+
+        const label = document.getElementById('live-label');
+
+        if (!days) {
+          if (label) label.textContent = 'offline · sample activity';
+          return;
+        }
+
+        // Bucket counts by ISO date (YYYY-MM-DD)
+        const byDay = Object.create(null);
+        let maxCount = 0;
+        for (const d of days) {
+          if (!d || typeof d.date !== 'string') continue;
+          const c = Number(d.count) || 0;
+          byDay[d.date] = c;
+          if (c > maxCount) maxCount = c;
+        }
+
+        const denom = Math.log2(1 + Math.max(maxCount, 2));
+
+        for (let d = 0; d < totalDays; d++) {
+          const iso = dateForIndex(d).toISOString().slice(0, 10);
+          const count = byDay[iso] || 0;
+          // Always record the real count on the cell, even when 0,
+          // so tooltips reflect reality once data has loaded.
+          data[d].count = count;
+          // Map real counts to intensity (log-scaled), replacing mock.
+          const intensity = count > 0
+            ? Math.min(1, 0.18 + (Math.log2(1 + count) / denom) * 0.82)
+            : 0.05;
+          data[d].intensity = intensity;
+          applyStyle(nodes[d], intensity);
+        }
+
+        if (label) label.textContent = 'live · github activity';
       })();
     }
 

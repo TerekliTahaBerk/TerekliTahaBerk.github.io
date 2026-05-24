@@ -248,6 +248,47 @@
       filter: drop-shadow(0 0 5px color-mix(in oklab, var(--tone-high), transparent 35%));
     }
 
+    /* ---------- GRID TOOLTIP ---------- */
+    .gh-tip {
+      position: fixed;
+      z-index: 60;
+      pointer-events: none;
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 10.5px;
+      line-height: 1.35;
+      color: #ece4d2;
+      background: rgba(18, 16, 14, 0.86);
+      border: 1px solid rgba(236, 228, 210, 0.09);
+      border-radius: 8px;
+      padding: 6px 9px;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      box-shadow: 0 6px 22px rgba(0, 0, 0, 0.35);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      transform: translate(-50%, -2px);
+      transition:
+        opacity .18s ease,
+        transform .22s cubic-bezier(.2,.7,.2,1);
+      will-change: opacity, transform;
+    }
+    .gh-tip.show {
+      opacity: 1;
+      transform: translate(-50%, -8px);
+    }
+    .gh-tip .gh-tip-label { display: block; }
+    .gh-tip .gh-tip-count {
+      display: block;
+      margin-top: 2px;
+      font-size: 9.5px;
+      opacity: 0.55;
+      letter-spacing: 0.02em;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .gh-tip { transition: opacity .12s ease; transform: translate(-50%, -8px); }
+    }
+
     /* ---------- INTRO ---------- */
     .intro {
       margin-top: clamp(20px, 4vh, 36px);
@@ -529,6 +570,41 @@
       mount.style.setProperty('--cols', cols);
       mount.style.setProperty('--rows', rows);
 
+      // ---- tooltip (single shared node) ----------------------------
+      let tipEl = document.querySelector('.gh-tip');
+      if (!tipEl) {
+        tipEl = document.createElement('div');
+        tipEl.className = 'gh-tip';
+        tipEl.setAttribute('role', 'tooltip');
+        tipEl.innerHTML = '<span class="gh-tip-label"></span><span class="gh-tip-count"></span>';
+        document.body.appendChild(tipEl);
+      }
+      const tipLabel = tipEl.querySelector('.gh-tip-label');
+      const tipCount = tipEl.querySelector('.gh-tip-count');
+
+      function labelFor(count) {
+        if (count <= 0)  return 'quiet day';
+        if (count === 1) return 'one tiny spark';
+        if (count <= 3)  return 'a few sparks';
+        if (count <= 7)  return 'busy little day';
+        if (count <= 12) return 'commit weather: active';
+        return 'tiny storm of commits';
+      }
+
+      function showTip(svg, cell) {
+        const count = cell.count | 0;
+        tipLabel.textContent = labelFor(count);
+        tipCount.textContent = count === 1 ? '1 commit' : `${count} commits`;
+        // Position above the cell, centered.
+        const r = svg.getBoundingClientRect();
+        tipEl.style.left = `${r.left + r.width / 2}px`;
+        tipEl.style.top  = `${r.top}px`;
+        tipEl.classList.add('show');
+      }
+      function hideTip() {
+        tipEl.classList.remove('show');
+      }
+
       // ---- intensity → visual mapping ------------------------------
       // Plus signs vary by opacity, tone (color mix) and a *very* subtle
       // scale. Low activity ≈ almost invisible gray. High ≈ soft warm white.
@@ -570,6 +646,23 @@
         }
       }
 
+      // ---- date axis (oldest top-left → newest bottom-right) -------
+      const totalDays = cols * rows;
+      const today = new Date();
+      const todayUTC = new Date(Date.UTC(
+        today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()
+      ));
+      const firstDay = new Date(todayUTC.getTime() - (totalDays - 1) * 86400000);
+      function dateForIndex(i) {
+        return new Date(firstDay.getTime() + i * 86400000);
+      }
+
+      // Plausible mock commit count derived deterministically from intensity.
+      // Keeps the field cohesive when GitHub data is missing.
+      function mockCountFromIntensity(v) {
+        return Math.round(Math.pow(Math.max(0, Math.min(1, v)), 1.6) * 14);
+      }
+
       // ---- deterministic mock field --------------------------------
       // Smooth low-frequency noise so the field reads as texture rather
       // than random dots. Recency lifts the right side just slightly.
@@ -579,7 +672,7 @@
           r = (r * 1664525 + 1013904223) >>> 0;
           return (r & 0xffffffff) / 0x100000000;
         };
-        const cells = new Array(cols * rows);
+        const data = new Array(cols * rows);
         for (let c = 0; c < cols; c++) {
           for (let row = 0; row < rows; row++) {
             const recency = c / Math.max(1, cols - 1);          // 0..1
@@ -590,18 +683,28 @@
             let v = 0.22 + noise + wave + recency * 0.22;
             // sprinkle voids so the field has breathing room
             if (rand() < 0.18) v *= 0.15;
-            cells[c * rows + row] = Math.max(0, Math.min(1, v));
+            v = Math.max(0, Math.min(1, v));
+            const idx = c * rows + row;
+            data[idx] = {
+              intensity: v,
+              count: mockCountFromIntensity(v),
+              date: dateForIndex(idx),
+            };
           }
         }
-        return cells;
+        return data;
       }
 
       // ---- render + diagonal stagger reveal ------------------------
-      function render(values) {
+      function render(data) {
         mount.innerHTML = '';
-        const nodes = new Array(values.length);
-        for (let i = 0; i < values.length; i++) {
-          const svg = makePlus(values[i]);
+        const nodes = new Array(data.length);
+        for (let i = 0; i < data.length; i++) {
+          const cell = data[i];
+          const svg = makePlus(cell.intensity);
+          // bind hover tooltip
+          svg.addEventListener('mouseenter', () => showTip(svg, data[i]));
+          svg.addEventListener('mouseleave', hideTip);
           mount.appendChild(svg);
           nodes[i] = svg;
         }
@@ -615,9 +718,14 @@
         return nodes;
       }
 
+      // Hide tooltip on scroll/resize so it never floats away from its cell.
+      const onDismiss = () => hideTip();
+      window.addEventListener('scroll', onDismiss, { passive: true });
+      window.addEventListener('resize', onDismiss);
+
       // ---- 1) instant mock paint -----------------------------------
-      const values = buildMock(0x9e3779b1);
-      const nodes  = render(values);
+      const data  = buildMock(0x9e3779b1);
+      const nodes = render(data);
 
       // ---- 2) silent overlay from real GitHub events ---------------
       (async () => {
@@ -640,25 +748,20 @@
             if (byDay[day] > maxCount) maxCount = byDay[day];
           }
 
-          // Last (cols * rows) days, oldest at top-left, newest at bottom-right.
-          const today = new Date();
-          const todayUTC = new Date(Date.UTC(
-            today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()
-          ));
-          const totalDays = cols * rows;
-          const first = new Date(todayUTC.getTime() - (totalDays - 1) * 86400000);
           const denom = Math.log2(1 + Math.max(maxCount, 2));
 
           for (let d = 0; d < totalDays; d++) {
-            const date = new Date(first.getTime() + d * 86400000);
-            const iso = date.toISOString().slice(0, 10);
+            const iso = dateForIndex(d).toISOString().slice(0, 10);
             const count = byDay[iso] || 0;
+            // Always record the real count on the cell, even when 0,
+            // so tooltips reflect reality once data has loaded.
+            data[d].count = count;
             if (count > 0) {
               // log-scaled boost; brighten the existing mock so the field
               // remains cohesive even with only a handful of events.
               const boost = Math.min(1, 0.45 + (Math.log2(1 + count) / denom) * 0.55);
-              values[d] = Math.max(values[d], boost);
-              applyStyle(nodes[d], values[d]);
+              data[d].intensity = Math.max(data[d].intensity, boost);
+              applyStyle(nodes[d], data[d].intensity);
             }
           }
         } catch (_) {

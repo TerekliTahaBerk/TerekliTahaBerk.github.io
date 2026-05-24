@@ -1,118 +1,242 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Work — Taha Berk</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet" />
-  <script>(function(){try{const s=localStorage.getItem('tbt_theme');if(s==='light'){document.documentElement.classList.remove('dark');}else{document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();</script>
-  <style>
-    :root { --bg:#f5f2eb; --fg:#15140f; --fg-soft:#4b4740; --fg-mute:#97928a; --rule:#d9d3c4; --chip:#e3decf; }
-    html.dark { --bg:#0b0a09; --fg:#ece7d8; --fg-soft:#b5ad9c; --fg-mute:#6a655c; --rule:#2b2824; --chip:#1c1a17; }
-    *,*::before,*::after { box-sizing: border-box; }
-    html,body { margin:0; padding:0; height:100%; }
-    body { background:var(--bg); color:var(--fg); font-family:'Geist',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
-    ::selection { background: var(--fg); color: var(--bg); }
-    .page { min-height:100vh; display:flex; flex-direction:column; padding:28px clamp(20px,4vw,56px); }
-    .top { display:flex; justify-content:space-between; align-items:center; gap:24px; }
-    .brand { font-family:'Instrument Serif',serif; font-size:22px; text-decoration:none; color:var(--fg); display:inline-flex; align-items:baseline; gap:6px; }
-    .brand .dot { width:5px; height:5px; border-radius:50%; background:oklch(0.62 0.15 155); display:inline-block; transform:translateY(-3px); }
-    .nav { display:flex; gap:clamp(20px,3vw,36px); }
-    .nav a { color:var(--fg); opacity:.65; text-decoration:none; font-size:13px; position:relative; padding:4px 2px; transition:opacity .25s ease; }
-    .nav a:hover, .nav a.active { opacity:1; }
-    .nav a::after { content:""; position:absolute; left:2px; right:2px; bottom:0; height:1px; background:currentColor; transform-origin:left; transform:scaleX(0); transition:transform .35s cubic-bezier(.2,.7,.2,1); }
-    .nav a:hover::after, .nav a.active::after { transform:scaleX(1); }
-
-    .center { flex:1; display:flex; flex-direction:column; justify-content:center; max-width:780px; width:100%; margin:0 auto; padding:48px 8px; }
-    h1 { font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(56px, 9vw, 104px); line-height:0.92; letter-spacing:-0.025em; margin:0 0 40px; }
-    .eyebrow { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--fg-mute); margin-bottom:14px; }
-
-    .list { display:flex; flex-direction:column; }
-    .row { display:grid; grid-template-columns: minmax(150px, 1.2fr) 2fr minmax(120px, auto); gap:24px; padding:22px 0; border-top:1px solid var(--rule); align-items:baseline; }
-    .row:last-child { border-bottom:1px solid var(--rule); }
-    .row .co { font-family:'Instrument Serif',serif; font-size:26px; letter-spacing:-0.01em; }
-    .row .role { color:var(--fg-soft); font-size:13.5px; line-height:1.55; }
-    .row .when { color:var(--fg-mute); font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; text-align:right; white-space:nowrap; }
-
-    .footer { display:flex; justify-content:space-between; gap:16px; padding-top:24px; color:var(--fg-mute); font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; }
-    .footer a { color:inherit; text-decoration:none; transition:color .2s ease; }
-    .footer a:hover { color:var(--fg); }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Work — Taha Berk</title>
+<meta name="description" content="Where I've worked — data, automation and the boring infra that makes it real." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet" />
+<script>(function(){try{const s=localStorage.getItem('tbt_theme');if(s==='light'){document.documentElement.classList.remove('dark');}else{document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();</script>
+<style>
+:root { --bg:#f5f2eb; --fg:#15140f; --fg-soft:#4b4740; --fg-mute:#97928a; --rule:#d9d3c4; --chip:#e3decf; }
+html.dark { --bg:#0b0a09; --fg:#ece7d8; --fg-soft:#b5ad9c; --fg-mute:#6a655c; --rule:#2b2824; --chip:#1c1a17; }
+*,*::before,*::after { box-sizing: border-box; }
+html,body { margin:0; padding:0; }
+body { background:var(--bg); color:var(--fg); font-family:'Geist',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+::selection { background: var(--fg); color: var(--bg); }
+.page { min-height:100vh; display:flex; flex-direction:column; padding:28px clamp(20px,4vw,56px) 48px; }
+.top { display:flex; justify-content:space-between; align-items:center; gap:24px; }
+.brand { font-family:'Instrument Serif',serif; font-size:22px; text-decoration:none; color:var(--fg); display:inline-flex; align-items:baseline; gap:6px; }
+.brand .dot { width:5px; height:5px; border-radius:50%; background:oklch(0.62 0.15 155); display:inline-block; transform:translateY(-3px); }
+.nav { display:flex; gap:clamp(18px,2.6vw,32px); flex-wrap:wrap; justify-content:flex-end; }
+.nav a { color:var(--fg); opacity:.65; text-decoration:none; font-size:13px; position:relative; padding:4px 2px; transition:opacity .25s ease; }
+.nav a:hover, .nav a.active { opacity:1; }
+.nav a::after { content:""; position:absolute; left:2px; right:2px; bottom:0; height:1px; background:currentColor; transform-origin:left; transform:scaleX(0); transition:transform .35s cubic-bezier(.2,.7,.2,1); }
+.nav a:hover::after, .nav a.active::after { transform:scaleX(1); }
+.head { max-width:1080px; margin:64px auto 36px; width:100%; display:grid; grid-template-columns:1.6fr 1fr; gap:36px 48px; align-items:end; }
+@media (max-width:760px) { .head { grid-template-columns:1fr; gap:24px; } }
+.eyebrow { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--fg-mute); margin-bottom:14px; }
+h1 { font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(56px,9vw,108px); line-height:0.9; letter-spacing:-0.025em; margin:0; }
+h1 em { font-style:italic; color:var(--fg-soft); }
+.lede { font-family:'Instrument Serif',serif; color:var(--fg-soft); font-size:clamp(17px,1.4vw,21px); line-height:1.45; max-width:38ch; margin:0; }
+.timeline { max-width:1080px; width:100%; margin:0 auto; display:flex; flex-direction:column; }
+.role { display:grid; grid-template-columns:180px 1fr; gap:28px clamp(24px,4vw,56px); padding:32px 0; border-top:1px solid var(--rule); position:relative; }
+.timeline .role:last-child { border-bottom:1px solid var(--rule); }
+.role .left { display:flex; flex-direction:column; gap:10px; }
+.role .when { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--fg-mute); }
+.role .co { font-family:'Instrument Serif',serif; font-size:clamp(30px,3vw,40px); line-height:1; letter-spacing:-0.015em; color:var(--fg); text-decoration:none; display:inline-flex; align-items:baseline; gap:6px; }
+.role .co .ext { font-size:14px; opacity:.4; transition:transform .3s ease, opacity .3s ease; }
+.role .co:hover .ext { opacity:1; transform:translate(2px,-2px); }
+.role .place { color:var(--fg-mute); font-size:12px; font-family:'Geist Mono',monospace; letter-spacing:0.04em; }
+.role .right { display:flex; flex-direction:column; gap:14px; }
+.role .role-title { font-size:14px; color:var(--fg-soft); letter-spacing:0.01em; }
+.role .role-title strong { color:var(--fg); font-weight:500; }
+.role p { margin:0; font-size:14.5px; line-height:1.7; color:var(--fg-soft); max-width:62ch; }
+.role p em { color:var(--fg); font-style:italic; }
+.bullets { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px 22px; margin-top:4px; }
+.bullets .bul { display:flex; align-items:flex-start; gap:10px; font-size:13px; line-height:1.55; color:var(--fg-soft); }
+.bullets .bul::before { content:""; margin-top:7px; flex:0 0 4px; width:4px; height:4px; border-radius:50%; background:var(--fg-mute); opacity:.85; }
+.bullets .bul em { color:var(--fg); font-style:italic; }
+.stack { display:flex; flex-wrap:wrap; gap:5px; margin-top:4px; }
+.chip { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.08em; padding:3px 9px; border-radius:999px; background:var(--chip); color:var(--fg-soft); transition:color .2s ease; }
+.role:hover .chip { color:var(--fg); }
+@media (max-width:760px) {
+  .role { grid-template-columns:1fr; gap:18px; padding:26px 0; }
+  .role .left { flex-direction:row; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+}
+.footer { max-width:1080px; margin:56px auto 0; width:100%; display:flex; justify-content:space-between; gap:16px; padding-top:24px; color:var(--fg-mute); font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; }
+.footer a { color:inherit; text-decoration:none; transition:color .2s ease; }
+.footer a:hover { color:var(--fg); }
+</style>
 </head>
 <body>
-  <main class="page">
-    <header class="top">
-      <a href="/" class="brand">Taha Berk<span class="dot" aria-hidden="true"></span></a>
-      <nav class="nav">
-        <a href="/work.html" class="active">Work</a>
-        <a href="/personal.html">Personal</a>
-        <a href="/research.html">Research</a>
-        <a href="/blog.html">Blog</a>
-      </nav>
-    </header>
+<main class="page">
+  <header class="top">
+    <a href="/" class="brand">Taha Berk<span class="dot" aria-hidden="true"></span></a>
+    <nav class="nav">
+      <a href="/work.html" class="active">Work</a>
+      <a href="/personal.html">Personal</a>
+      <a href="/research.html">Research</a>
+      <a href="/blog.html">Blog</a>
+    </nav>
+  </header>
 
-    <section class="center">
-      <div class="eyebrow">Work · 2023 — present</div>
-      <h1>Where I've been.</h1>
+  <section class="head">
+    <div>
+      <div class="eyebrow">Work · 2023 — now</div>
+      <h1>Where I've <em>been.</em></h1>
+    </div>
+    <p class="lede">
+      Six rooms, roughly the same job — turn messy reality into a table somebody trusts.
+      Each line below is short on titles and long on what actually happened.
+    </p>
+  </section>
 
-      <div class="list">
-        <div class="row">
-          <div>
-            <div class="co">Getir</div>
-            <div class="role">Data Intern</div>
-          </div>
-          <div class="role">Airflow · Python · PostgreSQL · BigQuery · Metabase. Pipelines &amp; dashboards.</div>
-          <div class="when">May 2025 — Now</div>
+  <section class="timeline">
+
+    <article class="role">
+      <div class="left">
+        <span class="when">May 2025 — Now</span>
+        <a class="co" href="https://www.getir.com" target="_blank" rel="noreferrer">Getir<span class="ext">↗</span></a>
+        <span class="place">Istanbul · Data Intern</span>
+      </div>
+      <div class="right">
+        <div class="role-title"><strong>Data Intern</strong> · Business Intelligence &amp; Data Engineering</div>
+        <p>
+          Working inside Getir's analytics stack — the part of the company where every "how many?" question eventually lands.
+          Most of my time goes into <em>moving data carefully</em>: building Airflow DAGs that survive retries, writing SQL
+          against Redshift and BigQuery that doesn't quietly drift, and stitching dashboards in Metabase that operations
+          teams actually trust enough to act on.
+        </p>
+        <div class="bullets">
+          <div class="bul">Built <em>ELT pipelines</em> in Airflow + Python (pandas, NumPy) for daily KPI rollups, with idempotent reruns and Slack-side alerts.</div>
+          <div class="bul">Modeled fact/dim tables in Redshift &amp; BigQuery; tuned long-running joins by re-keying and partition pruning.</div>
+          <div class="bul">Owned a small portfolio of Metabase dashboards — pruned the dead ones, instrumented the live ones with freshness checks.</div>
+          <div class="bul">Wrote internal docs &amp; runbooks so the next intern doesn't have to read my Slack history to debug a DAG.</div>
         </div>
-        <div class="row">
-          <div>
-            <div class="co">Papara</div>
-            <div class="role">RPA Developer / Analyst Intern</div>
-          </div>
-          <div class="role">UiPath · Automation Anywhere · SQL · .NET. Workflow automation.</div>
-          <div class="when">Dec 2024 — May 2025</div>
-        </div>
-        <div class="row">
-          <div>
-            <div class="co">LC Waikiki</div>
-            <div class="role">Supply Chain Intern</div>
-          </div>
-          <div class="role">Analytics for demand planning &amp; inventory.</div>
-          <div class="when">Aug — Sep 2024</div>
-        </div>
-        <div class="row">
-          <div>
-            <div class="co">Latro</div>
-            <div class="role">RPA Developer</div>
-          </div>
-          <div class="role">Robusta · Python · Java. SAP automation.</div>
-          <div class="when">Jul — Aug 2023</div>
-        </div>
-        <div class="row">
-          <div>
-            <div class="co">QNB Finansbank</div>
-            <div class="role">RPA Developer Intern</div>
-          </div>
-          <div class="role">SQL · RPA. Business process automation.</div>
-          <div class="when">Apr — Jun 2023</div>
-        </div>
-        <div class="row">
-          <div>
-            <div class="co">DenizBank</div>
-            <div class="role">Short Term Intern</div>
-          </div>
-          <div class="role">Banking analytics &amp; automation rotation.</div>
-          <div class="when">Jan — Mar 2023</div>
+        <div class="stack">
+          <span class="chip">Airflow</span><span class="chip">Python</span><span class="chip">PostgreSQL</span><span class="chip">Redshift</span><span class="chip">BigQuery</span><span class="chip">Metabase</span><span class="chip">ELT</span>
         </div>
       </div>
-    </section>
+    </article>
 
-    <footer class="footer">
-      <a href="/">← back</a>
-      <span>Istanbul · GMT+3</span>
-    </footer>
-  </main>
+    <article class="role">
+      <div class="left">
+        <span class="when">Dec 2024 — May 2025</span>
+        <a class="co" href="https://www.papara.com" target="_blank" rel="noreferrer">Papara<span class="ext">↗</span></a>
+        <span class="place">Istanbul · RPA Developer &amp; Analyst Intern</span>
+      </div>
+      <div class="right">
+        <div class="role-title"><strong>RPA Developer / Analyst Intern</strong> · Process automation in fintech</div>
+        <p>
+          Sat on the seam between operations and engineering — the part of fintech where someone is still copy-pasting
+          from one tab to another at 2 a.m. My job was to turn those small, dignity-eroding tasks into bots: stable,
+          auditable, and explainable to a compliance team that needs to know exactly <em>what the robot did and why</em>.
+        </p>
+        <div class="bullets">
+          <div class="bul">Built UiPath &amp; Automation Anywhere flows for reconciliations, periodic reports, and customer-ops triage.</div>
+          <div class="bul">Hooked bots into SQL Server &amp; .NET services so the automation didn't end at the UI but pushed into proper data stores.</div>
+          <div class="bul">Wrote PDDs &amp; SDDs that read like <em>documentation</em>, not a CYA — version-controlled and kept in sync with production.</div>
+          <div class="bul">Helped redesign manual processes into "humans only on the exceptions" flows, which is the only RPA win that matters.</div>
+        </div>
+        <div class="stack">
+          <span class="chip">UiPath</span><span class="chip">Automation Anywhere</span><span class="chip">SQL</span><span class="chip">.NET</span><span class="chip">VBA</span><span class="chip">Process Design</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="role">
+      <div class="left">
+        <span class="when">Aug — Sep 2024</span>
+        <a class="co" href="https://www.lcwaikiki.com" target="_blank" rel="noreferrer">LC Waikiki<span class="ext">↗</span></a>
+        <span class="place">Istanbul · Supply Chain Intern</span>
+      </div>
+      <div class="right">
+        <div class="role-title"><strong>Supply Chain Intern</strong> · Demand planning &amp; inventory analytics</div>
+        <p>
+          A short, dense rotation through a global retailer's supply chain — the kind of place where a 1% error in
+          forecast shows up as containers on a dock. I worked with planners on <em>demand signals</em> across SKUs and
+          stores, and built small analytical views to answer questions that Excel was starting to lose patience with.
+        </p>
+        <div class="bullets">
+          <div class="bul">Cleaned and aligned multi-source sales &amp; inventory data across markets and time zones.</div>
+          <div class="bul">Built ad-hoc analyses for SKU-level demand variance and over/under-stock pockets.</div>
+          <div class="bul">Sat in on supplier reviews — learned more about <em>lead-time risk</em> in a week than in two semesters.</div>
+        </div>
+        <div class="stack">
+          <span class="chip">Excel</span><span class="chip">SQL</span><span class="chip">Power BI</span><span class="chip">Supply Chain</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="role">
+      <div class="left">
+        <span class="when">Jul — Aug 2023</span>
+        <a class="co" href="https://www.latro.com.tr" target="_blank" rel="noreferrer">Latro<span class="ext">↗</span></a>
+        <span class="place">Istanbul · RPA Developer</span>
+      </div>
+      <div class="right">
+        <div class="role-title"><strong>RPA Developer</strong> · SAP automation on the Robusta platform</div>
+        <p>
+          My first real production engineering role. I built bots on Robusta that operated against SAP — the kind of
+          automation where a misclick costs a finance team a closing day. Tight feedback loops with users, a lot of
+          care around <em>idempotency</em>, and the discovery that "stable RPA" is mostly stable design, not stable code.
+        </p>
+        <div class="bullets">
+          <div class="bul">Designed &amp; shipped Robusta workflows for SAP transactions in finance and procurement.</div>
+          <div class="bul">Wrote Python and Java helpers for parsing inputs, logging, and retry policies the platform didn't ship with.</div>
+          <div class="bul">Built lightweight monitoring so failures surfaced in <em>minutes</em>, not in next-day reports.</div>
+        </div>
+        <div class="stack">
+          <span class="chip">Robusta</span><span class="chip">Python</span><span class="chip">Java</span><span class="chip">SAP</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="role">
+      <div class="left">
+        <span class="when">Apr — Jun 2023</span>
+        <a class="co" href="https://www.qnbfinansbank.com" target="_blank" rel="noreferrer">QNB Finansbank<span class="ext">↗</span></a>
+        <span class="place">Istanbul · RPA Developer Intern</span>
+      </div>
+      <div class="right">
+        <div class="role-title"><strong>RPA Developer Intern</strong> · Banking process automation</div>
+        <p>
+          A first proper banking environment — strict change controls, four-eye reviews, real production data. I picked
+          up the discipline of <em>writing code that auditors can read</em>: clear logs, immutable steps, never an
+          unexplained side effect. Most of my work was small bots that took load off back-office teams.
+        </p>
+        <div class="bullets">
+          <div class="bul">Implemented and tested SQL-backed automation flows for internal operations teams.</div>
+          <div class="bul">Worked through a real release pipeline — code review, test environments, controlled rollout.</div>
+        </div>
+        <div class="stack">
+          <span class="chip">RPA</span><span class="chip">SQL</span><span class="chip">Banking Ops</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="role">
+      <div class="left">
+        <span class="when">Jan — Mar 2023</span>
+        <a class="co" href="https://www.denizbank.com" target="_blank" rel="noreferrer">DenizBank<span class="ext">↗</span></a>
+        <span class="place">Istanbul · Short Term Intern</span>
+      </div>
+      <div class="right">
+        <div class="role-title"><strong>Short Term Intern</strong> · Cross-department rotation</div>
+        <p>
+          My first time inside a bank. Rotated through several teams — analytics, automation-adjacent operations, and
+          a couple of business units — and used the time to figure out which side of the building I actually wanted to
+          stand on. The answer turned out to be the side where the <em>SQL editor</em> is always open.
+        </p>
+        <div class="bullets">
+          <div class="bul">Exposure to banking analytics workflows and the boring-but-essential ops behind them.</div>
+          <div class="bul">First serious contact with production data and the controls around it.</div>
+        </div>
+        <div class="stack">
+          <span class="chip">Banking</span><span class="chip">Analytics</span><span class="chip">Ops</span>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <footer class="footer">
+    <a href="/">← back</a>
+    <span>Istanbul · GMT+3</span>
+  </footer>
+</main>
 </body>
 </html>

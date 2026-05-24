@@ -40,11 +40,14 @@
   a{color:inherit;text-decoration:none}
   em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--fg)}
   .wrap{max-width:880px;margin:0 auto;padding:48px 32px 96px}
-  nav.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:64px}
-  .brand{display:flex;align-items:center;gap:10px;font-family:'Instrument Serif',serif;font-size:22px}
-  .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
-  nav.top ul{display:flex;gap:28px;list-style:none;padding:0;margin:0;font-family:'Geist Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-mute)}
-  nav.top a.active{color:var(--fg)}
+  nav.top{display:flex;justify-content:space-between;align-items:baseline;gap:24px;margin-bottom:64px}
+  .brand{font-family:'Instrument Serif',serif;font-size:24px;text-decoration:none;color:var(--fg);display:inline-flex;align-items:baseline;gap:6px}
+  .brand .dot{width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block;transform:translateY(-3px)}
+  nav.top .nav{display:flex;gap:clamp(20px,3vw,40px)}
+  nav.top .nav a{color:var(--fg);opacity:.7;text-decoration:none;font-size:14px;position:relative;padding:4px 2px;transition:opacity .25s ease;font-family:'Geist',system-ui,sans-serif;letter-spacing:0;text-transform:none}
+  nav.top .nav a:hover,nav.top .nav a.active{opacity:1}
+  nav.top .nav a::after{content:"";position:absolute;left:2px;right:2px;bottom:0;height:1px;background:currentColor;transform-origin:left;transform:scaleX(0);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+  nav.top .nav a:hover::after,nav.top .nav a.active::after{transform:scaleX(1)}
   .hero{padding-bottom:48px;border-bottom:1px solid var(--rule);margin-bottom:48px}
   .hero .eyebrow{font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:18px;display:block}
   .hero h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:64px;line-height:1.02;margin:0 0 18px;letter-spacing:-.01em}
@@ -66,20 +69,20 @@
     .post{grid-template-columns:1fr;gap:8px}
     .post .date{padding-top:0}
     .post h2{font-size:28px}
-    nav.top ul{gap:18px}
+    nav.top .nav{gap:18px}
   }
 </style>
 </head>
 <body>
 <div class="wrap">
   <nav class="top">
-    <a class="brand" href="/"><span class="dot"></span><span>Taha Berk</span></a>
-    <ul>
-      <li><a href="/work.html">CV</a></li>
-      <li><a href="/personal.html">Personal</a></li>
-      <li><a href="/research.html">Research</a></li>
-      <li><a class="active" href="/blog.html">Blog</a></li>
-    </ul>
+    <a class="brand" href="/">Taha Berk<span class="dot" aria-hidden="true"></span></a>
+    <div class="nav">
+      <a href="/work.html">CV</a>
+      <a href="/personal.html">Personal</a>
+      <a href="/research.html">Research</a>
+      <a href="/blog.html" class="active">Blog</a>
+    </div>
   </nav>
 
   <section class="hero">

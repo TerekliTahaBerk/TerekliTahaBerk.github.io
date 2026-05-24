@@ -443,42 +443,43 @@
       const r = await fetch('https://github-contributions-api.jogruber.de/v4/TerekliTahaBerk?y=last');
       if (!r.ok) throw new Error('contrib http ' + r.status);
       const data = await r.json();
-      if (!data || !Array.isArray(data.contributions)) throw new Error('no contrib');
+      if (!Array.isArray(data && data.contributions)) throw new Error('no contrib');
 
-      // Build the last COLS weeks ending today (Mon..Sun rows).
       const map = Object.create(null);
       for (const d of data.contributions) map[d.date] = d.count;
 
+      // GitHub layout: weeks are columns (oldest left, newest right), each week
+      // starts on Sunday, rows are Sun..Sat top→bottom. Anchor the rightmost
+      // column to the Saturday that ends the current week.
       const today = new Date();
       const todayUTC = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
-      // Anchor to the most recent Sunday so a full week fits the rightmost column.
-      const dowToday = todayUTC.getUTCDay(); // 0=Sun..6=Sat
-      const daysToSun = (7 - dowToday) % 7;
-      const anchor = new Date(todayUTC.getTime() + daysToSun * 86400000);
+      const dowToday = todayUTC.getUTCDay();          // 0=Sun..6=Sat
+      const daysToSat = (6 - dowToday + 7) % 7;       // days until this week's Saturday
+      const lastSat = new Date(todayUTC.getTime() + daysToSat * 86400000);
 
+      // Iterate exactly COLS full weeks, oldest first.
       const totalDays = COLS * 7;
+      const firstSun = new Date(lastSat.getTime() - (totalDays - 1) * 86400000); // Sunday of the oldest week
       const out = new Array(COLS * ROWS).fill(0);
       let maxCount = 0;
 
       for (let d = 0; d < totalDays; d++) {
-        const date = new Date(anchor.getTime() - (totalDays - 1 - d) * 86400000);
+        const date = new Date(firstSun.getTime() + d * 86400000);
         const iso = date.toISOString().slice(0, 10);
         const count = map[iso] || 0;
         if (count > maxCount) maxCount = count;
-        // Column 0 = oldest week, ROWS rows Mon..Sun (0..6)
-        const dow = (date.getUTCDay() + 6) % 7; // Mon=0..Sun=6
-        const col = Math.floor(d / 7);
-        if (dow < ROWS) {
-          out[col * ROWS + dow] = count;
+        const col = Math.floor(d / 7);                // 0 = oldest week, COLS-1 = current
+        const row = date.getUTCDay();                 // 0=Sun (top) .. 6=Sat (bottom)
+        // Future days within the current week stay at 0 — same as GitHub.
+        if (date.getTime() <= todayUTC.getTime()) {
+          out[col * ROWS + row] = count;
         }
       }
 
-      // Normalize counts to 0..1 with a soft log curve so a 1-commit day is still visible.
-      const norm = out.map(c => {
-        if (c <= 0) return 0;
-        return Math.min(1, 0.25 + Math.log2(1 + c) / Math.log2(1 + Math.max(maxCount, 4)) * 0.85);
-      });
-      return { values: norm, total: data.total && data.total.lastYear };
+      // Normalize counts with a soft log curve so a 1-commit day is still visible.
+      const denom = Math.log2(1 + Math.max(maxCount, 4));
+      const norm = out.map(c => c <= 0 ? 0 : Math.min(1, 0.25 + (Math.log2(1 + c) / denom) * 0.85));
+      return { values: norm };
     }
 
     async function loadLastEvent() {

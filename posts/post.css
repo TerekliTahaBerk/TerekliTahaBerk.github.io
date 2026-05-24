@@ -44,3 +44,19 @@ footer.page a{text-decoration:none}
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:36px}
 .tag{font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-soft);background:var(--chip);padding:5px 10px;border-radius:3px;border:1px solid var(--rule)}
 @media (max-width:680px){.wrap{padding:32px 22px 64px}h1.title{font-size:38px}.lede{font-size:17px}article h2{font-size:26px}.next{grid-template-columns:1fr}nav.top ul{gap:16px}}
+@media (max-width:560px){
+  html,body{font-size:16px;line-height:1.65}
+  .wrap{padding:26px 18px 56px}
+  nav.top{flex-wrap:wrap;row-gap:12px;margin-bottom:40px}
+  nav.top ul{order:3;width:100%;gap:14px;flex-wrap:wrap}
+  .brand{font-size:20px}
+  .meta{font-size:10px;letter-spacing:.06em;gap:10px;margin-bottom:18px}
+  h1.title{font-size:32px;line-height:1.08;margin-bottom:18px}
+  .lede{font-size:16.5px;line-height:1.5;margin:0 0 36px;padding-bottom:28px}
+  article h2{font-size:24px;margin:44px 0 14px}
+  article h3{font-size:19px;margin:30px 0 10px}
+  article blockquote{font-size:20px;padding-left:18px;margin:24px 0}
+  pre{font-size:12.5px;padding:16px 16px;border-radius:5px}
+  .callout{padding:14px 16px;font-size:14.5px}
+  footer.page{flex-direction:column;align-items:flex-start;gap:8px;margin-top:56px}
+}

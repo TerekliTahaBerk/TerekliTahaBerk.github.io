@@ -167,6 +167,12 @@ npm run db:studio
 - `DATABASE_URL` doğru mu? `?sslmode=require` var mı?
 - Prisma Console'da bağlantı dizesi rotate edildi mi?
 
+**`npm error notarget No matching version found for @vercel/node@X.Y.Z`**
+- `vercel.json` → `functions.runtime` field'ı kaldırılmalı.
+- Vercel `/api/*.js` dosyalarını otomatik Node fonksiyonu olarak yakalar.
+- Node sürümü `package.json` → `engines.node: ">=20.0.0"` ile belirleniyor.
+- Sadece `maxDuration` ve `memory` belirtmek yeterli.
+
 **`prisma generate` Vercel build'de düşüyor**
 - `package.json` → `engines.node >= 20` ✅ (zaten ayarlı)
 - `vercel.json` → `buildCommand: "prisma generate"` ✅ (zaten ayarlı)

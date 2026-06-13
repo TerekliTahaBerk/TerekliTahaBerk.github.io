@@ -4,7 +4,7 @@
    ⚠️ SECURITY NOTE
    This is a DEMO login. Hardcoded credentials in client code
    provide no real security. They are checked client-side only,
-   for the single user (Taha) of this private workspace.
+   for the single user of this private workspace.
    For production:
      - Move credentials to environment variables
      - Use Supabase Auth / Clerk / Auth0 / Firebase
@@ -17,8 +17,8 @@
   // In production, remove this block entirely and proxy to a
   // server-side auth provider. Hashing client-side adds no security
   // (anyone can read the JS) so we keep this honest and simple.
-  var DEMO_EMAIL    = "terekli@tahaberk.com";
-  var DEMO_PASSWORD = "taha123";
+  var DEMO_EMAIL    = "demo@finance.local";
+  var DEMO_PASSWORD = "demo1234";
 
   var SESSION_KEY = "tbt_finance_session_v1";
   var TTL_MS      = 1000 * 60 * 60 * 24 * 7; // 7 days

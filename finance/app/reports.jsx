@@ -246,12 +246,12 @@
 
   function ReportsHub({ go }) {
     const tiles = [
-      { id: "monthly", label: "Aylık", icon: "reports", body: "Mayıs 2026 · ana odak", tone: "ac" },
-      { id: "yearly",  label: "Yıllık", icon: "trending", body: "Son 12 ay · yatırım odaklı", tone: "inv" },
-      { id: "all",     label: "Tüm Zamanlar", icon: "layers", body: "32 ay · net değer eğrisi", tone: "pos" },
-      { id: "weekly",  label: "Haftalık", icon: "book", body: "Bu hafta · hızlı özet", tone: "neutral" },
-      { id: "daily",   label: "Günlük", icon: "spark", body: "Bugün · küçük gözlemler", tone: "warn" },
-      { id: "custom",  label: "Özel Aralık", icon: "filter", body: "Kendin seç", tone: "neutral" },
+      { id: "monthly", label: "Aylık",         icon: "reports",  body: "Bu ayın özeti",          tone: "ac" },
+      { id: "yearly",  label: "Yıllık",        icon: "trending", body: "Yıllık görünüm",         tone: "inv" },
+      { id: "all",     label: "Tüm Zamanlar",  icon: "layers",   body: "Net değer eğrisi",       tone: "pos" },
+      { id: "weekly",  label: "Haftalık",      icon: "book",     body: "Bu hafta",               tone: "neutral" },
+      { id: "daily",   label: "Günlük",        icon: "spark",    body: "Bugün",                  tone: "warn" },
+      { id: "custom",  label: "Özel Aralık",   icon: "filter",   body: "Kendin seç",             tone: "neutral" },
     ];
     return (
       <div className="page">
@@ -284,19 +284,41 @@
             </div>
           ))}
         </div>
-
-        <div className="card" style={{ background: "linear-gradient(180deg, var(--ac-soft), transparent 60%), var(--bg-2)" }}>
-          <div className="card-eyebrow">AI · genel rapor önerisi</div>
-          <p style={{ fontSize: 15, fontFamily: "var(--serif)", color: "var(--tx-0)", lineHeight: 1.5 }}>
-            Bu ay için en faydalı rapor <b>Aylık Rapor</b>. Tasarruf trendi ve restoran kategorisi sapmasını birlikte gösterir.
-          </p>
-        </div>
       </div>
     );
   }
 
   function Reports() {
     const [view, setView] = useState("hub");
+
+    // Empty state — no transactions, no reports possible.
+    if (D.tx.length === 0) {
+      return (
+        <div className="page">
+          <div className="page-head">
+            <div>
+              <div className="page-eyebrow">Raporlar</div>
+              <h1 className="page-title">Reports</h1>
+              <p className="page-sub">Apple Health / Screen Time hissi · sakin, ölçülebilir, dışa aktarılabilir.</p>
+            </div>
+          </div>
+          <div className="empty-hero">
+            <div className="empty-hero-mark"><Icon name="reports" /></div>
+            <h2>Rapor için yeterli veri yok.</h2>
+            <p>
+              Birkaç işlem girdiğinde aylık, yıllık ve uzun dönem özetler
+              kendi kendine derlenir. PDF & CSV dışa aktarımı hazır bekliyor.
+            </p>
+            <div className="empty-hero-actions">
+              <button className="btn solid" onClick={() => window.TBOpenQuickAdd?.()}>
+                <Icon name="plus" /> İlk işlemi ekle
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     if (view === "monthly") return <MonthlyDetail back={() => setView("hub")} />;
     if (view === "yearly")  return <YearlyDetail  back={() => setView("hub")} />;
     if (view === "all")     return <AllTimeDetail back={() => setView("hub")} />;

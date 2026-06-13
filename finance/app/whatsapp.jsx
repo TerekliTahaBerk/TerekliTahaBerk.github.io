@@ -1,13 +1,49 @@
 /* ============================================================
    WhatsApp Channel — primary data-entry port.
-   iMessage / Apple Messages tonu. Yalnızca Taha'nın numarası.
+   ------------------------------------------------------------
+   iMessage / Apple Messages tonu. Empty-first.
 ============================================================ */
 (function () {
   const { useState } = React;
   const D = window.DATA;
 
-  function WhatsApp() {
-    const [items, setItems] = useState(D.waInbox);
+  function Empty() {
+    return (
+      <div className="page">
+        <div className="page-head">
+          <div>
+            <div className="page-eyebrow flex gap8" style={{ alignItems: "center" }}>
+              <span style={{ color: "var(--tx-2)" }}>○</span> Özel kanal · sessiz
+            </div>
+            <h1 className="page-title">WhatsApp Inbox</h1>
+            <p className="page-sub">
+              Banka entegrasyonu yokken ana veri giriş kapın burası olur. Mesajını gönder, sistem işleme dönüştürür.
+            </p>
+          </div>
+        </div>
+        <div className="empty-hero">
+          <div className="empty-hero-mark"><Icon name="whatsapp" /></div>
+          <h2>Inbox sessiz.</h2>
+          <p>
+            Henüz işlenmiş mesaj yok. Bir numara bağladığında gelen
+            metinler burada parse edilir, onayınla işleme dönüşür.
+          </p>
+          <div className="empty-hero-actions">
+            <button className="btn solid"><Icon name="link" /> Numara bağla</button>
+            <button className="btn ghost" onClick={() => window.TBOpenQuickAdd?.()}>
+              <Icon name="plus" /> Manuel ekle
+            </button>
+          </div>
+          <div className="empty-hero-hints">
+            <span className="muted">Uçtan uca özel · sadece bu cihaz</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  function Inbox({ initial }) {
+    const [items, setItems] = useState(initial);
     const [sel, setSel] = useState(items.find(m => m.status === "pending")?.id || items[0].id);
 
     function act(id, status) {
@@ -25,11 +61,11 @@
         <div className="page-head">
           <div>
             <div className="page-eyebrow flex gap8" style={{ alignItems: "center" }}>
-              <span style={{ color: "var(--pos)" }}>●</span> Yalnızca Taha · özel kanal
+              <span style={{ color: "var(--pos)" }}>●</span> Özel kanal · uçtan uca
             </div>
             <h1 className="page-title">WhatsApp Inbox</h1>
             <p className="page-sub">
-              Banka entegrasyonu olmadığı için ana veri giriş kapın burası. Mesajını gönder, sistem işleme dönüştürür.
+              Mesaj geldiğinde AI parse eder, sen onaylarsın. Tek dokunuş, sessiz akış.
             </p>
           </div>
           <div className="flex gap8">
@@ -47,13 +83,13 @@
           <div className="wa-list">
             <div className="wa-list-head">
               <b>Mesajlar</b>
-              <span>Son 7 gün · iMessage hissi</span>
+              <span>Son 7 gün</span>
             </div>
             {items.map(m => (
               <div key={m.id}
                    className={"wa-item " + (m.id === sel ? "active" : "")}
                    onClick={() => setSel(m.id)}>
-                <div className="av">TB</div>
+                <div className="av"><Icon name="user" style={{ width: 14, height: 14 }} /></div>
                 <div className="preview">
                   <div className="hd"><b>{m.parsed.name}</b><time>{m.time}</time></div>
                   <div className="msg">{m.raw}</div>
@@ -69,11 +105,10 @@
                 width: 36, height: 36, borderRadius: "50%",
                 background: "linear-gradient(135deg, oklch(0.55 0.13 152), oklch(0.4 0.1 145))",
                 color: "#fff", display: "grid", placeItems: "center",
-                fontSize: 13, fontWeight: 600,
-              }}>TB</div>
+              }}><Icon name="user" style={{ width: 16, height: 16 }} /></div>
               <div style={{ display: "flex", flexDirection: "column", lineHeight: 1.1 }}>
-                <b style={{ fontSize: 13.5 }}>Taha (özel kanal)</b>
-                <span className="muted" style={{ fontSize: 11, fontFamily: "var(--mono)", letterSpacing: "0.04em" }}>+90 ··· · son aktif şimdi</span>
+                <b style={{ fontSize: 13.5 }}>Özel kanal</b>
+                <span className="muted" style={{ fontSize: 11, fontFamily: "var(--mono)", letterSpacing: "0.04em" }}>son aktif şimdi</span>
               </div>
               <span className="tb-spacer" />
               <span className="muted mono" style={{ fontSize: 10.5, letterSpacing: "0.06em" }}>uçtan uca · özel</span>
@@ -127,7 +162,7 @@
             <div style={{ padding: 14, borderTop: "1px solid var(--line-soft)", background: "var(--bg-1)" }}>
               <div className="flex gap8">
                 <input
-                  placeholder="Bir işlem yaz… 'Migros 920 TL market Yapı Kredi'"
+                  placeholder="Bir işlem yaz… 'Market 920 TL'"
                   style={{
                     flex: 1, background: "var(--bg-2)", border: "1px solid var(--line)",
                     borderRadius: 999, padding: "10px 16px", fontSize: 13, outline: "none",
@@ -139,6 +174,12 @@
         </div>
       </div>
     );
+  }
+
+  function WhatsApp() {
+    const list = D.waInbox || [];
+    if (!list.length) return <Empty />;
+    return <Inbox initial={list} />;
   }
 
   window.WhatsApp = WhatsApp;

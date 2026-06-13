@@ -30,13 +30,16 @@
         <div className="flex gap14" style={{ alignItems: "center" }}>
           <div style={{
             width: 64, height: 64, borderRadius: 16,
-            background: "linear-gradient(135deg, oklch(0.5 0.06 290), oklch(0.36 0.08 250))",
+            background: "linear-gradient(135deg, var(--bg-3), var(--bg-2))",
+            border: "1px solid var(--bo-1)",
             display: "grid", placeItems: "center",
-            color: "#fff", fontWeight: 600, fontSize: 18,
-          }}>TB</div>
+            color: "var(--tx-1)",
+          }}>
+            <Icon name="user" style={{ width: 22, height: 22 }} />
+          </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-            <b style={{ fontSize: 16 }}>{D.user.name}</b>
-            <span className="dim" style={{ fontSize: 13 }}>{D.user.email}</span>
+            <b style={{ fontSize: 16 }}>Yerel hesap</b>
+            <span className="dim" style={{ fontSize: 13 }}>Bu cihazda saklanır</span>
             <span className="muted mono" style={{ fontSize: 11, letterSpacing: "0.06em" }}>private · single-tenant</span>
           </div>
         </div>
@@ -50,6 +53,8 @@
   }
 
   function DataSources() {
+    const sheets = D.sheets || [];
+    const hasSheets = sheets.length > 0;
     return (
       <div className="card">
         <div className="card-head">
@@ -60,30 +65,39 @@
         <div className="card flat tight" style={{ padding: 16 }}>
           <div className="flex between">
             <div className="flex gap8">
-              <span className="l-ic" style={{ background: "var(--pos-soft)", color: "var(--pos)" }}><Icon name="sheet" /></span>
+              <span className="l-ic" style={{
+                background: hasSheets ? "var(--pos-soft)" : "var(--bg-3)",
+                color: hasSheets ? "var(--pos)" : "var(--tx-2)",
+              }}><Icon name="sheet" /></span>
               <div>
                 <b style={{ fontSize: 13 }}>Google Sheets</b>
-                <span className="muted" style={{ fontSize: 11, display: "block", marginTop: 2 }}>Bağlı · 8 sayfa · son senkron 09:42</span>
+                <span className="muted" style={{ fontSize: 11, display: "block", marginTop: 2 }}>
+                  {hasSheets ? `Bağlı · ${sheets.length} sayfa` : "Bağlı değil · bir tablo bağla"}
+                </span>
               </div>
             </div>
-            <button className="btn ghost sm"><Icon name="sync" /> Senkronize</button>
+            <button className="btn ghost sm">
+              <Icon name={hasSheets ? "sync" : "plus"} /> {hasSheets ? "Senkronize" : "Bağla"}
+            </button>
           </div>
-          <div className="grid-2" style={{ gap: 6, marginTop: 4 }}>
-            {D.sheets.map(s => (
-              <div className="lrow" key={s.name} style={{ padding: "8px 0" }}>
-                <span className="l-ic" style={{ background: "var(--bg-3)" }}><Icon name="grid" /></span>
-                <div className="l-main">
-                  <b>{s.name}</b>
-                  <span>{s.rows.toLocaleString("tr-TR")} satır · son senkron {s.lastSync}</span>
+          {hasSheets && (
+            <div className="grid-2" style={{ gap: 6, marginTop: 4 }}>
+              {sheets.map(s => (
+                <div className="lrow" key={s.name} style={{ padding: "8px 0" }}>
+                  <span className="l-ic" style={{ background: "var(--bg-3)" }}><Icon name="grid" /></span>
+                  <div className="l-main">
+                    <b>{s.name}</b>
+                    <span>{s.rows.toLocaleString("tr-TR")} satır · son senkron {s.lastSync}</span>
+                  </div>
+                  <span className="chip tone-pos">{s.status}</span>
                 </div>
-                <span className="chip tone-pos">{s.status}</span>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
 
-        <Row icon="whatsapp" l="WhatsApp Channel" sub="Yalnızca Taha · uçtan uca özel"
-             right={<span className="chip tone-pos">Aktif</span>} />
+        <Row icon="whatsapp" l="WhatsApp Channel" sub="Bu cihaz · uçtan uca özel"
+             right={<span className="chip">Bağlı değil</span>} />
         <Row icon="upload"   l="CSV Import"      sub="Banka ekstresi yükle"
              right={<button className="btn ghost sm">Yükle</button>} />
         <Row icon="receipt"  l="Fiş yükleme"     sub="Fotoğraf · OCR + LLM"

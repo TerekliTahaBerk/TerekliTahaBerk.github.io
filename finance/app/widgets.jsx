@@ -190,10 +190,11 @@
   // ----------------- Greeting helper -----------------
   function greeting(name) {
     const h = new Date().getHours();
-    if (h < 5)  return `İyi geceler, ${name}.`;
-    if (h < 12) return `Günaydın, ${name}.`;
-    if (h < 18) return `Tünaydın, ${name}.`;
-    return `İyi akşamlar, ${name}.`;
+    const base = h < 5 ? "İyi geceler"
+              : h < 12 ? "Günaydın"
+              : h < 18 ? "Tünaydın"
+              : "İyi akşamlar";
+    return name ? `${base}, ${name}.` : `${base}.`;
   }
 
   Object.assign(window, {

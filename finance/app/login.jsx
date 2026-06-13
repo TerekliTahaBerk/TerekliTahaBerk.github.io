@@ -34,10 +34,10 @@
     return (
       <div className="login-shell">
         <form className="login-card" onSubmit={submit} autoComplete="off">
-          <div className="lg-mark"><span>F</span></div>
-          <h1>Private Finance OS</h1>
+          <div className="lg-mark"><Icon name="dollar" /></div>
+          <h1>Finance</h1>
           <div className="lg-sub">
-            Yalnızca Taha içindir.<br />Sessiz, kişisel, akıllı.
+            Sessiz, kişisel, akıllı.
           </div>
 
           <div className="lg-row">
@@ -45,7 +45,7 @@
             <input
               id="lg-email" ref={emailRef}
               type="email" inputMode="email" autoCapitalize="off" autoCorrect="off" spellCheck="false"
-              placeholder="terekli@tahaberk.com"
+              placeholder="ornek@email.com"
               value={email} onChange={(e) => setEmail(e.target.value)}
               required
             />
@@ -72,7 +72,7 @@
 
           <button className="lg-submit" type="submit" disabled={busy}>
             {busy ? <span className="login-spin" /> : <Icon name="lock" style={{ width: 13, height: 13 }} />}
-            <span>{busy ? "Doğrulanıyor…" : "Karargaha gir"}</span>
+            <span>{busy ? "Doğrulanıyor…" : "Giriş yap"}</span>
           </button>
 
           <div className="lg-foot">
@@ -82,7 +82,7 @@
         </form>
 
         <div className="login-note">
-          v0.1 · single-tenant · session 7 days · no plaintext financial data in localStorage
+          v0.1 · session 7 gün · finansal veri plaintext saklanmaz
         </div>
       </div>
     );

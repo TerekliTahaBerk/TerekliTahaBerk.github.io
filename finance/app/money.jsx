@@ -10,9 +10,38 @@
   ========================================================= */
   function Budget() {
     const [period, setPeriod] = useState("month");
+
+    if (!D.budgets || D.budgets.length === 0) {
+      return (
+        <div className="page">
+          <div className="page-head">
+            <div>
+              <div className="page-eyebrow">Bu Ay</div>
+              <h1 className="page-title">Budget</h1>
+              <p className="page-sub">Bu ay paran nereye gidiyor?</p>
+            </div>
+          </div>
+          <div className="empty-hero">
+            <div className="empty-hero-mark"><Icon name="pie" /></div>
+            <h2>Henüz bütçe yok.</h2>
+            <p>
+              İlk bütçeni oluştur. Bir kategori için aylık limit belirle —
+              gerçekçi tut, ay içinde kendiliğinden hizalanır.
+            </p>
+            <div className="empty-hero-actions">
+              <button className="btn solid"><Icon name="plus" /> İlk bütçeyi oluştur</button>
+              <button className="btn ghost" onClick={() => window.TBOpenQuickAdd?.()}>
+                <Icon name="receipt" /> Önce işlem ekle
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     const totalSpent = D.budgets.reduce((s, b) => s + b.spent, 0);
     const totalLimit = D.budgets.reduce((s, b) => s + b.limit, 0);
-    const pct        = Math.round((totalSpent / totalLimit) * 100);
+    const pct        = totalLimit ? Math.round((totalSpent / totalLimit) * 100) : 0;
     const dayOfMonth = 13, daysInMonth = 30;
     const projected  = Math.round((totalSpent / dayOfMonth) * daysInMonth);
     const overBy     = projected - totalLimit;
@@ -133,11 +162,36 @@
      CARDS
   ========================================================= */
   function Cards() {
+    if (!D.cards || D.cards.length === 0) {
+      return (
+        <div className="page">
+          <div className="page-head">
+            <div>
+              <div className="page-eyebrow">Kredi Kartları</div>
+              <h1 className="page-title">Cards</h1>
+              <p className="page-sub">Limit, kullanım, son ödeme tarihi — hepsi tek ekranda.</p>
+            </div>
+          </div>
+          <div className="empty-hero">
+            <div className="empty-hero-mark"><Icon name="card" /></div>
+            <h2>Henüz kart yok.</h2>
+            <p>
+              Bir kart ekle — limit, kullanım oranı ve son ödeme tarihleri
+              senin yerine takip edilsin.
+            </p>
+            <div className="empty-hero-actions">
+              <button className="btn solid"><Icon name="plus" /> Kart ekle</button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     const totalLimit = D.cards.reduce((s, c) => s + c.limit, 0);
     const totalUsed  = D.cards.reduce((s, c) => s + c.used, 0);
     const totalDebt  = D.cards.reduce((s, c) => s + c.debt, 0);
     const totalMin   = D.cards.reduce((s, c) => s + c.min, 0);
-    const utilization = Math.round((totalUsed / totalLimit) * 100);
+    const utilization = totalLimit ? Math.round((totalUsed / totalLimit) * 100) : 0;
 
     return (
       <div className="page">
@@ -157,8 +211,8 @@
           <Mini label="Asgari Toplam"   value={D.fmtK(totalMin)}    tone="ac" />
         </div>
 
-        <AIRow tone="warn" icon="info" rationale="60g kullanım trendi · 4 kart">
-          Genel limit kullanım oranın <b>%{utilization}</b>. Akbank kartı en kritik: <b>%66</b> kullanım.
+        <AIRow tone="warn" icon="info" rationale="60g kullanım trendi">
+          Genel limit kullanım oranın <b>%{utilization}</b>. En çok kullanılan kart yakından izleniyor.
         </AIRow>
 
         <div className="grid-2">
@@ -224,9 +278,34 @@
      GOALS
   ========================================================= */
   function Goals() {
+    if (!D.goals || D.goals.length === 0) {
+      return (
+        <div className="page">
+          <div className="page-head">
+            <div>
+              <div className="page-eyebrow">Hedefler</div>
+              <h1 className="page-title">Goals</h1>
+              <p className="page-sub">Acil fon, tatil, yatırım, donanım — her hedef için aylık katkı ve tahmini bitiş.</p>
+            </div>
+          </div>
+          <div className="empty-hero">
+            <div className="empty-hero-mark"><Icon name="flag" /></div>
+            <h2>Henüz hedef koyulmamış.</h2>
+            <p>
+              Birikim ya da bir tatil — küçük bir hedef bile zihnini sakinleştirir.
+              İlk hedefini koy, sistem aylık katkıyı senin için planlasın.
+            </p>
+            <div className="empty-hero-actions">
+              <button className="btn solid"><Icon name="plus" /> İlk hedefi ekle</button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     const totalSaved = D.goals.reduce((s, g) => s + g.current, 0);
     const totalTarget= D.goals.reduce((s, g) => s + g.target, 0);
-    const overall    = Math.round((totalSaved / totalTarget) * 100);
+    const overall    = totalTarget ? Math.round((totalSaved / totalTarget) * 100) : 0;
 
     return (
       <div className="page">
@@ -290,6 +369,31 @@
      DEBTS
   ========================================================= */
   function Debts() {
+    if (!D.debts || D.debts.length === 0) {
+      return (
+        <div className="page">
+          <div className="page-head">
+            <div>
+              <div className="page-eyebrow">Borçlar</div>
+              <h1 className="page-title">Debts</h1>
+              <p className="page-sub">Geri ödeme planı · faiz baskısı · borçsuz olma tarihi.</p>
+            </div>
+          </div>
+          <div className="empty-hero">
+            <div className="empty-hero-mark"><Icon name="check" /></div>
+            <h2>Borç görünmüyor.</h2>
+            <p>
+              Sessiz bir liste. Kredi, taksit ya da arkadaş borcu olduğunda
+              buradan toplam yükü ve aylık tempoyu görürsün.
+            </p>
+            <div className="empty-hero-actions">
+              <button className="btn solid"><Icon name="plus" /> Borç ekle</button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     const total = D.debts.reduce((s, d) => s + d.amount, 0);
     const totalMonthly = D.debts.reduce((s, d) => s + d.monthly, 0);
 
@@ -307,12 +411,11 @@
         <div className="grid-3">
           <Mini label="Toplam Borç"     value={D.fmtK(total)}        tone="neg" />
           <Mini label="Aylık Ödeme"     value={D.fmtK(totalMonthly)} tone="warn" />
-          <Mini label="Borçsuz Tarih"   value="Eylül 2026"           tone="ac" />
+          <Mini label="Borçsuz Tarih"   value="—"                    tone="ac" />
         </div>
 
         <AIRow tone="ac" icon="spark" rationale="aylık net tasarruf + faiz oranları">
-          Önce yüksek faizli borcu kapatmak daha mantıklı görünüyor. <b>Akbank kartı</b> en yüksek faiz baskısını taşıyor.
-          Bu tempoda borçsuz kalma tarihi: <b>Eylül 2026</b>.
+          Önce en yüksek faizli borcu kapatmak genelde en hızlı yol. Sistem mevcut tempona göre bunu hesaplar.
         </AIRow>
 
         <div className="card flat" style={{ padding: 0, borderRadius: 18, overflow: "hidden" }}>
@@ -360,6 +463,32 @@
      INCOME
   ========================================================= */
   function Income() {
+    if (!D.incomeBreakdown || D.incomeBreakdown.length === 0) {
+      return (
+        <div className="page">
+          <div className="page-head">
+            <div>
+              <div className="page-eyebrow">Gelir</div>
+              <h1 className="page-title">Income</h1>
+              <p className="page-sub">Maaş, freelance, pasif gelir — hepsi tek akışta.</p>
+            </div>
+          </div>
+          <div className="empty-hero">
+            <div className="empty-hero-mark"><Icon name="income" /></div>
+            <h2>Henüz gelir kaydı yok.</h2>
+            <p>
+              Maaş, freelance, kira, pasif gelir — ne girersen burada
+              dağılımı ve aylık ortalaması netleşir.
+            </p>
+            <div className="empty-hero-actions">
+              <button className="btn solid"><Icon name="plus" /> Gelir ekle</button>
+              <button className="btn ghost"><Icon name="upload" /> Bordro yükle</button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     const total = D.incomeBreakdown.reduce((s, i) => s + i.amount, 0);
     return (
       <div className="page">

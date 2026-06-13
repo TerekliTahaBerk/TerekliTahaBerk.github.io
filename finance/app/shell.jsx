@@ -71,10 +71,10 @@
         className={"sidebar " + (collapsed ? "collapsed " : "") + (mobileOpen ? "open " : "")}
         onClick={(e) => { if (e.target === e.currentTarget) onClose?.(); }}>
         <div className="sb-head">
-          <div className="sb-mark">F</div>
+          <div className="sb-mark"><Icon name="dollar" /></div>
           <div className="sb-word">
-            <b>Finance OS</b>
-            <span>Private · Taha</span>
+            <b>Finance</b>
+            <span>Sessiz, kişisel</span>
           </div>
         </div>
 
@@ -97,13 +97,9 @@
         </div>
 
         <div className="sb-foot">
-          <div className="avatar">TB</div>
-          <div className="who">
-            <b>Taha</b>
-            <span>Owner · Private</span>
-          </div>
-          <button className="signout" title="Çıkış yap" onClick={onSignOut}>
+          <button className="sb-signout" title="Oturumu kapat" onClick={onSignOut}>
             <Icon name="lock" />
+            <span className="sb-label">Oturumu kapat</span>
           </button>
         </div>
       </aside>

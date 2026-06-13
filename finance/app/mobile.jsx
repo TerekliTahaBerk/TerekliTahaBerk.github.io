@@ -1,5 +1,6 @@
 /* ============================================================
    Mobile preview — iOS phone frames showcasing key screens
+   Empty-safe: works whether data exists or not.
 ============================================================ */
 (function () {
   const D = window.DATA;
@@ -37,7 +38,16 @@
     );
   }
 
+  function greet() {
+    const h = new Date().getHours();
+    if (h < 5)  return "İyi geceler.";
+    if (h < 12) return "Günaydın.";
+    if (h < 18) return "Tünaydın.";
+    return "İyi akşamlar.";
+  }
+
   function Screen1() {
+    const upcoming = (D.upcoming || []).slice(0, 3);
     return (
       <>
         <StatusBar title="Bugün" />
@@ -45,36 +55,42 @@
           <div style={mcard}>
             <span style={{ fontFamily: "var(--mono)", fontSize: 9, color: "var(--tx-3)", letterSpacing: "0.12em", textTransform: "uppercase" }}>Today's Brief</span>
             <div className="serif" style={{ fontSize: 18, fontStyle: "italic", color: "var(--tx-0)", marginTop: 4, lineHeight: 1.2, fontWeight: 380 }}>
-              Günaydın, Taha.
+              {greet()}
             </div>
             <p style={{ fontSize: 12, color: "var(--tx-1)", lineHeight: 1.4, marginTop: 6, fontFamily: "var(--serif)" }}>
-              Bu ay hedefin önündesin. Restoran harcamaların biraz üzerinde.
+              Sessiz bir gün. İlk hareketini eklediğinde özet burada açılır.
             </p>
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
             <div style={mcard}>
               <span style={{ fontSize: 10, color: "var(--tx-2)" }}>Net</span>
-              <div className="mono" style={{ fontSize: 16, color: "var(--tx-0)", fontWeight: 500 }}>{D.fmtK(53860)}</div>
-              <span className="delta up mono" style={{ fontSize: 9, padding: "1px 6px", marginTop: 4, display: "inline-flex" }}>+%4.2</span>
+              <div className="mono" style={{ fontSize: 16, color: "var(--tx-1)", fontWeight: 500 }}>—</div>
+              <span className="muted" style={{ fontSize: 9 }}>henüz veri yok</span>
             </div>
             <div style={mcard}>
               <span style={{ fontSize: 10, color: "var(--tx-2)" }}>Bugün</span>
-              <div className="mono" style={{ fontSize: 16, color: "var(--neg)", fontWeight: 500 }}>{D.fmt(1850)}</div>
-              <span className="muted" style={{ fontSize: 9 }}>4 işlem · WhatsApp</span>
+              <div className="mono" style={{ fontSize: 16, color: "var(--tx-1)", fontWeight: 500 }}>—</div>
+              <span className="muted" style={{ fontSize: 9 }}>0 işlem</span>
             </div>
           </div>
 
           <div style={mcard}>
             <span style={{ fontFamily: "var(--mono)", fontSize: 9, color: "var(--tx-3)", letterSpacing: "0.12em", textTransform: "uppercase" }}>Yaklaşan</span>
-            <div style={{ marginTop: 6, display: "flex", flexDirection: "column", gap: 8 }}>
-              {D.upcoming.slice(0, 3).map((u, i) => (
-                <div key={i} style={{ display: "flex", justifyContent: "space-between", fontSize: 11.5 }}>
-                  <span style={{ color: "var(--tx-0)" }}>{u.name.slice(0, 22)}</span>
-                  <span className="mono" style={{ color: "var(--tx-1)" }}>{D.fmtK(u.amount)}</span>
-                </div>
-              ))}
-            </div>
+            {upcoming.length === 0 ? (
+              <div style={{ marginTop: 8, fontSize: 11, color: "var(--tx-2)", fontStyle: "italic" }}>
+                Planlanmış ödeme yok.
+              </div>
+            ) : (
+              <div style={{ marginTop: 6, display: "flex", flexDirection: "column", gap: 8 }}>
+                {upcoming.map((u, i) => (
+                  <div key={i} style={{ display: "flex", justifyContent: "space-between", fontSize: 11.5 }}>
+                    <span style={{ color: "var(--tx-0)" }}>{u.name.slice(0, 22)}</span>
+                    <span className="mono" style={{ color: "var(--tx-1)" }}>{D.fmtK(u.amount)}</span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </>
@@ -101,7 +117,7 @@
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
             <button className="btn primary sm" style={{ justifyContent: "center" }}>Onayla</button>
-            <button className="btn ghost sm" style={{ justifyContent: "center" }}>WhatsApp'tan ekle</button>
+            <button className="btn ghost sm" style={{ justifyContent: "center" }}>Mesajla ekle</button>
           </div>
         </div>
       </>
@@ -109,10 +125,31 @@
   }
 
   function Screen3() {
-    const m = D.waInbox[0];
+    const m = (D.waInbox || [])[0];
+    if (!m) {
+      return (
+        <>
+          <StatusBar title="Mesajlar" />
+          <div style={mShell}>
+            <div style={{ ...mcard, padding: 16, textAlign: "center" }}>
+              <Icon name="whatsapp" style={{ width: 22, height: 22, color: "var(--tx-2)" }} />
+              <div className="serif" style={{ fontSize: 16, fontStyle: "italic", color: "var(--tx-0)", marginTop: 8, fontWeight: 380 }}>
+                Inbox sessiz.
+              </div>
+              <p style={{ fontSize: 11, color: "var(--tx-2)", marginTop: 6, lineHeight: 1.45 }}>
+                Numara bağladığında gelen işlemler burada AI ile parse edilir.
+              </p>
+              <button className="btn primary sm" style={{ marginTop: 10, justifyContent: "center", width: "100%" }}>
+                <Icon name="link" /> Numara bağla
+              </button>
+            </div>
+          </div>
+        </>
+      );
+    }
     return (
       <>
-        <StatusBar title="WhatsApp" />
+        <StatusBar title="Mesajlar" />
         <div style={mShell}>
           <div style={mcard}>
             <div style={{ alignSelf: "flex-end", maxWidth: "85%", padding: "8px 12px",
@@ -135,16 +172,22 @@
   }
 
   function Screen4() {
+    const items = (D.notifications || []);
     return (
       <>
         <StatusBar title="Uyarılar" />
         <div style={mShell}>
-          {[
-            ["Akbank kart son ödeme · 6 gün", "warn", "₺39.850"],
-            ["WhatsApp'ta 2 onay bekliyor", "ac", "Migros · Starbucks"],
-            ["Yatırım +%2.8 (haftalık)", "pos", "Altın + hisse"],
-            ["Restoran kategorisi normalin üstünde", "warn", "+%34"],
-          ].map(([title, t, hint], i) => (
+          {items.length === 0 ? (
+            <div style={{ ...mcard, textAlign: "center", padding: 18 }}>
+              <Icon name="bell" style={{ width: 22, height: 22, color: "var(--tx-2)" }} />
+              <div className="serif" style={{ fontSize: 16, fontStyle: "italic", color: "var(--tx-0)", marginTop: 6, fontWeight: 380 }}>
+                Sessizlik.
+              </div>
+              <p style={{ fontSize: 11, color: "var(--tx-2)", marginTop: 4, lineHeight: 1.45 }}>
+                Bildirim için bir şey olmamış. Tam istediğin gibi.
+              </p>
+            </div>
+          ) : items.map(({ title, t, hint }, i) => (
             <div key={i} style={{ ...mcard, padding: 12 }}>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
                 <span style={{
@@ -174,14 +217,14 @@
           <div style={{ ...mcard, padding: 14, background: "linear-gradient(180deg, var(--ac-soft), transparent 60%), var(--bg-2)" }}>
             <span style={{ fontFamily: "var(--mono)", fontSize: 9, color: "var(--ac)", letterSpacing: "0.12em", textTransform: "uppercase" }}>AI · sakin</span>
             <div className="serif" style={{ fontSize: 18, fontStyle: "italic", color: "var(--tx-0)", marginTop: 4, lineHeight: 1.25, fontWeight: 380 }}>
-              "Bu ay nereden kısmalıyım?"
+              "Sor — verinden konuşurum."
             </div>
             <p style={{ fontSize: 12, color: "var(--tx-1)", lineHeight: 1.45, marginTop: 6, fontFamily: "var(--serif)" }}>
-              Restoran harcaman normalin %34 üzerinde. Kalan günlerde günlük ₺310 limiti yeterli olur. Beklenen etki: -₺1.250 / +%2 tasarruf.
+              Veri biriktikçe daha derin analiz yapabilirim. Kategori, kart ya da hedef sorabilirsin.
             </p>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-            {["3 ayda ₺50K?", "Kart borcu planı?", "Sabit gider oranı?"].map((q, i) => (
+            {["Bu ay nereden kısmalıyım?", "Hedeflerime yetişiyor muyum?", "Sabit gider oranı?"].map((q, i) => (
               <span key={i} className="chip" style={{ alignSelf: "flex-start", fontSize: 11 }}>{q}</span>
             ))}
           </div>
@@ -203,7 +246,7 @@
         <div className="phones">
           <Phone label="Bugün">    <Screen1 /></Phone>
           <Phone label="Hızlı ekle"><Screen2 /></Phone>
-          <Phone label="WhatsApp"> <Screen3 /></Phone>
+          <Phone label="Mesajlar"> <Screen3 /></Phone>
           <Phone label="Uyarılar"> <Screen4 /></Phone>
           <Phone label="AI Coach"> <Screen5 /></Phone>
         </div>

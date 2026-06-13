@@ -82,6 +82,42 @@
 
     const totalIn  = list.filter(t => t.kind === "gelir").reduce((s, t) => s + t.amount, 0);
     const totalOut = list.filter(t => t.kind !== "gelir").reduce((s, t) => s + t.amount, 0);
+    const isEmpty  = D.tx.length === 0;
+
+    if (isEmpty) {
+      return (
+        <div className="page">
+          <div className="page-head">
+            <div>
+              <div className="page-eyebrow">İşlemler</div>
+              <h1 className="page-title">Transactions</h1>
+              <p className="page-sub">Bütün hareketler — manuel, mesajla, ya da içe aktarmayla buraya akar.</p>
+            </div>
+          </div>
+          <div className="empty-hero">
+            <div className="empty-hero-mark"><Icon name="receipt" /></div>
+            <h2>Henüz hiçbir işlem yok.</h2>
+            <p>
+              İlk hareketini ekle — kahve, market, maaş, ne olursa.
+              Akıllı kategorileme ve grafikler arkada hazır bekliyor.
+            </p>
+            <div className="empty-hero-actions">
+              <button className="btn solid" onClick={() => window.TBOpenQuickAdd?.()}>
+                <Icon name="plus" /> İlk işlemi ekle
+              </button>
+              <button className="btn ghost" onClick={() => window.TBOpenPalette?.()}>
+                <Icon name="search" /> Komut paleti
+              </button>
+            </div>
+            <div className="empty-hero-hints">
+              <span className="kbd">⌘</span><span className="kbd">N</span> hızlı ekle
+              <span style={{ margin: "0 10px", opacity: 0.4 }}>·</span>
+              <span className="kbd">⌘</span><span className="kbd">K</span> komut paleti
+            </div>
+          </div>
+        </div>
+      );
+    }
 
     return (
       <div className="page">
@@ -198,12 +234,6 @@
           </table>
         </div>
 
-        {/* AI insight */}
-        <AIRow tone="warn" icon="info" title="Restoran kategorisi normalin üzerinde"
-          rationale="Son 30g rolling vs prev 30g · 18 işlem">
-          Bu ay restoran harcaman <b>₺7.250</b>; geçen aya göre <b>+%34</b>. Kalan günlerde günlük <b>₺310</b> limit önerilir.
-        </AIRow>
-
         <TxDrawer tx={open} onClose={() => setOpen(null)} />
       </div>
     );
@@ -242,15 +272,44 @@
   ========================================================= */
   function Investments() {
     const inv = D.investments;
-    const ret = ((inv.total - inv.costBase) / inv.costBase) * 100;
+    const isEmpty = !inv.assets || inv.assets.length === 0;
+    const ret = inv.costBase ? ((inv.total - inv.costBase) / inv.costBase) * 100 : 0;
     const profit = inv.total - inv.costBase;
     const [period, setPeriod] = useState("year");
+
+    if (isEmpty) {
+      return (
+        <div className="page">
+          <div className="page-head">
+            <div>
+              <div className="page-eyebrow">Yatırımlar</div>
+              <h1 className="page-title">Investments</h1>
+              <p className="page-sub">Portföy büyüklüğün, dağılımın ve risk eğilimi tek ekranda.</p>
+            </div>
+          </div>
+          <div className="empty-hero">
+            <div className="empty-hero-mark"><Icon name="trend" /></div>
+            <h2>Portföy henüz boş.</h2>
+            <p>
+              Hisse, fon, mevduat ya da kripto — hepsi tek ekranda toplanabilir.
+              İlk varlığını ekle, getiri ve risk dağılımı kendi kendine doğar.
+            </p>
+            <div className="empty-hero-actions">
+              <button className="btn solid"><Icon name="plus" /> Varlık ekle</button>
+            </div>
+            <div className="empty-hero-hints">
+              <span className="muted">Bu bir yatırım tavsiyesi değildir.</span>
+            </div>
+          </div>
+        </div>
+      );
+    }
 
     return (
       <div className="page">
         <div className="page-head">
           <div>
-            <div className="page-eyebrow">Yatırımlar · 8 varlık</div>
+            <div className="page-eyebrow">Yatırımlar · {inv.assets.length} varlık</div>
             <h1 className="page-title">Investments</h1>
             <p className="page-sub">Portföy büyüklüğün, dağılımın ve risk eğilimi tek ekranda.</p>
           </div>
@@ -336,9 +395,7 @@
   function AICoach() {
     const [tab, setTab] = useState("brief");
     const [q, setQ] = useState("");
-    const [thread, setThread] = useState([
-      { role: "ai", text: "Selam Taha. Bu hafta net tasarrufun ₺13.200, geçen haftaya göre +%6. Restoran kategorin yine bandının üstünde.", time: "09:12" },
-    ]);
+    const [thread, setThread] = useState([]);
     const inputRef = useRef(null);
     const threadRef = useRef(null);
     useEffect(() => { threadRef.current?.scrollTo({ top: 99999, behavior: "smooth" }); }, [thread]);
@@ -377,60 +434,54 @@
         </div>
 
         {tab === "brief" && (
-          <div className="grid-12">
-            <div className="card span-8" style={{ background: "linear-gradient(180deg, var(--ac-soft), transparent 60%), var(--bg-2)" }}>
-              <div className="card-eyebrow">Bugünün özeti</div>
-              <div className="serif" style={{ fontSize: 28, fontStyle: "italic", color: "var(--tx-0)", lineHeight: 1.2, fontWeight: 380, letterSpacing: "-0.01em" }}>
-                {greeting(D.user.name)}
-              </div>
-              <p style={{ fontSize: 16, color: "var(--tx-1)", lineHeight: 1.55, fontFamily: "var(--serif)" }}>
-                Bu ay tasarruf hedefinin önündesin. Net tasarruf oranın %58.2; bandının üst sınırına yakın.
-                Restoran harcamaların normal bandının üzerinde — kalan günlerde günlük ₺310 limiti yeterli olur.
-              </p>
-              <div className="ai-rationale">
-                — 30 günlük rolling restoran ortalaman ₺7.250 (önceki 30 gün ₺5.420). Maaş sonrası ilk 3 günde harcama yoğunluğu var.
-              </div>
-              <div className="grid-3" style={{ marginTop: 8 }}>
-                <div className="card flat tight">
-                  <span className="card-eyebrow">Aylık tasarruf</span>
-                  <span className="mono" style={{ fontSize: 20, color: "var(--pos)" }}>{D.fmtK(53860)}</span>
-                </div>
-                <div className="card flat tight">
-                  <span className="card-eyebrow">Aşılan kategori</span>
-                  <span className="mono" style={{ fontSize: 20, color: "var(--neg)" }}>2 / 8</span>
-                </div>
-                <div className="card flat tight">
-                  <span className="card-eyebrow">Yatırım getirisi</span>
-                  <span className="mono" style={{ fontSize: 20, color: "var(--inv)" }}>+10.0%</span>
+          (D.tx.length === 0)
+            ? (
+              <div className="empty-hero">
+                <div className="empty-hero-mark"><Icon name="ai" /></div>
+                <h2>Koç henüz dinleyecek bir şey duymadı.</h2>
+                <p>
+                  Birkaç işlem girdiğinde, kişisel briefing burada belirir.
+                  Hiçbir cevap tahmin değildir — yalnızca senin verinden gelir.
+                </p>
+                <div className="empty-hero-actions">
+                  <button className="btn solid" onClick={() => window.TBOpenQuickAdd?.()}>
+                    <Icon name="plus" /> İlk işlemi ekle
+                  </button>
+                  <button className="btn ghost" onClick={() => setTab("chat")}>
+                    <Icon name="ai" /> Yine de soru sor
+                  </button>
                 </div>
               </div>
-            </div>
-
-            <div className="card span-4">
-              <div className="card-title">Önerilen aksiyonlar</div>
-              {[
-                ["Akbank kartını bu ay duraklat", "neg", "−₺8.4K kart borç riski"],
-                ["Aylık otomatik hedef katkısı", "ac",  "Japonya · +₺1.200"],
-                ["Restoran 'cool-down' uyarısı", "warn","maaş + 3g · push"],
-              ].map(([title, t, hint], i) => (
-                <div className="lrow" key={i}>
-                  <span className="l-ic" style={{ background: t === "neg" ? "var(--neg-soft)" : t === "warn" ? "var(--warn-soft)" : "var(--ac-soft)", color: "var(--" + t + ")" }}>
-                    <Icon name="spark" />
-                  </span>
-                  <div className="l-main">
-                    <b>{title}</b>
-                    <span>{hint}</span>
+            ) : (
+              <div className="grid-12">
+                <div className="card span-8" style={{ background: "linear-gradient(180deg, var(--ac-soft), transparent 60%), var(--bg-2)" }}>
+                  <div className="card-eyebrow">Bugünün özeti</div>
+                  <div className="serif" style={{ fontSize: 28, fontStyle: "italic", color: "var(--tx-0)", lineHeight: 1.2, fontWeight: 380, letterSpacing: "-0.01em" }}>
+                    {greeting()}
                   </div>
-                  <button className="btn ghost sm">Uygula</button>
+                  <p style={{ fontSize: 16, color: "var(--tx-1)", lineHeight: 1.55, fontFamily: "var(--serif)" }}>
+                    Veriler işleniyor. Daha fazla işlem geldikçe özet zenginleşir.
+                  </p>
                 </div>
-              ))}
-            </div>
-          </div>
+                <div className="card span-4">
+                  <div className="card-title">Önerilen aksiyonlar</div>
+                  <div className="empty-inline">
+                    <b>Henüz öneri yok</b>
+                    Veri biriktikçe AI burada aksiyon önerir.
+                  </div>
+                </div>
+              </div>
+            )
         )}
 
         {tab === "timeline" && (
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-            {D.aiTimeline.map((it, i) => (
+            {D.aiTimeline.length === 0 ? (
+              <div className="empty-inline">
+                <b>Insight zaman çizelgesi boş</b>
+                Davranışın anlamlı bir örüntü oluşturduğunda buraya not düşülür.
+              </div>
+            ) : D.aiTimeline.map((it, i) => (
               <div key={i} className="card">
                 <div className="card-head">
                   <div className="card-eyebrow">{it.date}</div>
@@ -484,33 +535,38 @@
   }
 
   function mockReply(q) {
+    // Empty-state fallback: without data, AI cannot derive insights.
+    // When real backend lands, replace this with a server call.
+    if (D.tx.length === 0) {
+      return "Henüz analiz edebileceğim veri yok. Birkaç işlem ekledikten sonra tekrar dene — " +
+        "kategori, kart ya da hedef bazlı sorulara verinden net cevap veririm.";
+    }
+
     const lower = q.toLowerCase();
     if (lower.includes("kıs") || lower.includes("nereden")) {
-      return "Bu ay 'keyfi' sınıfta en yüksek üç sapma: restoran +%34 (₺7.250), online alışveriş +%18 (₺3.120), eğlence -%12 (₺2.410). " +
-        "Restoranı kalan 17 günde günlük ₺310 ile tutarsan ay sonu hedef bandında kalırsın. Yaklaşık etki: -₺1.250 / +%2 tasarruf oranı.";
+      return "Bu ay en yüksek sapma yaşanan 'keyfi' kategorilerine bakıyorum. " +
+        "Kısılması en kolay olanlar genellikle restoran, online alışveriş ve abonelik gruplarıdır.";
     }
-    if (lower.includes("50") && lower.includes("biri")) {
-      return "Mevcut tempoda 3 ayda ortalama ₺54.000 biriktiriyorsun. ₺50.000 hedefi rahatlıkla yakalanır. " +
-        "Kart borcunu sabit tutarsan +₺2.400 ek kazanç olur.";
+    if (lower.includes("biri") || lower.includes("birik")) {
+      return "Mevcut tasarruf temposuna ve hedefin tutarına göre hedefin ulaşılabilirliğini hesaplıyorum.";
     }
     if (lower.includes("kart") && lower.includes("borc")) {
-      return "Önce Akbank kartını kapat: ₺39.850, faiz baskısı en yüksek. Mevcut tempoda 5 ayda biter. " +
-        "Aylık katkıyı +₺3.000 artırırsan 3 ayda biter, toplam tasarruf ~₺2.100 faiz.";
+      return "Genelde önce en yüksek faizli kart borcunu kapatmak en hızlı yol. " +
+        "Mevcut aylık tempoyla bunu kaç ayda kapatabileceğini hesaplıyorum.";
     }
     if (lower.includes("riskl") || lower.includes("yatırım")) {
-      return "Portföy: %41 hisse/fon, %18.5 altın, %14 USD mevduat, %12 eurobond, %3.8 kripto. " +
-        "Risk dağılımı: 38% düşük / 41% orta / 21% yüksek. Bu bandı son 6 ayda korumuşsun. " +
+      return "Portföyün varlık ve risk dağılımına göre konumunu özetliyorum. " +
         "Bu bir yatırım tavsiyesi değildir; yalnızca kişisel takip analizi.";
     }
     if (lower.includes("sabit")) {
-      return "Net gelirinin %41.8'i sabit giderlere gidiyor (kira ₺22.500 + faturalar ₺6.280 + abonelikler ₺578). " +
-        "Bu oran sağlıklı bandın (%38–%45) ortasında.";
+      return "Net gelirinin sabit giderlere giden oranını hesaplıyorum (kira, fatura, abonelik). " +
+        "Sağlıklı bant genelde %38–%45 arasıdır.";
     }
     if (lower.includes("hedef")) {
-      return "Japonya hedefi %73 ilerlemede, Eylül sonu hazır. Acil Fon %32 — aylık katkıyı +₺2.500 artırırsan 6 aylık tampon Ocak 2027'de tamam.";
+      return "Aktif hedeflerin ilerleme yüzdesine ve aylık katkılarına bakıyorum.";
     }
-    return "Bu sorunun cevabı için son 30 günü inceledim. Kısa cevap: planın dahilindesin, " +
-      "ama keyfi harcama bandının üstüne çıkıyor. Daha net bir yanıt için kategori veya kart belirtebilirsin.";
+    return "Bu soruyu cevaplamak için son 30 gün verisini incelerim. " +
+      "Daha net bir yanıt için kategori, kart ya da hedef belirtebilirsin.";
   }
 
   Object.assign(window, { Transactions, Investments, AICoach });

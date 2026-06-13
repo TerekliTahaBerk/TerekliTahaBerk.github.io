@@ -1858,3 +1858,124 @@ table.t td.right { text-align: right; }
   text-align: center;
   font-size: 11px;
 }
+
+/* ============================================================
+   Empty-state · Apple-vari minimal
+   Used by Dashboard, Transactions, AI Coach, WhatsApp etc.
+============================================================ */
+.empty-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 72px 24px 56px;
+  margin: 12px 0 4px;
+  background: var(--bg-1);
+  border: 1px solid var(--bo-1);
+  border-radius: 22px;
+  box-shadow: 0 1px 0 color-mix(in oklab, var(--tx-0) 4%, transparent) inset;
+}
+.empty-hero-mark {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 22px;
+  background: linear-gradient(180deg,
+    color-mix(in oklab, var(--ac) 14%, var(--bg-2)),
+    var(--bg-2));
+  border: 1px solid var(--bo-1);
+  color: var(--ac);
+  box-shadow:
+    0 1px 0 color-mix(in oklab, white 28%, transparent) inset,
+    0 8px 24px -16px color-mix(in oklab, var(--ac) 55%, transparent);
+}
+.empty-hero-mark svg { width: 26px; height: 26px; }
+.empty-hero h2 {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 380;
+  font-size: 30px;
+  letter-spacing: -0.02em;
+  color: var(--tx-0);
+  margin: 0 0 10px;
+  line-height: 1.15;
+}
+.empty-hero p {
+  max-width: 440px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--tx-1);
+  margin: 0 0 26px;
+}
+.empty-hero-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+.empty-hero-hints {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--tx-2);
+}
+.empty-hero-hints .kbd {
+  margin: 0 4px 0 0;
+}
+
+/* KPI minimal variant (no AI footer, just label/value/spark) */
+.kpi.clean {
+  background: var(--bg-1);
+  min-height: 108px;
+}
+.kpi.clean .kpi-value {
+  font-weight: 380;
+  letter-spacing: -0.025em;
+  color: var(--tx-0);
+}
+.kpi-spark-empty {
+  display: inline-block;
+  width: 120px;
+  height: 28px;
+  border-radius: 6px;
+  background: repeating-linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--bo-1) 70%, transparent) 0 2px,
+    transparent 2px 8px
+  );
+  opacity: 0.4;
+}
+
+/* Subtle inline empty hint inside cards/tables */
+.empty-inline {
+  padding: 36px 18px;
+  text-align: center;
+  color: var(--tx-2);
+  font-size: 13px;
+  line-height: 1.6;
+  border: 1px dashed var(--bo-1);
+  border-radius: 14px;
+  background: color-mix(in oklab, var(--bg-1) 65%, transparent);
+}
+.empty-inline b {
+  display: block;
+  color: var(--tx-1);
+  font-weight: 500;
+  margin-bottom: 4px;
+  font-size: 13.5px;
+}
+
+@media (max-width: 720px) {
+  .empty-hero { padding: 52px 18px 40px; border-radius: 18px; }
+  .empty-hero h2 { font-size: 24px; }
+  .empty-hero p { font-size: 13.5px; }
+}

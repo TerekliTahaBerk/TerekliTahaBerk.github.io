@@ -1,0 +1,54 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
+
+  "framework": null,
+  "buildCommand": "prisma generate",
+  "outputDirectory": ".",
+  "installCommand": "npm install",
+
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "@vercel/node@3.2.30",
+      "maxDuration": 15,
+      "memory": 512
+    }
+  },
+
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Cache-Control",          "value": "no-store, no-cache, must-revalidate" },
+        { "key": "X-Robots-Tag",           "value": "noindex, nofollow" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy",        "value": "no-referrer" }
+      ]
+    },
+    {
+      "source": "/finance/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag",            "value": "noindex, nofollow" },
+        { "key": "Cache-Control",           "value": "no-store, max-age=0" },
+        { "key": "X-Frame-Options",         "value": "DENY" },
+        { "key": "X-Content-Type-Options",  "value": "nosniff" },
+        { "key": "Referrer-Policy",         "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy",      "value": "geolocation=(), microphone=(), camera=()" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options",         "value": "SAMEORIGIN" },
+        { "key": "X-Content-Type-Options",  "value": "nosniff" },
+        { "key": "Referrer-Policy",         "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ],
+
+  "rewrites": [
+    { "source": "/finance",         "destination": "/finance/index.html" },
+    { "source": "/finance/:path*",  "destination": "/finance/index.html" }
+  ]
+}

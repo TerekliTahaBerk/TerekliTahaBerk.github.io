@@ -1,0 +1,205 @@
+// ============================================================
+// prisma/schema.prisma — Private Finance OS data model
+// ------------------------------------------------------------
+// Single-tenant for now (one user: Taha). Multi-tenant fields
+// are commented; flip them on when adding real auth.
+// ============================================================
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ----------------------------------------------------------------
+// USERS — placeholder for future multi-tenant auth
+// ----------------------------------------------------------------
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  cards        Card[]
+  transactions Transaction[]
+  categories   Category[]
+  goals        Goal[]
+  debts        Debt[]
+  assets       Asset[]
+  whatsapp     WhatsAppMessage[]
+
+  @@map("users")
+}
+
+// ----------------------------------------------------------------
+// CARDS (credit / debit)
+// ----------------------------------------------------------------
+model Card {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  bank      String
+  name      String
+  brand     String?  // akbank, garanti, ykb, qnb, etc.
+  numMasked String   @map("num_masked") // "•••• 4831"
+  cardLimit Decimal? @map("card_limit") @db.Decimal(14, 2)
+  used      Decimal? @db.Decimal(14, 2)
+  debt      Decimal? @db.Decimal(14, 2)
+  min       Decimal? @db.Decimal(14, 2)
+  dueDate   DateTime? @map("due_date")
+  cutDate   DateTime? @map("cut_date")
+  risk      String   @default("safe") // safe / watch / hot
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+
+  @@index([userId])
+  @@map("cards")
+}
+
+// ----------------------------------------------------------------
+// CATEGORIES
+// ----------------------------------------------------------------
+model Category {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  name      String
+  color     String   @default("var(--tx-1)")
+  budget    Decimal? @db.Decimal(14, 2)
+  isFixed   Boolean  @default(false) @map("is_fixed")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+
+  @@unique([userId, name])
+  @@index([userId])
+  @@map("categories")
+}
+
+// ----------------------------------------------------------------
+// TRANSACTIONS
+// ----------------------------------------------------------------
+model Transaction {
+  id          String   @id @default(cuid())
+  userId      String   @map("user_id")
+  cardId      String?  @map("card_id")
+  categoryId  String?  @map("category_id")
+
+  date        DateTime
+  merchant    String
+  amount      Decimal  @db.Decimal(14, 2) // negative = expense, positive = income
+  note        String?
+  tag         String?  // ai-flagged, recurring, etc.
+  source      String   @default("manual") // manual, whatsapp, sheets, csv, ai-parsed
+  externalId  String?  @map("external_id") // for dedupe
+  rawPayload  Json?    @map("raw_payload") // original webhook body
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  card     Card?     @relation(fields: [cardId], references: [id], onDelete: SetNull)
+  category Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  @@index([userId, date(sort: Desc)])
+  @@index([cardId])
+  @@index([categoryId])
+  @@unique([userId, externalId])
+  @@map("transactions")
+}
+
+// ----------------------------------------------------------------
+// GOALS (savings goals)
+// ----------------------------------------------------------------
+model Goal {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  name      String
+  target    Decimal  @db.Decimal(14, 2)
+  current   Decimal  @default(0) @db.Decimal(14, 2)
+  deadline  DateTime?
+  color     String?
+  note      String?
+  isDone    Boolean  @default(false) @map("is_done")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("goals")
+}
+
+// ----------------------------------------------------------------
+// DEBTS (loans, friends, etc.)
+// ----------------------------------------------------------------
+model Debt {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  name      String
+  total     Decimal  @db.Decimal(14, 2)
+  remaining Decimal  @db.Decimal(14, 2)
+  rate      Float?   // annual %
+  monthly   Decimal? @db.Decimal(14, 2)
+  due       DateTime?
+  kind      String   @default("loan") // loan, friend, family, credit-line
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("debts")
+}
+
+// ----------------------------------------------------------------
+// ASSETS (investments)
+// ----------------------------------------------------------------
+model Asset {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  name      String
+  kind      String   // stock, fund, crypto, gold, fx, cash
+  amount    Decimal  @db.Decimal(20, 6) // shares / units
+  value     Decimal  @db.Decimal(14, 2) // current TL value
+  costBase  Decimal? @db.Decimal(14, 2) @map("cost_base")
+  meta      Json?
+  updatedAt DateTime @updatedAt @map("updated_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("assets")
+}
+
+// ----------------------------------------------------------------
+// WHATSAPP — inbox for parse / approve flow
+// ----------------------------------------------------------------
+model WhatsAppMessage {
+  id          String   @id @default(cuid())
+  userId      String   @map("user_id")
+  fromNumber  String   @map("from_number")
+  fromName    String?  @map("from_name")
+  body        String
+  receivedAt  DateTime @map("received_at")
+  parsedJson  Json?    @map("parsed_json") // AI parse result
+  confidence  Float?
+  status      String   @default("inbox") // inbox, approved, rejected, parsed
+  txId        String?  @map("tx_id") // linked transaction id
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, receivedAt(sort: Desc)])
+  @@index([status])
+  @@map("whatsapp_messages")
+}

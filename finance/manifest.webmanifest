@@ -1,0 +1,30 @@
+{
+  "id": "/finance/",
+  "name": "Private Finance OS · Taha",
+  "short_name": "Finance OS",
+  "description": "Kişisel finans karargahı — özel kullanım.",
+  "start_url": "/finance/",
+  "scope": "/finance/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0a09",
+  "theme_color": "#0b0a09",
+  "lang": "tr",
+  "dir": "ltr",
+  "categories": ["finance", "productivity"],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/favicon.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}

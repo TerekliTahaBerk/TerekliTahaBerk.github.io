@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="tr" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0a09" />
+  <title>Private Finance OS · Taha</title>
+  <meta name="robots" content="noindex,nofollow" />
+
+  <!-- iOS / Apple-vari standalone hissi -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Finance OS" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+  <link rel="apple-touch-icon" href="/favicon.jpg" />
+  <link rel="manifest" href="/finance/manifest.webmanifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="app/style.css" />
+</head>
+<body>
+  <!-- Boot screen — replaced by React on mount. Keeps first paint silent. -->
+  <div id="root">
+    <div class="boot-shell" aria-hidden="true">
+      <div class="boot-mark">F</div>
+    </div>
+  </div>
+
+  <!-- React 18 + Babel standalone (matches the prototype's stack) -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+
+  <!-- App layers -->
+  <script src="app/auth.js"></script>
+  <script src="app/data.js"></script>
+  <script src="app/util.js"></script>
+  <script type="text/babel" src="app/icons.jsx"></script>
+  <script type="text/babel" src="app/charts.jsx"></script>
+  <script type="text/babel" src="app/widgets.jsx"></script>
+  <script type="text/babel" src="app/login.jsx"></script>
+  <script type="text/babel" src="app/shell.jsx"></script>
+  <script type="text/babel" src="app/palette.jsx"></script>
+  <script type="text/babel" src="app/modals.jsx"></script>
+  <script type="text/babel" src="app/dashboard.jsx"></script>
+  <script type="text/babel" src="app/pages.jsx"></script>
+  <script type="text/babel" src="app/money.jsx"></script>
+  <script type="text/babel" src="app/reports.jsx"></script>
+  <script type="text/babel" src="app/settings.jsx"></script>
+  <script type="text/babel" src="app/whatsapp.jsx"></script>
+  <script type="text/babel" src="app/mobile.jsx"></script>
+  <script type="text/babel" src="app/app.jsx"></script>
+</body>
+</html>

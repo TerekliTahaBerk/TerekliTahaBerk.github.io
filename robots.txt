@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /finance/
+Disallow: /finance
 
 Sitemap: https://www.tahaberk.com/sitemap.xml

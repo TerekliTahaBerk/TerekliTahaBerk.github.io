@@ -3,7 +3,7 @@
 ============================================================ */
 .wk-main { max-width: var(--measure); width: 100%; margin: 0 auto; padding: clamp(48px, 8vh, 88px) 8px 24px; }
 .wk-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; margin-bottom: var(--sp-2); }
-.wk-head h1 { font-size: clamp(52px, 8vw, 88px); line-height: 0.96; letter-spacing: -0.02em; }
+.wk-head h1 { font-size: clamp(38px, 5.6vw, 62px); line-height: 1.05; letter-spacing: -0.025em; }
 
 .list { display: flex; flex-direction: column; }
 .row {
@@ -11,13 +11,13 @@
   gap: 24px; padding: 22px 0; border-top: 1px solid var(--rule); align-items: baseline;
 }
 .row:last-child { border-bottom: 1px solid var(--rule); }
-.row .co { font-family: var(--f-serif); font-size: 27px; letter-spacing: -0.01em; }
+.row .co { font-family: var(--f-serif); font-weight: 700; font-size: 22px; letter-spacing: -0.015em; }
 .row .role { color: var(--fg-soft); font-size: 14px; line-height: 1.55; }
-.row .when { color: var(--fg-mute); font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; text-align: right; white-space: nowrap; }
+.row .when { color: var(--fg-mute); font-size: 13px; text-align: right; white-space: nowrap; }
 .row .when.current { color: var(--a-live); }
 
 .certs { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 14px; border-top: 1px solid var(--rule); padding-top: 18px; }
-.cert .issuer { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg-mute); margin-bottom: 10px; }
+.cert .issuer { font-size: 13px; font-weight: 600; color: var(--fg-mute); margin-bottom: 10px; }
 .cert ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
 .cert li { font-size: 13.5px; color: var(--fg-soft); line-height: 1.5; }
 

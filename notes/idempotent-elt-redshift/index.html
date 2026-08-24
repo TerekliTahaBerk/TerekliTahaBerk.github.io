@@ -6,7 +6,7 @@
 <title>Idempotent Redshift ELT · Taha Berk Terekli</title>
 <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
 <link rel="apple-touch-icon" href="/favicon.jpg" />
-<meta name="description" content="A pragmatic defence of idempotent ELT in Amazon Redshift: why running the same SQL twice should produce the same numbers, with concrete patterns for late-arriving facts, dedup windows, MERGE-style upserts and safe re-runs." />
+<meta name="description" content="A pragmatic defence of idempotent ELT in Amazon Redshift — why running the same SQL twice should produce the same numbers, with patterns for late-arriving facts and safe re-runs." />
 <meta name="keywords" content="idempotent ELT, Amazon Redshift, data engineering, SQL, late-arriving facts, dedup, MERGE, upsert" />
 <meta name="author" content="Taha Berk Terekli" />
 <meta name="robots" content="index,follow,max-image-preview:large" />
@@ -42,7 +42,7 @@
 <script>(function(){try{var s=localStorage.getItem('tbt_theme');var d=s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark');}catch(e){document.documentElement.classList.add('dark');}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/tokens.css" />
 <link rel="stylesheet" href="/assets/css/base.css" />
 <link rel="stylesheet" href="/assets/css/notes-article.css" />
@@ -52,7 +52,6 @@
 <main class="page" id="main">
   <header class="top">
     <a href="/" class="brand">Taha Berk<span class="dot" aria-hidden="true"></span></a>
-    <div class="nav-wrap">
       <nav class="nav" aria-label="Primary">
         <a href="/work/">Work</a>
         <a href="/projects/">Projects</a>
@@ -65,7 +64,6 @@
           <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
         </svg>
       </button>
-    </div>
   </header>
 
   <div class="art-wrap">
@@ -220,7 +218,5 @@
 
 <script defer src="/assets/js/theme.js"></script>
 <script defer src="/assets/js/toc.js"></script>
-<!-- Private Finance OS launcher (additive, non-invasive) -->
-<script defer src="/assets/finance-launcher.js"></script>
 </body>
 </html>

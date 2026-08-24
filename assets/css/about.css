@@ -2,7 +2,7 @@
    about.css — /about/ page styles
 ============================================================ */
 .ab-main { max-width: var(--measure); width: 100%; margin: 0 auto; padding: clamp(48px, 8vh, 88px) 8px 24px; }
-.ab-main > h1 { font-size: clamp(48px, 7.4vw, 80px); line-height: 0.98; letter-spacing: -0.02em; max-width: 15ch; }
+.ab-main > h1 { font-size: clamp(36px, 5.2vw, 56px); line-height: 1.08; letter-spacing: -0.025em; max-width: 15ch; }
 .ab-lede { font-family: var(--f-serif); font-size: clamp(19px, 1.7vw, 23px); line-height: 1.42; color: var(--fg-soft); margin: var(--sp-4) 0 0; }
 
 .ab-section { margin-top: var(--sp-8); padding-top: var(--sp-7); border-top: 1px solid var(--rule); }
@@ -14,9 +14,9 @@
 
 .ab-vol-row { display: grid; grid-template-columns: minmax(160px,1fr) 2fr minmax(110px,auto); gap: 20px; padding: 16px 0; border-top: 1px solid var(--rule); align-items: baseline; }
 .ab-vol-row:last-child { border-bottom: 1px solid var(--rule); }
-.ab-vol-row .co { font-family: var(--f-serif); font-size: 20px; }
+.ab-vol-row .co { font-family: var(--f-serif); font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
 .ab-vol-row .role { color: var(--fg-soft); font-size: 13.5px; }
-.ab-vol-row .when { color: var(--fg-mute); font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; text-align: right; white-space: nowrap; }
+.ab-vol-row .when { color: var(--fg-mute); font-size: 13px; text-align: right; white-space: nowrap; }
 
 .ab-elsewhere { display: flex; flex-wrap: wrap; gap: 10px; margin-top: var(--sp-2); }
 

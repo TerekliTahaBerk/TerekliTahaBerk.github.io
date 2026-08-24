@@ -1,20 +1,17 @@
 # tahaberk.com
 
 Personal site for Taha Berk Terekli — a static, hand-authored HTML/CSS/JS
-portfolio, plus a private "Finance OS" (Prisma/Postgres + Vercel serverless
-functions) that lives in the same repository as a separate, non-indexed
-product.
+portfolio. No framework, no build step, no backend.
 
 ## Architecture — why plain static HTML
 
-The custom domain (`www.tahaberk.com`) is currently served by **GitHub
-Pages** directly from this repository (see `CNAME`, `.nojekyll`). GitHub
-Pages does not run a build step — it serves whatever is committed, as-is.
-That rules out any static-site generator or framework for the public pages:
-there is nowhere for a build to run before the browser sees the files.
+The custom domain (`www.tahaberk.com`) is served by **GitHub Pages**
+directly from this repository (see `CNAME`, `.nojekyll`). GitHub Pages does
+not run a build step — it serves whatever is committed, as-is. That rules
+out any static-site generator or framework: there is nowhere for a build to
+run before the browser sees the files.
 
-So the public site is deliberately **zero-build, hand-authored static
-HTML/CSS/JS**:
+So the site is deliberately **zero-build, hand-authored static HTML/CSS/JS**:
 
 - Every public page is its own `.html` file (or `index.html` inside a clean
   URL folder, e.g. `/work/index.html` serves `/work/`).
@@ -29,12 +26,10 @@ HTML/CSS/JS**:
   duplicated across a handful of files rather than pulled from one data
   file — see "Updating content" below for exactly which files to touch.
 
-A Vercel project also exists (`vercel.json`) and is fully configured — it
-runs `prisma generate`, serves `/api/*` as serverless functions, and rewrites
-`/finance/*` to the Finance OS shell. It is **not currently the host behind
-the custom domain** (DNS points at GitHub Pages). See "Finance OS" below and
-the final report for details — this is a deployment/DNS decision for you to
-make, not something this redesign changes.
+A `vercel.json` is still present in case the domain is ever pointed at
+Vercel instead of GitHub Pages — it only defines general security headers
+and 301 redirects from old URLs, nothing more. There is no serverless
+backend, database, or API in this repository.
 
 ## Local development
 
@@ -47,8 +42,7 @@ This runs `npx serve -l 3000 .` and serves the repository root exactly like
 GitHub Pages would (static files, clean URLs via `/work/index.html`, and a
 custom `404.html`). Open `http://localhost:3000`.
 
-There is no build step for the public site — edit HTML/CSS/JS directly and
-refresh.
+There is no build step — edit HTML/CSS/JS directly and refresh.
 
 ## Site structure
 
@@ -71,8 +65,6 @@ refresh.
                          new clean URLs, kept for anyone with an old link
                          bookmarked or indexed. `vercel.json` also defines
                          real 301s for whenever Vercel serves the domain.
-
-/finance/, /api/, /prisma/, /lib/   Private Finance OS — see below.
 ```
 
 ## Updating content
@@ -119,31 +111,8 @@ falls back to a deterministic decorative pattern and the label reads
 "sample activity · pattern only" — it never claims to be live data it
 doesn't have.
 
-## Finance OS (private, non-public)
-
-`/finance`, `/api`, `/prisma`, `/lib` implement a separate, private,
-single-tenant personal finance product:
-
-- `/finance` — a static React app (React 18 + Babel standalone via CDN, no
-  build step) served as the UI shell.
-- `/api/health.js`, `/api/transactions.js` — Vercel serverless functions
-  backed by Prisma/Postgres (`/prisma/schema.prisma`, `/lib/prisma.js`).
-- `/assets/finance-launcher.js` — the small lock icon in the bottom-right
-  corner of every public page, linking to `/finance/`. It is deliberately
-  not in the public nav.
-
-This is **not indexed and not linked from public navigation**:
-`robots.txt` disallows `/finance/` and `/api/`, and `vercel.json` sends
-`X-Robots-Tag: noindex, nofollow` plus stricter security headers
-(`X-Frame-Options: DENY`, no-store caching) on both. None of this redesign
-touched Finance OS code, schema, or API logic — see `DEPLOY.md` for how to
-deploy/rotate credentials for that side of the project.
-
 ## Deployment
 
-See [`DEPLOY.md`](DEPLOY.md) for the Vercel + Prisma Postgres deployment
-path (Finance OS). The public pages need no build step and will work on
-GitHub Pages, Vercel, or any static host as-is.
-
-Environment variables are documented (without values) in
-[`.env.example`](.env.example) — real values are never committed.
+Nothing to configure — push to `main` and GitHub Pages serves it directly.
+The public pages need no build step and will work on GitHub Pages, Vercel,
+or any static host as-is.

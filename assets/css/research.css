@@ -2,7 +2,7 @@
    research.css — /research/ page styles
 ============================================================ */
 .rs-main { max-width: var(--measure); width: 100%; margin: 0 auto; padding: clamp(48px, 8vh, 88px) 8px 24px; }
-.rs-main > h1 { font-size: clamp(48px, 7.4vw, 80px); line-height: 0.98; letter-spacing: -0.02em; max-width: 15ch; }
+.rs-main > h1 { font-size: clamp(36px, 5.2vw, 56px); line-height: 1.08; letter-spacing: -0.025em; max-width: 15ch; }
 .rs-lede { font-family: var(--f-serif); font-size: clamp(19px, 1.7vw, 23px); line-height: 1.42; color: var(--fg-soft); margin: var(--sp-4) 0 0; }
 
 .rs-meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: var(--sp-5); }
@@ -28,8 +28,8 @@
 
 .rs-status-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4); margin: var(--sp-4) 0 var(--sp-5); }
 .rs-status-item { padding: var(--sp-4); }
-.rs-status-item .n { font-family: var(--f-serif); font-size: 30px; line-height: 1; }
-.rs-status-item .l { font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--fg-mute); margin-top: 6px; }
+.rs-status-item .n { font-family: var(--f-serif); font-weight: 700; font-size: 26px; line-height: 1; letter-spacing: -0.02em; }
+.rs-status-item .l { font-size: 13px; font-weight: 500; color: var(--fg-mute); margin-top: 6px; }
 
 .rs-callout {
   border: 1px solid var(--rule); border-left: 3px solid var(--a-research);

@@ -1,31 +1,54 @@
 /* ============================================================
    tokens.css — design tokens (single source of truth)
-   Colors, type scale, spacing, radii, motion timings.
+   Notion-inspired system: warm off-white surfaces, soft gray
+   cards, bold black sans display type, pastel tag colors.
    Edit here to change the look of the entire site.
 ============================================================ */
 :root {
   /* --- surfaces / text (light) --- */
-  --bg:        #f5f2eb;
-  --bg-raised: #faf8f3;
-  --fg:        #15140f;
-  --fg-soft:   #4b4740;
-  --fg-mute:   #736e66;
-  --rule:      #d9d3c4;
-  --chip:      #e3decf;
-  --hover:     rgba(21, 20, 15, 0.04);
-  --code-bg:   #efe9da;
+  --bg:        #ffffff;
+  --bg-card:   #f7f6f3;
+  --bg-raised: #ffffff;
+  --fg:        #191919;
+  --fg-soft:   #4a4a48;
+  --fg-mute:   #83837e;
+  --rule:      #e9e8e4;
+  --chip:      #f1f0ec;
+  --hover:     rgba(25, 25, 25, 0.045);
+  --code-bg:   #f7f6f3;
 
-  /* --- semantic accents (restrained; light) --- */
-  --a-data:       oklch(0.55 0.14 245);
-  --a-automation: oklch(0.58 0.15 55);
-  --a-research:   oklch(0.52 0.13 155);
-  --a-ml:         oklch(0.56 0.15 20);
-  --a-live:       oklch(0.55 0.13 155);
+  /* --- brand accents --- */
+  --accent:        #2383e2;
+  --accent-bg:      #e7f3fe;
+  --accent-2:       #ffa344;
+  --accent-2-bg:    #fef1de;
 
-  /* --- type --- */
-  --f-serif: 'Instrument Serif', ui-serif, Georgia, serif;
-  --f-sans:  'Geist', system-ui, -apple-system, "Segoe UI", sans-serif;
-  --f-mono:  'Geist Mono', ui-monospace, "SFMono-Regular", Menlo, monospace;
+  /* --- pastel tag palette (Notion property-tag style) --- */
+  --tag-blue-bg:   #dbecf8; --tag-blue-fg:   #2064a3;
+  --tag-green-bg:  #dcf0dc; --tag-green-fg:  #256a2e;
+  --tag-yellow-bg: #fbecc7; --tag-yellow-fg: #93701f;
+  --tag-orange-bg: #fbe4d4; --tag-orange-fg: #a2540f;
+  --tag-pink-bg:   #f8dfea; --tag-pink-fg:   #a02a63;
+  --tag-purple-bg: #eae3f8; --tag-purple-fg: #5f3fa8;
+  --tag-gray-bg:   #ececea; --tag-gray-fg:   #4a4a48;
+
+  /* semantic aliases used across pages */
+  --a-data:       var(--tag-blue-fg);
+  --a-automation: var(--tag-orange-fg);
+  --a-research:   var(--tag-green-fg);
+  --a-ml:         var(--tag-pink-fg);
+  --a-live:       #2e9e4f;
+
+  /* --- type ---
+     Notion's headline face is a bold geometric grotesk; Geist at
+     heavy weight reads the same way, so nothing new to load.
+     `--f-serif` is kept as an alias (not an actual serif) so the
+     many `.serif` utility classes across the markup don't need a
+     find/replace — they now render the bold display sans. */
+  --f-display: 'Geist', system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-serif:   'Geist', system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-sans:    'Geist', system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:    'Geist Mono', ui-monospace, "SFMono-Regular", Menlo, monospace;
 
   /* --- spacing scale --- */
   --sp-1: 4px;
@@ -41,9 +64,10 @@
   /* --- layout --- */
   --container: 1120px;
   --measure: 680px;
-  --radius-s: 6px;
-  --radius-m: 12px;
-  --radius-l: 18px;
+  --radius-s: 8px;
+  --radius-m: 16px;
+  --radius-l: 24px;
+  --shadow-card: 0 1px 2px rgba(25,25,25,0.04), 0 8px 24px rgba(25,25,25,0.05);
 
   /* --- motion --- */
   --ease: cubic-bezier(.2,.7,.2,1);
@@ -53,21 +77,37 @@
 }
 
 html.dark {
-  --bg:        #0b0a09;
-  --bg-raised: #0f0e0c;
-  --fg:        #ece7d8;
-  --fg-soft:   #b5ad9c;
-  --fg-mute:   #7d786f;
-  --rule:      #2b2824;
-  --chip:      #1c1a17;
-  --hover:     rgba(236, 231, 216, 0.05);
-  --code-bg:   #14120f;
+  --bg:        #191919;
+  --bg-card:   #262625;
+  --bg-raised: #202020;
+  --fg:        #ededec;
+  --fg-soft:   #b9b9b5;
+  --fg-mute:   #8c8c88;
+  --rule:      rgba(255, 255, 255, 0.09);
+  --chip:      #2b2b2a;
+  --hover:     rgba(255, 255, 255, 0.055);
+  --code-bg:   #262625;
 
-  --a-data:       oklch(0.75 0.13 245);
-  --a-automation: oklch(0.78 0.14 55);
-  --a-research:   oklch(0.72 0.13 155);
-  --a-ml:         oklch(0.74 0.14 20);
-  --a-live:       oklch(0.72 0.14 155);
+  --accent:      #5eb0ff;
+  --accent-bg:   rgba(35, 131, 226, 0.16);
+  --accent-2:    #ffb166;
+  --accent-2-bg: rgba(255, 163, 68, 0.14);
+
+  --tag-blue-bg:   rgba(35,131,226,0.16);   --tag-blue-fg:   #7cc0ff;
+  --tag-green-bg:  rgba(46,158,79,0.16);    --tag-green-fg:  #7fd18f;
+  --tag-yellow-bg: rgba(226,178,35,0.16);   --tag-yellow-fg: #e6c667;
+  --tag-orange-bg: rgba(226,120,35,0.16);   --tag-orange-fg: #f0a874;
+  --tag-pink-bg:   rgba(226,35,140,0.16);   --tag-pink-fg:   #f194c6;
+  --tag-purple-bg: rgba(135,90,226,0.18);   --tag-purple-fg: #c3a8f5;
+  --tag-gray-bg:   rgba(255,255,255,0.08);  --tag-gray-fg:   #b9b9b5;
+
+  --a-data:       var(--tag-blue-fg);
+  --a-automation: var(--tag-orange-fg);
+  --a-research:   var(--tag-green-fg);
+  --a-ml:         var(--tag-pink-fg);
+  --a-live:       #6fd486;
+
+  --shadow-card: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
 }
 
 @media (prefers-reduced-motion: reduce) {

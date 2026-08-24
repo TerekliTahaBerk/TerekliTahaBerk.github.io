@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Research · Taha Berk Terekli</title>
+  <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+  <link rel="apple-touch-icon" href="/favicon.jpg" />
+  <meta name="description" content="TÜBİTAK 2209-A research by Taha Berk Terekli: a leakage-safe, patient-level evaluation of U-Net-family models for brain-tumor segmentation on multimodal MRI." />
+  <meta name="theme-color" content="#0b0a09" />
+  <link rel="canonical" href="https://www.tahaberk.com/research/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Research · Taha Berk Terekli" />
+  <meta property="og:description" content="A leakage-safe, patient-level evaluation of U-Net-family models for brain-tumor segmentation, under a TÜBİTAK 2209-A grant." />
+  <meta property="og:url" content="https://www.tahaberk.com/research/" />
+  <meta property="og:site_name" content="Taha Berk Terekli" />
+  <meta property="og:image" content="https://www.tahaberk.com/assets/img/og-cover.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://www.tahaberk.com/assets/img/og-cover.png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Brain-tumor segmentation with U-Net — TÜBİTAK 2209-A",
+    "about": "Leakage-safe, patient-level evaluation of U-Net-family models on multimodal BraTS-style MRI",
+    "author": { "@type": "Person", "name": "Taha Berk Terekli", "url": "https://www.tahaberk.com/" },
+    "funder": { "@type": "Organization", "name": "TÜBİTAK", "identifier": "2209-A" },
+    "url": "https://www.tahaberk.com/research/",
+    "inLanguage": "en"
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet" />
+  <script>(function(){try{var s=localStorage.getItem('tbt_theme');var d=s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark');}catch(e){document.documentElement.classList.add('dark');}})();</script>
+  <link rel="stylesheet" href="/assets/css/tokens.css" />
+  <link rel="stylesheet" href="/assets/css/base.css" />
+  <link rel="stylesheet" href="/assets/css/research.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <main class="page" id="main">
+    <header class="top">
+      <a href="/" class="brand">Taha Berk<span class="dot" aria-hidden="true"></span></a>
+      <div class="nav-wrap">
+        <nav class="nav" aria-label="Primary">
+          <a href="/work/">Work</a>
+          <a href="/projects/">Projects</a>
+          <a href="/research/" aria-current="page">Research</a>
+          <a href="/notes/">Notes</a>
+          <a href="/about/">About</a>
+        </nav>
+        <button class="theme-toggle" id="theme" aria-label="Toggle color theme" aria-pressed="false" title="Toggle theme">
+          <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <section class="rs-main">
+      <div class="eyebrow">Research · TÜBİTAK 2209-A</div>
+      <h1 class="serif">Brain-tumor segmentation with U-Net.</h1>
+      <p class="rs-lede">A leakage-safe, patient-level evaluation of U-Net-family architectures on multimodal MRI — built under an undergraduate research grant, and written up the way I wish more segmentation papers were: audited, reproducible, and honest about what it doesn't show.</p>
+      <div class="rs-meta-row">
+        <span class="chip">TensorFlow</span><span class="chip">Keras</span><span class="chip">U-Net</span><span class="chip">MRI</span><span class="chip">Python</span>
+      </div>
+
+      <!-- OVERVIEW -->
+      <div class="rs-section">
+        <h2 class="serif">Overview</h2>
+        <p>This project is funded by a TÜBİTAK 2209-A undergraduate research grant and asks a narrow, deliberately unglamorous question: under a fixed, matched training protocol, do specific U-Net variants actually segment brain tumors better than a standard U-Net baseline — and can that claim survive a genuinely held-out, leakage-free test?</p>
+        <p>Semantic segmentation on medical images is easy to get impressive-looking numbers from and hard to get trustworthy ones. Most of the engineering effort in this project went into the second half of that sentence.</p>
+      </div>
+
+      <!-- PROBLEM -->
+      <div class="rs-section">
+        <h2 class="serif">Problem framing</h2>
+        <p>Multimodal brain MRI (T1, T1ce, T2, FLAIR) plus tumor sub-region labels — the BraTS-style setup — is a well-studied benchmark, which also means it is easy to overfit to its own quirks. Three failure modes are common in student and research projects alike:</p>
+        <ul>
+          <li><strong>Split leakage.</strong> Splitting by slice or patch instead of by patient lets the model memorise a patient's anatomy across train and validation, inflating scores.</li>
+          <li><strong>Undocumented preprocessing.</strong> Skull-stripping tool, intensity normalisation and scanner-field-strength differences all shift results, but rarely get reported precisely enough to reproduce.</li>
+          <li><strong>Mean-only reporting.</strong> A single averaged Dice score hides a heavy-tailed distribution — most patients segment well, and a long tail segments badly, which is exactly the tail a clinician would notice.</li>
+        </ul>
+        <p>The pipeline for this project (public as <a class="link-arrow" href="https://github.com/TerekliTahaBerk/bratsarticle" target="_blank" rel="noopener noreferrer">bratsarticle</a>) is designed around closing those three gaps before comparing any architectures.</p>
+      </div>
+
+      <!-- METHODOLOGY -->
+      <div class="rs-section">
+        <h2 class="serif">Methodology</h2>
+
+        <svg class="rs-pipeline" viewBox="0 0 640 96" role="img" aria-label="Pipeline diagram: MRI volumes, preprocessing, patient-level split, multi-seed training, one frozen held-out evaluation, then a Dice and IoU report">
+          <defs>
+            <marker id="rs-arrow" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0 0 L8 4 L0 8 Z" fill="currentColor"/>
+            </marker>
+          </defs>
+          <g fill="none" stroke="currentColor" stroke-width="1.1">
+            <rect x="6"   y="30" width="92" height="36" rx="3"/>
+            <rect x="130" y="30" width="92" height="36" rx="3"/>
+            <rect x="254" y="30" width="92" height="36" rx="3"/>
+            <rect x="378" y="30" width="92" height="36" rx="3"/>
+            <rect class="accent" x="502" y="30" width="92" height="36" rx="3" stroke-width="1.5"/>
+            <path d="M98 48 L128 48" marker-end="url(#rs-arrow)"/>
+            <path d="M222 48 L252 48" marker-end="url(#rs-arrow)"/>
+            <path d="M346 48 L376 48" marker-end="url(#rs-arrow)"/>
+            <path d="M470 48 L500 48" marker-end="url(#rs-arrow)"/>
+          </g>
+          <g class="step-label" text-anchor="middle">
+            <text x="52"  y="52">MRI volumes</text>
+            <text x="176" y="52">Preprocess</text>
+            <text x="300" y="52">Patient split</text>
+            <text x="424" y="52">Train (seeds)</text>
+            <text x="548" y="52" class="accent">Frozen eval</text>
+          </g>
+          <g text-anchor="middle">
+            <text x="52"  y="24">T1 · T1ce · T2 · FLAIR</text>
+            <text x="176" y="24">z-score, non-zero voxels</text>
+            <text x="300" y="24">no leakage across sets</text>
+            <text x="424" y="24">matched 2D protocol</text>
+            <text x="548" y="24" class="accent">one guarded run</text>
+          </g>
+        </svg>
+
+        <h3>Data &amp; preprocessing</h3>
+        <p>Inputs are multimodal MRI volumes (T1, T1ce, T2, FLAIR) with tumor sub-region labels. Intensities are z-score normalised per volume over non-zero voxels only — ignoring the surrounding air rather than scaling against it — which in practice mattered more to segmentation quality than any single architectural change.</p>
+        <p>Because the positive (tumor) class is a small fraction of total voxels, training uses patch-based sampling biased toward tumor-containing regions, combined with a soft-Dice-plus-cross-entropy loss so the network cannot get a good loss by predicting background everywhere.</p>
+
+        <h3>Splitting &amp; training</h3>
+        <p>The unit of the train/validation/test split is the <strong>patient</strong>, not the slice or the patch — the single most common source of inflated scores in segmentation work, and the first thing the pipeline enforces. Three U-Net-family architectures (standard U-Net, BU-Net, and U-Net+RES) are trained under a bounded, matched 2D protocol with multiple random seeds per architecture, to separate real differences from training noise.</p>
+        <p>An analysis plan — which metrics, which comparisons, which significance thresholds — was written and frozen before the held-out test set was touched, and the test set itself was evaluated exactly once, under that plan.</p>
+
+        <h3>Evaluation</h3>
+        <p>The primary metrics are the Dice similarity coefficient and Intersection-over-Union (IoU), per tumor sub-region:</p>
+        <div class="rs-formula">Dice(A, B) = 2·|A ∩ B| / (|A| + |B|)</div>
+        <p>Rather than reporting a single mean, the project reports Dice and IoU as <strong>median and interquartile range across patients</strong>, plus an explicit count of patients falling below a set threshold — a distribution is much harder to be wrong about than a single averaged headline number.</p>
+
+        <h3>Reproducibility</h3>
+        <p>The repository ships one training script, one config file and a synthetic-data smoke test that runs on CPU in under two minutes, plus a clean-clone reproduction audit — cloning the repo fresh and re-running the pipeline end to end — so the results aren't tied to one machine's state.</p>
+      </div>
+
+      <!-- STATUS / FINDINGS -->
+      <div class="rs-section">
+        <h2 class="serif">Status &amp; findings</h2>
+        <p>The project has worked through its full internal pipeline — audited data and patient split, tested implementations, matched development runs, multi-seed confirmation, a frozen analysis plan, one guarded held-out test evaluation, artifact-derived figures and tables, a clean-clone reproduction audit, and a manuscript package including a formal response-to-reviewers cycle.</p>
+        <div class="rs-callout">
+          <strong>Finding.</strong> Under the bounded 2D protocol, both BU-Net and U-Net+RES improved patient-level mean regional Dice over standard U-Net, and U-Net+RES slightly exceeded the full BU-Net while using fewer measured resources.
+        </div>
+        <p>This result is intentionally narrow. It does not establish clinical utility, external generalisation, state-of-the-art performance, or superiority over untested 3D, transformer-based or self-configuring segmentation systems — and the write-up says so explicitly.</p>
+      </div>
+
+      <!-- FUTURE -->
+      <div class="rs-section">
+        <h2 class="serif">What's next</h2>
+        <ul>
+          <li>Better skull-strip QA before training, potentially a learned skull-stripping step.</li>
+          <li>Histogram matching across scanners, rather than per-volume normalisation alone.</li>
+          <li>Per-patient temperature scaling so uncertainty estimates are properly calibrated.</li>
+          <li>An honest out-of-distribution test set from a different scanner or institution, evaluated only once, at the very end.</li>
+        </ul>
+        <p>Longer field notes on the day-to-day decisions behind this project — normalisation, patch sampling, the validation-split bug that cost two weeks — are in <a class="link-arrow" href="/notes/unet-brain-tumor-notes/">Notes</a>.</p>
+      </div>
+
+      <div class="rs-links">
+        <a class="btn primary" href="https://github.com/TerekliTahaBerk/bratsarticle" target="_blank" rel="noopener noreferrer">View repository ↗</a>
+        <a class="btn" href="/notes/unet-brain-tumor-notes/">Field notes</a>
+        <a class="btn" href="/projects/">See in Projects</a>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <a href="/">← Back home</a>
+      <span>Istanbul · GMT+3</span>
+    </footer>
+  </main>
+
+  <script defer src="/assets/js/theme.js"></script>
+  <!-- Private Finance OS launcher (additive, non-invasive) -->
+  <script defer src="/assets/finance-launcher.js"></script>
+</body>
+</html>

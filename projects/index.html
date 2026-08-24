@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects · Taha Berk Terekli</title>
+  <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+  <link rel="apple-touch-icon" href="/favicon.jpg" />
+  <meta name="description" content="Selected projects by Taha Berk Terekli — a reproducible brain-tumor segmentation research pipeline, a production education platform, two subscription products and a symbolic-mathematics toolkit." />
+  <meta name="theme-color" content="#0b0a09" />
+  <link rel="canonical" href="https://www.tahaberk.com/projects/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Projects · Taha Berk Terekli" />
+  <meta property="og:description" content="A reproducible brain-tumor segmentation pipeline, a production education platform, two subscription products and a symbolic-mathematics toolkit." />
+  <meta property="og:url" content="https://www.tahaberk.com/projects/" />
+  <meta property="og:site_name" content="Taha Berk Terekli" />
+  <meta property="og:image" content="https://www.tahaberk.com/assets/img/og-cover.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://www.tahaberk.com/assets/img/og-cover.png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.tahaberk.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://www.tahaberk.com/projects/" }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet" />
+  <script>(function(){try{var s=localStorage.getItem('tbt_theme');var d=s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark');}catch(e){document.documentElement.classList.add('dark');}})();</script>
+  <link rel="stylesheet" href="/assets/css/tokens.css" />
+  <link rel="stylesheet" href="/assets/css/base.css" />
+  <link rel="stylesheet" href="/assets/css/projects.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <main class="page" id="main">
+    <header class="top">
+      <a href="/" class="brand">Taha Berk<span class="dot" aria-hidden="true"></span></a>
+      <div class="nav-wrap">
+        <nav class="nav" aria-label="Primary">
+          <a href="/work/">Work</a>
+          <a href="/projects/" aria-current="page">Projects</a>
+          <a href="/research/">Research</a>
+          <a href="/notes/">Notes</a>
+          <a href="/about/">About</a>
+        </nav>
+        <button class="theme-toggle" id="theme" aria-label="Toggle color theme" aria-pressed="false" title="Toggle theme">
+          <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <section class="pj-main">
+      <div class="eyebrow">Selected work</div>
+      <h1 class="serif">Things I've shipped.</h1>
+      <p class="pj-intro">Five projects that span the range I work in — a reproducible research pipeline, two production subscription products, an education platform in daily use, and a symbolic-mathematics toolkit. Quality over quantity: everything else lives on <a class="link-arrow" href="https://github.com/TerekliTahaBerk" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+
+      <div class="pj-list">
+
+        <article class="pj-item">
+          <div class="pj-head">
+            <div>
+              <div class="pj-id">01 · Research</div>
+              <h2 class="serif">BraTS U-Net Research Pipeline</h2>
+            </div>
+            <div class="pj-links">
+              <span class="pj-status">Manuscript prepared</span>
+              <a class="btn" href="https://github.com/TerekliTahaBerk/bratsarticle" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+              <a class="btn" href="/research/">Research page</a>
+            </div>
+          </div>
+          <p class="pj-tagline">A reproducible, leakage-safe evaluation pipeline for U-Net-family models on multimodal brain-tumor MRI, built for the TÜBİTAK 2209-A project.</p>
+          <dl class="pj-grid-body">
+            <dt>Problem</dt>
+            <dd>Segmentation results in medical imaging are hard to trust when train/test splits leak between patients, evaluation protocols shift between papers, or preprocessing choices go undocumented.</dd>
+            <dt>Approach</dt>
+            <dd>Built the evaluation around a fixed patient-level split, an audited dataset, and a written analysis plan frozen <em>before</em> the held-out test set was touched — then ran one guarded internal evaluation against it.</dd>
+            <dt>Engineering</dt>
+            <dd>Implemented and compared standard U-Net, BU-Net and U-Net+RES under a bounded, matched 2D training protocol; ran multi-seed confirmation for stability; tracked measured compute per model; produced artifact-derived figures and tables plus a clean-clone reproduction audit; assembled the manuscript package, including a formal response-to-reviewers cycle.</dd>
+            <dt>Stack</dt>
+            <dd>TensorFlow, Keras, Python, pytest.</dd>
+            <dt>Result</dt>
+            <dd>Under the bounded protocol, both BU-Net and U-Net+RES improved patient-level mean regional Dice over standard U-Net, with U-Net+RES slightly ahead of the full BU-Net while using fewer measured resources. This is a deliberately narrow, internally-validated finding — not a claim of clinical utility, external generalisation or state-of-the-art performance.</dd>
+          </dl>
+        </article>
+
+        <article class="pj-item">
+          <div class="pj-head">
+            <div>
+              <div class="pj-id">02 · Production</div>
+              <h2 class="serif">Online Dershanem</h2>
+            </div>
+            <div class="pj-links">
+              <span class="pj-status">Live</span>
+              <a class="btn" href="https://github.com/TerekliTahaBerk/online-dershanem" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+              <a class="btn" href="https://www.onlinedershanem.com" target="_blank" rel="noopener noreferrer">Live site ↗</a>
+            </div>
+          </div>
+          <p class="pj-tagline">A role-based education and business-operations platform connecting sales, learning delivery, assessment and reporting in one product.</p>
+          <dl class="pj-grid-body">
+            <dt>Problem</dt>
+            <dd>Running exam-prep education — lessons, mock exams, CRM and operational reporting — across disconnected tools creates friction between teaching, sales and operations.</dd>
+            <dt>Approach</dt>
+            <dd>One platform, role-based access: lesson delivery and progress tracking, a mock-exam club, and CRM/ops reporting behind a single account system.</dd>
+            <dt>Engineering</dt>
+            <dd>CI and Lighthouse performance checks run on every change via GitHub Actions; the app ships as a container image to GHCR.</dd>
+            <dt>Stack</dt>
+            <dd>Next.js, TypeScript, Prisma, PostgreSQL, Playwright, Docker.</dd>
+            <dt>Result</dt>
+            <dd>Live in production at onlinedershanem.com.</dd>
+          </dl>
+        </article>
+
+        <article class="pj-item">
+          <div class="pj-head">
+            <div>
+              <div class="pj-id">03 · Production</div>
+              <h2 class="serif">OneRead</h2>
+            </div>
+            <div class="pj-links">
+              <span class="pj-status">Live</span>
+              <a class="btn" href="https://github.com/TerekliTahaBerk/one-read" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+              <a class="btn" href="https://one-read.vercel.app" target="_blank" rel="noopener noreferrer">Live site ↗</a>
+            </div>
+          </div>
+          <p class="pj-tagline">The subscription and account layer behind OneArticle — one human-reviewed article briefing delivered every weekday.</p>
+          <dl class="pj-grid-body">
+            <dt>Problem</dt>
+            <dd>Ship a small, sustainable subscription product without hand-rolling billing, verified sign-up and transactional email from scratch.</dd>
+            <dt>Approach</dt>
+            <dd>A single verified product path: email-code sign-up, reader preferences, checkout, then scheduled delivery to eligible subscribers only.</dd>
+            <dt>Engineering</dt>
+            <dd>Checkout, subscriptions and webhooks via Polar; verification, editorial and alert email via Resend with RFC 8058 one-click unsubscribe and bounce/complaint-based suppression; daily send via a Vercel cron job; error monitoring with Sentry.</dd>
+            <dt>Stack</dt>
+            <dd>Next.js, TypeScript, PostgreSQL, Prisma, Polar, Resend.</dd>
+            <dt>Result</dt>
+            <dd>Live production subscription product with real billing and delivery infrastructure.</dd>
+          </dl>
+        </article>
+
+        <article class="pj-item">
+          <div class="pj-head">
+            <div>
+              <div class="pj-id">04 · Production</div>
+              <h2 class="serif">OneGames</h2>
+            </div>
+            <div class="pj-links">
+              <span class="pj-status">Live</span>
+              <a class="btn" href="https://github.com/TerekliTahaBerk/one-games" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+              <a class="btn" href="https://one-games.vercel.app" target="_blank" rel="noopener noreferrer">Live site ↗</a>
+            </div>
+          </div>
+          <p class="pj-tagline">A daily-games sibling to OneRead — OneSudoku, OneDna and OneWord under one shared product shell.</p>
+          <dl class="pj-grid-body">
+            <dt>Problem</dt>
+            <dd>Extend the same product family into daily casual games without fragmenting the brand or rebuilding the shell from scratch.</dd>
+            <dt>Approach</dt>
+            <dd>Reused OneRead's design system — typography, layout, lockup, footer — so both products read as one company, while shipping three independent daily puzzles.</dd>
+            <dt>Engineering</dt>
+            <dd>Email-code verification and subscription billing shared across games, plus an explicit no-payment test path; consistent page padding and lockup placement verified by tests.</dd>
+            <dt>Stack</dt>
+            <dd>Next.js, TypeScript, Prisma, Polar.</dd>
+            <dt>Result</dt>
+            <dd>Live production product, sibling to OneRead.</dd>
+          </dl>
+        </article>
+
+        <article class="pj-item">
+          <div class="pj-head">
+            <div>
+              <div class="pj-id">05 · Research tooling</div>
+              <h2 class="serif">Quantum Groups</h2>
+            </div>
+            <div class="pj-links">
+              <span class="pj-status">Reproducible</span>
+              <a class="btn" href="https://github.com/TerekliTahaBerk/quantum-groups" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            </div>
+          </div>
+          <p class="pj-tagline">Symbolic Python verification of quantum group structures — representations, Hopf axioms and Yang–Baxter relations.</p>
+          <dl class="pj-grid-body">
+            <dt>Problem</dt>
+            <dd>Verify, by computation rather than by hand, the algebraic claims behind a piece of mathematical research on quantum group structures.</dd>
+            <dt>Approach</dt>
+            <dd>A tightly scoped symbolic toolkit for <em>U<sub>q</sub>(sl₂)</em> and <em>GL<sub>q</sub>(2|1)</em> — not a general theorem prover, but a way to pin the paper's finite-dimensional representations and relations to reproducible tests.</dd>
+            <dt>Engineering</dt>
+            <dd>Explicit E, F, K, K⁻¹ matrices for finite-dimensional representations; representation-level zero-residual checks of the defining relations; Hopf-structure axiom checks (comultiplication, counit, antipode); a 9×9 R-matrix and graded Yang–Baxter verification for <em>GL<sub>q</sub>(2|1)</em>.</dd>
+            <dt>Stack</dt>
+            <dd>Python, SymPy, pytest.</dd>
+            <dt>Result</dt>
+            <dd>A reproducible, test-verified companion codebase to the underlying mathematical research.</dd>
+          </dl>
+        </article>
+
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <a href="/">← Back home</a>
+      <span>Istanbul · GMT+3</span>
+    </footer>
+  </main>
+
+  <script defer src="/assets/js/theme.js"></script>
+  <!-- Private Finance OS launcher (additive, non-invasive) -->
+  <script defer src="/assets/finance-launcher.js"></script>
+</body>
+</html>

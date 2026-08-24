@@ -1,0 +1,31 @@
+/* ============================================================
+   projects.css — /projects/ page styles
+============================================================ */
+.pj-main { max-width: 880px; width: 100%; margin: 0 auto; padding: clamp(48px, 8vh, 88px) 8px 24px; }
+.pj-main > h1 { font-size: clamp(52px, 8vw, 88px); line-height: 0.96; letter-spacing: -0.02em; max-width: 14ch; }
+.pj-intro { font-family: var(--f-serif); font-size: clamp(18px, 1.6vw, 22px); line-height: 1.4; color: var(--fg-soft); max-width: 56ch; margin: var(--sp-4) 0 0; }
+
+.pj-list { display: flex; flex-direction: column; margin-top: var(--sp-8); }
+.pj-item { padding: var(--sp-7) 0; border-top: 1px solid var(--rule); }
+.pj-list > .pj-item:last-child { border-bottom: 1px solid var(--rule); }
+
+.pj-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; margin-bottom: var(--sp-2); }
+.pj-head .pj-id { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg-mute); }
+.pj-head h2 { font-size: clamp(26px, 3.4vw, 36px); line-height: 1.1; margin-top: 4px; }
+.pj-links { display: flex; gap: 8px; flex-wrap: wrap; align-self: flex-start; }
+
+.pj-tagline { font-family: var(--f-serif); font-size: 18px; line-height: 1.4; color: var(--fg-soft); max-width: 60ch; margin: 0 0 var(--sp-5); }
+
+.pj-grid-body { display: grid; grid-template-columns: 130px 1fr; gap: var(--sp-3) var(--sp-5); }
+.pj-grid-body dt { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fg-mute); padding-top: 3px; }
+.pj-grid-body dd { margin: 0 0 var(--sp-2); font-size: 14px; line-height: 1.65; color: var(--fg-soft); }
+.pj-grid-body dd:last-of-type { margin-bottom: 0; }
+
+.pj-status { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; background: var(--chip); color: var(--fg-soft); }
+
+@media (max-width: 640px) {
+  .pj-grid-body { grid-template-columns: 1fr; gap: 2px var(--sp-5); }
+  .pj-grid-body dt { margin-top: var(--sp-3); }
+  .pj-item { padding: var(--sp-6) 0; }
+  .pj-main { padding: 40px 2px 16px; }
+}

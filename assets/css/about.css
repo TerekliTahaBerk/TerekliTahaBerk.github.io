@@ -1,0 +1,27 @@
+/* ============================================================
+   about.css — /about/ page styles
+============================================================ */
+.ab-main { max-width: var(--measure); width: 100%; margin: 0 auto; padding: clamp(48px, 8vh, 88px) 8px 24px; }
+.ab-main > h1 { font-size: clamp(48px, 7.4vw, 80px); line-height: 0.98; letter-spacing: -0.02em; max-width: 15ch; }
+.ab-lede { font-family: var(--f-serif); font-size: clamp(19px, 1.7vw, 23px); line-height: 1.42; color: var(--fg-soft); margin: var(--sp-4) 0 0; }
+
+.ab-section { margin-top: var(--sp-8); padding-top: var(--sp-7); border-top: 1px solid var(--rule); }
+.ab-section h2 { font-size: clamp(22px, 2.6vw, 27px); margin-bottom: var(--sp-4); }
+.ab-section p { font-size: 15px; line-height: 1.72; color: var(--fg-soft); margin: 0 0 var(--sp-4); }
+.ab-section ul { padding-left: 20px; margin: 0 0 var(--sp-4); color: var(--fg-soft); font-size: 15px; line-height: 1.7; }
+.ab-section li { margin-bottom: 6px; }
+.ab-section strong { color: var(--fg); font-weight: 500; }
+
+.ab-vol-row { display: grid; grid-template-columns: minmax(160px,1fr) 2fr minmax(110px,auto); gap: 20px; padding: 16px 0; border-top: 1px solid var(--rule); align-items: baseline; }
+.ab-vol-row:last-child { border-bottom: 1px solid var(--rule); }
+.ab-vol-row .co { font-family: var(--f-serif); font-size: 20px; }
+.ab-vol-row .role { color: var(--fg-soft); font-size: 13.5px; }
+.ab-vol-row .when { color: var(--fg-mute); font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; text-align: right; white-space: nowrap; }
+
+.ab-elsewhere { display: flex; flex-wrap: wrap; gap: 10px; margin-top: var(--sp-2); }
+
+@media (max-width: 640px) {
+  .ab-main { padding: 40px 2px 16px; }
+  .ab-vol-row { grid-template-columns: 1fr; gap: 4px; }
+  .ab-vol-row .when { text-align: left; }
+}

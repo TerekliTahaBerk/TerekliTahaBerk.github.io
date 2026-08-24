@@ -3,795 +3,314 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Taha Berk Terekli</title>
-<link rel="icon" type="image/jpeg" href="/favicon.jpg" />
-<link rel="apple-touch-icon" href="/favicon.jpg" />
-  <meta name="description" content="Taha Berk Terekli — mathematics student & data-driven engineer in Istanbul." />
-  <meta name="theme-color" content="#0f0e0c" />
+  <title>Taha Berk Terekli — Data, Automation, ML &amp; Research</title>
+  <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+  <link rel="apple-touch-icon" href="/favicon.jpg" />
+  <meta name="description" content="Taha Berk Terekli — mathematics student at Yıldız Technical University and data intern at Getir. Building data pipelines, automation systems and applied ML; researching brain-tumor segmentation under a TÜBİTAK 2209-A grant." />
+  <meta name="theme-color" content="#0b0a09" />
   <link rel="canonical" href="https://www.tahaberk.com/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Taha Berk Terekli — Data, Automation, ML & Research" />
+  <meta property="og:description" content="Mathematics student and data engineer in the making — pipelines, automation, applied ML and a TÜBİTAK-funded segmentation research project." />
+  <meta property="og:url" content="https://www.tahaberk.com/" />
+  <meta property="og:site_name" content="Taha Berk Terekli" />
+  <meta property="og:image" content="https://www.tahaberk.com/assets/img/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Taha Berk Terekli — Data, Automation, ML & Research" />
+  <meta name="twitter:description" content="Mathematics student and data engineer in the making — pipelines, automation, applied ML and a TÜBİTAK-funded segmentation research project." />
+  <meta name="twitter:image" content="https://www.tahaberk.com/assets/img/og-cover.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://www.tahaberk.com/#person",
+        "name": "Taha Berk Terekli",
+        "url": "https://www.tahaberk.com/",
+        "image": "https://www.tahaberk.com/favicon.jpg",
+        "jobTitle": "Data Intern",
+        "worksFor": { "@type": "Organization", "name": "Getir" },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Yıldız Technical University" },
+        "address": { "@type": "PostalAddress", "addressLocality": "Istanbul", "addressCountry": "TR" },
+        "sameAs": [
+          "https://github.com/TerekliTahaBerk",
+          "https://www.linkedin.com/in/tahaberkterekli1/",
+          "https://www.kaggle.com/tahaberkterekli"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.tahaberk.com/#website",
+        "url": "https://www.tahaberk.com/",
+        "name": "Taha Berk Terekli",
+        "publisher": { "@id": "https://www.tahaberk.com/#person" }
+      }
+    ]
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet" />
 
   <script>
-    // Default to dark; respect user choice if previously set.
     (function () {
       try {
-        const saved = localStorage.getItem('tbt_theme');
-        if (saved === 'light') {
-          document.documentElement.classList.remove('dark');
-        } else {
-          document.documentElement.classList.add('dark');
-        }
-      } catch (e) {
-        document.documentElement.classList.add('dark');
-      }
+        var saved = localStorage.getItem('tbt_theme');
+        var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (dark) document.documentElement.classList.add('dark');
+      } catch (e) { document.documentElement.classList.add('dark'); }
     })();
   </script>
 
-  <style>
-    :root {
-      --bg:        #f5f2eb;
-      --fg:        #15140f;
-      --fg-soft:   #4b4740;
-      --fg-mute:   #97928a;
-      --rule:      #d9d3c4;
-      --chip:      #e3decf;
-      --hover:     rgba(21, 20, 15, 0.04);
-    }
-    html.dark {
-      --bg:        #0b0a09;
-      --fg:        #ece7d8;
-      --fg-soft:   #b5ad9c;
-      --fg-mute:   #6a655c;
-      --rule:      #2b2824;
-      --chip:      #1c1a17;
-      --hover:     rgba(236, 231, 216, 0.05);
-    }
-
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; height: 100%; }
-    body {
-      background: var(--bg);
-      color: var(--fg);
-      font-family: 'Geist', system-ui, -apple-system, sans-serif;
-      font-feature-settings: "ss01", "cv11";
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-      overflow: hidden;
-    }
-    @media (max-height: 660px), (max-width: 640px) {
-      body { overflow: auto; }
-    }
-
-    ::selection { background: var(--fg); color: var(--bg); }
-
-    .page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      padding: 28px clamp(20px, 4vw, 56px);
-      position: relative;
-    }
-
-    /* ---------- TOP BAR ---------- */
-    .top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 24px;
-    }
-    .brand {
-      font-family: 'Instrument Serif', serif;
-      font-size: 22px;
-      letter-spacing: -0.01em;
-      text-decoration: none;
-      color: var(--fg);
-      display: inline-flex;
-      align-items: baseline;
-      gap: 6px;
-    }
-    .brand .dot {
-      width: 5px; height: 5px; border-radius: 50%;
-      background: oklch(0.62 0.15 155);
-      display: inline-block;
-      transform: translateY(-3px);
-    }
-    .nav-wrap { display: flex; align-items: center; gap: clamp(16px, 2vw, 28px); }
-    .nav {
-      display: flex;
-      gap: clamp(20px, 3vw, 36px);
-    }
-    .nav a {
-      color: var(--fg);
-      opacity: 0.65;
-      text-decoration: none;
-      font-size: 13px;
-      letter-spacing: 0.01em;
-      position: relative;
-      padding: 4px 2px;
-      transition: opacity .25s ease;
-    }
-    .nav a:hover { opacity: 1; }
-    .nav a::after {
-      content: "";
-      position: absolute;
-      left: 2px; right: 2px;
-      bottom: 0;
-      height: 1px;
-      background: currentColor;
-      transform-origin: left;
-      transform: scaleX(0);
-      transition: transform .35s cubic-bezier(.2,.7,.2,1);
-    }
-    .nav a:hover::after { transform: scaleX(1); }
-
-    .theme-toggle {
-      background: transparent;
-      border: 1px solid var(--rule);
-      color: var(--fg);
-      opacity: 0.65;
-      border-radius: 999px;
-      width: 28px; height: 28px;
-      display: inline-flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      transition: opacity .25s ease, border-color .25s ease;
-    }
-    .theme-toggle:hover { opacity: 1; border-color: var(--fg-soft); }
-    .theme-toggle svg { width: 13px; height: 13px; }
-
-    /* ---------- CENTER ---------- */
-    .center {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      text-align: left;
-      max-width: 620px;
-      margin: 0 auto;
-      width: 100%;
-      padding: 0 8px;
-    }
-    .center .intro { text-align: left; }
-
-    .hey {
-      font-family: 'Instrument Serif', serif;
-      font-weight: 400;
-      font-size: clamp(72px, 13vw, 160px);
-      line-height: 0.88;
-      letter-spacing: -0.025em;
-      margin: 0;
-    }
-
-    .live {
-      display: inline-flex; align-items: center; gap: 9px;
-      font-family: 'Geist Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.06em;
-      color: var(--fg-mute);
-      margin-top: 20px;
-      text-decoration: none;
-    }
-    .live:hover .live-link { color: var(--fg-soft); }
-    .live .live-link { color: var(--fg-mute); transition: color .3s ease; }
-    .live .arrow { opacity: .45; }
-    .live .pulse {
-      position: relative;
-      display: inline-block;
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: oklch(0.66 0.16 152);
-      box-shadow: 0 0 6px oklch(0.66 0.16 152 / 0.6);
-    }
-    .live .pulse::after {
-      content: "";
-      position: absolute;
-      inset: -3px;
-      border-radius: 50%;
-      background: oklch(0.66 0.16 152);
-      opacity: 0.3;
-      animation: pulse 2.4s ease-out infinite;
-    }
-    @keyframes pulse {
-      0%   { transform: scale(0.55); opacity: 0.45; }
-      100% { transform: scale(2.0);  opacity: 0;    }
-    }
-
-    /* ---------- PLUS GRID ---------- */
-    .grid {
-      --cell: 11px;
-      --gap-x: 6px;
-      --gap-y: 7px;
-      --tone-low:  var(--fg-mute);
-      --tone-high: var(--fg);
-
-      margin-top: clamp(22px, 3.4vh, 36px);
-      display: grid;
-      grid-template-columns: repeat(var(--cols, 22), var(--cell));
-      grid-template-rows:    repeat(var(--rows, 8),  var(--cell));
-      grid-auto-flow: column;
-      gap: var(--gap-y) var(--gap-x);
-      width: max-content;
-      max-width: 100%;
-      /* a faint inner halo to anchor the field as a single object */
-      filter: drop-shadow(0 0 0 transparent);
-    }
-    html.dark .grid {
-      --tone-low:  #2f2c27;
-      --tone-high: #ece4d2; /* soft warm white */
-    }
-    .grid svg {
-      display: block;
-      width: var(--cell);
-      height: var(--cell);
-      /* per-cell tone interpolated low→high by --tone (0..1) */
-      color: color-mix(in oklab, var(--tone-low), var(--tone-high) calc(var(--tone, 0) * 100%));
-      opacity: 0;
-      transform: translateY(4px) scale(.5);
-      transition:
-        opacity .9s cubic-bezier(.2,.7,.2,1),
-        transform .55s cubic-bezier(.2,.7,.2,1),
-        filter .35s ease,
-        color .35s ease;
-      will-change: opacity, transform;
-    }
-    .grid svg.in {
-      opacity: var(--op, 1);
-      transform: scale(var(--scl, 1));
-    }
-    .grid svg:hover {
-      opacity: 1;
-      transform: scale(1.45);
-      color: var(--tone-high);
-      filter: drop-shadow(0 0 5px color-mix(in oklab, var(--tone-high), transparent 35%));
-    }
-
-    /* ---------- GRID TOOLTIP ---------- */
-    .gh-tip {
-      position: fixed;
-      z-index: 60;
-      pointer-events: none;
-      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: 10.5px;
-      line-height: 1.35;
-      color: #ece4d2;
-      background: rgba(18, 16, 14, 0.86);
-      border: 1px solid rgba(236, 228, 210, 0.09);
-      border-radius: 8px;
-      padding: 6px 9px;
-      letter-spacing: 0.01em;
-      white-space: nowrap;
-      box-shadow: 0 6px 22px rgba(0, 0, 0, 0.35);
-      -webkit-backdrop-filter: blur(6px);
-      backdrop-filter: blur(6px);
-      opacity: 0;
-      transform: translate(-50%, -2px);
-      transition:
-        opacity .18s ease,
-        transform .22s cubic-bezier(.2,.7,.2,1);
-      will-change: opacity, transform;
-    }
-    .gh-tip.show {
-      opacity: 1;
-      transform: translate(-50%, -8px);
-    }
-    .gh-tip .gh-tip-label { display: block; }
-    .gh-tip .gh-tip-count {
-      display: block;
-      margin-top: 2px;
-      font-size: 9.5px;
-      opacity: 0.55;
-      letter-spacing: 0.02em;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .gh-tip { transition: opacity .12s ease; transform: translate(-50%, -8px); }
-    }
-
-    /* ---------- INTRO ---------- */
-    .intro {
-      margin-top: clamp(20px, 4vh, 36px);
-      font-family: 'Instrument Serif', serif;
-      font-size: clamp(22px, 2.6vw, 30px);
-      line-height: 1.25;
-      letter-spacing: -0.005em;
-      max-width: 34ch;
-      color: var(--fg);
-    }
-    .w-data       { color: oklch(0.62 0.14 245); }
-    .w-automation { color: oklch(0.66 0.14 55);  }
-    .w-research   { color: oklch(0.60 0.14 155); }
-    .w-ml         { color: oklch(0.62 0.14 10);  }
-    html.dark .w-data       { color: oklch(0.78 0.14 245); }
-    html.dark .w-automation { color: oklch(0.82 0.14 55);  }
-    html.dark .w-research   { color: oklch(0.78 0.14 155); }
-    html.dark .w-ml         { color: oklch(0.78 0.14 10);  }
-
-    /* ---------- BOTTOM ---------- */
-    .bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      margin-top: 16px;
-    }
-    .meta {
-      font-family: 'Geist Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--fg-mute);
-    }
-    .icons {
-      display: flex;
-      gap: 10px;
-    }
-    .icons a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 30px; height: 30px;
-      border-radius: 999px;
-      color: var(--fg);
-      opacity: 0.45;
-      text-decoration: none;
-      transition: opacity .25s ease, background .25s ease, transform .25s ease;
-    }
-    .icons a:hover {
-      opacity: 1;
-      background: var(--hover);
-      transform: translateY(-1px);
-    }
-    .icons a svg { width: 15px; height: 15px; }
-
-    a:focus-visible, button:focus-visible {
-      outline: 1px dashed var(--fg-soft);
-      outline-offset: 3px;
-    }
-
-    /* ---------- MOBILE ---------- */
-    @media (max-width: 640px) {
-      html, body { height: auto; }
-      body { overflow-x: hidden; }
-
-      .page {
-        padding: 18px 20px 24px;
-        min-height: 100svh;
-        gap: 0;
-      }
-
-      /* Top bar: keep brand + nav + theme on one row, tighter */
-      .top {
-        flex-wrap: nowrap;
-        gap: 10px;
-        align-items: center;
-      }
-      .brand { font-size: 19px; }
-      .nav-wrap { gap: 10px; flex-shrink: 0; }
-      .nav {
-        gap: 14px;
-      }
-      .nav a {
-        font-size: 12px;
-        padding: 4px 0;
-        opacity: 0.7;
-      }
-      .theme-toggle {
-        width: 28px; height: 28px;
-        flex-shrink: 0;
-      }
-
-      /* Center: properly balanced vertical rhythm */
-      .center {
-        padding: 0;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 0;
-        padding-top: clamp(24px, 6vh, 56px);
-        padding-bottom: clamp(16px, 4vh, 40px);
-      }
-      .hey {
-        font-size: clamp(88px, 28vw, 132px);
-        line-height: 0.86;
-        letter-spacing: -0.03em;
-      }
-      .live {
-        margin-top: 18px;
-        font-size: 10px;
-        letter-spacing: 0.08em;
-      }
-
-      /* Grid: keep it as a wide, sparse texture that fits the viewport */
-      .grid {
-        --cell: 9px;
-        --gap-x: 4px;
-        --gap-y: 5px;
-        margin-top: 28px;
-        margin-left: -2px; /* small visual bleed for balance */
-      }
-
-      .intro {
-        margin-top: 28px;
-        font-size: clamp(22px, 6vw, 28px);
-        line-height: 1.25;
-        max-width: 22ch;
-      }
-
-      /* Bottom: keep on a single line — meta left, icons right */
-      .bottom {
-        flex-wrap: nowrap;
-        gap: 12px;
-        margin-top: clamp(18px, 4vh, 32px);
-      }
-      .meta {
-        font-size: 9px;
-        letter-spacing: 0.18em;
-      }
-      .icons { gap: 6px; }
-      .icons a {
-        width: 30px; height: 30px;
-        opacity: 0.55;
-      }
-      .icons a svg { width: 15px; height: 15px; }
-    }
-
-    /* Tighten for the smallest phones */
-    @media (max-width: 380px) {
-      .page { padding: 16px 16px 20px; }
-      .nav { gap: 11px; }
-      .nav a { font-size: 11.5px; }
-      .brand { font-size: 18px; }
-      .hey { font-size: clamp(76px, 26vw, 108px); }
-      .grid {
-        --cell: 7.5px;
-        --gap-x: 3px;
-        --gap-y: 4px;
-      }
-      .intro { font-size: 20px; }
-      .meta { letter-spacing: 0.14em; }
-    }
-
-    /* Very short screens — make sure everything still breathes */
-    @media (max-width: 640px) and (max-height: 700px) {
-      .center {
-        padding-top: 20px;
-        padding-bottom: 16px;
-      }
-      .hey { font-size: clamp(72px, 22vw, 104px); }
-      .grid { margin-top: 18px; }
-      .intro { margin-top: 18px; }
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/css/tokens.css" />
+  <link rel="stylesheet" href="/assets/css/base.css" />
+  <link rel="stylesheet" href="/assets/css/home.css" />
 </head>
 <body>
-  <main class="page">
-    <!-- TOP -->
+  <a class="skip-link" href="#main">Skip to content</a>
+  <main class="page" id="main">
     <header class="top">
-      <a href="/" class="brand">Taha Berk</a>
+      <a href="/" class="brand">Taha Berk<span class="dot" aria-hidden="true"></span></a>
       <div class="nav-wrap">
         <nav class="nav" aria-label="Primary">
-          <a href="/work.html">CV</a>
-          <a href="/personal.html">Personal</a>
-          <a href="/research.html">Research</a>
-          <a href="/blog.html">Blog</a>
+          <a href="/work/">Work</a>
+          <a href="/projects/">Projects</a>
+          <a href="/research/">Research</a>
+          <a href="/notes/">Notes</a>
+          <a href="/about/">About</a>
         </nav>
-        <button class="theme-toggle" id="theme" aria-label="Toggle theme" title="Toggle theme">
+        <button class="theme-toggle" id="theme" aria-label="Toggle color theme" aria-pressed="false" title="Toggle theme">
           <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="4"/>
-            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+            <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
           </svg>
         </button>
       </div>
     </header>
 
-    <!-- CENTER -->
-    <section class="center">
-      <h1 class="hey">Hey,</h1>
-
-      <a class="live" id="live" href="https://github.com/TerekliTahaBerk" target="_blank" rel="noreferrer">
-        <span class="pulse" aria-hidden="true"></span>
-        <span class="live-link" id="live-label">offline · sample activity</span>
-        <span class="live-link arrow" aria-hidden="true">↗</span>
-      </a>
-
-      <div class="grid" id="grid" aria-hidden="true"></div>
-
-      <p class="intro">
-        I'm Taha, building with
-        <span class="w-data">data</span>,
-        <span class="w-automation">automation</span>,
-        <span class="w-research">research</span>
-        and <span class="w-ml">ML</span>.
+    <!-- HERO -->
+    <section class="hero container">
+      <h1 class="serif">Taha Berk Terekli</h1>
+      <p class="lede">
+        A mathematically trained engineer working across
+        <span class="w-data">data</span>, <span class="w-automation">automation</span>
+        and applied <span class="w-ml">ML</span>, with a running <span class="w-research">research</span>
+        project in medical image segmentation.
       </p>
+      <p class="now-line">
+        <strong>Istanbul, TR</strong>
+        <span class="sep">·</span>
+        <span>Data Intern @ Getir</span>
+        <span class="sep">·</span>
+        <span>B.Sc. Mathematics, YTU</span>
+      </p>
+      <div class="actions">
+        <a class="btn primary" href="mailto:contact@tahaberk.com">Email</a>
+        <a class="btn" href="https://github.com/TerekliTahaBerk" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        <a class="btn" href="https://www.linkedin.com/in/tahaberkterekli1/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+        <a class="btn" href="https://www.kaggle.com/tahaberkterekli" target="_blank" rel="noopener noreferrer">Kaggle ↗</a>
+      </div>
+
+      <div class="activity">
+        <a class="activity-head" id="live" href="https://github.com/TerekliTahaBerk" target="_blank" rel="noopener noreferrer">
+          <span class="pulse" aria-hidden="true"></span>
+          <span id="live-label">sample activity · pattern only</span>
+        </a>
+        <div class="grid" id="grid" role="img" aria-label="Decorative grid representing recent GitHub commit activity"></div>
+      </div>
     </section>
 
-    <!-- BOTTOM -->
-    <footer class="bottom">
-      <div class="meta">Istanbul · GMT+3</div>
-      <div class="icons" aria-label="Contact">
-        <a href="https://github.com/TerekliTahaBerk" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M12 .5C5.73.5.75 5.48.75 11.75c0 4.98 3.23 9.2 7.71 10.7.56.1.77-.24.77-.54v-1.9c-3.14.68-3.8-1.51-3.8-1.51-.51-1.3-1.25-1.64-1.25-1.64-1.02-.7.08-.68.08-.68 1.13.08 1.73 1.16 1.73 1.16 1 1.72 2.63 1.23 3.27.94.1-.73.39-1.23.71-1.51-2.5-.28-5.13-1.25-5.13-5.58 0-1.23.44-2.24 1.16-3.03-.12-.29-.5-1.43.11-2.98 0 0 .95-.3 3.1 1.16a10.7 10.7 0 0 1 5.65 0c2.15-1.46 3.1-1.16 3.1-1.16.61 1.55.23 2.69.11 2.98.72.79 1.16 1.8 1.16 3.03 0 4.34-2.63 5.3-5.14 5.58.4.35.76 1.03.76 2.08v3.08c0 .3.21.65.78.54 4.47-1.5 7.7-5.72 7.7-10.7C23.25 5.48 18.27.5 12 .5z"/>
-          </svg>
+    <!-- NOW -->
+    <section class="section container" aria-labelledby="now-h">
+      <div class="section-head">
+        <h2 id="now-h" class="serif">Right now</h2>
+      </div>
+      <div class="now-grid">
+        <div class="card now-card">
+          <div class="k">Work</div>
+          <h3>Data Intern, Getir</h3>
+          <p>SQL, Python, Amazon Redshift and Airflow — building pipelines and dashboards for business metrics in Tableau and Metabase.</p>
+        </div>
+        <div class="card now-card">
+          <div class="k">Research</div>
+          <h3>TÜBİTAK 2209-A</h3>
+          <p>Brain-tumor segmentation with U-Net on multimodal MRI — preprocessing, training and leakage-safe evaluation.</p>
+        </div>
+        <div class="card now-card">
+          <div class="k">Study</div>
+          <h3>Mathematics, YTU</h3>
+          <p>Final years of a B.Sc. in Mathematics at Yıldız Technical University, Istanbul (2022–2026).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE PREVIEW -->
+    <section class="section container" aria-labelledby="exp-h">
+      <div class="section-head">
+        <h2 id="exp-h" class="serif">Experience</h2>
+        <a class="link-arrow mono" href="/work/">Full experience
+          <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 14 L14 8 M9 8 L14 8 L14 13"/></svg>
         </a>
-        <a href="https://www.linkedin.com/in/tahaberkterekli1/" target="_blank" rel="noreferrer" aria-label="LinkedIn" title="LinkedIn">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.84v1.64h.06c.54-1 1.85-2.06 3.8-2.06 4.06 0 4.8 2.67 4.8 6.15V21h-4v-5.34c0-1.27-.02-2.91-1.78-2.91-1.78 0-2.05 1.39-2.05 2.82V21h-4V9z"/>
-          </svg>
+      </div>
+      <div class="exp-list">
+        <div class="exp-row">
+          <div class="co serif">Getir</div>
+          <div class="role">Data Intern — SQL, Python, Redshift, Airflow, Tableau &amp; Metabase.</div>
+          <div class="when current">May 2025 — Now</div>
+        </div>
+        <div class="exp-row">
+          <div class="co serif">Papara</div>
+          <div class="role">RPA Developer / Analyst Intern — Automation Anywhere, .NET, VB, SQL.</div>
+          <div class="when">Dec 2024 — May 2025</div>
+        </div>
+        <div class="exp-row">
+          <div class="co serif">LC Waikiki</div>
+          <div class="role">Supply Chain Intern — demand planning &amp; inventory analytics.</div>
+          <div class="when">Aug — Sep 2024</div>
+        </div>
+        <div class="exp-row">
+          <div class="co serif">Latro</div>
+          <div class="role">RPA Developer — SAP automation with Robusta, Python, Java.</div>
+          <div class="when">Jul 2023 — Apr 2024</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH HIGHLIGHT -->
+    <section class="section container" aria-labelledby="research-h">
+      <div class="section-head">
+        <h2 id="research-h" class="serif">Research</h2>
+        <a class="link-arrow mono" href="/research/">Full write-up
+          <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 14 L14 8 M9 8 L14 8 L14 13"/></svg>
         </a>
-        <a href="mailto:contact@tahaberk.com" aria-label="Email" title="Email">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="3" y="5" width="18" height="14" rx="2"/>
-            <path d="m3 7 9 6 9-6"/>
-          </svg>
+      </div>
+      <a class="card research-card" href="/research/" style="text-decoration:none; display:grid;">
+        <div class="rc-copy">
+          <div class="k">TÜBİTAK 2209-A · Research Student</div>
+          <h3 class="serif">Brain-tumor segmentation with U-Net</h3>
+          <p>A leakage-safe, patient-level evaluation of U-Net-family architectures on multimodal BraTS-style MRI — preprocessing, patch-based sampling, multi-seed training and an audited, reproducible evaluation pipeline.</p>
+          <div class="chips">
+            <span class="chip">TensorFlow</span><span class="chip">Keras</span><span class="chip">U-Net</span><span class="chip">MRI segmentation</span>
+          </div>
+        </div>
+        <svg class="research-diagram" viewBox="0 0 300 170" role="img" aria-label="Schematic diagram of an encoder-decoder U-Net architecture">
+          <g fill="none" stroke="currentColor" stroke-width="1.2">
+            <rect x="14"  y="34" width="34" height="34" rx="2"/>
+            <rect x="58"  y="44" width="30" height="26" rx="2"/>
+            <rect x="98"  y="52" width="26" height="18" rx="2"/>
+            <rect class="accent" x="132" y="56" width="24" height="12" rx="2" stroke-width="1.6"/>
+            <rect x="166" y="52" width="26" height="18" rx="2"/>
+            <rect x="202" y="44" width="30" height="26" rx="2"/>
+            <rect x="242" y="34" width="34" height="34" rx="2"/>
+            <path d="M48 51 L58 57 M88 57 L98 61 M124 61 L132 62 M156 62 L166 61 M192 61 L202 57 M232 57 L242 51" stroke-dasharray="2 2"/>
+            <path class="accent" d="M31 34 C 31 8, 259 8, 259 34" stroke-width="1"/>
+            <path class="accent" d="M73 44 C 73 22, 217 22, 217 44" stroke-width="1"/>
+          </g>
+          <text x="31" y="86" text-anchor="middle">input</text>
+          <text x="144" y="94" text-anchor="middle">bottleneck</text>
+          <text x="259" y="86" text-anchor="middle">mask</text>
+          <text x="72" y="14" text-anchor="middle">encoder</text>
+          <text x="216" y="14" text-anchor="middle">decoder</text>
+        </svg>
+      </a>
+    </section>
+
+    <!-- SELECTED PROJECTS -->
+    <section class="section container" aria-labelledby="proj-h">
+      <div class="section-head">
+        <h2 id="proj-h" class="serif">Selected projects</h2>
+        <a class="link-arrow mono" href="/projects/">All projects
+          <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 14 L14 8 M9 8 L14 8 L14 13"/></svg>
         </a>
-        <a href="https://www.tahaberk.com" aria-label="Website" title="Website">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="9"/>
-            <path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>
-          </svg>
+      </div>
+      <div class="proj-grid">
+        <a class="card proj-card" href="https://github.com/TerekliTahaBerk/online-dershanem" target="_blank" rel="noopener noreferrer">
+          <div class="pc-top">
+            <span class="pc-name serif">Online Dershanem</span>
+            <svg class="arrow" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 14 L14 8 M9 8 L14 8 L14 13"/></svg>
+          </div>
+          <p>Role-based education &amp; operations platform — lessons, mock exams, CRM and reporting in one product, live in production.</p>
+          <div class="chips"><span class="chip">Next.js</span><span class="chip">Prisma</span><span class="chip">PostgreSQL</span></div>
         </a>
+        <a class="card proj-card" href="https://github.com/TerekliTahaBerk/one-read" target="_blank" rel="noopener noreferrer">
+          <div class="pc-top">
+            <span class="pc-name serif">OneRead</span>
+            <svg class="arrow" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 14 L14 8 M9 8 L14 8 L14 13"/></svg>
+          </div>
+          <p>A subscription product delivering one human-reviewed article briefing every weekday, with verified sign-up and billing.</p>
+          <div class="chips"><span class="chip">Next.js</span><span class="chip">Prisma</span><span class="chip">Polar</span></div>
+        </a>
+        <a class="card proj-card" href="https://github.com/TerekliTahaBerk/quantum-groups" target="_blank" rel="noopener noreferrer">
+          <div class="pc-top">
+            <span class="pc-name serif">Quantum Groups</span>
+            <svg class="arrow" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 14 L14 8 M9 8 L14 8 L14 13"/></svg>
+          </div>
+          <p>Symbolic Python modelling of U_q(sl₂) and GL_q(2|1) — finite-dimensional representations and Yang–Baxter verification.</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip">SymPy</span><span class="chip">Pytest</span></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- NOTES PREVIEW -->
+    <section class="section container" aria-labelledby="notes-h">
+      <div class="section-head">
+        <h2 id="notes-h" class="serif">Notes</h2>
+        <a class="link-arrow mono" href="/notes/">Read all
+          <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 14 L14 8 M9 8 L14 8 L14 13"/></svg>
+        </a>
+      </div>
+      <div class="notes-list">
+        <a class="notes-row" href="/notes/idempotent-elt-redshift/">
+          <div class="date">2025 · 03</div>
+          <div><div class="notes-title serif">Why I'd rather build the same Redshift query twice</div>
+          <p>A case for boring, idempotent ELT — and what it actually costs to enforce in a real warehouse.</p></div>
+        </a>
+        <a class="notes-row" href="/notes/from-rpa-to-data/">
+          <div class="date">2025 · 02</div>
+          <div><div class="notes-title serif">From RPA to data: notes from the in-between</div>
+          <p>What two years of RPA taught me before moving into a data role — and which lessons were portable.</p></div>
+        </a>
+        <a class="notes-row" href="/notes/unet-brain-tumor-notes/">
+          <div class="date">2025 · 01</div>
+          <div><div class="notes-title serif">What U-Net taught me about reading MRI slices</div>
+          <p>Field notes from the TÜBİTAK project — normalisation, patch sampling and honest evaluation.</p></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- CLOSING -->
+    <section class="closing container">
+      <h2 class="serif">Building something in data, automation or applied ML? I'd like to hear about it.</h2>
+      <div class="actions">
+        <a class="btn primary" href="mailto:contact@tahaberk.com">contact@tahaberk.com</a>
+        <a class="btn" href="/about/">More about me</a>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <span>© <span id="year">2026</span> Taha Berk Terekli · Istanbul, GMT+3</span>
+      <div class="fsocial">
+        <a href="https://github.com/TerekliTahaBerk" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/tahaberkterekli1/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://www.kaggle.com/tahaberkterekli" target="_blank" rel="noopener noreferrer">Kaggle</a>
       </div>
     </footer>
   </main>
 
-  <script>
-    /* ---------- Theme toggle ---------- */
-    const themeBtn  = document.getElementById('theme');
-    const themeIcon = document.getElementById('theme-icon');
-    const SUN = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>';
-    const MOON = '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>';
-    const syncIcon = () => {
-      themeIcon.innerHTML = document.documentElement.classList.contains('dark') ? SUN : MOON;
-    };
-    syncIcon();
-    themeBtn.addEventListener('click', () => {
-      const root = document.documentElement;
-      root.classList.toggle('dark');
-      try { localStorage.setItem('tbt_theme', root.classList.contains('dark') ? 'dark' : 'light'); } catch {}
-      syncIcon();
-    });
-
-    /* ---------- GitHubActivityGrid ----------
-       A decorative plus-sign field that softly reacts to recent GitHub
-       activity. Deterministic mock data is rendered immediately; a
-       statically-generated JSON file (built daily by a GitHub Action)
-       is then quietly overlaid. If the JSON is unavailable the field
-       keeps its mock data and the status line flips to "offline".
-    ----------------------------------------------------------------- */
-    function GitHubActivityGrid({
-      mount,
-      username,
-      cols = 22,
-      rows = 8,
-    }) {
-      const SVG_NS = 'http://www.w3.org/2000/svg';
-      mount.style.setProperty('--cols', cols);
-      mount.style.setProperty('--rows', rows);
-
-      // ---- tooltip (single shared node) ----------------------------
-      let tipEl = document.querySelector('.gh-tip');
-      if (!tipEl) {
-        tipEl = document.createElement('div');
-        tipEl.className = 'gh-tip';
-        tipEl.setAttribute('role', 'tooltip');
-        tipEl.innerHTML = '<span class="gh-tip-label"></span><span class="gh-tip-count"></span>';
-        document.body.appendChild(tipEl);
+  <script defer src="/assets/js/theme.js"></script>
+  <script defer src="/assets/js/github-activity.js"></script>
+  <script defer>
+    document.addEventListener('DOMContentLoaded', function () {
+      var yEl = document.getElementById('year');
+      if (yEl) yEl.textContent = String(new Date().getFullYear());
+      if (typeof GitHubActivityGrid === 'function') {
+        GitHubActivityGrid({ mount: document.getElementById('grid'), username: 'TerekliTahaBerk', cols: 22, rows: 8 });
       }
-      const tipLabel = tipEl.querySelector('.gh-tip-label');
-      const tipCount = tipEl.querySelector('.gh-tip-count');
-
-      function labelFor(count) {
-        if (count <= 0)  return 'quiet day';
-        if (count === 1) return 'one tiny spark';
-        if (count <= 3)  return 'a few sparks';
-        if (count <= 7)  return 'busy little day';
-        if (count <= 12) return 'commit weather: active';
-        return 'tiny storm of commits';
-      }
-
-      function showTip(svg, cell) {
-        const count = cell.count | 0;
-        tipLabel.textContent = labelFor(count);
-        tipCount.textContent = count === 1 ? '1 commit' : `${count} commits`;
-        // Position above the cell, centered.
-        const r = svg.getBoundingClientRect();
-        tipEl.style.left = `${r.left + r.width / 2}px`;
-        tipEl.style.top  = `${r.top}px`;
-        tipEl.classList.add('show');
-      }
-      function hideTip() {
-        tipEl.classList.remove('show');
-      }
-
-      // ---- intensity → visual mapping ------------------------------
-      // Plus signs vary by opacity, tone (color mix) and a *very* subtle
-      // scale. Low activity ≈ almost invisible gray. High ≈ soft warm white.
-      function styleFromIntensity(v) {
-        const x = Math.max(0, Math.min(1, v));
-        // Strong floor so low cells barely register, gentle ceiling so the
-        // field never feels punchy or developer-dashboard-like.
-        const op   = 0.06 + Math.pow(x, 1.25) * 0.86;
-        const tone = Math.pow(x, 1.4);              // 0..1, biased dark
-        const scl  = 0.86 + x * 0.18;               // 0.86..1.04
-        return { op, tone, scl };
-      }
-
-      function makePlus(v) {
-        const { op, tone, scl } = styleFromIntensity(v);
-        const svg = document.createElementNS(SVG_NS, 'svg');
-        svg.setAttribute('viewBox', '0 0 14 14');
-        svg.setAttribute('aria-hidden', 'true');
-        svg.style.setProperty('--op',   op);
-        svg.style.setProperty('--tone', tone);
-        svg.style.setProperty('--scl',  scl);
-        const path = document.createElementNS(SVG_NS, 'path');
-        path.setAttribute('d', 'M7 2.5 L7 11.5 M2.5 7 L11.5 7');
-        path.setAttribute('stroke', 'currentColor');
-        path.setAttribute('stroke-width', '1.4');
-        path.setAttribute('stroke-linecap', 'round');
-        path.setAttribute('fill', 'none');
-        svg.appendChild(path);
-        return svg;
-      }
-
-      function applyStyle(svg, v) {
-        const { op, tone, scl } = styleFromIntensity(v);
-        svg.style.setProperty('--op',   op);
-        svg.style.setProperty('--tone', tone);
-        svg.style.setProperty('--scl',  scl);
-        if (svg.classList.contains('in')) {
-          svg.style.opacity = op;
-        }
-      }
-
-      // ---- date axis (oldest top-left → newest bottom-right) -------
-      const totalDays = cols * rows;
-      const today = new Date();
-      const todayUTC = new Date(Date.UTC(
-        today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()
-      ));
-      const firstDay = new Date(todayUTC.getTime() - (totalDays - 1) * 86400000);
-      function dateForIndex(i) {
-        return new Date(firstDay.getTime() + i * 86400000);
-      }
-
-      // Plausible mock commit count derived deterministically from intensity.
-      // Keeps the field cohesive when GitHub data is missing.
-      function mockCountFromIntensity(v) {
-        return Math.round(Math.pow(Math.max(0, Math.min(1, v)), 1.6) * 14);
-      }
-
-      // ---- deterministic mock field --------------------------------
-      // Smooth low-frequency noise so the field reads as texture rather
-      // than random dots. Recency lifts the right side just slightly.
-      function buildMock(seed) {
-        let r = seed >>> 0;
-        const rand = () => {
-          r = (r * 1664525 + 1013904223) >>> 0;
-          return (r & 0xffffffff) / 0x100000000;
-        };
-        const data = new Array(cols * rows);
-        for (let c = 0; c < cols; c++) {
-          for (let row = 0; row < rows; row++) {
-            const recency = c / Math.max(1, cols - 1);          // 0..1
-            const wave =
-              0.18 * Math.sin(c * 0.55 + row * 0.85) +
-              0.12 * Math.sin(c * 0.21 - row * 0.33 + 1.1);
-            const noise = rand() * 0.45;
-            let v = 0.22 + noise + wave + recency * 0.22;
-            // sprinkle voids so the field has breathing room
-            if (rand() < 0.18) v *= 0.15;
-            v = Math.max(0, Math.min(1, v));
-            const idx = c * rows + row;
-            data[idx] = {
-              intensity: v,
-              count: mockCountFromIntensity(v),
-              date: dateForIndex(idx),
-            };
-          }
-        }
-        return data;
-      }
-
-      // ---- render + diagonal stagger reveal ------------------------
-      function render(data) {
-        mount.innerHTML = '';
-        const nodes = new Array(data.length);
-        for (let i = 0; i < data.length; i++) {
-          const cell = data[i];
-          const svg = makePlus(cell.intensity);
-          // bind hover tooltip
-          svg.addEventListener('mouseenter', () => showTip(svg, data[i]));
-          svg.addEventListener('mouseleave', hideTip);
-          mount.appendChild(svg);
-          nodes[i] = svg;
-        }
-        // Diagonal wave reveal — calm, premium, not dramatic.
-        for (let i = 0; i < nodes.length; i++) {
-          const col = Math.floor(i / rows);
-          const row = i % rows;
-          const delay = 180 + col * 22 + row * 14;
-          setTimeout(() => nodes[i].classList.add('in'), delay);
-        }
-        return nodes;
-      }
-
-      // Hide tooltip on scroll/resize so it never floats away from its cell.
-      const onDismiss = () => hideTip();
-      window.addEventListener('scroll', onDismiss, { passive: true });
-      window.addEventListener('resize', onDismiss);
-
-      // ---- 1) instant mock paint -----------------------------------
-      const data  = buildMock(0x9e3779b1);
-      const nodes = render(data);
-
-      // ---- 2) silent overlay from statically-built JSON -----------
-      // The JSON is produced daily by .github/workflows/github-activity.yml
-      // and committed to the repo. We try a couple of likely paths so the
-      // site works both at the repo root and when served from /public.
-      (async () => {
-        const candidates = [
-          '/github-activity.json',
-          'github-activity.json',
-          'public/github-activity.json',
-        ];
-        let days = null;
-        for (const url of candidates) {
-          try {
-            const res = await fetch(url, { cache: 'no-cache' });
-            if (!res.ok) continue;
-            const json = await res.json();
-            if (Array.isArray(json) && json.length > 0) {
-              days = json;
-              break;
-            }
-          } catch (_) { /* try next */ }
-        }
-
-        const label = document.getElementById('live-label');
-
-        if (!days) {
-          if (label) label.textContent = 'offline · sample activity';
-          return;
-        }
-
-        // Bucket counts by ISO date (YYYY-MM-DD)
-        const byDay = Object.create(null);
-        let maxCount = 0;
-        for (const d of days) {
-          if (!d || typeof d.date !== 'string') continue;
-          const c = Number(d.count) || 0;
-          byDay[d.date] = c;
-          if (c > maxCount) maxCount = c;
-        }
-
-        const denom = Math.log2(1 + Math.max(maxCount, 2));
-
-        for (let d = 0; d < totalDays; d++) {
-          const iso = dateForIndex(d).toISOString().slice(0, 10);
-          const count = byDay[iso] || 0;
-          // Always record the real count on the cell, even when 0,
-          // so tooltips reflect reality once data has loaded.
-          data[d].count = count;
-          // Map real counts to intensity (log-scaled), replacing mock.
-          const intensity = count > 0
-            ? Math.min(1, 0.18 + (Math.log2(1 + count) / denom) * 0.82)
-            : 0.05;
-          data[d].intensity = intensity;
-          applyStyle(nodes[d], intensity);
-        }
-
-        if (label) label.textContent = 'live · github activity';
-      })();
-    }
-
-    GitHubActivityGrid({
-      mount: document.getElementById('grid'),
-      username: 'TerekliTahaBerk',
-      cols: 22,
-      rows: 8,
     });
   </script>
 

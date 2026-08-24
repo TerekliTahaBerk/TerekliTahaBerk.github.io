@@ -1,0 +1,75 @@
+/* ============================================================
+   tokens.css — design tokens (single source of truth)
+   Colors, type scale, spacing, radii, motion timings.
+   Edit here to change the look of the entire site.
+============================================================ */
+:root {
+  /* --- surfaces / text (light) --- */
+  --bg:        #f5f2eb;
+  --bg-raised: #faf8f3;
+  --fg:        #15140f;
+  --fg-soft:   #4b4740;
+  --fg-mute:   #736e66;
+  --rule:      #d9d3c4;
+  --chip:      #e3decf;
+  --hover:     rgba(21, 20, 15, 0.04);
+  --code-bg:   #efe9da;
+
+  /* --- semantic accents (restrained; light) --- */
+  --a-data:       oklch(0.55 0.14 245);
+  --a-automation: oklch(0.58 0.15 55);
+  --a-research:   oklch(0.52 0.13 155);
+  --a-ml:         oklch(0.56 0.15 20);
+  --a-live:       oklch(0.55 0.13 155);
+
+  /* --- type --- */
+  --f-serif: 'Instrument Serif', ui-serif, Georgia, serif;
+  --f-sans:  'Geist', system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:  'Geist Mono', ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* --- spacing scale --- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+
+  /* --- layout --- */
+  --container: 1120px;
+  --measure: 680px;
+  --radius-s: 6px;
+  --radius-m: 12px;
+  --radius-l: 18px;
+
+  /* --- motion --- */
+  --ease: cubic-bezier(.2,.7,.2,1);
+  --dur-fast: .18s;
+  --dur: .3s;
+  --dur-slow: .5s;
+}
+
+html.dark {
+  --bg:        #0b0a09;
+  --bg-raised: #0f0e0c;
+  --fg:        #ece7d8;
+  --fg-soft:   #b5ad9c;
+  --fg-mute:   #7d786f;
+  --rule:      #2b2824;
+  --chip:      #1c1a17;
+  --hover:     rgba(236, 231, 216, 0.05);
+  --code-bg:   #14120f;
+
+  --a-data:       oklch(0.75 0.13 245);
+  --a-automation: oklch(0.78 0.14 55);
+  --a-research:   oklch(0.72 0.13 155);
+  --a-ml:         oklch(0.74 0.14 20);
+  --a-live:       oklch(0.72 0.14 155);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-fast: 0s; --dur: 0s; --dur-slow: 0s; }
+}

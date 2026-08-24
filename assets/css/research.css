@@ -1,0 +1,47 @@
+/* ============================================================
+   research.css — /research/ page styles
+============================================================ */
+.rs-main { max-width: var(--measure); width: 100%; margin: 0 auto; padding: clamp(48px, 8vh, 88px) 8px 24px; }
+.rs-main > h1 { font-size: clamp(48px, 7.4vw, 80px); line-height: 0.98; letter-spacing: -0.02em; max-width: 15ch; }
+.rs-lede { font-family: var(--f-serif); font-size: clamp(19px, 1.7vw, 23px); line-height: 1.42; color: var(--fg-soft); margin: var(--sp-4) 0 0; }
+
+.rs-meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: var(--sp-5); }
+
+.rs-section { margin-top: var(--sp-8); padding-top: var(--sp-7); border-top: 1px solid var(--rule); }
+.rs-section h2 { font-size: clamp(24px, 2.8vw, 30px); margin-bottom: var(--sp-4); }
+.rs-section h3 { font-size: 18px; margin: var(--sp-5) 0 var(--sp-2); color: var(--fg); }
+.rs-section p { font-size: 15px; line-height: 1.72; color: var(--fg-soft); margin: 0 0 var(--sp-4); }
+.rs-section ul, .rs-section ol { padding-left: 20px; margin: 0 0 var(--sp-4); color: var(--fg-soft); font-size: 15px; line-height: 1.7; }
+.rs-section li { margin-bottom: 8px; }
+.rs-section strong { color: var(--fg); font-weight: 500; }
+
+.rs-pipeline { width: 100%; height: auto; margin: var(--sp-5) 0; color: var(--fg-soft); }
+.rs-pipeline .accent { color: var(--a-research); }
+.rs-pipeline text { font-family: var(--f-mono); font-size: 7px; letter-spacing: .02em; fill: var(--fg-mute); }
+.rs-pipeline text.step-label { fill: var(--fg-soft); font-size: 7.5px; }
+
+.rs-formula {
+  font-family: var(--f-mono); font-size: 14px; color: var(--fg);
+  background: var(--chip); border: 1px solid var(--rule); border-radius: var(--radius-s);
+  padding: 14px 18px; margin: var(--sp-3) 0 var(--sp-5); display: inline-block;
+}
+
+.rs-status-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4); margin: var(--sp-4) 0 var(--sp-5); }
+.rs-status-item { padding: var(--sp-4); }
+.rs-status-item .n { font-family: var(--f-serif); font-size: 30px; line-height: 1; }
+.rs-status-item .l { font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--fg-mute); margin-top: 6px; }
+
+.rs-callout {
+  border: 1px solid var(--rule); border-left: 3px solid var(--a-research);
+  background: color-mix(in oklab, var(--chip) 50%, transparent);
+  padding: 16px 20px; border-radius: 4px; margin: var(--sp-4) 0;
+  font-size: 14px; color: var(--fg-soft); line-height: 1.6;
+}
+.rs-callout strong { color: var(--fg); }
+
+.rs-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: var(--sp-6); }
+
+@media (max-width: 640px) {
+  .rs-status-grid { grid-template-columns: 1fr 1fr; }
+  .rs-main { padding: 40px 2px 16px; }
+}

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Notes · Taha Berk Terekli</title>
+<link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+<link rel="apple-touch-icon" href="/favicon.jpg" />
+<meta name="description" content="Long-form notes by Taha Berk Terekli on data engineering, the RPA-to-data transition, idempotent ELT in Redshift, and U-Net for brain-tumor segmentation." />
+<meta name="author" content="Taha Berk Terekli" />
+<link rel="canonical" href="https://www.tahaberk.com/notes/" />
+<meta property="og:title" content="Notes · Taha Berk Terekli" />
+<meta property="og:description" content="Long-form notes on data engineering, ML and the messy middle between RPA and analytics." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.tahaberk.com/notes/" />
+<meta property="og:site_name" content="Taha Berk Terekli" />
+<meta property="og:image" content="https://www.tahaberk.com/assets/img/og-cover.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://www.tahaberk.com/assets/img/og-cover.png" />
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Blog",
+  "name":"Taha Berk Terekli — Notes",
+  "url":"https://www.tahaberk.com/notes/",
+  "author":{"@type":"Person","name":"Taha Berk Terekli","url":"https://www.tahaberk.com/"},
+  "description":"Long-form notes on data engineering, ML and the RPA-to-data career transition."
+}
+</script>
+<script>(function(){try{var s=localStorage.getItem('tbt_theme');var d=s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark');}catch(e){document.documentElement.classList.add('dark');}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/tokens.css" />
+<link rel="stylesheet" href="/assets/css/base.css" />
+<link rel="stylesheet" href="/assets/css/notes.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<main class="page" id="main">
+  <header class="top">
+    <a href="/" class="brand">Taha Berk<span class="dot" aria-hidden="true"></span></a>
+    <div class="nav-wrap">
+      <nav class="nav" aria-label="Primary">
+        <a href="/work/">Work</a>
+        <a href="/projects/">Projects</a>
+        <a href="/research/">Research</a>
+        <a href="/notes/" aria-current="page">Notes</a>
+        <a href="/about/">About</a>
+      </nav>
+      <button class="theme-toggle" id="theme" aria-label="Toggle color theme" aria-pressed="false" title="Toggle theme">
+        <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <section class="nt-main">
+    <div class="nt-hero">
+      <h1 class="serif">Notes from the messy middle.</h1>
+      <p>Slow, opinionated essays on data engineering, machine learning and the parts of an analytics career that nobody puts on the slide.</p>
+    </div>
+
+    <div class="nt-list">
+      <a class="nt-post" href="/notes/idempotent-elt-redshift/">
+        <div class="date">2025 · 03<small>~ 11 min read</small></div>
+        <div>
+          <h2 class="serif">Why I'd rather build the same Redshift query twice</h2>
+          <p>A defence of boring, idempotent ELT — why running the same SQL again on Monday morning should produce the same numbers, and what that costs to enforce in a real warehouse.</p>
+          <div class="chips"><span class="chip">data engineering</span><span class="chip">redshift</span><span class="chip">elt</span><span class="chip">sql</span></div>
+        </div>
+      </a>
+
+      <a class="nt-post" href="/notes/from-rpa-to-data/">
+        <div class="date">2025 · 02<small>~ 9 min read</small></div>
+        <div>
+          <h2 class="serif">From RPA to data: notes from the in-between</h2>
+          <p>What two years of automation work taught me before I moved to a data role — which lessons were portable, which were a trap, and what I'd tell a junior RPA developer eyeing the same move.</p>
+          <div class="chips"><span class="chip">career</span><span class="chip">rpa</span><span class="chip">data engineering</span><span class="chip">essay</span></div>
+        </div>
+      </a>
+
+      <a class="nt-post" href="/notes/unet-brain-tumor-notes/">
+        <div class="date">2025 · 01<small>~ 12 min read</small></div>
+        <div>
+          <h2 class="serif">What U-Net taught me about reading MRI slices</h2>
+          <p>Field notes from the TÜBİTAK-funded segmentation project. Less about architectures, more about the unglamorous decisions — normalisation, patch sampling, honest evaluation — that decide whether a Dice score means anything.</p>
+          <div class="chips"><span class="chip">deep learning</span><span class="chip">u-net</span><span class="chip">medical imaging</span><span class="chip">tensorflow</span></div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <a href="/">← Back home</a>
+    <span>Istanbul · GMT+3</span>
+  </footer>
+</main>
+
+<script defer src="/assets/js/theme.js"></script>
+<!-- Private Finance OS launcher (additive, non-invasive) -->
+<script defer src="/assets/finance-launcher.js"></script>
+</body>
+</html>

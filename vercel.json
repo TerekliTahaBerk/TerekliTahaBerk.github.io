@@ -49,5 +49,15 @@
   "rewrites": [
     { "source": "/finance",         "destination": "/finance/index.html" },
     { "source": "/finance/:path*",  "destination": "/finance/index.html" }
+  ],
+
+  "redirects": [
+    { "source": "/work.html",     "destination": "/work/",     "permanent": true },
+    { "source": "/personal.html", "destination": "/projects/", "permanent": true },
+    { "source": "/research.html", "destination": "/research/", "permanent": true },
+    { "source": "/blog.html",     "destination": "/notes/",    "permanent": true },
+    { "source": "/posts/idempotent-elt-redshift.html", "destination": "/notes/idempotent-elt-redshift/", "permanent": true },
+    { "source": "/posts/from-rpa-to-data.html",         "destination": "/notes/from-rpa-to-data/",         "permanent": true },
+    { "source": "/posts/unet-brain-tumor-notes.html",   "destination": "/notes/unet-brain-tumor-notes/",   "permanent": true }
   ]
 }

@@ -1,0 +1,264 @@
+/* ============================================================
+   base.css — reset, typography, shared components
+   Loaded on every public page after tokens.css.
+============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--f-sans);
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+::selection { background: var(--fg); color: var(--bg); }
+
+.serif { font-family: var(--f-serif); letter-spacing: -0.01em; }
+.mono  { font-family: var(--f-mono); }
+
+/* ---------- skip link ---------- */
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -48px;
+  background: var(--fg);
+  color: var(--bg);
+  padding: 10px 16px;
+  border-radius: var(--radius-s);
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  z-index: 100;
+  transition: top var(--dur-fast) var(--ease);
+}
+.skip-link:focus { top: 12px; }
+
+/* ---------- focus ---------- */
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+  outline: 1.5px dashed var(--fg-soft);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- layout shell ---------- */
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 28px clamp(20px, 4vw, 56px) 40px;
+}
+.container { max-width: var(--container); width: 100%; margin: 0 auto; }
+.prose { max-width: var(--measure); }
+
+/* ---------- top nav ---------- */
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  max-width: var(--container);
+  margin: 0 auto;
+  width: 100%;
+}
+.brand {
+  font-family: var(--f-serif);
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  color: var(--fg);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.brand .dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--a-research);
+  display: inline-block;
+  transform: translateY(-3px);
+}
+.nav-wrap { display: flex; align-items: center; gap: clamp(14px, 2vw, 26px); }
+.nav { display: flex; gap: clamp(16px, 2.4vw, 30px); flex-wrap: wrap; }
+.nav a {
+  color: var(--fg);
+  opacity: 0.65;
+  text-decoration: none;
+  font-size: 13.5px;
+  letter-spacing: 0.01em;
+  position: relative;
+  padding: 4px 2px;
+  transition: opacity var(--dur-fast) ease;
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+}
+.nav a:hover, .nav a[aria-current="page"] { opacity: 1; }
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 2px; right: 2px; bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform var(--dur) var(--ease);
+}
+.nav a:hover::after, .nav a[aria-current="page"]::after { transform: scaleX(1); }
+
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--fg);
+  opacity: 0.65;
+  border-radius: 999px;
+  width: 30px; height: 30px;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: opacity var(--dur-fast) ease, border-color var(--dur-fast) ease;
+}
+.theme-toggle:hover { opacity: 1; border-color: var(--fg-soft); }
+.theme-toggle svg { width: 13px; height: 13px; }
+
+/* ---------- footer ---------- */
+.site-footer {
+  max-width: var(--container);
+  margin: var(--sp-8) auto 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--rule);
+  color: var(--fg-mute);
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.site-footer a { color: inherit; text-decoration: none; transition: color var(--dur-fast) ease; }
+.site-footer a:hover { color: var(--fg); }
+.site-footer .fsocial { display: flex; gap: 16px; }
+
+/* ---------- common text ---------- */
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  margin-bottom: var(--sp-3);
+}
+.section-label {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  margin: var(--sp-8) 0 var(--sp-2);
+}
+h1, h2, h3 { font-family: var(--f-serif); font-weight: 400; letter-spacing: -0.015em; margin: 0; }
+
+/* ---------- chips / tags ---------- */
+.chip {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--chip);
+  color: var(--fg-soft);
+  display: inline-block;
+}
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* ---------- buttons / links ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--fg);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 10px 18px;
+  min-height: 40px;
+  transition: border-color var(--dur-fast) ease, background var(--dur-fast) ease, transform var(--dur-fast) ease;
+}
+.btn:hover { border-color: var(--fg-soft); background: var(--hover); transform: translateY(-1px); }
+.btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.btn.primary:hover { background: var(--fg-soft); border-color: var(--fg-soft); }
+
+.link-arrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  text-decoration: none; color: var(--fg);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 2px;
+  transition: border-color var(--dur-fast) ease, opacity var(--dur-fast) ease;
+}
+.link-arrow:hover { border-color: var(--fg-soft); }
+.link-arrow svg { width: 12px; height: 12px; transition: transform var(--dur-fast) var(--ease); }
+.link-arrow:hover svg { transform: translate(2px, -2px); }
+
+/* ---------- external icon row (used on home/footer) ---------- */
+.icons { display: flex; gap: 10px; }
+.icons a {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px;
+  border-radius: 999px;
+  color: var(--fg);
+  opacity: 0.5;
+  text-decoration: none;
+  transition: opacity var(--dur-fast) ease, background var(--dur-fast) ease, transform var(--dur-fast) ease;
+}
+.icons a:hover { opacity: 1; background: var(--hover); transform: translateY(-1px); }
+.icons a svg { width: 15px; height: 15px; }
+
+/* ---------- card ---------- */
+.card {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-m);
+  padding: var(--sp-5);
+  background: var(--bg-raised);
+  transition: border-color var(--dur-fast) ease, transform var(--dur-fast) ease;
+}
+.card:hover { border-color: var(--fg-soft); transform: translateY(-2px); }
+
+/* ---------- utility ---------- */
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+hr.rule { border: 0; border-top: 1px solid var(--rule); margin: var(--sp-7) 0; }
+
+/* ---------- mobile shell ---------- */
+@media (max-width: 640px) {
+  .page { padding: 20px 18px 32px; }
+  .top { flex-wrap: wrap; row-gap: 12px; column-gap: 12px; }
+  .brand { font-size: 20px; }
+  .nav-wrap { gap: 12px; }
+  .nav { order: 3; width: 100%; gap: 16px; }
+  .nav a { font-size: 13px; }
+  .site-footer { flex-direction: column; align-items: flex-start; gap: 10px; margin-top: var(--sp-7); }
+}
+
+/* ---------- print ---------- */
+@media print {
+  .theme-toggle, .nav-wrap .theme-toggle, .tbt-fl-wrap, .site-footer .fsocial, .skip-link { display: none !important; }
+  body { background: #fff; color: #000; }
+  a { color: #000; text-decoration: underline; }
+  .card { border-color: #999; }
+}

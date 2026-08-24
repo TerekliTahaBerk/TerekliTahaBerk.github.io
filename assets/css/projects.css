@@ -21,7 +21,15 @@
 .pj-grid-body dd { margin: 0 0 var(--sp-2); font-size: 14px; line-height: 1.65; color: var(--fg-soft); }
 .pj-grid-body dd:last-of-type { margin-bottom: 0; }
 
-.pj-status { font-size: 12.5px; font-weight: 500; padding: 4px 11px; border-radius: 999px; background: var(--chip); color: var(--fg-soft); }
+/* inline-flex + centred: this pill is a flex item next to .btn, so it
+   stretches to the button height. As a plain block its text stuck to
+   the top of the stretched box — centring keeps the row aligned. */
+.pj-status {
+  display: inline-flex; align-items: center;
+  font-size: 12.5px; font-weight: 500;
+  padding: 4px 14px; border-radius: 999px;
+  background: var(--chip); color: var(--fg-soft);
+}
 
 @media (max-width: 640px) {
   .pj-grid-body { grid-template-columns: 1fr; gap: 2px var(--sp-5); }

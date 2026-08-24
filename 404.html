@@ -7,13 +7,13 @@
   <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
   <link rel="apple-touch-icon" href="/favicon.jpg" />
   <meta name="robots" content="noindex" />
-  <meta name="theme-color" content="#0b0a09" />
+  <meta name="theme-color" content="#ffffff" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <script>(function(){try{var s=localStorage.getItem('tbt_theme');var d=s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark');}catch(e){document.documentElement.classList.add('dark');}})();</script>
-  <link rel="stylesheet" href="/assets/css/tokens.css" />
-  <link rel="stylesheet" href="/assets/css/base.css" />
+  <script>(function(){try{if(localStorage.getItem('tbt_theme')==='dark')document.documentElement.classList.add('dark');}catch(e){}})();</script>
+  <link rel="stylesheet" href="/assets/css/tokens.css?v=20260824c" />
+  <link rel="stylesheet" href="/assets/css/base.css?v=20260824c" />
   <style>
     .nf-main { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; max-width: 620px; margin: 0 auto; width: 100%; padding: 0 8px; }
     .nf-code { font-family: var(--f-mono); font-size: 12px; letter-spacing: .2em; color: var(--fg-mute); margin-bottom: var(--sp-3); }
@@ -56,6 +56,6 @@
       <span>Taha Berk Terekli · Istanbul, GMT+3</span>
     </footer>
   </main>
-  <script defer src="/assets/js/theme.js"></script>
+  <script defer src="/assets/js/theme.js?v=20260824c"></script>
 </body>
 </html>

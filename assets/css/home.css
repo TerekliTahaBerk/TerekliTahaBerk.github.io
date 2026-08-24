@@ -17,28 +17,48 @@
 }
 .hero h1 {
   font-size: clamp(38px, 6.2vw, 68px);
-  line-height: 1.15;
+  /* Tuned against the pill: it is 1 + 2×0.08em = 1.16em tall, so this
+     line-height leaves a small positive gap and the pill never rides
+     up into the descenders of the line above. */
+  line-height: 1.25;
   letter-spacing: -0.03em;
   max-width: 20ch;
   margin: 0 auto;
 }
+/* The pill is inline-block, NOT inline-flex, on purpose: an
+   inline-block takes its baseline from the text inside it, so the
+   word lines up with the surrounding words automatically. An
+   inline-flex box instead synthesises its baseline from its bottom
+   edge, which is what forced the old vertical-align nudge — and that
+   nudge drifted at every font size. The dot is absolutely positioned
+   so it can never affect that baseline or the line box height. */
 .hero h1 .hl-pill {
-  display: inline-flex; align-items: center; justify-content: center; gap: 0.14em;
+  display: inline-block;
+  position: relative;
+  line-height: 1;
   background: var(--accent-2-bg);
   border-radius: 999px;
-  padding: 0.05em 0.34em;
-  vertical-align: -0.13em;
+  padding: 0.08em 0.34em 0.08em 0.84em;
   white-space: nowrap;
+  /* Left-aligned, not centred: the dot is out of flow, so centring
+     would pull the word left underneath it. Anchoring the text at
+     padding-left keeps a fixed, equal gap after the dot for every
+     word, and keeps the text still while the width animates. */
+  text-align: left;
   transition: background var(--dur) var(--ease), width .38s var(--ease);
 }
 .hero h1 .hl-pill .hl-dot {
-  width: 0.2em; height: 0.2em; min-width: 8px; min-height: 8px; border-radius: 50%;
-  background: var(--accent-2); flex-shrink: 0;
+  position: absolute;
+  left: 0.34em;
+  top: 50%;
+  width: 0.19em; height: 0.19em;
+  border-radius: 50%;
+  background: var(--accent-2);
+  transform: translateY(-50%);
   transition: background var(--dur) var(--ease);
 }
 .hero h1 .hl-word {
   display: inline-block;
-  line-height: 1;
   transition: opacity .22s ease, transform .22s ease;
 }
 .hero h1 .hl-word.swap-out { opacity: 0; transform: translateY(6px) scale(.96); }
@@ -225,7 +245,9 @@
 }
 @media (max-width: 640px) {
   .hero { padding: 40px 0 var(--sp-7); }
-  .hero h1 .hl-pill { padding: 2px 14px 5px; }
+  /* No pill padding override here on purpose — the base rule is in em,
+     so it already scales with the headline at every breakpoint. A px
+     override would break the baseline alignment on small screens. */
   .hero-mock .bf-body { padding: var(--sp-4); }
   .exp-row { grid-template-columns: 1fr; gap: 4px; }
   .exp-row .when { text-align: left; }

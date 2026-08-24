@@ -39,13 +39,13 @@
   "inLanguage":"en"
 }
 </script>
-<script>(function(){try{var s=localStorage.getItem('tbt_theme');var d=s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark');}catch(e){document.documentElement.classList.add('dark');}})();</script>
+<script>(function(){try{if(localStorage.getItem('tbt_theme')==='dark')document.documentElement.classList.add('dark');}catch(e){}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/tokens.css" />
-<link rel="stylesheet" href="/assets/css/base.css" />
-<link rel="stylesheet" href="/assets/css/notes-article.css" />
+<link rel="stylesheet" href="/assets/css/tokens.css?v=20260824c" />
+<link rel="stylesheet" href="/assets/css/base.css?v=20260824c" />
+<link rel="stylesheet" href="/assets/css/notes-article.css?v=20260824c" />
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -176,7 +176,7 @@
   </footer>
 </main>
 
-<script defer src="/assets/js/theme.js"></script>
-<script defer src="/assets/js/toc.js"></script>
+<script defer src="/assets/js/theme.js?v=20260824c"></script>
+<script defer src="/assets/js/toc.js?v=20260824c"></script>
 </body>
 </html>

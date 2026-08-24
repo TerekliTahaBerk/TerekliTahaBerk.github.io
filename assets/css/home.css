@@ -168,6 +168,36 @@
 .feature-card .fc-mock { margin-top: auto; }
 .feature-card .fc-mock { padding-bottom: var(--sp-5); }
 
+/* ---------- flagship proof figure ----------
+   A real generated research figure, not a mockup. The plate stays
+   light in both themes because the source figure has a white ground:
+   inverting or recolouring it would misrepresent a published result. */
+.proof-figure {
+  display: block;
+  margin-top: var(--sp-4);
+  text-decoration: none;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  background: var(--bg-card);
+  transition: transform var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
+}
+.proof-figure:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); }
+.proof-figure figure { margin: 0; }
+.proof-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #fff;
+  border-bottom: 1px solid var(--rule);
+}
+.proof-figure figcaption {
+  padding: var(--sp-4) var(--sp-5);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--fg-soft);
+}
+
 /* Evidence rows inside a flagship card — verifiable facts, not chrome. */
 .fact-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
 .fact-list li {

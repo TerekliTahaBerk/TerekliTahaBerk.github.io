@@ -12,8 +12,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <script>(function(){try{if(localStorage.getItem('tbt_theme')==='dark')document.documentElement.classList.add('dark');}catch(e){}})();</script>
-  <link rel="stylesheet" href="/assets/css/tokens.css?v=20260824c" />
-  <link rel="stylesheet" href="/assets/css/base.css?v=20260824c" />
+  <link rel="stylesheet" href="/assets/css/tokens.css?v=20260824d" />
+  <link rel="stylesheet" href="/assets/css/base.css?v=20260824d" />
   <style>
     .nf-main { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; max-width: 620px; margin: 0 auto; width: 100%; padding: 0 8px; }
     .nf-code { font-family: var(--f-mono); font-size: 12px; letter-spacing: .2em; color: var(--fg-mute); margin-bottom: var(--sp-3); }
@@ -24,11 +24,11 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <main class="page" id="main">
+  <div class="page">
     <header class="top">
       <a href="/" class="brand">Taha Berk<span class="dot" aria-hidden="true"></span></a>
         <nav class="nav" aria-label="Primary">
-          <a href="/work/">Work</a>
+          <a href="/work/">Experience</a>
           <a href="/projects/">Projects</a>
           <a href="/research/">Research</a>
           <a href="/notes/">Notes</a>
@@ -41,6 +41,8 @@
         </button>
     </header>
 
+    <main id="main">
+
     <section class="nf-main">
       <div class="nf-code">404 · NOT FOUND</div>
       <h1 class="serif">Nothing here.</h1>
@@ -52,10 +54,12 @@
       </div>
     </section>
 
+    </main>
+
     <footer class="site-footer">
       <span>Taha Berk Terekli · Istanbul, GMT+3</span>
     </footer>
-  </main>
-  <script defer src="/assets/js/theme.js?v=20260824c"></script>
+  </div>
+  <script defer src="/assets/js/theme.js?v=20260824d"></script>
 </body>
 </html>

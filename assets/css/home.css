@@ -91,35 +91,24 @@
   margin: var(--sp-5) auto 0;
 }
 .hero .lede .w-data       { color: var(--a-data); font-weight: 600; }
-.hero .lede .w-automation { color: var(--a-automation); font-weight: 600; }
-.hero .lede .w-research   { color: var(--a-research); font-weight: 600; }
-.hero .lede .w-ml         { color: var(--a-ml); font-weight: 600; }
 
 .hero .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: var(--sp-6); }
-.hero .now-line {
-  margin-top: var(--sp-5);
-  font-size: 13.5px;
+/* ---------- GitHub activity strip ----------
+   Deliberately understated: a quiet footnote under the hero rather
+   than a hero element of its own. Real project evidence outranks it. */
+.activity-strip {
+  text-decoration: none;
+  display: inline-flex; flex-direction: column; align-items: center; gap: 9px;
+  margin: var(--sp-8) auto 0;
+  padding: 14px 18px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-m);
+  font-size: 12.5px;
   color: var(--fg-mute);
-  display: flex; justify-content: center;
-  flex-wrap: wrap; gap: 6px 14px;
+  text-decoration: none;
+  transition: border-color var(--dur-fast) ease, color var(--dur-fast) ease;
 }
-.hero .now-line strong { color: var(--fg-soft); font-weight: 600; }
-.hero .now-line .sep { opacity: 0.5; }
-
-/* ---------- hero product mockup (browser-chrome) ---------- */
-.hero-mock { max-width: 880px; margin: var(--sp-8) auto 0; text-align: left; }
-.hero-mock .bf-url {
-  font-size: 12.5px; color: var(--fg-mute); margin-left: 6px;
-  background: var(--bg); border: 1px solid var(--rule); border-radius: 999px;
-  padding: 3px 12px;
-}
-.hero-mock .bf-body { padding: var(--sp-6) var(--sp-6); }
-.hero-mock .activity-head {
-  display: flex; align-items: center; gap: 9px;
-  font-size: 13px; color: var(--fg-mute);
-  text-decoration: none; margin-bottom: var(--sp-4);
-}
-.hero-mock .activity-head:hover { color: var(--fg-soft); }
+.activity-strip:hover { color: var(--fg-soft); border-color: var(--fg-mute); }
 .pulse {
   position: relative; display: inline-block;
   width: 6px; height: 6px; border-radius: 50%;
@@ -134,8 +123,9 @@
 @media (prefers-reduced-motion: reduce) { .pulse::after { animation: none; opacity: 0.18; } }
 
 .grid {
-  --cell: 11px; --gap-x: 6px; --gap-y: 6px;
-  --tone-low: var(--rule); --tone-high: var(--fg);
+  --cell: 5px; --gap-x: 2px; --gap-y: 2px;
+  --tone-low: color-mix(in oklab, var(--fg-mute) 38%, var(--bg));
+  --tone-high: var(--fg);
   display: grid;
   grid-template-columns: repeat(var(--cols, 22), var(--cell));
   grid-template-rows: repeat(var(--rows, 8), var(--cell));
@@ -171,29 +161,23 @@
 
 /* ---------- feature grid (Notion "Capture knowledge / Find answers") ---------- */
 .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); }
-.feature-card { display: flex; flex-direction: column; padding: var(--sp-5) var(--sp-5) 0; }
+.feature-card { display: flex; flex-direction: column; padding: var(--sp-5); text-decoration: none; }
 .feature-card .fc-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: var(--sp-6); }
 .feature-card .fc-eyebrow { font-size: 14px; color: var(--fg-mute); margin-bottom: 6px; }
 .feature-card h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; letter-spacing: -0.015em; max-width: 26ch; }
 .feature-card .fc-mock { margin-top: auto; }
-.feature-card .browser-frame { border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom: none; }
+.feature-card .fc-mock { padding-bottom: var(--sp-5); }
 
-.mock-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
-.mock-list li {
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  padding: 10px 12px;
-  border-radius: 8px;
+/* Evidence rows inside a flagship card — verifiable facts, not chrome. */
+.fact-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.fact-list li {
+  display: grid; grid-template-columns: 62px 1fr; gap: 12px; align-items: baseline;
+  padding: 9px 0;
+  border-top: 1px solid var(--rule);
   font-size: 13.5px;
-  font-weight: 500;
 }
-.mock-list li:hover { background: var(--hover); }
-.mock-list li span:first-child { color: var(--fg); }
-
-/* ---------- now / focus cards ---------- */
-.now-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4); }
-.now-card .k { font-size: 13px; color: var(--fg-mute); margin-bottom: var(--sp-2); }
-.now-card h3 { font-size: 18px; line-height: 1.3; margin-bottom: 6px; letter-spacing: -0.015em; }
-.now-card p { font-size: 14px; line-height: 1.55; color: var(--fg-soft); margin: 0; }
+.fact-list .fl-k { color: var(--fg-mute); font-size: 12.5px; }
+.fact-list .fl-v { color: var(--fg-soft); line-height: 1.45; }
 
 /* ---------- experience preview ---------- */
 .exp-list { display: flex; flex-direction: column; }
@@ -206,11 +190,6 @@
 .exp-row .role { color: var(--fg-soft); font-size: 14px; line-height: 1.5; }
 .exp-row .when { color: var(--fg-mute); font-size: 13px; text-align: right; white-space: nowrap; }
 .exp-row .when.current { color: var(--a-live); font-weight: 600; }
-
-/* ---------- research highlight (single wide card fallback, unused when feature-grid is used) ---------- */
-.research-diagram { width: 100%; height: auto; color: var(--fg-soft); }
-.research-diagram .accent { color: var(--a-research); }
-.research-diagram text { font-family: var(--f-mono); font-size: 6.5px; letter-spacing: .04em; fill: var(--fg-mute); }
 
 /* ---------- project mini grid ---------- */
 .proj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4); }
@@ -239,7 +218,6 @@
 .section-head h2 { font-size: clamp(24px, 2.8vw, 30px); letter-spacing: -0.025em; }
 
 @media (max-width: 900px) {
-  .now-grid { grid-template-columns: 1fr; }
   .feature-grid { grid-template-columns: 1fr; }
   .proj-grid { grid-template-columns: 1fr 1fr; }
 }
@@ -248,11 +226,10 @@
   /* No pill padding override here on purpose — the base rule is in em,
      so it already scales with the headline at every breakpoint. A px
      override would break the baseline alignment on small screens. */
-  .hero-mock .bf-body { padding: var(--sp-4); }
   .exp-row { grid-template-columns: 1fr; gap: 4px; }
   .exp-row .when { text-align: left; }
   .proj-grid { grid-template-columns: 1fr; }
   .notes-row { grid-template-columns: 1fr; gap: 6px; }
-  .grid { --cell: 8px; --gap-x: 4px; --gap-y: 5px; }
+  .grid { --cell: 3px; --gap-x: 1px; --gap-y: 1px; }
   .section { padding: var(--sp-7) 0; }
 }

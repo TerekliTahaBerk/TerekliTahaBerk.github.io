@@ -71,6 +71,11 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
   flex-direction: column;
   padding: 28px clamp(20px, 4vw, 56px) 40px;
 }
+/* <header> sits outside <main id="main"> so the skip link actually
+   skips the navigation. main takes the remaining height and keeps the
+   flex column, so children that rely on flex:1 (e.g. the 404 block)
+   still centre correctly. */
+.page > main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
 .container { max-width: var(--container); width: 100%; margin: 0 auto; }
 .prose { max-width: var(--measure); }
 
@@ -251,23 +256,6 @@ a:hover > .arrow-btn, .card:hover .arrow-btn { transform: translate(2px, -2px); 
   transition: transform var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
 }
 .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); }
-
-/* ---------- browser-chrome mockup frame ---------- */
-.browser-frame {
-  background: var(--bg-raised);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-m);
-  box-shadow: var(--shadow-card);
-  overflow: hidden;
-}
-.browser-frame .bf-bar {
-  display: flex; align-items: center; gap: 6px;
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--rule);
-  background: var(--bg-card);
-}
-.browser-frame .bf-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--rule); }
-.browser-frame .bf-body { padding: var(--sp-5); }
 
 /* ---------- utility ---------- */
 .visually-hidden {

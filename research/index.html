@@ -33,17 +33,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <script>(function(){try{if(localStorage.getItem('tbt_theme')==='dark')document.documentElement.classList.add('dark');}catch(e){}})();</script>
-  <link rel="stylesheet" href="/assets/css/tokens.css?v=20260824c" />
-  <link rel="stylesheet" href="/assets/css/base.css?v=20260824c" />
-  <link rel="stylesheet" href="/assets/css/research.css?v=20260824c" />
+  <link rel="stylesheet" href="/assets/css/tokens.css?v=20260824d" />
+  <link rel="stylesheet" href="/assets/css/base.css?v=20260824d" />
+  <link rel="stylesheet" href="/assets/css/research.css?v=20260824d" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <main class="page" id="main">
+  <div class="page">
     <header class="top">
       <a href="/" class="brand">Taha Berk<span class="dot" aria-hidden="true"></span></a>
         <nav class="nav" aria-label="Primary">
-          <a href="/work/">Work</a>
+          <a href="/work/">Experience</a>
           <a href="/projects/">Projects</a>
           <a href="/research/" aria-current="page">Research</a>
           <a href="/notes/">Notes</a>
@@ -56,10 +56,12 @@
         </button>
     </header>
 
+    <main id="main">
+
     <section class="rs-main">
       <div class="eyebrow">Research · TÜBİTAK 2209-A</div>
       <h1 class="serif">Brain-tumor segmentation with U-Net.</h1>
-      <p class="rs-lede">A leakage-safe, patient-level evaluation of U-Net-family architectures on multimodal MRI — built under an undergraduate research grant, and written up the way I wish more segmentation papers were: audited, reproducible, and honest about what it doesn't show.</p>
+      <p class="rs-lede">A patient-level evaluation of U-Net-family architectures on multimodal MRI, built under an undergraduate research grant. The split was frozen before the test set was opened, every figure regenerates from tracked artifacts, and the limits of the result are stated with it.</p>
       <div class="rs-meta-row">
         <span class="chip">TensorFlow</span><span class="chip">Keras</span><span class="chip">U-Net</span><span class="chip">MRI</span><span class="chip">Python</span>
       </div>
@@ -67,7 +69,7 @@
       <!-- OVERVIEW -->
       <div class="rs-section">
         <h2 class="serif">Overview</h2>
-        <p>This project is funded by a TÜBİTAK 2209-A undergraduate research grant and asks a narrow, deliberately unglamorous question: under a fixed, matched training protocol, do specific U-Net variants actually segment brain tumors better than a standard U-Net baseline — and can that claim survive a genuinely held-out, leakage-free test?</p>
+        <p>This project is funded by a TÜBİTAK 2209-A undergraduate research grant and asks one narrow question: under a fixed, matched training protocol, do specific U-Net variants segment brain tumors better than a standard U-Net baseline — and does that hold on a test set nobody touched until the analysis plan was frozen?</p>
         <p>Semantic segmentation on medical images is easy to get impressive-looking numbers from and hard to get trustworthy ones. Most of the engineering effort in this project went into the second half of that sentence.</p>
       </div>
 
@@ -140,11 +142,12 @@
       <!-- STATUS / FINDINGS -->
       <div class="rs-section">
         <h2 class="serif">Status &amp; findings</h2>
-        <p>The project has worked through its full internal pipeline — audited data and patient split, tested implementations, matched development runs, multi-seed confirmation, a frozen analysis plan, one guarded held-out test evaluation, artifact-derived figures and tables, a clean-clone reproduction audit, and a manuscript package including a formal response-to-reviewers cycle.</p>
+        <p>The pipeline has run end to end: an audited 369-subject cohort, a patient-level 258/37/74 split, tested implementations, matched development runs, multi-seed confirmation, an analysis plan frozen before any test access, one logged held-out evaluation, and every figure and table generated from tracked artifacts.</p>
+        <p>A clean clone with no local data or checkpoints verified 230 tracked artifacts, passed 108 tests, and regenerated every output byte-for-byte. A manuscript and a response-to-reviewer document live in the repository from an <strong>internal review round</strong>; the work has not been submitted to a journal or conference, and nothing here has been peer reviewed.</p>
         <div class="rs-callout">
-          <strong>Finding.</strong> Under the bounded 2D protocol, both BU-Net and U-Net+RES improved patient-level mean regional Dice over standard U-Net, and U-Net+RES slightly exceeded the full BU-Net while using fewer measured resources.
+          <strong>Finding.</strong> On the 74-patient held-out subset, seed-aggregated mean regional Dice was <strong>0.736</strong> for standard U-Net, <strong>0.752</strong> for BU-Net and <strong>0.756</strong> for residual U-Net. Against the baseline both differences held up under Holm-corrected paired bootstrap tests (+0.017, CI 0.005–0.030; +0.020, CI 0.008–0.034). Between the two finalists the gap was −0.004 with a Holm-corrected p of 0.05 — small, and borderline. Residual U-Net got there with fewer parameters, fewer per-slice MACs and lower peak VRAM.
         </div>
-        <p>This result is intentionally narrow. It does not establish clinical utility, external generalisation, state-of-the-art performance, or superiority over untested 3D, transformer-based or self-configuring segmentation systems — and the write-up says so explicitly.</p>
+        <p>The scope is narrow on purpose. This is one internal held-out subset of a single dataset, evaluated once with 2D slice models. It says nothing about clinical utility or external generalisation, and it is not a comparison against 3D, transformer-based or self-configuring systems, none of which were run here.</p>
       </div>
 
       <!-- FUTURE -->
@@ -154,7 +157,7 @@
           <li>Better skull-strip QA before training, potentially a learned skull-stripping step.</li>
           <li>Histogram matching across scanners, rather than per-volume normalisation alone.</li>
           <li>Per-patient temperature scaling so uncertainty estimates are properly calibrated.</li>
-          <li>An honest out-of-distribution test set from a different scanner or institution, evaluated only once, at the very end.</li>
+          <li>An out-of-distribution test set from a different scanner or institution, evaluated once, at the very end.</li>
         </ul>
         <p>Longer field notes on the day-to-day decisions behind this project — normalisation, patch sampling, the validation-split bug that cost two weeks — are in <a class="link-arrow" href="/notes/unet-brain-tumor-notes/">Notes</a>.</p>
       </div>
@@ -166,12 +169,14 @@
       </div>
     </section>
 
+    </main>
+
     <footer class="site-footer">
       <a href="/">← Back home</a>
       <span>Istanbul · GMT+3</span>
     </footer>
-  </main>
+  </div>
 
-  <script defer src="/assets/js/theme.js?v=20260824c"></script>
+  <script defer src="/assets/js/theme.js?v=20260824d"></script>
 </body>
 </html>

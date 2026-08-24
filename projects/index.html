@@ -31,17 +31,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <script>(function(){try{if(localStorage.getItem('tbt_theme')==='dark')document.documentElement.classList.add('dark');}catch(e){}})();</script>
-  <link rel="stylesheet" href="/assets/css/tokens.css?v=20260824c" />
-  <link rel="stylesheet" href="/assets/css/base.css?v=20260824c" />
-  <link rel="stylesheet" href="/assets/css/projects.css?v=20260824c" />
+  <link rel="stylesheet" href="/assets/css/tokens.css?v=20260824d" />
+  <link rel="stylesheet" href="/assets/css/base.css?v=20260824d" />
+  <link rel="stylesheet" href="/assets/css/projects.css?v=20260824d" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <main class="page" id="main">
+  <div class="page">
     <header class="top">
       <a href="/" class="brand">Taha Berk<span class="dot" aria-hidden="true"></span></a>
         <nav class="nav" aria-label="Primary">
-          <a href="/work/">Work</a>
+          <a href="/work/">Experience</a>
           <a href="/projects/" aria-current="page">Projects</a>
           <a href="/research/">Research</a>
           <a href="/notes/">Notes</a>
@@ -54,10 +54,12 @@
         </button>
     </header>
 
+    <main id="main">
+
     <section class="pj-main">
       <div class="eyebrow">Selected work</div>
-      <h1 class="serif">Things I've shipped.</h1>
-      <p class="pj-intro">Five projects that span the range I work in — a reproducible research pipeline, two production subscription products, an education platform in daily use, and a symbolic-mathematics toolkit. Quality over quantity: everything else lives on <a class="link-arrow" href="https://github.com/TerekliTahaBerk" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+      <h1 class="serif">Things I've built and tested.</h1>
+      <p class="pj-intro">Five projects that span the range I work in — a reproducible research pipeline, an education platform in daily use, two subscription products, and a symbolic-mathematics toolkit. Everything else lives on <a class="link-arrow" href="https://github.com/TerekliTahaBerk" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
 
       <div class="pj-list">
 
@@ -68,7 +70,7 @@
               <h2 class="serif">BraTS U-Net Research Pipeline</h2>
             </div>
             <div class="pj-links">
-              <span class="pj-status">Manuscript prepared</span>
+              <span class="pj-status">Manuscript drafted</span>
               <a class="btn" href="https://github.com/TerekliTahaBerk/bratsarticle" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
               <a class="btn" href="/research/">Research page</a>
             </div>
@@ -80,11 +82,11 @@
             <dt>Approach</dt>
             <dd>Built the evaluation around a fixed patient-level split, an audited dataset, and a written analysis plan frozen <em>before</em> the held-out test set was touched — then ran one guarded internal evaluation against it.</dd>
             <dt>Engineering</dt>
-            <dd>Implemented and compared standard U-Net, BU-Net and U-Net+RES under a bounded, matched 2D training protocol; ran multi-seed confirmation for stability; tracked measured compute per model; produced artifact-derived figures and tables plus a clean-clone reproduction audit; assembled the manuscript package, including a formal response-to-reviewers cycle.</dd>
+            <dd>Implemented and compared standard U-Net, BU-Net and U-Net+RES under a bounded, matched 2D training protocol; ran multi-seed confirmation for stability; tracked measured compute per model; produced every figure and table from tracked artifacts; verified the whole thing from a clean clone; assembled the manuscript package with an internal review round.</dd>
             <dt>Stack</dt>
             <dd>TensorFlow, Keras, Python, pytest.</dd>
             <dt>Result</dt>
-            <dd>Under the bounded protocol, both BU-Net and U-Net+RES improved patient-level mean regional Dice over standard U-Net, with U-Net+RES slightly ahead of the full BU-Net while using fewer measured resources. This is a deliberately narrow, internally-validated finding — not a claim of clinical utility, external generalisation or state-of-the-art performance.</dd>
+            <dd>On the 74-patient held-out subset, seed-aggregated mean regional Dice was 0.736 for standard U-Net, 0.752 for BU-Net and 0.756 for residual U-Net. Both variants beat the baseline under Holm-corrected paired bootstrap tests; the gap between the two finalists was small and borderline after correction. Residual U-Net reached its score with fewer parameters, fewer per-slice MACs and lower peak VRAM. Internal single-dataset evidence — no external validation, and no clinical claim.</dd>
           </dl>
         </article>
 
@@ -198,12 +200,14 @@
       </div>
     </section>
 
+    </main>
+
     <footer class="site-footer">
       <a href="/">← Back home</a>
       <span>Istanbul · GMT+3</span>
     </footer>
-  </main>
+  </div>
 
-  <script defer src="/assets/js/theme.js?v=20260824c"></script>
+  <script defer src="/assets/js/theme.js?v=20260824d"></script>
 </body>
 </html>

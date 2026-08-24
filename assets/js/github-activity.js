@@ -47,7 +47,7 @@ function GitHubActivityGrid({ mount, username, cols = 22, rows = 8 }) {
 
   function styleFromIntensity(v) {
     const x = Math.max(0, Math.min(1, v));
-    const op = 0.06 + Math.pow(x, 1.25) * 0.86;
+    const op = 0.18 + Math.pow(x, 1.25) * 0.74;
     const tone = Math.pow(x, 1.4);
     const scl = 0.86 + x * 0.18;
     return { op, tone, scl };
@@ -125,7 +125,7 @@ function GitHubActivityGrid({ mount, username, cols = 22, rows = 8 }) {
     for (let i = 0; i < nodes.length; i++) {
       const col = Math.floor(i / rows);
       const row = i % rows;
-      const delay = 180 + col * 22 + row * 14;
+      const delay = 120 + col * 7 + row * 10;
       setTimeout(() => nodes[i].classList.add('in'), delay);
     }
     return nodes;
